@@ -1,0 +1,57 @@
+{
+  "version": "2024",
+  "source": "WHO Medical Eligibility Criteria for Contraceptive Use",
+  "rules": [
+    {
+      "id": "MEC_001",
+      "condition": "age > 35 AND smoking == true",
+      "restrict_methods": ["combined_oral_contraceptives", "combined_patch", "combined_ring"],
+      "category": 4,
+      "explanation": "Estrogen-based contraceptives increase risk of cardiovascular events in smokers over 35."
+    },
+    {
+      "id": "MEC_002", 
+      "condition": "migraine == 'with_aura'",
+      "restrict_methods": ["combined_oral_contraceptives", "combined_patch", "combined_ring"],
+      "category": 4,
+      "explanation": "Estrogen-based contraceptives increase stroke risk in women with migraine with aura."
+    },
+    {
+      "id": "MEC_003",
+      "condition": "systolic_bp >= 140 OR diastolic_bp >= 90",
+      "restrict_methods": ["combined_hormonal_methods"],
+      "category": 3,
+      "explanation": "Hypertension increases cardiovascular risks with combined contraceptives."
+    },
+    {
+      "id": "MEC_004",
+      "condition": "breastfeeding == true AND postpartum_weeks < 6",
+      "restrict_methods": ["combined_hormonal_methods"],
+      "category": 3,
+      "explanation": "May affect milk supply in early postpartum period."
+    },
+    {
+      "id": "MEC_005",
+      "condition": "age >= 40",
+      "restrict_methods": ["combined_hormonal_methods"],
+      "category": 2,
+      "explanation": "Benefits generally outweigh risks, but increased cardiovascular risk."
+    }
+  ],
+  "method_mapping": {
+    "combined_oral_contraceptives": "Daily Pill (Combined)",
+    "progestin_only_pill": "Daily Pill (Mini-Pill)",
+    "injectables": "Depo-Provera (Injection)",
+    "implants": "Implant (Jadelle/Implanon)",
+    "iud_copper": "IUD (Copper)",
+    "iud_hormonal": "IUD (Hormonal - Mirena)",
+    "male_condom": "Male Condom",
+    "female_condom": "Female Condom",
+    "emergency_contraception": "Emergency Pill (P2)",
+    "withdrawal": "Withdrawal Method",
+    "rhythm": "Rhythm/Safe Days",
+    "lam": "Lactational Amenorrhea Method",
+    "female_sterilization": "Tubal Ligation",
+    "male_sterilization": "Vasectomy"
+  }
+}
