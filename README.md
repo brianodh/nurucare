@@ -28,3 +28,50 @@ NuruCare is an ethical, explainable AI platform that helps individuals in Sub-Sa
 | Deployment | Vercel / Render |
 
 ## Project Structure
+nurucare/
+├── backend/ # FastAPI backend
+├── frontend/ # React frontend
+├── data/ # Datasets + synthetic profiles
+├── notebooks/ # Jupyter notebooks
+├── docs/ # Documentation
+├── tests/ # Unit tests
+├── .github/ # CI/CD workflows
+└── pitch/ # Presentation materials
+
+
+## Setup Instructions
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- Git
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### Frontend Setup
+cd frontend
+npm install
+npm run dev
+
+### Team
+| Role | Name |
+|-------|------------|
+| AI Lead + Coordinator | Brian Odhiambo Ouma |
+| Backend + AI Integration | Alois Karanja Gitau |
+| Frontend/UI Developer | Lisa Adongo Akinyi |
+| Full Stack + Deployment | Uvyne Chepchirchir Rop |
+| Health Expert + QA | Moffat Mose |
+
+### License
+MIT License
+
+### Acknowledgments
+WHO MEC Guidelines (2024)
+
+Data Science Africa 2026 Hackathon
