@@ -73,20 +73,3 @@ MIT License
 WHO MEC Guidelines (2024)
 
 Data Science Africa 2026 Hackathon
-
----
-
-**Create `LICENSE`:**
-
-```bash
-notepad LICENSE
-
-MIT License
-
-Copyright (c) 2026 NuruCare Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
-
-[Full MIT license text from: https://opensource.org/licenses/MIT]
