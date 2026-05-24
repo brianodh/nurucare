@@ -1,5 +1,8 @@
 # NuruCare
-## AI-powered contraceptive decision-support platform for Sub-Saharan Africa
+
+## AI-Powered Contraceptive Decision-Support Platform for Sub-Saharan Africa
+
+>>>>>>> eef013d00e517daf4068a979320caca55785db4d
 > *"Nuru" means "Light" in Swahili — illuminating informed contraceptive choices.*
 
 ## Overview
@@ -35,6 +38,11 @@ nurucare/
 ├── tests/ # Unit tests
 ├── .github/ # CI/CD workflows
 └── pitch/ # Presentation materials
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> eef013d00e517daf4068a979320caca55785db4d
 ## Setup Instructions
 
 ### Prerequisites
@@ -66,7 +74,11 @@ npm run dev
 | Full Stack + Deployment | Uvyne Chepchirchir Rop |
 | Health Expert + QA | Moffat Mose |
 
+<<<<<<< HEAD
 ### Licence
+=======
+### License
+>>>>>>> eef013d00e517daf4068a979320caca55785db4d
 MIT License
 
 ### Acknowledgments
