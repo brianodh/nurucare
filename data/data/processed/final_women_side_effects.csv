@@ -1,0 +1,1998 @@
+woman_id,age,stop_wanted_pregnant,stop_method_failed,stop_no_sexual_urge,stop_menstrual_problem,stop_health_problem,stop_inconvenient,stop_hard_to_get,stop_weight_change,stop_partner_disapproved,problem_method_failed,problem_no_sexual_urge,problem_bleeding,problem_backache,problem_headache,problem_nausea,problem_weight_gain,problem_weakness,side_effect_bleeding,side_effect_weight_change,side_effect_headaches,side_effect_backaches,side_effect_nausea,side_effect_sleeplessness,side_effect_weakness,side_effect_no_urge,side_effect_fear_infertility,side_effect_fear_cancer,problem_if_pregnant
+1,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2,25.0,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,No,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+3,28.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,
+4,19.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+5,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+6,31.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,No,Yes,Yes,No,No,No,Yes,Yes,No,Big problem
+7,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,No,No,No,No,Big problem
+8,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+9,22.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,
+11,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,Yes,No,Yes,No,No,Big problem
+12,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+13,27.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,No,
+14,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+15,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+16,44.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+17,47.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+18,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+19,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+20,18.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,
+21,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,Yes,No,No,
+22,46.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+23,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+24,20.0,Yes,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,
+25,49.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,Big problem
+26,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+27,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+28,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+29,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+30,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+31,28.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Small problem
+32,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+33,28.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,Yes,Yes,No,Yes,No,No,No,No,No,No,
+34,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+36,49.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+37,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+38,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+41,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,Yes,No,No,No problem
+42,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+43,42.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Big problem
+44,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+47,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Small problem
+48,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+49,31.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+50,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+51,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,Yes,No problem
+52,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+53,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+54,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+56,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,Yes,No,Big problem
+58,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+60,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+63,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,No problem
+64,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+65,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+66,24.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,Yes,No,No,No,Big problem
+67,22.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,
+68,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,Yes,No,No,Big problem
+69,28.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,Yes,Yes,No,No,No,No,No,Big problem
+70,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+71,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+74,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+75,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,Yes,No,Small problem
+76,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+77,37.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+79,36.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,
+80,34.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+81,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+82,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+83,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+84,27.0,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+85,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,Yes,No,No,No problem
+86,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+87,41.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+88,22.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+89,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+90,25.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,Small problem
+91,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+92,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+93,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+94,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,Big problem
+95,22.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+96,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+97,46.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,
+98,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+99,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+100,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+101,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+102,45.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+103,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,Yes,No,No,Big problem
+104,26.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+105,44.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+106,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+107,38.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,Yes,No,Big problem
+108,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+110,27.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+111,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+112,48.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+113,30.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+114,46.0,,,,,,,,,Yes,,,,,,,,,Yes,No,Yes,No,No,Yes,No,Yes,No,No,
+115,22.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,No problem
+116,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+117,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+118,22.0,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+119,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+120,33.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+121,15.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+122,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+123,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+124,16.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No problem
+125,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+126,40.0,No,No,No,Yes,No,No,No,Yes,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+127,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,
+128,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,Yes,No,No,
+129,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+130,40.0,No,No,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+131,26.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+132,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,Yes,No,No problem
+133,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+134,16.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+135,26.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,Yes,No,No,Big problem
+136,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+137,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+138,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+139,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,Yes,No,No,Big problem
+140,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,No problem
+141,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+142,30.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+143,30.0,Yes,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+144,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,
+145,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Says she can't get pregnant/Not having sex
+146,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+147,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+148,36.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Yes,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+149,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+150,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+151,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+152,41.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,No,No,Big problem
+153,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,No,No problem
+155,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+156,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+157,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+158,27.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+159,31.0,No,No,No,Yes,Yes,No,No,Yes,No,Yes,No,Yes,No,Yes,No,No,Yes,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+160,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+161,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+162,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,No problem
+164,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+165,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+166,23.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,No,No,Yes,Yes,No,Yes,No,No,No,No,No,No,No,
+167,40.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+168,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Says she can't get pregnant/Not having sex
+169,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,No problem
+170,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+171,35.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,Yes,No,No,No,Big problem
+172,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+174,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+175,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+177,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+179,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+180,24.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+181,44.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+182,19.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+183,21.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,No problem
+185,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,Yes,No,
+186,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+187,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+188,44.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+189,22.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+190,24.0,No,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+191,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+192,44.0,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Big problem
+193,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+194,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+195,44.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+196,42.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+197,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+198,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+199,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+200,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+201,18.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,,,,,,,,,,,Small problem
+202,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+203,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,Yes,No,No,No,No problem
+204,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+205,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+206,36.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,Big problem
+207,44.0,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,Big problem
+208,32.0,No,No,No,Yes,Yes,No,No,Yes,No,No,No,Yes,Yes,No,No,Yes,No,Yes,No,No,Yes,No,No,No,No,No,No,
+209,16.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+210,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Says she can't get pregnant/Not having sex
+211,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+212,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+213,23.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,Yes,No,No,Big problem
+214,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+215,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+216,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+217,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+218,47.0,Yes,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,
+219,49.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+220,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+221,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+222,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+223,44.0,No,No,No,No,No,Yes,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+224,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+225,32.0,No,Yes,Yes,Yes,Yes,No,No,No,No,Yes,Yes,Yes,No,Yes,,No,No,Yes,No,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+226,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+227,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+228,26.0,,,,Yes,,,,,,,,Yes,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+229,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,Yes,No,Big problem
+230,33.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,Yes,No,No,Big problem
+231,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+232,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No problem
+233,30.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Big problem
+234,41.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+235,28.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+236,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+237,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,
+238,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+239,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+240,24.0,,Yes,Yes,Yes,Yes,,,,,Yes,Yes,Yes,,Yes,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,
+241,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,
+242,24.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+243,28.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+244,30.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+245,34.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,Yes,No,No,No,No problem
+246,38.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+247,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+248,23.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+249,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+250,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,
+251,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+252,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+253,49.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+254,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+255,40.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+256,42.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,Yes,
+257,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+258,27.0,Yes,,,,,,,,Yes,,,,,,,,,No,No,No,No,No,No,No,Yes,No,No,
+259,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+260,44.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+261,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+262,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+263,27.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+264,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+265,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+266,33.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+267,30.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+268,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+269,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+270,16.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+271,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+272,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+273,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+274,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+276,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+277,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+278,33.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,Yes,Big problem
+279,40.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+280,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+281,30.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+283,40.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,Big problem
+284,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Small problem
+285,37.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,Yes,No,
+286,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+287,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+288,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+289,24.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,
+290,49.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+291,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+292,27.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,Yes,Small problem
+293,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+294,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+296,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+297,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+298,30.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,No problem
+299,29.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,No,No,No,No,Big problem
+300,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+301,47.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+303,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+304,34.0,No,No,No,Yes,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+305,49.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+306,44.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+307,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+308,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,Yes,No,
+310,24.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+311,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+312,21.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,
+314,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,Yes,No,
+315,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+316,26.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+317,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+318,36.0,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+320,35.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+321,25.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+322,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,
+323,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+325,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+326,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,Yes,No,No,No,No,Big problem
+327,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+328,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+329,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Big problem
+330,49.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,Yes,No,No,No,No,No,Says she can't get pregnant/Not having sex
+331,44.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+332,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+333,17.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,
+337,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+338,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+346,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+347,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+348,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Small problem
+349,34.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+351,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+352,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+353,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+354,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,Yes,No,Yes,No,No,
+355,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+356,32.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+357,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+358,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+359,30.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,No,No,No,No,No problem
+360,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+361,48.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,Yes,No,No,Yes,No,Yes,No,Yes,No,No,No,No,No,
+362,32.0,Yes,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,
+363,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+364,24.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,No problem
+365,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+366,48.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,
+367,20.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+368,20.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+369,35.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+370,15.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,
+371,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+372,32.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,Yes,No,No,No,No,No,Big problem
+373,43.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+374,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+375,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+376,41.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+377,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+378,46.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+379,25.0,No,No,No,Yes,Yes,No,No,No,No,,,,,,,,,Yes,No,No,Yes,Yes,No,No,Yes,No,No,Big problem
+380,19.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+381,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+382,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+383,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+384,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+385,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,Yes,No,No,No,Big problem
+386,18.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,
+388,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+389,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,
+390,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+391,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+392,20.0,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,No,No,No,
+393,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+394,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+395,29.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+396,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Big problem
+397,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+398,40.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,Yes,No,Big problem
+399,33.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+400,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+406,28.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+410,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+414,28.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+416,30.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+417,24.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+418,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+419,17.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,No,No,No,No,Yes,No,No,Big problem
+420,18.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+421,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+422,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+423,22.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,No,No,No,No,Big problem
+424,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+425,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+426,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+427,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+428,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+429,44.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,Yes,No,No,No,Yes,No problem
+430,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,Yes,No,No,No,No,No,Yes,
+431,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+432,37.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+433,37.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,Yes,No,No,
+434,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,Yes,No,No,No,Big problem
+435,30.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+436,20.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+437,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+438,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Small problem
+439,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+440,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+441,21.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,Yes,No,No,Big problem
+442,30.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+443,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+445,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,No problem
+446,41.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+447,46.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,
+448,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+449,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+454,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+456,47.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+457,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+459,23.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+462,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+464,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,Yes,No,No,Big problem
+469,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+471,46.0,,,,,,,,Yes,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+474,39.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+475,32.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+476,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+477,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,Yes,No,No,Big problem
+478,24.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+479,26.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+480,37.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+481,49.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+482,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+483,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+484,21.0,,,,Yes,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,Yes,No,No,
+485,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+486,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+487,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+488,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+490,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+491,38.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+492,25.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,Yes,No,No,No,Big problem
+493,48.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+494,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+497,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+498,40.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+499,17.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+500,48.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,
+501,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+502,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+504,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+505,17.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+508,24.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+509,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+511,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+512,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+513,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+514,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+515,34.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+517,36.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+518,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+520,29.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,Says she can't get pregnant/Not having sex
+521,37.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+523,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+524,29.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+525,47.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+526,32.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+530,36.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,Yes,No,No,Big problem
+531,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+532,34.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+537,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+540,49.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+542,46.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+545,38.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+547,19.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,No,No,No,Big problem
+549,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+550,29.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No problem
+551,42.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+553,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+554,19.0,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No,No,Yes,,,,,,,,,,,No problem
+555,47.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+556,38.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+557,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+558,41.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,Yes,No,Yes,No,No,Big problem
+559,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+563,35.0,,,,,,,,,,,,,,,,,,,No,No,No,No,No,Yes,No,No,No,Big problem
+564,33.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+565,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+566,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+567,48.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+568,35.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+569,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+570,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+571,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+573,30.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+574,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+575,38.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+576,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+577,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,Yes,No,No,Big problem
+578,24.0,,Yes,,,Yes,,,,,,,,Yes,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+580,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+582,17.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,No,No,No,No,No,No,No,Big problem
+583,44.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,Yes,No,
+584,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+585,25.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+586,35.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Says she can't get pregnant/Not having sex
+587,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,No problem
+588,49.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Big problem
+589,25.0,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Big problem
+590,42.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+591,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+592,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+593,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+594,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+595,26.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,No,No,No,No,No,Yes,No,No,Yes,Yes,Big problem
+597,18.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+598,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+600,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,Yes,No,No,No,Big problem
+602,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+603,24.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+604,17.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+605,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+606,24.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+607,38.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,No,No,No,No,
+608,23.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,Yes,No,
+610,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+611,34.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+613,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+614,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+617,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+620,42.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+624,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+625,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+626,43.0,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,,,,,,,,,,,Says she can't get pregnant/Not having sex
+627,30.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,Yes,No,No,
+628,49.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+629,37.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+630,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,Yes,No,No,Big problem
+631,18.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,Yes,No,No,
+634,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+635,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,Yes,No,
+636,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+637,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+638,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+640,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+645,24.0,,Yes,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,
+646,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+647,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,Yes,No,No,Big problem
+648,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+649,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+650,46.0,No,No,Yes,Yes,Yes,No,No,No,No,No,Yes,Yes,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,No,No,No,No,No,Big problem
+653,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+654,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+656,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+657,28.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+659,32.0,,Yes,,,,,,,,Yes,,Yes,Yes,Yes,,,Yes,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,
+661,40.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+662,17.0,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+665,33.0,No,No,No,Yes,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+667,26.0,Yes,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,Yes,No,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+669,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+670,40.0,,,,Yes,Yes,,,,,,,Yes,Yes,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+672,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,
+674,24.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+675,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+676,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+677,16.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+678,33.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,Yes,No,No,Yes,Yes,No,Yes,Yes,No,No,No,Big problem
+680,21.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,Yes,No,Yes,No,No,No,No problem
+681,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+683,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+684,19.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,Small problem
+686,16.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+687,18.0,Yes,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,Yes,No,No,
+691,22.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+692,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+693,17.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,Yes,No,No,No,
+694,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+695,47.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+696,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,Yes,No,No,No problem
+697,34.0,No,No,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,Big problem
+698,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+699,47.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+700,23.0,No,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,
+701,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,No problem
+702,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+703,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+704,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+705,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+707,40.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+708,37.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+710,35.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+711,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No problem
+712,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+713,44.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+715,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+716,20.0,Yes,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+719,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+720,23.0,,,,,,,,,Yes,,,,Yes,,Yes,,,Yes,No,No,Yes,Yes,No,No,No,No,No,
+721,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+722,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+723,26.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+724,21.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+725,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+727,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+728,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+729,45.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+730,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,
+731,19.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,No problem
+732,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,
+733,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+734,47.0,No,No,No,Yes,No,No,No,Yes,No,No,No,Yes,No,No,No,No,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,
+735,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,Yes,No,No,
+737,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+738,17.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+739,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,
+740,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+741,22.0,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,No,Big problem
+742,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+743,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+744,25.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+745,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+746,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Big problem
+747,18.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,No,No,No,No,Big problem
+748,17.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+749,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+750,20.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,No problem
+751,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+752,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,No problem
+753,47.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+754,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+755,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+756,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+757,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+758,20.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+759,29.0,,,,,Yes,,,,,,,Yes,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+760,17.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,Yes,No,
+761,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+762,44.0,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,
+763,47.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+764,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+765,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+766,28.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+767,43.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,No problem
+769,18.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+770,30.0,No,No,No,Yes,Yes,No,No,Yes,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,Big problem
+771,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+772,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,Yes,No,No,
+773,31.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,Yes,No,No,Big problem
+774,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+775,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+776,35.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+778,46.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+779,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+781,21.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+783,34.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No problem
+784,48.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+785,36.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,No,No,No,No,
+786,33.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,Yes,No,No,No,Yes,No,No,No,No,No,No,No,No,Big problem
+787,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+793,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+794,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+795,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+796,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+797,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,Yes,No,Big problem
+798,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+799,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,
+800,24.0,,Yes,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+801,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+802,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+803,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+804,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,No,Big problem
+805,20.0,Yes,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,
+806,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+807,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+808,27.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,Yes,No,No,No,No,No,No,No,No,No,Big problem
+809,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+810,27.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+811,42.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+812,26.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+813,32.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+814,26.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,No,No,No,Yes,No,No,No,Yes,No,No,Big problem
+815,44.0,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,No,Yes,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+816,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No problem
+817,23.0,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+818,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+819,27.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+820,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+821,30.0,No,No,No,Yes,Yes,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+822,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,Yes,No,No,Big problem
+823,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+824,27.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+825,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+827,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+828,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+829,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+830,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+831,27.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+832,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+833,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+834,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+835,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+836,20.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,
+837,21.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+838,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+839,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+840,39.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,Yes,No,No,No,Small problem
+841,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+842,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+843,27.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+844,31.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,
+845,34.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,Yes,No,No,Big problem
+846,26.0,Yes,Yes,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,
+847,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Small problem
+848,29.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,No problem
+849,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+853,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,Yes,No,Big problem
+855,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+856,28.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+857,17.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Big problem
+858,17.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+859,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+860,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,No,No,No,No,Big problem
+861,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,No problem
+862,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+863,31.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+864,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+865,24.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,No problem
+866,36.0,Yes,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,No problem
+867,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+868,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+869,28.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,Yes,No,No,No,Big problem
+870,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+871,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+872,20.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,No problem
+873,32.0,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+874,23.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+875,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+876,24.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+877,20.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+878,36.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+879,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+880,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+881,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,No problem
+882,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+883,46.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+884,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+885,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Small problem
+886,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+887,37.0,No,No,Yes,Yes,Yes,No,No,Yes,No,No,Yes,Yes,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+889,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,No,No,No,No,Big problem
+890,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+891,39.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,
+892,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+893,30.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+906,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+907,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+908,18.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+909,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+910,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+911,24.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+912,44.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No problem
+913,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+914,23.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,Yes,No,No,No,No,No,No problem
+915,38.0,No,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,Yes,No,Yes,No,No,No,No,
+916,19.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,No,Yes,No,No,Big problem
+917,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+918,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+919,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,No problem
+920,18.0,Yes,No,Yes,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+921,34.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+922,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+923,25.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,Big problem
+924,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+925,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,Yes,No problem
+926,42.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+927,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+928,18.0,No,Yes,No,No,No,Yes,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+929,44.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+930,40.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No problem
+931,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+932,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+933,24.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+937,34.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+938,23.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+939,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Big problem
+940,25.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+941,47.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+942,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Small problem
+943,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+944,20.0,No,No,No,No,No,Yes,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+945,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+946,23.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+947,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+948,36.0,Yes,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+949,42.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+950,24.0,No,No,No,Yes,Yes,No,No,Yes,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,Big problem
+951,42.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+952,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+953,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,Yes,No,No,Big problem
+954,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+955,20.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,Yes,No,No,No,No,No,Big problem
+956,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+957,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+958,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+959,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+960,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+961,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+962,28.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+963,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+964,23.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+965,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+966,33.0,,,,,Yes,,,,,,,,,Yes,,,Yes,Yes,No,Yes,No,Yes,No,Yes,No,No,No,
+967,37.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,No,Yes,No,No,Big problem
+968,41.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,Yes,Yes,No,No,No,
+969,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,Big problem
+970,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+971,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+972,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,No problem
+973,38.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+974,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+975,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+976,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,Yes,No,Big problem
+977,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+978,49.0,,,,,Yes,,,,,No,No,No,No,No,No,No,Yes,No,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+979,27.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+980,24.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+981,25.0,Yes,No,No,No,No,No,No,No,Yes,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Small problem
+982,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,No problem
+983,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,Yes,No,No,No problem
+984,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+985,26.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,No problem
+986,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+987,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+988,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+989,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+990,37.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,
+991,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,Yes,No,No,Small problem
+992,32.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+993,45.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+994,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,Yes,No,No problem
+995,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,
+996,49.0,Yes,,,,Yes,,,,,,,,,Yes,Yes,,,Yes,No,No,Yes,Yes,No,No,No,No,No,
+997,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+998,36.0,,,,Yes,Yes,,,Yes,,,,Yes,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,No,
+999,30.0,,,,Yes,,,,,,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1000,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,Yes,No,No,No,
+1001,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+1002,47.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1003,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1004,25.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1005,22.0,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,Yes,No,No,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,No,No,
+1006,17.0,No,No,Yes,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,No problem
+1007,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1008,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,
+1009,28.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1010,29.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1011,22.0,No,No,No,No,No,No,Yes,No,No,No,No,Yes,No,Yes,No,No,No,Yes,Yes,Yes,No,No,No,No,Yes,No,No,Big problem
+1012,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+1013,32.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,No problem
+1014,32.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1015,42.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1016,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,Big problem
+1017,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,No problem
+1018,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1019,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+1020,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,
+1021,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1022,34.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1023,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1024,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1025,24.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1026,47.0,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,
+1027,23.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1028,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1029,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,No problem
+1030,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1031,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1032,35.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,
+1033,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1034,48.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1035,45.0,No,No,Yes,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1036,48.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1037,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No problem
+1040,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+1041,27.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1043,49.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1044,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1045,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+1046,41.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1047,32.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1048,21.0,No,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+1049,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1050,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,Yes,No,No,Big problem
+1051,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1052,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,Yes,No,No problem
+1053,44.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+1054,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1055,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,No problem
+1056,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1057,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Small problem
+1058,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1059,23.0,No,No,No,No,No,No,Yes,No,Yes,,,,,,,,,Yes,Yes,No,No,No,No,Yes,Yes,No,No,Big problem
+1060,46.0,No,No,No,No,Yes,No,No,No,No,Yes,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Yes,No,No,No,No,No,
+1061,17.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1062,37.0,,,,Yes,Yes,,,,,,,Yes,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1063,30.0,,,,,,,,,Yes,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,Yes,No,No,
+1064,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1065,46.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Big problem
+1066,48.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,No,No,No,No,
+1067,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1068,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1070,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1072,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,
+1073,25.0,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1074,25.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1075,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1076,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1077,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,Yes,No,No,Big problem
+1078,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1079,20.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,Yes,No,Yes,No,No,Yes,No,Big problem
+1080,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1081,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1082,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,Yes,No,Yes,No,No,Big problem
+1083,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1084,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1085,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1086,42.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,Yes,No,No,Small problem
+1087,46.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,Yes,Big problem
+1088,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1089,26.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1090,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1091,32.0,No,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,Yes,No,No,No,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1092,25.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1093,35.0,,,,,Yes,,,Yes,,No,No,No,No,No,No,Yes,Yes,No,No,Yes,No,No,No,Yes,No,No,No,No problem
+1094,43.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1095,30.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1096,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1097,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+1098,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,Yes,No,No,Small problem
+1099,46.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1100,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1101,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,No problem
+1102,18.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+1103,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,Yes,No,
+1104,46.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,Yes,No,No,No,No problem
+1105,49.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1106,15.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,
+1107,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1108,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1109,36.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1110,44.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1111,17.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1112,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1113,21.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+1114,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1115,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1116,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1117,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1118,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1119,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Small problem
+1120,25.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,
+1121,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1122,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1123,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1124,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1125,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+1126,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1127,28.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,Yes,No,No,No,No,No problem
+1128,38.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,Yes,No,Yes,No,No,No,Small problem
+1129,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1130,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1131,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+1132,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1133,30.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1134,37.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1135,19.0,Yes,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+1136,29.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+1137,38.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1138,38.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1139,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1140,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1141,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1142,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1143,23.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1144,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1145,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+1146,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1147,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Small problem
+1148,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1149,36.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Small problem
+1150,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,Yes,No,No,Big problem
+1151,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+1152,18.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1153,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,No problem
+1154,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1155,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1156,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1157,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1158,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+1159,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1160,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1161,19.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,Yes,No,No,
+1162,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+1163,28.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1164,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+1165,47.0,Yes,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,Big problem
+1166,37.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1167,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1168,19.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,
+1170,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1171,42.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,Yes,No,No,No,No,Big problem
+1172,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,
+1173,44.0,No,No,No,Yes,Yes,No,No,No,No,,,,,,,,,Yes,Yes,No,No,Yes,No,Yes,No,No,No,No problem
+1174,46.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1175,40.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,
+1176,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1177,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,No problem
+1178,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1179,45.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1180,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1181,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1182,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1183,32.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1184,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1185,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1186,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1187,25.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1188,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1189,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1190,20.0,,,,,,,,,Yes,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,
+1191,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1192,36.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1193,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1194,31.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+1195,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,No problem
+1196,21.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+1197,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+1198,40.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1199,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1200,26.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,Big problem
+1201,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1202,19.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+1203,47.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1204,19.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1205,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1206,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,
+1207,41.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+1208,17.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,
+1209,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1210,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1211,31.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1212,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1213,30.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,Yes,No,No,No,No,Big problem
+1214,31.0,No,No,No,Yes,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1215,34.0,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,Yes,No,No,Yes,Big problem
+1216,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1217,19.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,No,No,No,No,No problem
+1218,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1219,44.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1220,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1221,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1222,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+1223,26.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1224,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1225,22.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,No,No,No,Yes,No,Yes,No,Yes,No,Yes,No,No,No,
+1226,48.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,
+1227,36.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1228,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1229,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1230,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+1231,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,Yes,No,Big problem
+1232,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+1233,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1234,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1235,32.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1236,33.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,Yes,No,No,No,No problem
+1237,34.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1238,24.0,No,No,Yes,No,No,No,No,No,Yes,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,
+1239,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1240,31.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1241,46.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1242,20.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1243,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1244,17.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1245,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1246,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1247,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1248,20.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+1249,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1250,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,Big problem
+1251,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1252,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1253,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,Yes,No,Big problem
+1254,44.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1255,19.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,Yes,Yes,No,No,No,Yes,Yes,Yes,No,Big problem
+1256,21.0,Yes,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1257,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1258,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1259,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1260,25.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1261,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1262,48.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,
+1263,22.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+1264,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1265,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,Yes,Yes,No,No,No,Big problem
+1266,28.0,No,No,No,Yes,Yes,No,No,No,Yes,No,No,Yes,No,No,No,No,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1267,38.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1268,19.0,,,,,,,,,Yes,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1269,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1270,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1271,23.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1272,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1273,32.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1274,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1275,25.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1276,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+1277,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1278,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,No problem
+1279,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1280,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1281,23.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1282,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,Big problem
+1283,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+1284,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1285,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1286,40.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,
+1287,18.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+1288,22.0,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1289,48.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,
+1290,19.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,
+1291,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1292,23.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1293,25.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,Yes,No,No,No,No,No,Big problem
+1294,31.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1295,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1296,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+1297,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1298,16.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,Yes,No,No,No,Yes,No,Big problem
+1299,41.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+1300,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1301,25.0,Yes,No,No,No,No,Yes,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+1302,19.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1303,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1304,46.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,
+1305,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1306,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1307,45.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1308,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1309,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1310,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1311,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,No problem
+1312,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+1313,44.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1314,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1315,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1316,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+1317,36.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1318,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1319,36.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1320,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1321,28.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Small problem
+1322,40.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1323,19.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,Yes,No,No,No,No,No,
+1324,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,Yes,Yes,No,No,No,
+1325,40.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1326,38.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1327,32.0,,Yes,,,,,,,,Yes,,,,Yes,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,No,
+1328,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1329,21.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1330,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1331,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,No problem
+1332,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+1333,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1334,18.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+1335,33.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,Yes,No,Yes,
+1336,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1337,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1338,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1339,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1340,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1341,38.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,Yes,Big problem
+1342,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1343,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,Big problem
+1344,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1345,20.0,,Yes,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,No,No,Yes,No,
+1346,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+1347,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1348,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1349,38.0,,,,,Yes,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Says she can't get pregnant/Not having sex
+1350,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1351,25.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1352,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1353,38.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1354,25.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1355,34.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1356,36.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1357,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1358,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1359,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1360,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1361,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,
+1362,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1363,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1364,26.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Small problem
+1365,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,Yes,No,No,No,Big problem
+1366,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1367,47.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,
+1368,30.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+1369,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1370,35.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,Yes,No,No,
+1371,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1372,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1373,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1374,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1375,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1376,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1377,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1378,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Small problem
+1379,32.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Small problem
+1380,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1381,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1382,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1383,28.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1384,24.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1390,25.0,,,,Yes,Yes,,,Yes,,,,Yes,Yes,,,,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1394,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1395,29.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Small problem
+1396,30.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1397,40.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1398,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1399,21.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1400,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1401,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,No problem
+1402,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,Yes,No,Yes,No,No,No,No,Big problem
+1403,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1404,38.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,Yes,No,Yes,
+1405,29.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+1406,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,Small problem
+1407,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,
+1408,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1409,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1411,22.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1412,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1413,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1414,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1416,20.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,Yes,No,No,No,No,No,No problem
+1417,34.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1418,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+1419,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1420,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,Yes,No,No,No problem
+1421,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1422,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1423,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Small problem
+1424,28.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1425,27.0,Yes,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1426,37.0,,,,,Yes,,,,,,,,Yes,Yes,Yes,,,Yes,Yes,Yes,No,No,Yes,No,No,No,No,
+1427,40.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1428,25.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+1429,28.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,Yes,No,Yes,Yes,No,Yes,No,Yes,No,No,No,No,No,Big problem
+1430,31.0,Yes,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1431,26.0,,,,Yes,Yes,Yes,,Yes,,,,Yes,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,
+1432,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1433,23.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+1434,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1435,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1436,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1437,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1438,36.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1439,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1440,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1441,23.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1442,46.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,Yes,No,No,
+1443,17.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1444,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1445,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1446,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1447,30.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,No,Yes,No,No,Yes,No,Yes,No,Yes,No,No,No,No,No,No problem
+1448,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1449,47.0,,,,Yes,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1450,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,Yes,No,No,No,No,
+1451,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1452,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1453,48.0,,,,,,,Yes,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1454,35.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1455,36.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,No problem
+1456,45.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+1457,25.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1458,46.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1459,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1460,36.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1461,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+1462,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+1463,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,Yes,No,No,Big problem
+1466,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,No problem
+1468,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+1469,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,Yes,No,
+1470,27.0,No,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1471,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,Yes,No,No,Yes,No,No,No,Small problem
+1472,26.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1473,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1474,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,
+1475,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1476,49.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1477,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1478,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1479,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1480,32.0,,,,Yes,Yes,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1481,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1482,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1483,27.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,Yes,No,No,No,No,Big problem
+1484,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1485,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1486,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1487,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1488,38.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,Yes,No,No,
+1489,20.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1490,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1491,19.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1492,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1493,38.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1494,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1495,40.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1496,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1497,48.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1498,46.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,Yes,No,No,Big problem
+1499,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1500,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1501,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1502,40.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1503,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1504,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1505,39.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1506,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1507,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+1508,44.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1509,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1510,39.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1511,44.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1512,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1513,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1514,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1515,22.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,
+1516,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1517,16.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,Yes,No,
+1518,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1519,23.0,,,,Yes,Yes,,,,,,,,,,Yes,,Yes,Yes,Yes,No,No,Yes,No,No,No,No,No,
+1520,27.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1521,27.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1522,22.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1523,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1524,20.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,
+1525,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,Yes,No,No,
+1526,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1527,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1528,45.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1529,37.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1530,17.0,,Yes,,,,,,,,Yes,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1531,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1532,40.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,Yes,No,No,Yes,No,Yes,No,Yes,No,No,Yes,No,No,Yes,Big problem
+1533,25.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1534,44.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1535,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+1536,40.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1537,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1538,27.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,No problem
+1539,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1540,25.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1541,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+1542,27.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1543,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1544,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,Big problem
+1545,23.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1546,24.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1547,25.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Yes,
+1548,45.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,Yes,No,Yes,No,No,No,
+1549,48.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1550,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,Yes,Big problem
+1551,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1552,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,
+1553,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Big problem
+1554,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1555,43.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1556,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1557,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Says she can't get pregnant/Not having sex
+1558,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1559,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1560,34.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1561,20.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,
+1562,40.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,No,No,Yes,No,No,Big problem
+1563,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1564,28.0,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1565,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1566,24.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,No,No problem
+1567,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+1568,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1569,24.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,Big problem
+1570,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+1572,48.0,,,,,Yes,,,,,,,Yes,Yes,Yes,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,No,
+1573,27.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1574,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,Yes,No,No,Big problem
+1575,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1576,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1577,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1578,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1579,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+1580,43.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+1581,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1582,31.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,No problem
+1583,27.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,Big problem
+1584,44.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1585,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1586,19.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1587,25.0,Yes,,,,,,,,,,,,Yes,Yes,Yes,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,
+1588,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1589,38.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+1590,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+1591,48.0,,Yes,,,,,,,,,,Yes,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1592,47.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1593,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1594,21.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,No problem
+1597,21.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1598,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,Big problem
+1599,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1600,45.0,,,,,,,,,,,,Yes,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,No,
+1601,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1602,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1603,29.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1604,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1605,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1606,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1607,44.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1608,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1609,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,Yes,No,No,
+1610,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1611,45.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1612,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Small problem
+1613,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1614,33.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1615,32.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,No,No,No,No,Small problem
+1616,42.0,No,No,No,Yes,Yes,No,No,No,Yes,No,No,Yes,Yes,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+1617,19.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1618,32.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1619,49.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,
+1620,22.0,,Yes,,,,,,,Yes,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1621,31.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1622,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1623,39.0,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,Yes,No,Big problem
+1624,20.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+1625,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1626,35.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1627,38.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,Big problem
+1628,18.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1629,22.0,Yes,,,,,,,,Yes,Yes,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1630,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1631,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1632,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1633,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1634,42.0,,,,,Yes,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1635,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1636,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,Yes,Big problem
+1637,33.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1638,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1639,28.0,,,,Yes,Yes,,,,,,,Yes,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+1640,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1641,48.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,
+1642,22.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,No,No,No,No,No,
+1643,16.0,Yes,,,,,,,,,,,Yes,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1644,28.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1645,44.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1646,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1647,41.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1648,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,No problem
+1649,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1650,35.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1651,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1652,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1653,34.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,Yes,Big problem
+1654,30.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1655,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1656,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,
+1657,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1658,27.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,No,No,No,No,
+1659,28.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1660,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1661,20.0,,Yes,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1662,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1663,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1664,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1665,24.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,Big problem
+1666,43.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1667,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1668,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1669,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1670,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1671,23.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1672,37.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1673,28.0,No,No,No,Yes,Yes,No,No,No,No,No,No,No,Yes,Yes,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1674,24.0,,,,,Yes,,,,,,,Yes,Yes,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+1675,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1676,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Big problem
+1677,27.0,,,,,Yes,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1678,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1679,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1680,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,
+1682,18.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,
+1683,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1684,26.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1685,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1686,38.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1687,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+1688,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1689,25.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1690,22.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1691,48.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1692,24.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1693,20.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1694,48.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+1695,26.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Small problem
+1696,17.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,Yes,Yes,No,No,Yes,No,No,Yes,
+1697,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1698,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1699,22.0,,,,,,,,,Yes,,,Yes,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+1700,46.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1701,24.0,,,,,,,,,Yes,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1702,41.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,No problem
+1703,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1704,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1705,15.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1706,33.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1707,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+1708,30.0,,Yes,,,,,,,Yes,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1709,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1710,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1711,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,Yes,Big problem
+1712,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1713,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1714,29.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1715,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1716,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1717,28.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1718,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,Yes,Big problem
+1719,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1720,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1721,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1722,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1723,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1724,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1725,29.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,Yes,No,No,No,No,No,
+1726,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1727,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,Yes,No,No,
+1728,35.0,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1729,29.0,,,,,,,,,,,,,,,,,,No,Yes,Yes,No,No,No,Yes,No,No,No,Big problem
+1730,42.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1731,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,
+1732,28.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,No problem
+1733,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1734,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1735,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1736,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1737,29.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1738,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1739,38.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,No,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+1740,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1741,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+1742,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1743,36.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1744,48.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,No,No,No,No,No,No,Big problem
+1745,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Small problem
+1746,37.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1747,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+1748,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,
+1749,17.0,Yes,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1750,30.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1751,19.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1752,26.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,No,No,No,No,No problem
+1753,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1754,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1755,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,Yes,No,No,
+1757,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+1758,24.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,,,,,,,,,,,Big problem
+1759,35.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+1760,49.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1761,49.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1762,46.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1763,26.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1764,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1765,26.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1766,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+1767,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+1768,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1769,28.0,,,,,,,,,,,,,,,,,,No,Yes,No,Yes,Yes,No,No,No,No,No,
+1770,35.0,No,No,No,Yes,Yes,No,No,Yes,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+1771,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,Big problem
+1772,18.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1773,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1774,49.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1775,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+1776,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1777,31.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,Yes,No,No,No,
+1778,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+1779,21.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,Yes,No,No,Yes,No,Yes,No,No,No,Big problem
+1780,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1782,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1783,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,Yes,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1786,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1793,33.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1796,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1798,26.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+1799,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1802,22.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+1803,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1804,34.0,No,No,No,Yes,Yes,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,No problem
+1805,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1806,26.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,No problem
+1807,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1808,30.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1809,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1810,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1811,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1812,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,
+1813,42.0,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,No,No,Yes,No,Yes,No,Big problem
+1814,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,No problem
+1815,23.0,,Yes,,,,,,,,Yes,,,,,,,,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,
+1816,34.0,,Yes,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,
+1817,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1818,47.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1819,22.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1820,48.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1821,24.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,Yes,No,No,No,Yes,No,Big problem
+1822,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1823,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1824,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,
+1825,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1826,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1827,47.0,,,,Yes,,,,Yes,,,,Yes,,,,,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,
+1828,40.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,
+1829,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+1830,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1831,20.0,,Yes,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1832,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,Yes,No,No,No,No,
+1833,21.0,No,No,No,No,No,No,Yes,No,No,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1834,23.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+1835,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1836,40.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,
+1837,45.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1838,23.0,No,No,No,Yes,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,Yes,No,No,
+1839,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1840,24.0,Yes,No,No,No,No,Yes,No,No,No,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+1841,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1842,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+1843,18.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,
+1844,45.0,,,,,Yes,,,,,,,Yes,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,
+1845,40.0,No,No,No,No,No,No,Yes,No,No,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1846,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1847,44.0,No,No,No,No,No,No,No,Yes,Yes,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1848,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1849,22.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1850,27.0,,Yes,,,,,,,,Yes,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,
+1851,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+1852,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1853,48.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1854,21.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,
+1855,36.0,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1856,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1857,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,
+1858,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1859,34.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,No problem
+1860,19.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+1861,36.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,Yes,No,Yes,No,No,No,Big problem
+1862,35.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Small problem
+1863,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1864,28.0,No,No,No,Yes,Yes,No,No,Yes,No,No,No,Yes,Yes,Yes,Yes,No,No,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+1865,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1866,21.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,Yes,No,No,
+1867,19.0,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1868,40.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,Yes,No,No,No,No,No,Big problem
+1869,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,No problem
+1870,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1871,49.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1872,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1873,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1874,24.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,Yes,Yes,No,No,No,Big problem
+1875,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1876,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,No problem
+1877,23.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1878,27.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,Yes,No,Big problem
+1879,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1880,36.0,No,No,No,No,Yes,No,No,No,No,,,,,,,,,Yes,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+1881,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+1882,20.0,,,,,,,,,,,,,,,,,,No,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1883,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,Big problem
+1884,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1885,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1886,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1889,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1890,45.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,Says she can't get pregnant/Not having sex
+1891,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1892,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1893,23.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,No,No,No,No,No,No,No,No,No,No,No problem
+1894,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1895,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1896,47.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,Yes,No,Yes,Yes,No,No,Big problem
+1897,47.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1898,32.0,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,Yes,No,Big problem
+1899,23.0,,,,,Yes,,,,,,,Yes,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,
+1900,25.0,Yes,,,,,,,,,,,Yes,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1901,36.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1902,40.0,No,No,No,No,No,No,Yes,No,No,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1903,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,No problem
+1904,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+1905,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+1906,27.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,Yes,Small problem
+1907,29.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,Yes,No,No,No,Big problem
+1908,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+1909,28.0,,Yes,,,,,,,Yes,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1910,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+1911,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1912,15.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1913,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+1914,30.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+1915,42.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+1916,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1917,17.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,Yes,Big problem
+1918,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1919,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Small problem
+1920,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+1921,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,No problem
+1922,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Small problem
+1923,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1924,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,
+1925,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1926,28.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,No problem
+1927,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Small problem
+1928,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1929,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1930,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1931,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No problem
+1932,30.0,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+1933,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1934,45.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,No,No,Yes,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+1935,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1936,48.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+1937,39.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,Yes,No,Yes,No,No,No,Big problem
+1938,16.0,Yes,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+1939,46.0,Yes,No,No,No,Yes,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1940,17.0,Yes,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1941,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+1942,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+1943,21.0,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No problem
+1944,25.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1945,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1946,22.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1947,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1948,45.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,No problem
+1949,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+1950,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1951,25.0,No,No,No,No,No,Yes,Yes,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1952,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,
+1953,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1954,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1955,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,Yes,Yes,No,No,No,No problem
+1956,16.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,
+1957,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+1958,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+1959,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1960,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+1961,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+1962,48.0,No,Yes,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,Yes,No,No,Yes,No,No,Big problem
+1963,19.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+1964,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1965,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+1966,21.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Small problem
+1967,23.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Big problem
+1968,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1969,45.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,Yes,No,No,Yes,Yes,No,Yes,No,No,No,Yes,No,No,No,Big problem
+1970,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1971,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1972,23.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,Yes,No,No,Big problem
+1973,20.0,,,,,,,,,,,,,Yes,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+1974,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1975,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1976,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1977,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,No problem
+1978,48.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+1979,47.0,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+1980,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1981,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+1982,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1983,33.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+1984,19.0,,,,,,Yes,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+1985,30.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,Yes,No,Yes,No,No,No,Big problem
+1986,28.0,,,,,Yes,,,,,,,Yes,,,,,,Yes,Yes,No,Yes,No,No,Yes,Yes,No,No,
+1987,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+1988,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+1989,32.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,No problem
+1990,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+1991,22.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,Yes,No,No,
+1992,15.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,Yes,No,No,No,No,
+1993,24.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+1994,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+1995,21.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,Yes,No,No,No,
+1996,24.0,,,,,Yes,,,,,,,,,,,,,No,No,Yes,No,Yes,No,No,No,No,No,
+1997,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,No problem
+1998,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+1999,49.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2000,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2001,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2002,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+2003,36.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+2004,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,Yes,Yes,No,No,No,
+2005,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+2006,18.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+2007,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2008,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,
+2009,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+2010,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,
+2011,48.0,,,,,,,,,Yes,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2012,37.0,Yes,,,,,,,,,,,Yes,,,Yes,,,Yes,No,No,No,Yes,No,No,No,No,No,
+2013,23.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,Yes,No,Yes,No,No,No,Big problem
+2014,18.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,No problem
+2015,42.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,Yes,Big problem
+2016,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+2017,29.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+2018,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,Yes,No,Yes,No,Big problem
+2019,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2020,32.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,Big problem
+2021,27.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2022,26.0,No,No,No,No,No,Yes,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+2023,45.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+2024,33.0,No,No,No,No,No,No,Yes,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2025,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+2026,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2027,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2028,32.0,No,Yes,No,No,No,No,Yes,No,No,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+2029,16.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+2030,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2031,15.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2032,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2033,33.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,No problem
+2034,23.0,No,No,No,Yes,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+2035,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Big problem
+2036,30.0,Yes,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,Yes,No,No,No,No,No,No,
+2037,33.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,Big problem
+2038,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+2039,21.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2040,31.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2041,25.0,,Yes,,,Yes,,,,,,,Yes,Yes,,Yes,,,Yes,No,Yes,Yes,No,No,No,No,No,No,
+2042,36.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,No,No,Small problem
+2043,15.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+2044,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2045,41.0,,Yes,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+2046,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2047,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2048,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Says she can't get pregnant/Not having sex
+2049,41.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2050,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+2051,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2052,42.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2053,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2054,41.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+2055,26.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+2056,39.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+2057,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2058,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2059,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2060,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2061,22.0,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,Yes,No,No,No,Big problem
+2062,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2063,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2064,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2065,49.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,Yes,No,No,No,
+2066,37.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2067,22.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+2068,20.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2069,18.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+2070,22.0,,Yes,,Yes,Yes,,,,,Yes,,Yes,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,
+2071,42.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2072,16.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Big problem
+2073,48.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,Yes,No,Yes,No,No,No,
+2074,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2075,43.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,Yes,No,No,No,No problem
+2076,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+2077,30.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,No,No,No,No,No problem
+2078,38.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,Yes,
+2079,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,Big problem
+2080,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2081,23.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2082,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+2083,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,Yes,
+2084,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2085,38.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+2086,21.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,No problem
+2087,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2088,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2089,23.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2090,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2091,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Small problem
+2092,30.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,Big problem
+2093,40.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2094,21.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+2095,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+2096,38.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+2097,24.0,No,No,No,No,No,No,No,No,No,,,,,,,,,,,,,,,,,,,Big problem
+2098,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2099,38.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+2100,26.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,Big problem
+2101,31.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,Yes,No,No,No problem
+2102,43.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+2103,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2104,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,No,Yes,No,No,Yes,No,No,No,No,No,Small problem
+2105,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Says she can't get pregnant/Not having sex
+2106,16.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,No,No,No,No,No problem
+2107,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,Big problem
+2108,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2109,21.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2110,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,
+2111,20.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+2112,26.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2113,27.0,Yes,No,No,No,No,No,No,No,No,No,No,Yes,Yes,No,Yes,No,No,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+2114,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Small problem
+2115,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2116,46.0,Yes,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2117,48.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2118,22.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+2119,44.0,,,,,,,,,,,,,,,,,,No,No,No,Yes,No,No,No,No,Yes,No,
+2120,45.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2121,26.0,,,,Yes,Yes,Yes,,,,,,Yes,Yes,Yes,,,,No,No,Yes,Yes,Yes,No,No,No,No,No,
+2122,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,Yes,Yes,No,No,No,Big problem
+2123,29.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,No problem
+2124,28.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Big problem
+2125,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,
+2126,24.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+2127,24.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,
+2128,21.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,No problem
+2129,19.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,
+2130,26.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,Big problem
+2131,39.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2132,26.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+2133,18.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,Yes,No,No,
+2134,19.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+2135,43.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,Big problem
+2136,40.0,Yes,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2137,35.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2138,32.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,Small problem
+2139,34.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,Yes,No,No,No,
+2140,40.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+2141,31.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2142,34.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+2143,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,Yes,Yes,No,No,No,No,No,No problem
+2144,22.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,Yes,No,Big problem
+2145,39.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,No,No,No,Big problem
+2146,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,No problem
+2147,36.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+2148,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2149,31.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,No problem
+2150,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+2151,32.0,,,,,,,,,Yes,,,,,Yes,,,,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,
+2152,19.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2153,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,Yes,Big problem
+2154,25.0,No,No,No,Yes,No,No,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,No,No problem
+2155,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2156,39.0,,,,,Yes,,,,,No,No,No,No,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,Big problem
+2157,29.0,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,No,No,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+2158,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2159,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,Yes,No,No,No,Big problem
+2160,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+2161,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2162,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2163,24.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,Yes,No,No,No,Big problem
+2164,22.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,No,No,No,No,No,No,No,Big problem
+2165,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,Yes,No,Big problem
+2166,15.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,Big problem
+2167,42.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,Yes,No,No,No,No,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2168,43.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,No,Big problem
+2169,46.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,
+2170,42.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,No,No,No,No,
+2171,16.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2172,26.0,Yes,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+2173,25.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2174,30.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+2175,36.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2176,26.0,Yes,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,
+2177,43.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,Yes,No,No,Yes,Big problem
+2178,17.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,Yes,No,No,Big problem
+2180,47.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,Yes,No,No,No,Big problem
+2181,40.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2182,34.0,,,,,,,,,,,,,,,,,,No,Yes,No,No,No,No,Yes,No,No,No,
+2183,15.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2184,35.0,,,,,,,,,,,,,,,,,,Yes,No,Yes,Yes,No,No,No,No,No,No,Big problem
+2185,41.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+2186,39.0,No,No,No,Yes,Yes,No,No,No,No,No,No,Yes,No,No,No,No,Yes,Yes,No,No,Yes,No,No,Yes,No,No,No,Big problem
+2190,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2191,19.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+2193,45.0,No,No,No,No,Yes,No,No,No,No,Yes,No,No,No,No,No,No,No,No,No,No,Yes,No,No,No,No,No,No,Big problem
+2194,25.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,Big problem
+2195,16.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2196,20.0,,,,,,,,,,,,,,,,,,Yes,No,No,Yes,No,No,No,No,No,No,Big problem
+2197,44.0,No,Yes,No,No,No,No,No,No,No,,,,,,,,,No,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,Big problem
+2198,37.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,Yes,No,No,No,No,No,No,Small problem
+2199,21.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,Yes,No,No,Yes,Yes,No,No,Big problem
+2200,47.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,Yes,No,No,No,No,No,Big problem
+2201,41.0,No,No,No,No,No,No,No,No,No,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,Big problem
+2202,27.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,No,No,Big problem
+2203,42.0,,,,,,,,,,,,,,,,,,No,No,Yes,Yes,No,No,Yes,No,No,No,
+2204,48.0,,,,,,,,,,,,,,,,,,Yes,Yes,Yes,No,No,No,Yes,No,No,No,
+2205,18.0,No,Yes,No,Yes,No,No,No,Yes,No,Yes,No,Yes,No,No,No,No,No,Yes,Yes,No,No,No,No,No,Yes,No,No,
+2206,21.0,,,,,,,,,Yes,,,,,,,,,Yes,Yes,No,No,Yes,No,No,No,No,No,
+2207,20.0,No,No,No,No,No,No,No,No,Yes,,,,,,,,,Yes,No,No,No,No,No,No,No,Yes,No,Big problem
+2208,16.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+2209,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
+2211,28.0,,,,,,,,,,,,,,,,,,No,No,Yes,No,No,No,Yes,No,No,No,
+2213,17.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,Big problem
+2215,18.0,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2216,17.0,,,,,,,,,,,,,,,,,,No,No,No,No,No,No,No,No,Yes,No,
+2217,32.0,,,,,,,,,,,,,,,,,,Yes,Yes,No,No,No,No,No,No,No,No,
+2218,25.0,,,,,,,,,,,,,,,,,,Yes,No,No,No,No,No,No,No,No,No,
