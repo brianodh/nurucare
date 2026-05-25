@@ -1,0 +1,26 @@
+======================================================================
+DATASET 2: Client Service Statistics - SUMMARY
+======================================================================
+
+Total records: 216,539
+Total columns extracted: 29
+
+Age range: 10 - 60
+Mean age: 28.0
+
+FP Status distribution:
+  Revisit: 123,237 (56.9%)
+  New: 93,095 (43.0%)
+  Missing: 207 (0.1%)
+
+Top 10 methods adopted:
+  Condoms: 87,245 (40.3%)
+  Pills: 48,127 (22.2%)
+  Implants: 33,967 (15.7%)
+  Injectables: 32,852 (15.2%)
+  IUCD: 4,624 (2.1%)
+  BTL: 4,529 (2.1%)
+  Pills & Condoms: 3,228 (1.5%)
+  Removal_Implant: 1,066 (0.5%)
+  Other RH services: 690 (0.3%)
+  Removal_IUCD: 134 (0.1%)
