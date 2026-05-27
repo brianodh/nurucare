@@ -104,20 +104,153 @@ class WHOMECGuardrail:
                     return True
         return False
 
-# Example usage
+# ============================================
+# ENHANCED TESTING SECTION
+# ============================================
+
 if __name__ == "__main__":
+    print("\n" + "=" * 70)
+    print("TESTING WHO MEC GUARDRAIL ENGINE")
+    print("=" * 70 + "\n")
+    
+    # Initialize the guardrail
     guardrail = WHOMECGuardrail()
+    print("✅ Guardrail engine loaded successfully\n")
     
-    # Test profile
-    test_profile = {
-        'age': 36,
-        'smoking': True,
-        'migraine_type': 'none',
-        'systolic_bp': 120,
-        'diastolic_bp': 80,
-        'breastfeeding': False,
-        'postpartum_weeks': 100
-    }
+    # Define test profiles
+    test_profiles = [
+        {
+            "name": "✅ Healthy young woman - NO RESTRICTIONS",
+            "profile": {
+                "age": 24,
+                "smoking": False,
+                "migraine_type": "none",
+                "systolic_bp": 110,
+                "diastolic_bp": 70,
+                "breastfeeding": False,
+                "postpartum_weeks": 100
+            }
+        },
+        {
+            "name": "❌ Smoker over 35 - HIGH RISK (Category 4)",
+            "profile": {
+                "age": 36,
+                "smoking": True,
+                "migraine_type": "none",
+                "systolic_bp": 120,
+                "diastolic_bp": 80,
+                "breastfeeding": False,
+                "postpartum_weeks": 100
+            }
+        },
+        {
+            "name": "❌ Migraine with aura - HIGH RISK (Category 4)",
+            "profile": {
+                "age": 28,
+                "smoking": False,
+                "migraine_type": "with_aura",
+                "systolic_bp": 115,
+                "diastolic_bp": 75,
+                "breastfeeding": False,
+                "postpartum_weeks": 100
+            }
+        },
+        {
+            "name": "⚠️ Hypertension - CAUTION (Category 3)",
+            "profile": {
+                "age": 34,
+                "smoking": False,
+                "migraine_type": "none",
+                "systolic_bp": 145,
+                "diastolic_bp": 95,
+                "breastfeeding": False,
+                "postpartum_weeks": 100
+            }
+        },
+        {
+            "name": "⚠️ Breastfeeding new mother - CAUTION (Category 3)",
+            "profile": {
+                "age": 29,
+                "smoking": False,
+                "migraine_type": "none",
+                "systolic_bp": 118,
+                "diastolic_bp": 78,
+                "breastfeeding": True,
+                "postpartum_weeks": 3
+            }
+        },
+        {
+            "name": "ℹ️ Woman over 40 - AGE CAUTION (Category 2)",
+            "profile": {
+                "age": 42,
+                "smoking": False,
+                "migraine_type": "none",
+                "systolic_bp": 125,
+                "diastolic_bp": 82,
+                "breastfeeding": False,
+                "postpartum_weeks": 100
+            }
+        }
+    ]
     
-    result = guardrail.evaluate(test_profile)
-    print(json.dumps(result, indent=2))
+    # Test each profile
+    for test in test_profiles:
+        print("=" * 70)
+        print(f"🧪 {test['name']}")
+        print("=" * 70)
+        
+        print(f"\n📋 User Profile:")
+        for key, value in test['profile'].items():
+            print(f"   {key}: {value}")
+        
+        # Evaluate
+        result = guardrail.evaluate(test['profile'])
+        
+        print(f"\n📊 Evaluation Result:")
+        
+        # Print summary
+        restricted_count = len(result['restricted_methods'])
+        allowed_count = len(result['allowed_methods'])
+        
+        if restricted_count == 0:
+            print(f"   ✅ SAFE: No restrictions - all methods are medically safe")
+        else:
+            print(f"   ⚠️ {restricted_count} method(s) restricted for safety")
+            print(f"   ✅ {allowed_count} method(s) remain available")
+        
+        # Print restricted methods
+        if result['restricted_methods']:
+            print(f"\n❌ RESTRICTED METHODS:")
+            for method_id, restrictions in result['restricted_methods'].items():
+                # Get readable method name from method_mapping
+                method_name = guardrail.method_mapping.get(method_id, method_id)
+                print(f"   • {method_name}")
+                for r in restrictions:
+                    print(f"     - Category {r['category']}: {r['explanation'][:80]}...")
+        
+        # Print allowed methods (first 5)
+        if result['allowed_methods']:
+            print(f"\n✅ ALLOWED METHODS (first 5):")
+            for method_id in result['allowed_methods'][:5]:
+                method_name = guardrail.method_mapping.get(method_id, method_id)
+                print(f"   • {method_name}")
+        
+        print(f"\n🏥 Requires Provider Consultation: {result['requires_provider']}")
+        print()
+    
+    # Print summary of all methods
+    print("=" * 70)
+    print("📋 CONTRACEPTIVE METHODS BEING MONITORED")
+    print("=" * 70)
+    
+    for method_id, name in guardrail.method_mapping.items():
+        # Check if method contains estrogen (combined methods do)
+        if 'combined' in method_id or method_id in ['combined_pill', 'combined_patch', 'combined_ring']:
+            estrogen = "⚠️ Contains ESTROGEN - may be restricted"
+        else:
+            estrogen = "✓ No estrogen - safer for most"
+        print(f"   • {name}: {estrogen}")
+    
+    print("\n" + "=" * 70)
+    print("✅ Guardrail engine test complete!")
+    print("=" * 70)
