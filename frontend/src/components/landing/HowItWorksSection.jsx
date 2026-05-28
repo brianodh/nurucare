@@ -1,31 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { UserCheck, ClipboardList, Sparkles, Heart } from 'lucide-react';
-
-const steps = [
-  { icon: UserCheck, title: 'Choose Your Role', desc: 'Select your profile — female client, male client, or healthcare professional.' },
-  { icon: ClipboardList, title: 'Complete Assessment', desc: 'Answer guided health questions in a safe, judgment-free environment.' },
-  { icon: Sparkles, title: 'Get Recommendations', desc: 'Receive personalized, WHO-aligned contraceptive guidance with clear explanations.' },
-  { icon: Heart, title: 'Take Action', desc: 'Access educational resources, connect with your partner, or consult a nurse.' },
-];
+import { useLang } from '@/lib/i18n';
 
 export default function HowItWorksSection() {
+  const { t } = useLang();
+
+  const steps = [
+    { icon: UserCheck, titleKey: 'step_1_title', descKey: 'step_1_desc' },
+    { icon: ClipboardList, titleKey: 'step_2_title', descKey: 'step_2_desc' },
+    { icon: Sparkles, titleKey: 'step_3_title', descKey: 'step_3_desc' },
+    { icon: Heart, titleKey: 'step_4_title', descKey: 'step_4_desc' },
+  ];
+
   return (
     <section className="py-20 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-medium text-secondary uppercase tracking-wider mb-2">How It Works</p>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold">Simple steps to clarity</h2>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+          <p className="text-sm font-medium text-secondary uppercase tracking-wider mb-2">{t('how_label')}</p>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold">{t('how_h2')}</h2>
         </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s, i) => (
             <motion.div
-              key={s.title}
+              key={s.titleKey}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -40,8 +38,8 @@ export default function HowItWorksSection() {
                   {i + 1}
                 </span>
               </div>
-              <h3 className="font-heading font-semibold mt-4 mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              <h3 className="font-heading font-semibold mt-4 mb-2">{t(s.titleKey)}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{t(s.descKey)}</p>
             </motion.div>
           ))}
         </div>

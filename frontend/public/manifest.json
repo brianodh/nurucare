@@ -1,0 +1,22 @@
+{
+  "name": "NuruCare",
+  "short_name": "NuruCare",
+  "description": "Contraceptive decision support for African youth",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6fa",
+  "theme_color": "#5b4fcf",
+  "orientation": "portrait-primary",
+    "icons": [
+    {
+      "src": "/nuru-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+
+  "categories": ["health", "medical", "education"],
+  "lang": "en",
+  "prefer_related_applications": false
+}

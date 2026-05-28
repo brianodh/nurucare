@@ -4,18 +4,18 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { AlertTriangle, CheckCircle, Shield, Info, XCircle } from 'lucide-react';
 import { mockRecommendations } from '@/lib/mockData';
+import { useLang } from '@/lib/i18n';
 
 export default function IntakeStep5({ data }) {
+  const { t } = useLang();
   const { safe, restricted, explanation, warnings } = mockRecommendations;
   const isHighRisk = (parseInt(data.age) > 35 && data.smoking) || data.migraine === 'with_aura';
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-heading font-semibold text-xl mb-1">Your Recommendations</h3>
-        <p className="text-sm text-muted-foreground">
-          Based on your health profile and WHO medical eligibility criteria.
-        </p>
+        <h3 className="font-heading font-semibold text-xl mb-1">{t('s5_title')}</h3>
+        <p className="text-sm text-muted-foreground">{t('s5_sub')}</p>
       </div>
 
       {isHighRisk && (
@@ -27,18 +27,12 @@ export default function IntakeStep5({ data }) {
           <div className="flex items-start gap-3">
             <XCircle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-heading font-semibold text-destructive">Critical Risk Flagged</p>
+              <p className="font-heading font-semibold text-destructive">{t('s5_risk_title')}</p>
               <p className="text-sm text-destructive/80 mt-1">
-                {data.migraine === 'with_aura'
-                  ? 'Migraine with aura significantly increases stroke risk with estrogen-based contraceptives.'
-                  : 'Age over 35 combined with smoking increases cardiovascular risk with estrogen-based methods.'}
+                {data.migraine === 'with_aura' ? t('s5_risk_aura') : t('s5_risk_smoke')}
               </p>
-              <p className="text-sm font-medium text-destructive mt-2">
-                Restricted: Estrogen-based contraceptives
-              </p>
-              <p className="text-xs text-destructive/70 mt-2">
-                Please consult a healthcare provider immediately.
-              </p>
+              <p className="text-sm font-medium text-destructive mt-2">{t('s5_restricted_label')}</p>
+              <p className="text-xs text-destructive/70 mt-2">{t('s5_consult')}</p>
             </div>
           </div>
         </motion.div>
@@ -47,7 +41,7 @@ export default function IntakeStep5({ data }) {
       <div>
         <div className="flex items-center gap-2 mb-4">
           <CheckCircle className="w-5 h-5 text-secondary" />
-          <h4 className="font-heading font-semibold">Recommended Methods</h4>
+          <h4 className="font-heading font-semibold">{t('s5_recommended')}</h4>
         </div>
         <div className="space-y-3">
           {safe.map((m, i) => (
@@ -58,8 +52,8 @@ export default function IntakeStep5({ data }) {
               transition={{ delay: i * 0.1 }}
               className="bg-card border rounded-2xl p-4"
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h5 className="font-medium">{m.name}</h5>
                   <Badge variant="secondary" className="text-xs">{m.category}</Badge>
                 </div>
@@ -76,7 +70,7 @@ export default function IntakeStep5({ data }) {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <AlertTriangle className="w-5 h-5 text-accent" />
-            <h4 className="font-heading font-semibold">Restricted Methods</h4>
+            <h4 className="font-heading font-semibold">{t('s5_restricted')}</h4>
           </div>
           <div className="space-y-3">
             {restricted.map(m => (
@@ -96,18 +90,16 @@ export default function IntakeStep5({ data }) {
         <div className="flex items-start gap-3">
           <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
           <div>
-            <p className="font-medium text-sm mb-1">AI Explanation</p>
+            <p className="font-medium text-sm mb-1">{t('s5_ai_label')}</p>
             <p className="text-sm text-muted-foreground leading-relaxed">{explanation}</p>
           </div>
         </div>
       </div>
 
-      {warnings.map((w, i) => (
-        <div key={i} className="bg-muted rounded-xl p-4 text-sm text-muted-foreground flex items-start gap-2">
-          <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
-          {w}
-        </div>
-      ))}
+      <div className="bg-muted rounded-xl p-4 text-sm text-muted-foreground flex items-start gap-2">
+        <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
+        {t('s5_disclaimer')}
+      </div>
     </div>
   );
 }
