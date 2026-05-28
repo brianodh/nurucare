@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, Shield, Heart, BookOpen, CheckCircle, XCircle, ArrowRight, Link2 } from 'lucide-react';
+import { Users, Shield, Heart, BookOpen, CheckCircle, XCircle, Link2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-
-const educationCards = [
-  { title: 'Condom Guidance', desc: 'Proper use increases effectiveness from 85% to 98%. Learn the correct steps.', color: 'bg-primary/10 text-primary' },
-  { title: 'Fertility Window', desc: 'Understanding your partner\'s fertile window helps with shared planning.', color: 'bg-secondary/10 text-secondary' },
-  { title: 'Male Clinical Trials', desc: 'New male contraceptive methods are in development. Stay informed.', color: 'bg-accent/10 text-accent' },
-  { title: 'Shared Responsibility', desc: 'Contraception is a shared decision. Open communication builds trust.', color: 'bg-primary/10 text-primary' },
-];
+import { useLang } from '@/lib/i18n';
 
 const vasectomyMyths = [
   { myth: 'Vasectomy affects masculinity or performance', fact: 'Vasectomy only blocks sperm transport. It does not affect hormone levels, libido, or sexual performance.' },
-  { myth: 'Vasectomy is permanent and cannot be reversed', fact: 'Vasectomy reversal is possible, though success rates vary. It\'s best considered a permanent decision with reversal as a possibility.' },
+  { myth: 'Vasectomy is permanent and cannot be reversed', fact: "Vasectomy reversal is possible, though success rates vary. It's best considered a permanent decision with reversal as a possibility." },
   { myth: 'Vasectomy is painful and requires long recovery', fact: 'Modern no-scalpel vasectomy is minimally invasive. Most men return to normal activities within a few days.' },
 ];
 
 export default function MaleDashboard() {
+  const { t } = useLang();
   const [partnerToken, setPartnerToken] = useState('');
   const [connected, setConnected] = useState(false);
   const { toast } = useToast();
 
+  const educationCards = [
+    { titleKey: 'male_card1_title', descKey: 'male_card1_desc', color: 'bg-primary/10 text-primary', Icon: Shield },
+    { titleKey: 'male_card2_title', descKey: 'male_card2_desc', color: 'bg-secondary/10 text-secondary', Icon: Heart },
+    { titleKey: 'male_card3_title', descKey: 'male_card3_desc', color: 'bg-accent/10 text-accent', Icon: BookOpen },
+    { titleKey: 'male_card4_title', descKey: 'male_card4_desc', color: 'bg-primary/10 text-primary', Icon: Users },
+  ];
+
   const connectPartner = () => {
-    if (partnerToken.length >= 6) {
+    if (partnerToken.trim().length >= 6) {
       setConnected(true);
-      toast({ title: 'Connected!', description: 'Partner sync established.' });
+      toast({ title: t('male_connected'), description: t('male_connected_sub') });
     }
   };
 
@@ -38,25 +39,20 @@ export default function MaleDashboard() {
     <div className="min-h-[85vh] py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">Bro-Talk</Badge>
-          <h1 className="font-heading text-3xl font-bold">Male Health Hub</h1>
-          <p className="text-muted-foreground mt-2">Your space for contraceptive education and partner support.</p>
+          <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">{t('male_badge')}</Badge>
+          <h1 className="font-heading text-3xl font-bold">{t('male_title')}</h1>
+          <p className="text-muted-foreground mt-2">{t('male_sub')}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid sm:grid-cols-2 gap-5 mb-8">
           {educationCards.map((c, i) => (
-            <motion.div
-              key={c.title}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-            >
+            <motion.div key={c.titleKey} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
               <Card className="p-5 rounded-2xl h-full hover:shadow-md transition-shadow">
                 <div className={`w-10 h-10 rounded-xl ${c.color} flex items-center justify-center mb-3`}>
-                  {i === 0 ? <Shield className="w-5 h-5" /> : i === 1 ? <Heart className="w-5 h-5" /> : i === 2 ? <BookOpen className="w-5 h-5" /> : <Users className="w-5 h-5" />}
+                  <c.Icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-heading font-semibold mb-1">{c.title}</h3>
-                <p className="text-sm text-muted-foreground">{c.desc}</p>
+                <h3 className="font-heading font-semibold mb-1">{t(c.titleKey)}</h3>
+                <p className="text-sm text-muted-foreground">{t(c.descKey)}</p>
               </Card>
             </motion.div>
           ))}
@@ -64,31 +60,31 @@ export default function MaleDashboard() {
 
         <Card className="p-6 rounded-2xl mb-8">
           <h3 className="font-heading font-semibold text-lg mb-4 flex items-center gap-2">
-            <Link2 className="w-5 h-5 text-accent" /> Partner Sync
+            <Link2 className="w-5 h-5 text-accent" /> {t('male_partner_title')}
           </h3>
           {!connected ? (
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Input
-                placeholder="Enter partner's sync token"
+                placeholder={t('male_partner_ph')}
                 value={partnerToken}
                 onChange={e => setPartnerToken(e.target.value)}
                 className="flex-1"
               />
-              <Button onClick={connectPartner} className="rounded-full">Connect</Button>
+              <Button onClick={connectPartner} className="rounded-full sm:w-auto w-full">{t('male_connect_btn')}</Button>
             </div>
           ) : (
             <div className="flex items-center gap-3 bg-secondary/10 rounded-xl p-4">
-              <CheckCircle className="w-5 h-5 text-secondary" />
+              <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
               <div>
-                <p className="font-medium text-sm text-secondary">Partner Connected</p>
-                <p className="text-xs text-muted-foreground">Shared health decisions are now accessible.</p>
+                <p className="font-medium text-sm text-secondary">{t('male_connected')}</p>
+                <p className="text-xs text-muted-foreground">{t('male_connected_sub')}</p>
               </div>
             </div>
           )}
         </Card>
 
         <Card className="p-6 rounded-2xl">
-          <h3 className="font-heading font-semibold text-lg mb-4">Vasectomy: Myths vs Facts</h3>
+          <h3 className="font-heading font-semibold text-lg mb-4">{t('male_myths_title')}</h3>
           <Accordion type="single" collapsible className="space-y-2">
             {vasectomyMyths.map((vm, i) => (
               <AccordionItem key={i} value={`vm-${i}`} className="bg-muted/30 rounded-xl border px-4">
