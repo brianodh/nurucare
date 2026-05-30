@@ -1,0 +1,87 @@
+{
+  "source": "WHO Medical Eligibility Criteria for Contraceptive Use, 5th Edition (2024)",
+  "guidelines": [
+    {
+      "id": "WHO_MEC_001",
+      "title": "Combined Oral Contraceptives - Age >35 with Smoking",
+      "category": "combined_hormonal",
+      "content": "Women over 35 who smoke should not use combined oral contraceptives (Category 4). The combination of age and smoking significantly increases the risk of cardiovascular events including stroke, heart attack, and venous thromboembolism. Alternative progestin-only methods (mini-pill, implant, injection, IUD) or non-hormonal methods (condoms, copper IUD) are safe options.",
+      "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_copper", "male_condom"],
+      "category_level": 4
+    },
+    {
+      "id": "WHO_MEC_002",
+      "title": "Combined Oral Contraceptives - Migraine with Aura",
+      "category": "combined_hormonal",
+      "content": "Women who experience migraine with aura should not use combined oral contraceptives (Category 4). Migraine with aura is associated with an increased risk of ischemic stroke, and estrogen-containing contraceptives further elevate this risk. Progestin-only methods are safe alternatives.",
+      "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_hormonal", "iud_copper"],
+      "category_level": 4
+    },
+    {
+      "id": "WHO_MEC_003",
+      "title": "Combined Hormonal Contraceptives - Hypertension",
+      "category": "combined_hormonal",
+      "content": "Women with hypertension (systolic BP ≥140 mmHg or diastolic BP ≥90 mmHg) should use combined hormonal contraceptives with caution (Category 3). The risks of cardiovascular events increase with elevated blood pressure. If blood pressure is well-controlled and the woman is monitored, benefits may outweigh risks. Alternative progestin-only or non-hormonal methods are preferred.",
+      "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_copper", "male_condom"],
+      "category_level": 3
+    },
+    {
+      "id": "WHO_MEC_004",
+      "title": "Breastfeeding - Early Postpartum",
+      "category": "breastfeeding",
+      "content": "For breastfeeding women less than 6 weeks postpartum, combined hormonal contraceptives are Category 3 (use with caution). Estrogen-containing methods may reduce milk supply. Progestin-only methods (mini-pill, implant, injection, IUD) are Category 1 (no restriction) and do not affect milk production.",
+      "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_hormonal", "lam"],
+      "category_level": 3
+    },
+    {
+      "id": "WHO_MEC_005",
+      "title": "Age 40 and Older - Combined Hormonal Methods",
+      "category": "combined_hormonal",
+      "content": "Women aged 40 years and older have increased baseline risk of cardiovascular events. Combined hormonal contraceptives are Category 2 (advantages generally outweigh risks). Progestin-only methods and non-hormonal methods are Category 1 and have fewer age-related concerns.",
+      "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_copper", "male_condom"],
+      "category_level": 2
+    },
+    {
+      "id": "WHO_EFF_001",
+      "title": "Contraceptive Method Effectiveness",
+      "category": "effectiveness",
+      "content": "Typical use effectiveness rates (first year failure rate): Implants: 99.9% (0.05% fail), IUD (hormonal/copper): 99.8% (0.2-0.8% fail), Injectable (Depo-Provera): 94% (6% fail), Pill (combined/progestin-only): 93% (7% fail), Male Condom: 85% (15% fail), Withdrawal: 78% (22% fail), Rhythm/Fertility Awareness: 76% (24% fail). Long-acting reversible contraceptives (LARC: implants, IUDs) are the most effective reversible methods.",
+      "category_level": null
+    },
+    {
+      "id": "WHO_STI_001",
+      "title": "STI Protection",
+      "category": "prevention",
+      "content": "Only condoms (male and female) provide protection against sexually transmitted infections (STIs) including HIV. Hormonal methods (pills, implants, injections, IUDs) do NOT protect against STIs. Dual protection (condom plus another method) is recommended for individuals at risk of STIs who also need pregnancy prevention.",
+      "category_level": null
+    },
+    {
+      "id": "WHO_BENEFITS_001",
+      "title": "Non-Contraceptive Benefits of Hormonal Methods",
+      "category": "benefits",
+      "content": "Combined oral contraceptives provide non-contraceptive benefits including: lighter and more regular periods, reduced menstrual pain, lower risk of ovarian cancer (by 50% after 5+ years), lower risk of endometrial cancer, improved acne, and reduced symptoms of endometriosis.",
+      "category_level": null
+    },
+    {
+      "id": "WHO_SIDE_EFFECTS_001",
+      "title": "Common Side Effects and Management",
+      "category": "side_effects",
+      "content": "Common side effects of hormonal contraceptives include: irregular bleeding (especially first 3-6 months of implants/IUDs - usually resolves), nausea (take pill with food), headaches (may resolve after 3 months), breast tenderness (usually improves with time), mood changes (monitor; consider switching method if persistent), weight changes (minimal evidence for significant weight gain except Depo-Provera). Most side effects improve within 3 months.",
+      "category_level": null
+    },
+    {
+      "id": "WHO_EMERGENCY_001",
+      "title": "Emergency Contraception",
+      "category": "emergency",
+      "content": "Emergency contraceptive pills (ECPs) can prevent pregnancy after unprotected sex. Levonorgestrel (P2) is effective up to 72 hours (3 days) after sex - take as soon as possible. Ulipristal acetate (Ella) is effective up to 120 hours (5 days) after sex. Copper IUD is the most effective emergency contraception (99% effective) and can be inserted up to 5 days after unprotected sex, and then continues as ongoing contraception.",
+      "category_level": null
+    },
+    {
+      "id": "WHO_LACTATION_001",
+      "title": "Lactational Amenorrhea Method (LAM)",
+      "category": "breastfeeding",
+      "content": "LAM is a contraceptive method for breastfeeding women. It is effective when: (1) baby is less than 6 months old, (2) mother is exclusively breastfeeding (no formula or solid food), and (3) mother has not yet had a period. Under these conditions, LAM is 98% effective. After 6 months or when any of these conditions change, another method should be added.",
+      "category_level": null
+    }
+  ]
+}

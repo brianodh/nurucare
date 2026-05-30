@@ -1,0 +1,141 @@
+{
+  "methods": [
+    {
+      "method_id": "implants",
+      "name": "Implant (Jadelle/Implanon)",
+      "benefits": [
+        "99.9% effective - one of the most effective methods",
+        "Lasts 3-5 years depending on the brand",
+        "Reversible - fertility returns immediately after removal",
+        "No daily action needed",
+        "Safe for most women including those who can't take estrogen"
+      ],
+      "side_effects": [
+        "Irregular bleeding or spotting (most common, especially first 3-6 months)",
+        "Headaches (may improve with time)",
+        "Weight changes (minimal evidence for significant gain)",
+        "Mood changes (monitor; consider removal if severe)",
+        "Breast tenderness (usually resolves)"
+      ],
+      "side_effect_management": "Irregular bleeding often improves by 6 months. If bothersome, a course of ibuprofen or combined pills (if no contraindications) may help. For persistent severe side effects, removal is always an option.",
+      "who_should_use": "Women who want long-term, highly effective contraception without daily action. Good for women who cannot use estrogen. Suitable for all ages including adolescents.",
+      "who_should_not_use": "Very few contraindications. Not recommended for women with current breast cancer or severe liver disease."
+    },
+    {
+      "method_id": "iud_copper",
+      "name": "Copper IUD",
+      "benefits": [
+        "99.9% effective",
+        "Lasts up to 10 years",
+        "No hormones - no hormonal side effects",
+        "Reversible - fertility returns immediately after removal",
+        "Can be used as emergency contraception up to 5 days after unprotected sex"
+      ],
+      "side_effects": [
+        "Heavier and longer periods (especially first 3-6 months)",
+        "Increased cramping during periods",
+        "Spotting between periods (first few months)"
+      ],
+      "side_effect_management": "Heavy bleeding often improves after 6 months. NSAIDs (ibuprofen) can help with cramping. If severe bleeding persists, removal is an option.",
+      "who_should_use": "Women who want long-term, hormone-free contraception. Good for women who cannot use hormones. Suitable for all ages.",
+      "who_should_not_use": "Current pelvic infection, known copper allergy, Wilson's disease, unexplained vaginal bleeding, uterine abnormalities."
+    },
+    {
+      "method_id": "iud_hormonal",
+      "name": "Hormonal IUD (Mirena/Kyleena)",
+      "benefits": [
+        "99.8% effective",
+        "Lasts 3-7 years depending on brand",
+        "Lighter periods - many women stop having periods entirely",
+        "Reduces menstrual pain",
+        "Reversible - fertility returns after removal"
+      ],
+      "side_effects": [
+        "Irregular bleeding/spotting (first 3-6 months)",
+        "Cramping during and after insertion",
+        "Hormonal side effects (less common than pills due to local action)",
+        "Ovarian cysts (usually harmless and resolve on their own)"
+      ],
+      "side_effect_management": "Irregular bleeding typically improves by 6 months. Ibuprofen helps with cramping. Most women report high satisfaction after the adjustment period.",
+      "who_should_use": "Women who want long-term contraception AND lighter periods. Good for women with heavy periods or painful periods.",
+      "who_should_not_use": "Current pelvic infection, unexplained vaginal bleeding, uterine abnormalities, current breast cancer, severe liver disease."
+    },
+    {
+      "method_id": "injectables",
+      "name": "Injectable (Depo-Provera)",
+      "benefits": [
+        "94% effective with typical use",
+        "One shot every 3 months",
+        "No daily action",
+        "Private - no one needs to know you're using it",
+        "Often stops periods after 6-12 months"
+      ],
+      "side_effects": [
+        "Irregular bleeding initially (often stops completely)",
+        "Weight gain (average 2-5 lbs over first year)",
+        "Delayed return to fertility (6-12 months after last shot)",
+        "Decreased bone density with long-term use (reversible after stopping)"
+      ],
+      "side_effect_management": "Calcium and vitamin D supplementation recommended for long-term users. Weight can be managed with diet and exercise. Return to fertility is delayed but not permanent.",
+      "who_should_use": "Women who want a method they don't have to think about daily. Good for women who can't use estrogen.",
+      "who_should_not_use": "Current breast cancer, unexplained vaginal bleeding, severe liver disease, osteoporosis risk factors for long-term use."
+    },
+    {
+      "method_id": "combined_pill",
+      "name": "Combined Oral Contraceptive Pill",
+      "benefits": [
+        "93% effective with typical use",
+        "Lighter, more regular periods",
+        "Reduces menstrual pain",
+        "Improves acne",
+        "Reduces risk of ovarian and endometrial cancer",
+        "Reversible - fertility returns immediately"
+      ],
+      "side_effects": [
+        "Nausea (improves with time - take with food)",
+        "Headaches",
+        "Breast tenderness",
+        "Mood changes",
+        "Small increased risk of blood clots (very low for healthy non-smokers under 35)"
+      ],
+      "side_effect_management": "Take with food to reduce nausea. Most side effects resolve within 3 months. If not, try a different pill formulation.",
+      "who_should_use": "Healthy non-smoking women under 35. Women who want cycle control and non-contraceptive benefits.",
+      "who_should_not_use": "Smokers over 35, migraine with aura, uncontrolled hypertension, history of blood clots, current breast cancer, severe liver disease."
+    },
+    {
+      "method_id": "progestin_only_pill",
+      "name": "Progestin-Only Pill (Mini-Pill)",
+      "benefits": [
+        "93% effective with typical use",
+        "Safe for women who can't take estrogen",
+        "Safe for breastfeeding women",
+        "Safe for women with migraines (even with aura)",
+        "Safe for smokers of any age"
+      ],
+      "side_effects": [
+        "Irregular bleeding (most common)",
+        "Headaches",
+        "Breast tenderness",
+        "Mood changes"
+      ],
+      "side_effect_management": "Must be taken at the same time every day (+/- 3 hours window). Irregular bleeding often improves with time.",
+      "who_should_use": "Women who cannot take estrogen - smokers over 35, migraine with aura, hypertension, breastfeeding. Good alternative to combined pill.",
+      "who_should_not_use": "Current breast cancer, severe liver disease."
+    },
+    {
+      "method_id": "male_condom",
+      "name": "Male Condom",
+      "benefits": [
+        "85% effective with typical use (98% with perfect use)",
+        "Protects against STIs including HIV",
+        "No hormones - no side effects",
+        "No prescription needed",
+        "Inexpensive and widely available"
+      ],
+      "side_effects": "No medical side effects. Some people report reduced sensation or latex allergy (non-latex options available).",
+      "side_effect_management": "Use with water-based lubricant to improve comfort. Try different brands/sizes for better fit.",
+      "who_should_use": "Anyone - especially those at risk of STIs. Great as backup method or primary method when used consistently.",
+      "who_should_not_use": "Latex allergy (use polyurethane or polyisoprene condoms instead)."
+    }
+  ]
+}

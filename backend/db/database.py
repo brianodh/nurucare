@@ -40,7 +40,7 @@ class WHOGuideline(Base):
     title = Column(Text, nullable=False)
     content = Column(Text, nullable=False)
     category = Column(String(100))
-    embedding = Column(Vector(1536))  # 1536 dimensions for OpenAI embeddings
+    embedding = Column(Vector(384))  # 384 dimensions for OpenAI embeddings
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
@@ -55,7 +55,7 @@ class Myth(Base):
     explanation = Column(Text, nullable=False)
     source = Column(String(200))
     category = Column(String(50))
-    embedding = Column(Vector(1536))
+    embedding = Column(Vector(384))
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
@@ -69,7 +69,7 @@ class EducationalContent(Base):
     content = Column(Text, nullable=False)
     content_type = Column(String(50))
     method_name = Column(String(100))
-    embedding = Column(Vector(1536))
+    embedding = Column(Vector(384))
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
@@ -90,7 +90,7 @@ class QueryLog(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     query_text = Column(Text, nullable=False)
-    embedding = Column(Vector(1536))
+    embedding = Column(Vector(384))
     retrieved_docs = Column(JSON)
     response = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -138,7 +138,7 @@ def create_embedding(text: str) -> list:
     This will be implemented in the RAG pipeline
     """
     # Placeholder - actual embedding will use Gemini Flash
-    # Returns a list of 1536 floats
+    # Returns a list of 384 floats
     pass
 
 

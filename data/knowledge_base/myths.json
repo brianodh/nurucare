@@ -1,0 +1,118 @@
+{
+  "source": "NuruCare Myth Database - Extracted from Final Women ANON and Student Datasets (2026)",
+  "myths": [
+    {
+      "id": "MYTH_001",
+      "category": "contraceptive",
+      "myth_statement": "The contraceptive injection causes permanent infertility",
+      "truth_statement": "Fertility returns to normal after stopping injections",
+      "explanation": "Depo-Provera (the injection) may delay return to fertility by 6-12 months after the last injection, but it does NOT cause permanent infertility. Most women become pregnant within 12-18 months of stopping. This myth prevents women from using an otherwise safe and effective method.",
+      "prevalence": "94.4% of women in our dataset recognized this myth",
+      "source": "WHO MEC 2024, ACOG Practice Bulletin"
+    },
+    {
+      "id": "MYTH_002",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives cause serious health problems",
+      "truth_statement": "Modern contraceptives are safe for most women",
+      "explanation": "Like all medications, contraceptives can have side effects, but serious health problems are rare. Combined pills have a small increased risk of blood clots, but this risk is lower than the risk of blood clots during pregnancy. For most women, the benefits far outweigh the risks. Your healthcare provider can help you choose the safest method for your health profile.",
+      "prevalence": "94.5% of women in our dataset recognized this myth",
+      "source": "WHO MEC 2024, CDC"
+    },
+    {
+      "id": "MYTH_003",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives can harm your womb",
+      "truth_statement": "Contraceptives do not cause permanent damage to the uterus",
+      "explanation": "Hormonal contraceptives actually protect the uterus - they reduce the risk of endometrial cancer. IUDs are placed inside the uterus and are safe for long-term use. There is no evidence that any modern contraceptive causes permanent damage to the womb. Fertility returns to normal after stopping all methods (except sterilization).",
+      "prevalence": "94.3% of women in our dataset recognized this myth",
+      "source": "WHO, ACOG"
+    },
+    {
+      "id": "MYTH_004",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives reduce sexual urge",
+      "truth_statement": "Most women do not experience changes in libido",
+      "explanation": "While some women report changes in sexual desire, most do not. Many women actually experience improved sexual satisfaction due to reduced fear of unwanted pregnancy. If you experience unwanted side effects, switching to a different method often resolves the issue.",
+      "prevalence": "94.0% of women in our dataset recognized this myth",
+      "source": "Contraception journal, 2019"
+    },
+    {
+      "id": "MYTH_005",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives cause cancer",
+      "truth_statement": "Some contraceptives actually reduce cancer risk",
+      "explanation": "Combined oral contraceptives reduce the risk of ovarian cancer (by 50% after 5+ years) and endometrial cancer. They may slightly increase breast and cervical cancer risk while using, but this risk returns to normal after stopping. For most women, the cancer-protective benefits outweigh the small risks.",
+      "prevalence": "94.3% of women in our dataset recognized this myth",
+      "source": "WHO, American Cancer Society"
+    },
+    {
+      "id": "MYTH_006",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives cause deformed babies",
+      "truth_statement": "Contraceptives do not cause birth defects",
+      "explanation": "Extensive research shows no increased risk of birth defects from contraceptive use. If a woman becomes pregnant while using contraception, stopping the method does not increase the risk of birth defects. This myth often leads to unnecessary abortion or anxiety.",
+      "prevalence": "94.3% of women in our dataset recognized this myth",
+      "source": "WHO, CDC"
+    },
+    {
+      "id": "MYTH_007",
+      "category": "contraceptive",
+      "myth_statement": "Contraceptives are dangerous to your health",
+      "truth_statement": "Contraceptives are safe when used correctly",
+      "explanation": "All medications have potential risks, but modern contraceptives are among the safest medications available. For healthy women, the health benefits of contraception (preventing unintended pregnancy, reducing cancer risk, improving menstrual symptoms) far exceed the small risks. Your healthcare provider can help you choose the safest method.",
+      "prevalence": "94.5% of women in our dataset recognized this myth",
+      "source": "WHO MEC 2024"
+    },
+    {
+      "id": "MYTH_008",
+      "category": "contraceptive",
+      "myth_statement": "Making contraceptives available to young people encourages sexual activity",
+      "truth_statement": "Contraceptive access does not increase sexual activity",
+      "explanation": "Numerous studies worldwide have shown that providing contraceptives to adolescents does NOT increase sexual activity. What it does do: increase contraceptive use among sexually active teens, reduce unintended pregnancy rates, and reduce abortion rates. Comprehensive sex education plus contraceptive access is the most effective approach.",
+      "prevalence": "99.1% of students in our dataset recognized this myth",
+      "source": "Guttmacher Institute, WHO"
+    },
+    {
+      "id": "MYTH_009",
+      "category": "contraceptive",
+      "myth_statement": "Young people who carry condoms are promiscuous or unfaithful",
+      "truth_statement": "Carrying condoms shows responsibility, not promiscuity",
+      "explanation": "Carrying condoms is a sign of responsible sexual health behavior, not promiscuity. It means the person is prepared to protect themselves and their partner from STIs and unintended pregnancy. Many sexually active people have only one partner at a time but still need protection.",
+      "prevalence": "98.1% of students in our dataset recognized this myth",
+      "source": "WHO, CDC"
+    },
+    {
+      "id": "MENSTRUAL_MYTH_001",
+      "category": "menstrual",
+      "myth_statement": "It is dangerous to go swimming during your period",
+      "truth_statement": "Swimming is perfectly safe during menstruation",
+      "explanation": "Water does not enter the vagina during swimming (water pressure keeps it out). Tampons or menstrual cups can be used while swimming. There is no medical reason to avoid swimming during your period.",
+      "source": "ACOG, Mayo Clinic"
+    },
+    {
+      "id": "MENSTRUAL_MYTH_002",
+      "category": "menstrual",
+      "myth_statement": "Menstruation cleans the body of dirty blood",
+      "truth_statement": "Menstrual blood is not 'dirty' - it's normal blood mixed with uterine lining",
+      "explanation": "Menstrual blood is the same as regular blood, just mixed with tissue from the uterine lining. The body does not need to 'clean' itself through menstruation. This myth can lead to stigma and shame around normal bodily functions.",
+      "source": "ACOG"
+    },
+    {
+      "id": "MENSTRUAL_MYTH_003",
+      "category": "menstrual",
+      "myth_statement": "Menstrual blood leaves the body through the urethra",
+      "truth_statement": "Menstrual blood leaves through the vagina, not the urethra",
+      "explanation": "The urethra is for urine only. The vagina is the passage for menstrual blood. Understanding basic anatomy helps reduce confusion and stigma.",
+      "source": "Basic anatomy"
+    },
+    {
+      "id": "MENSTRUAL_MYTH_004",
+      "category": "menstrual",
+      "myth_statement": "All girls get bad tempered or have mood swings before their periods",
+      "truth_statement": "Not everyone experiences PMS, and severity varies greatly",
+      "explanation": "While some women experience premenstrual syndrome (PMS), many do not. Among those who do, severity varies from mild to severe. Normalizing all emotions as 'just PMS' can dismiss legitimate feelings and concerns.",
+      "source": "ACOG"
+    }
+  ]
+}
