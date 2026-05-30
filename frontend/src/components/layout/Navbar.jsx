@@ -3,12 +3,21 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Heart, Moon, Sun } from 'lucide-react';
+// Change this line:
+import { useLang } from '@/lib/i18n.jsx'; // 🚀 Added .jsx extension explicitly
+
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
   const location = useLocation();
   const isLanding = location.pathname === '/';
+  
+// Ensure useLang is imported at the top of the file
+const langContext = useLang(); 
+const t = langContext ? langContext.t : (key) => key;
+
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -22,9 +31,9 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: 'Home', to: '/' },
-    { label: 'Get Started', to: '/roles' },
-    { label: 'Education', to: '/education' },
+    { label: t('nav_home'), to: '/' },
+    { label: t('nav_get_started'), to: '/roles' },
+    { label: t('nav_education'), to: '/education' },
   ];
 
   return (
@@ -51,11 +60,12 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <Button variant="ghost" size="icon" onClick={toggleDark} className="rounded-full">
               {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
             <Link to="/roles" className="hidden md:block">
-              <Button size="sm" className="rounded-full px-5">Start Free</Button>
+              <Button size="sm" className="rounded-full px-5">{t('nav_start_free')}</Button>
             </Link>
             <Sheet>
               <SheetTrigger asChild className="md:hidden">
@@ -69,7 +79,7 @@ export default function Navbar() {
                     </Link>
                   ))}
                   <Link to="/roles">
-                    <Button className="w-full rounded-full">Start Free</Button>
+                    <Button className="w-full rounded-full">{t('nav_start_free')}</Button>
                   </Link>
                 </div>
               </SheetContent>

@@ -5,28 +5,27 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Clock, CheckCircle, XCircle } from 'lucide-react';
 import { mockMythsFacts, sideEffectTimeline } from '@/lib/mockData';
+import { useLang } from '@/lib/i18n';
 
 export default function Education() {
+  const { t } = useLang();
+
   return (
     <div className="min-h-[85vh] py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-2 mb-2">
             <BookOpen className="w-5 h-5 text-primary" />
-            <p className="text-sm font-medium text-primary">Educational Resources</p>
+            <p className="text-sm font-medium text-primary">{t('edu_label')}</p>
           </div>
-          <h1 className="font-heading text-3xl font-bold">Learn the Facts</h1>
-          <p className="text-muted-foreground mt-2">Evidence-based education to support your reproductive health decisions.</p>
+          <h1 className="font-heading text-3xl font-bold">{t('edu_title')}</h1>
+          <p className="text-muted-foreground mt-2">{t('edu_sub')}</p>
         </motion.div>
 
         <Tabs defaultValue="myths" className="space-y-6">
-          <TabsList className="w-full sm:w-auto">
-            <TabsTrigger value="myths">Myths vs Facts</TabsTrigger>
-            <TabsTrigger value="timeline">Side Effect Timeline</TabsTrigger>
+          <TabsList className="w-full sm:w-auto flex">
+            <TabsTrigger value="myths" className="flex-1 sm:flex-none">{t('edu_tab_myths')}</TabsTrigger>
+            <TabsTrigger value="timeline" className="flex-1 sm:flex-none">{t('edu_tab_timeline')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="myths">
@@ -36,16 +35,16 @@ export default function Education() {
                   <AccordionTrigger className="py-4 hover:no-underline">
                     <div className="flex items-start gap-3 text-left">
                       <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-medium text-sm">Myth: "{mf.myth}"</p>
-                      </div>
+                      <p className="font-medium text-sm">{t('edu_myth_prefix')} "{mf.myth}"</p>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-4">
                     <div className="ml-8 space-y-3">
                       <div className="flex items-start gap-2">
                         <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-foreground leading-relaxed"><strong>Fact:</strong> {mf.fact}</p>
+                        <p className="text-sm text-foreground leading-relaxed">
+                          <strong>{t('edu_fact_prefix')}</strong> {mf.fact}
+                        </p>
                       </div>
                       <Badge variant="secondary" className="text-xs">{mf.source}</Badge>
                     </div>
@@ -66,7 +65,7 @@ export default function Education() {
                   className="bg-card rounded-2xl border p-6"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <Clock className="w-5 h-5 text-primary" />
                     </div>
                     <div>
