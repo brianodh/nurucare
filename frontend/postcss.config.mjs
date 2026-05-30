@@ -1,6 +1,6 @@
-export default {
+xport default {
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
 }
