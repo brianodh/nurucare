@@ -42,9 +42,8 @@ class TokenType(Enum):
 
 @dataclass
 class TokenData:
-    """Structure for token data"""
-    token: str
-    token_hash: str
+    """Structure for token data - NO raw token stored for privacy"""
+    token_hash: str  # Only store hash, never raw token
     created_at: datetime
     expires_at: datetime
     token_type: TokenType
@@ -71,7 +70,6 @@ class PartnerSyncTokenGenerator:
     TOKEN_PATTERN = "{prefix}-{part1}-{part2}"
     TOKEN_LENGTH = 10  # Characters excluding hyphens
     DEFAULT_EXPIRY_HOURS = 24
-    DEFAULT_EXPIRY_MINUTES = None
     
     # Character sets for token generation
     # Removed confusing characters: 0, O, 1, I, l, 5, S
@@ -114,10 +112,9 @@ class PartnerSyncTokenGenerator:
         created_at = datetime.now()
         expires_at = created_at + timedelta(hours=self.expiry_hours)
         
-        # Store token metadata (hash only, not raw token)
+        # Store ONLY the hash - never the raw token!
         token_data = TokenData(
-            token=token,
-            token_hash=token_hash,
+            token_hash=token_hash,  # Only store hash
             created_at=created_at,
             expires_at=expires_at,
             token_type=TokenType.PARTNER_SYNC,
@@ -197,7 +194,7 @@ class PartnerSyncTokenGenerator:
         # Hash the provided token
         token_hash = self._hash_token(token)
         
-        # Check if token exists
+        # Check if token exists (by hash)
         if token_hash not in self._storage:
             return False, None, "Invalid token. Please check and try again."
         
@@ -211,7 +208,7 @@ class PartnerSyncTokenGenerator:
         if datetime.now() > token_data.expires_at:
             # Clean up expired token
             del self._storage[token_hash]
-            return False, None, f"This token expired at {token_data.expires_at.strftime('%H:%M')}. Please generate a new one."
+            return False, None, "This token has expired. Please generate a new one."
         
         return True, token_data, "Token verified successfully!"
     
@@ -307,6 +304,36 @@ class PartnerSyncTokenGenerator:
             1 for data in self._storage.values()
             if not data.used and now <= data.expires_at
         )
+    
+    def create_test_token_with_expiry(self, user_id: str, expiry_seconds: int = 1) -> str:
+        """
+        Create a token with custom expiry for testing.
+        
+        Args:
+            user_id: User identifier
+            expiry_seconds: Seconds until expiry (default 1)
+            
+        Returns:
+            Token string
+        """
+        random_bytes = secrets.token_bytes(8)
+        token = self._bytes_to_token(random_bytes, "TEST")
+        token_hash = self._hash_token(token)
+        
+        created_at = datetime.now()
+        expires_at = created_at + timedelta(seconds=expiry_seconds)
+        
+        token_data = TokenData(
+            token_hash=token_hash,
+            created_at=created_at,
+            expires_at=expires_at,
+            token_type=TokenType.PARTNER_SYNC,
+            user_id=user_id,
+            used=False
+        )
+        
+        self._storage[token_hash] = token_data
+        return token
 
 
 # =========================================================
@@ -361,9 +388,8 @@ class SessionKeyGenerator:
         created_at = datetime.now()
         expires_at = created_at + timedelta(minutes=self.expiry_minutes)
         
-        # Store
+        # Store (only hash, not raw key)
         self._storage[key_hash] = {
-            'key': key,
             'key_hash': key_hash,
             'created_at': created_at,
             'expires_at': expires_at,
@@ -417,6 +443,34 @@ class SessionKeyGenerator:
         
         self._storage[key_hash]['used'] = True
         return True
+    
+    def create_test_key_with_expiry(self, session_id: str, expiry_seconds: int = 1) -> str:
+        """
+        Create a session key with custom expiry for testing.
+        
+        Args:
+            session_id: Session identifier
+            expiry_seconds: Seconds until expiry (default 1)
+            
+        Returns:
+            6-digit key string
+        """
+        key_number = secrets.randbelow(900000) + 100000
+        key = str(key_number)
+        key_hash = hashlib.sha256(key.encode()).hexdigest()
+        
+        created_at = datetime.now()
+        expires_at = created_at + timedelta(seconds=expiry_seconds)
+        
+        self._storage[key_hash] = {
+            'key_hash': key_hash,
+            'created_at': created_at,
+            'expires_at': expires_at,
+            'session_id': session_id,
+            'used': False
+        }
+        
+        return key
 
 
 # =========================================================
@@ -486,7 +540,7 @@ class CryptographicSyncManager:
         self.token_generator.mark_token_used(token)
         
         # Get the original user ID (who created the token)
-        original_user_id = token_data.user_id
+        original_user_id = token_data.user_id if token_data else None
         
         return {
             'success': True,
@@ -539,8 +593,8 @@ class CryptographicSyncManager:
         return {
             'success': True,
             'message': 'Session access granted.',
-            'session_id': key_data.get('session_id'),
-            'expires_at': key_data['expires_at'].isoformat()
+            'session_id': key_data.get('session_id') if key_data else None,
+            'expires_at': key_data['expires_at'].isoformat() if key_data else None
         }
     
     def get_token_status(self, token: str) -> Dict:
@@ -652,16 +706,15 @@ def test_partner_sync():
     print(f"   Success: {invalid_result['success']}")
     print(f"   Message: {invalid_result['message']}")
     
-    # Test 7: Test expired token (create, wait, check - simulate)
-    print("\n📌 TEST 7: Token Expiry (simulated)")
-    # Create a token with very short expiry for testing
-    short_life_token_gen = PartnerSyncTokenGenerator(expiry_hours=0)  # Expires immediately
-    short_token = short_life_token_gen.generate_token("test_user")
-    print(f"   Generated token with 0-hour expiry: {short_token}")
+    # Test 7: Test expired token using test method
+    print("\n📌 TEST 7: Token Expiry Test")
+    # Use the test method that creates token with 0-second expiry
+    test_token = sync_manager.token_generator.create_test_token_with_expiry("test_user", expiry_seconds=0)
+    print(f"   Created test token (0-second expiry)")
     
     # This should be expired immediately
-    expired_result = short_life_token_gen.verify_token(short_token)
-    print(f"   Verification result: {expired_result[2]}")
+    expired_result = sync_manager.verify_partner_sync(test_token, "partner_test")
+    print(f"   Verification result: {expired_result['message']}")
     
     # Test 8: Cleanup expired tokens
     print("\n📌 TEST 8: Cleanup Expired Tokens")
