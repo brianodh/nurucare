@@ -12,6 +12,7 @@ Pipeline Flow:
 
 Author: Brian Odhiambo Ouma
 Date: May 31, 2026
+Version: 2.0 - Fixed guardrail integration
 """
 
 # =========================================================
@@ -51,6 +52,7 @@ except ImportError as e:
     print(f"⚠️ RAG pipeline not available: {e}")
     RAG_AVAILABLE = False
 
+
 class RecommendationPipeline:
     """
     Complete recommendation pipeline combining Guardrail + RAG
@@ -87,6 +89,9 @@ class RecommendationPipeline:
         self.method_weights = self._load_method_weights()
         print(f"✅ Loaded method weights for {len(self.method_weights)} methods")
         
+        # Method effectiveness lookup table
+        self.method_effectiveness = self._load_method_effectiveness()
+        
         print("=" * 60)
     
     def _load_method_weights(self) -> Dict[str, float]:
@@ -117,7 +122,34 @@ class RecommendationPipeline:
             'sterilization_male': 0.0005,
             'combined_patch': 0.0005,
             'combined_ring': 0.0005,
+            'combined_oral_contraceptives': 0.222,
         }
+    
+    def _load_method_effectiveness(self) -> Dict[str, int]:
+        """Load effectiveness percentages for each method"""
+        return {
+            'implants': 99,
+            'iud_copper': 99,
+            'iud_hormonal': 99,
+            'sterilization_female': 99,
+            'sterilization_male': 99,
+            'lam': 98,
+            'injectables': 94,
+            'combined_pill': 93,
+            'progestin_pill': 93,
+            'combined_patch': 93,
+            'combined_ring': 93,
+            'combined_oral_contraceptives': 93,
+            'male_condom': 85,
+            'emergency': 85,
+            'female_condom': 79,
+            'withdrawal': 78,
+            'rhythm': 76,
+        }
+    
+    def _get_effectiveness(self, method_id: str) -> int:
+        """Get effectiveness percentage for a method"""
+        return self.method_effectiveness.get(method_id, 90)
     
     def _get_method_name(self, method_id: str) -> str:
         """Get display name for a method"""
@@ -138,7 +170,8 @@ class RecommendationPipeline:
             'sterilization_male': 'Vasectomy',
             'combined_patch': 'Contraceptive Patch',
             'combined_ring': 'Vaginal Ring',
-            'combined_oral_contraceptives': 'Combined Oral Contraceptive'
+            'combined_oral_contraceptives': 'Combined Oral Contraceptive',
+            'progestin_only_pill': 'Progestin-Only Pill (Mini-Pill)',
         }
         return method_names.get(method_id, method_id.replace('_', ' ').title())
     
@@ -150,8 +183,9 @@ class RecommendationPipeline:
         # Methods that preserve fertility (reversible)
         reversible_methods = [
             'male_condom', 'female_condom', 'combined_pill', 'progestin_pill',
-            'injectables', 'implants', 'iud_copper', 'iud_hormonal',
-            'withdrawal', 'rhythm', 'lam', 'emergency', 'combined_patch', 'combined_ring'
+            'progestin_only_pill', 'injectables', 'implants', 'iud_copper', 
+            'iud_hormonal', 'withdrawal', 'rhythm', 'lam', 'emergency', 
+            'combined_patch', 'combined_ring', 'combined_oral_contraceptives'
         ]
         
         # Permanent methods (sterilization)
@@ -215,12 +249,16 @@ class RecommendationPipeline:
         # Factor 4: AI Relevance (10 points) - if RAG available
         if self.rag and retrieved_context:
             try:
-                ai_score = self.rag.calculate_ai_relevance_score(
-                    method_id,
-                    self._get_method_name(method_id),
-                    user_profile,
-                    retrieved_context
-                )
+                # Try to use RAG pipeline if available
+                if hasattr(self.rag, 'calculate_ai_relevance_score'):
+                    ai_score = self.rag.calculate_ai_relevance_score(
+                        method_id,
+                        self._get_method_name(method_id),
+                        user_profile,
+                        retrieved_context
+                    )
+                else:
+                    ai_score = 7.0  # Default moderate score
                 score += ai_score
                 print(f"      AI relevance: +{ai_score:.1f}")
             except Exception as e:
@@ -248,42 +286,48 @@ class RecommendationPipeline:
         # Try RAG-generated explanation first
         if self.rag and retrieved_context:
             try:
-                rag_explanation = self.rag.generate_explanation(
-                    method_id, method_name, user_profile, confidence_score, retrieved_context
-                )
-                if rag_explanation and len(rag_explanation) > 20:
-                    return rag_explanation
+                if hasattr(self.rag, 'generate_explanation'):
+                    rag_explanation = self.rag.generate_explanation(
+                        method_id, method_name, user_profile, confidence_score, retrieved_context
+                    )
+                    if rag_explanation and len(rag_explanation) > 20:
+                        return rag_explanation
             except Exception as e:
                 print(f"      RAG explanation failed: {e}")
         
         # Fallback explanations
-        age = user_profile.get('age', 0)
         fertility_intent = user_profile.get('fertility_intent', 'unsure')
+        effectiveness = self._get_effectiveness(method_id)
         
         explanations = {
-            'implants': f"The implant is 99% effective and lasts 3-5 years. It's a great choice because it requires no daily action and is reversible.",
-            'iud_copper': f"The copper IUD is 99% effective and lasts up to 10 years. It contains no hormones, making it ideal if you prefer non-hormonal options.",
-            'iud_hormonal': f"The hormonal IUD is 99% effective and lasts 3-7 years. It often makes periods lighter or stops them completely.",
-            'injectables': f"The injection (Depo-Provera) is 94% effective and requires a shot every 3 months. It's private and requires no daily action.",
-            'combined_pill': f"The combined pill is 93% effective when taken daily. It can make your periods lighter and more regular.",
-            'progestin_pill': f"The mini-pill is 93% effective when taken daily at the same time. It's safe if you can't take estrogen.",
-            'male_condom': f"Condoms are 85% effective with typical use (98% with perfect use). They also protect against STIs including HIV.",
-            'female_condom': f"Female condoms are 79% effective and can be inserted before sex. They also protect against STIs.",
-            'withdrawal': f"Withdrawal is 78% effective when done correctly every time. It requires no supplies but has higher failure rates.",
-            'rhythm': f"The rhythm method is 76% effective when you track your cycle accurately. It works best with regular cycles.",
-            'lam': f"LAM is 98% effective when you're exclusively breastfeeding and haven't had a period. It's a natural option for new mothers.",
-            'emergency': f"Emergency contraception (P2) can prevent pregnancy if taken within 72 hours of unprotected sex. It's not for regular use.",
-            'sterilization_female': f"Tubal ligation is permanent and 99% effective. It's a good choice if you're certain you don't want future children.",
-            'sterilization_male': f"Vasectomy is permanent and 99% effective. It's a safe option for men who don't want future children.",
+            'implants': f"The {method_name} is {effectiveness}% effective and lasts 3-5 years. It's a great choice because it requires no daily action and is reversible.",
+            'iud_copper': f"The {method_name} is {effectiveness}% effective and lasts up to 10 years. It contains no hormones, making it ideal if you prefer non-hormonal options.",
+            'iud_hormonal': f"The {method_name} is {effectiveness}% effective and lasts 3-7 years. It often makes periods lighter or stops them completely.",
+            'injectables': f"The {method_name} (Depo-Provera) is {effectiveness}% effective and requires a shot every 3 months. It's private and requires no daily action.",
+            'combined_pill': f"The {method_name} is {effectiveness}% effective when taken daily. It can make your periods lighter and more regular.",
+            'progestin_pill': f"The {method_name} is {effectiveness}% effective when taken daily at the same time. It's safe if you can't take estrogen.",
+            'progestin_only_pill': f"The {method_name} is {effectiveness}% effective when taken daily at the same time. It's safe if you can't take estrogen.",
+            'male_condom': f"{method_name} are {effectiveness}% effective with typical use (98% with perfect use). They also protect against STIs including HIV.",
+            'female_condom': f"{method_name} are {effectiveness}% effective and can be inserted before sex. They also protect against STIs.",
+            'withdrawal': f"{method_name} is {effectiveness}% effective when done correctly every time. It requires no supplies but has higher failure rates.",
+            'rhythm': f"The {method_name} is {effectiveness}% effective when you track your cycle accurately. It works best with regular cycles.",
+            'lam': f"LAM is {effectiveness}% effective when you're exclusively breastfeeding and haven't had a period. It's a natural option for new mothers.",
+            'emergency': f"{method_name} (P2) can prevent pregnancy if taken within 72 hours of unprotected sex. It's not for regular use.",
+            'sterilization_female': f"{method_name} is permanent and {effectiveness}% effective. It's a good choice if you're certain you don't want future children.",
+            'sterilization_male': f"{method_name} is permanent and {effectiveness}% effective. It's a safe option for men who don't want future children.",
         }
         
-        explanation = explanations.get(method_id, f"{method_name} is a good option for you.")
+        # Get explanation or create generic one
+        explanation = explanations.get(method_id, f"{method_name} is {effectiveness}% effective and a good option for you.")
         
         # Add fertility intent context
         if fertility_intent in ['want_soon', 'want_later']:
             explanation += " This method is reversible, preserving your ability to have children in the future."
         elif fertility_intent == 'no_more':
             explanation += " This method is highly effective for permanent pregnancy prevention."
+        
+        # Add confidence score
+        explanation += f" (Confidence: {confidence_score:.0f}%)"
         
         return explanation
     
@@ -305,6 +349,21 @@ class RecommendationPipeline:
         Please provide information about suitable contraceptive methods.
         """
         return query.strip()
+    
+    def _format_restricted(self, restricted_methods: Dict) -> List[Dict]:
+        """Format restricted methods for output"""
+        formatted = []
+        for method_id, restrictions in restricted_methods.items():
+            method_name = self._get_method_name(method_id)
+            for r in restrictions:
+                formatted.append({
+                    'method_id': method_id,
+                    'method_name': method_name,
+                    'category': r.get('category', 4),
+                    'explanation': r.get('explanation', 'Not recommended for you.'),
+                    'rule_id': r.get('rule_id', 'UNKNOWN')
+                })
+        return formatted
     
     def recommend(
         self, 
@@ -341,6 +400,10 @@ class RecommendationPipeline:
         if missing:
             raise ValueError(f"Missing required fields: {missing}")
         
+        # Set default postpartum_weeks if not provided
+        if 'postpartum_weeks' not in user_profile:
+            user_profile['postpartum_weeks'] = 100  # Not recently postpartum
+        
         # =========================================================
         # STEP 1: Guardrail Safety Check
         # =========================================================
@@ -362,8 +425,11 @@ class RecommendationPipeline:
                 'recommended_methods': [],
                 'restricted_methods': self._format_restricted(restricted_methods),
                 'requires_provider': True,
+                'allowed_count': 0,
+                'restricted_count': len(restricted_methods),
                 'message': "Based on your health profile, please consult a healthcare provider for personalized contraceptive advice.",
-                'timestamp': datetime.now().isoformat()
+                'timestamp': datetime.now().isoformat(),
+                'disclaimer': "This is not medical advice. Always consult a healthcare provider before starting any contraceptive method."
             }
         
         # =========================================================
@@ -374,9 +440,12 @@ class RecommendationPipeline:
         retrieved_context = None
         if self.rag and include_educational:
             try:
-                query = self._create_retrieval_query(user_profile, allowed_methods)
-                retrieved_context = self.rag.retrieve_all_relevant(user_profile, allowed_methods)
-                print(f"   ✅ Retrieved context with guidelines and myths")
+                # Try to retrieve relevant content
+                if hasattr(self.rag, 'retrieve_all_relevant'):
+                    retrieved_context = self.rag.retrieve_all_relevant(user_profile, allowed_methods)
+                    print(f"   ✅ Retrieved context with guidelines and myths")
+                else:
+                    print("   ⚠️ RAG retrieve method not available")
             except Exception as e:
                 print(f"   ⚠️ RAG retrieval failed: {e}")
                 retrieved_context = None
@@ -406,7 +475,16 @@ class RecommendationPipeline:
             )
             
             # Get effectiveness
-            effectiveness = self.guardrail.methods.get(method_id, {}).get('effectiveness', 90)
+            effectiveness = self._get_effectiveness(method_id)
+            
+            # Get method type
+            method_type = 'hormonal'
+            if method_id in ['male_condom', 'female_condom', 'iud_copper']:
+                method_type = 'barrier'
+            elif method_id in ['withdrawal', 'rhythm', 'lam']:
+                method_type = 'behavioral'
+            elif method_id in ['sterilization_female', 'sterilization_male']:
+                method_type = 'permanent'
             
             ranked_methods.append({
                 'method_id': method_id,
@@ -414,7 +492,7 @@ class RecommendationPipeline:
                 'confidence_score': round(confidence, 1),
                 'effectiveness': effectiveness,
                 'explanation': explanation,
-                'type': self.guardrail.methods.get(method_id, {}).get('type', 'unknown')
+                'type': method_type
             })
         
         # Sort by confidence score (highest first)
@@ -442,40 +520,17 @@ class RecommendationPipeline:
             'disclaimer': "This is not medical advice. Always consult a healthcare provider before starting any contraceptive method."
         }
         
-        # Generate summary if RAG available
-        if self.rag and retrieved_context and top_recommendations:
-            try:
-                method_scores = [(m['method_id'], m['confidence_score']) for m in top_recommendations[:3]]
-                summary = self.rag.generate_recommendation_context(
-                    user_profile, allowed_methods, method_scores
-                )
-                response['summary'] = summary
-            except Exception as e:
-                response['summary'] = f"Based on your health profile, {top_recommendations[0]['method_name']} appears to be a good fit for you with {top_recommendations[0]['confidence_score']:.0f}% confidence."
+        # Generate summary
+        if top_recommendations:
+            response['summary'] = f"Based on your health profile, {top_recommendations[0]['method_name']} appears to be a good fit for you with {top_recommendations[0]['confidence_score']:.0f}% confidence. Please consult a healthcare provider before making a decision."
         else:
-            if top_recommendations:
-                response['summary'] = f"Based on your health profile, {top_recommendations[0]['method_name']} appears to be a good fit for you with {top_recommendations[0]['confidence_score']:.0f}% confidence. Please consult a healthcare provider before making a decision."
+            response['summary'] = "Based on your health profile, please consult a healthcare provider for personalized contraceptive advice."
         
         print("\n" + "=" * 60)
         print("✅ Recommendations Generated Successfully!")
         print("=" * 60)
         
         return response
-    
-    def _format_restricted(self, restricted_methods: Dict) -> List[Dict]:
-        """Format restricted methods for output"""
-        formatted = []
-        for method_id, restrictions in restricted_methods.items():
-            method_name = self._get_method_name(method_id)
-            for r in restrictions:
-                formatted.append({
-                    'method_id': method_id,
-                    'method_name': method_name,
-                    'category': r.get('category', 4),
-                    'explanation': r.get('explanation', 'Not recommended for you.'),
-                    'rule_id': r.get('rule_id', 'UNKNOWN')
-                })
-        return formatted
 
 
 # =========================================================
