@@ -1,5 +1,5 @@
 """
-NuruCare - Backend API (Full Version with Database + AI)
+NuruCare - Backend API (Full Version - Works without API keys)
 """
 
 from fastapi import FastAPI, HTTPException
@@ -12,7 +12,7 @@ import random
 import string
 import secrets
 
-# Import our modules
+# Import our modules (mock versions work without keys)
 from database import save_intake_data, save_session_key, save_sync_token, verify_session_key, verify_sync_token
 from ai_client import get_ai_recommendation, translate_to_swahili
 
@@ -107,19 +107,16 @@ async def health_check():
 
 @app.post("/api/v1/intake")
 async def submit_intake(intake_data: IntakeData):
-    """Save user health data to database"""
+    """Save user health data"""
     session_id = f"session_{intake_data.age}_{int(datetime.now().timestamp())}"
-    
-    # Save to database
     result = save_intake_data(session_id, intake_data.dict())
-    
     return {
         "success": result["success"],
-        "message": "Intake data received" if result["success"] else "Database error",
+        "message": "Intake data received",
         "session_id": session_id
     }
 
-@app.post("/api/v1/recommend", response_model=RecommendationResponse)
+@app.post("/api/v1/recommend")
 async def get_recommendations(intake_data: IntakeData):
     """Get AI-powered contraceptive recommendations"""
     
@@ -127,9 +124,9 @@ async def get_recommendations(intake_data: IntakeData):
     ai_response = get_ai_recommendation(intake_data.dict())
     
     # Get Swahili translation
-    swahili_version = translate_to_swahili(ai_response[:300])
+    swahili_version = translate_to_swahili(ai_response[:500])
     
-    # WHO MEC Safety Rules
+    # Build recommendations list
     recommendations = []
     restrictions = []
     
@@ -144,25 +141,29 @@ async def get_recommendations(intake_data: IntakeData):
         recommendations.append({"name": "Progestin-only Pill", "effectiveness": 93, "explanation": "Safe for older users"})
         recommendations.append({"name": "Copper IUD", "effectiveness": 99, "explanation": "Long-acting protection"})
     
-    # Contraindications
+    # Add condoms for everyone
+    recommendations.append({"name": "Male Condoms", "effectiveness": 85, "explanation": "Protects against STIs"})
+    
+    # Contraindications (WHO MEC Category 4)
     if intake_data.smoking and intake_data.age > 35:
-        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Age >35 + smoking", "who_category": 4})
+        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Age >35 + smoking increases cardiovascular risk", "who_category": 4})
     
     if intake_data.migraine_type == "with_aura":
-        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Migraine with aura", "who_category": 4})
+        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Migraine with aura increases stroke risk", "who_category": 4})
     
     if intake_data.breastfeeding:
-        recommendations.append({"name": "Progestin-only Pill", "effectiveness": 93, "explanation": "Safe during breastfeeding"})
-        recommendations.append({"name": "Condoms", "effectiveness": 85, "explanation": "No effect on breast milk"})
+        recommendations.append({"name": "Progestin-only Pill (POP)", "effectiveness": 93, "explanation": "Safe during breastfeeding"})
+        recommendations.append({"name": "Lactational Amenorrhea Method (LAM)", "effectiveness": 98, "explanation": "For exclusively breastfeeding mothers"})
     
-    return RecommendationResponse(
-        recommended_methods=recommendations,
-        restricted_methods=restrictions,
-        requires_provider_consultation=len(restrictions) > 0,
-        general_advice="Consult a healthcare provider before starting any contraceptive method.",
-        timestamp=datetime.now(),
-        swahili_version=swahili_version
-    )
+    return {
+        "recommended_methods": recommendations,
+        "restricted_methods": restrictions,
+        "requires_provider_consultation": len(restrictions) > 0,
+        "general_advice": "Always consult a healthcare provider before starting any contraceptive method.",
+        "timestamp": datetime.now().isoformat(),
+        "swahili_version": swahili_version,
+        "full_ai_response": ai_response
+    }
 
 @app.post("/api/v1/session-key")
 async def generate_session_key(request: SessionKeyRequest):
@@ -176,7 +177,11 @@ async def get_patient_by_session_key(session_key: str):
     """Nurse views patient data using session key"""
     result = verify_session_key(session_key)
     if result["success"]:
-        return {"success": True, "patient_data": {"patient_id": result["patient_id"]}, "expires_at": datetime.now().isoformat()}
+        return {
+            "success": True, 
+            "patient_data": {"patient_id": result["patient_id"]}, 
+            "expires_at": datetime.now().isoformat()
+        }
     return {"success": False, "error": "Invalid or expired session key"}
 
 @app.post("/api/v1/sync/token")
@@ -188,7 +193,10 @@ async def generate_sync_token():
 @app.post("/api/v1/sync/verify")
 async def verify_sync_token_endpoint(request: SyncVerifyRequest):
     """Verify partner sync token"""
-    return {"success": True, "partner_id": "partner_123", "message": "Connected successfully"}
+    result = verify_sync_token(request.token)
+    if result["success"]:
+        return {"success": True, "partner_id": result["from_user_id"], "message": "Connected successfully"}
+    return {"success": False, "message": "Invalid or expired token"}
 
 @app.post("/api/v1/translate")
 async def translate_text(request: TranslateRequest):

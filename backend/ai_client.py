@@ -1,107 +1,179 @@
 """
-NuruCare - Google Gemini AI Client
-Handles AI-powered recommendations and Swahili translation
+NuruCare - AI Client (Mock Mode - No API Keys Required)
+This version works without Gemini API. Add real keys later.
 """
-
-import os
-from dotenv import load_dotenv
-import google.generativeai as genai
-
-# Load environment variables
-load_dotenv()
-
-# Configure Gemini 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyDmKcAubUrtNIrKk9x7DBqr8mvKvf0m5cw")
-genai.configure(api_key=GEMINI_API_KEY)
-
-# Use Gemini 1.5 Flash (fast and efficient)
-model = genai.GenerativeModel('gemini-1.5-flash')
 
 def get_ai_recommendation(user_data: dict) -> str:
     """
-    Get personalized contraceptive recommendation from Gemini AI
+    Get personalized contraceptive recommendation - mock version
     """
-    prompt = f"""
-    You are a compassionate contraceptive counselor for women in Sub-Saharan Africa.
+    age = user_data.get('age', 25)
+    parity = user_data.get('parity', 0)
+    fertility = user_data.get('fertility_intention', 'long_term')
+    smoking = user_data.get('smoking', False)
+    breastfeeding = user_data.get('breastfeeding', False)
+    migraine = user_data.get('migraine_type', 'none')
     
-    User profile:
-    - Age: {user_data.get('age')}
-    - Has children: {user_data.get('parity', 0)}
-    - Wants children in future: {user_data.get('fertility_intention')}
-    - Smokes: {user_data.get('smoking', False)}
-    - Breastfeeding: {user_data.get('breastfeeding', False)}
-    - Has migraines: {user_data.get('migraine_type')}
+    # Build response based on user data
+    response = f"""
+╔══════════════════════════════════════════════════════════════╗
+║                    NURUCARE - YOUR RESULTS                    ║
+╚══════════════════════════════════════════════════════════════╝
+
+📊 YOUR PROFILE:
+• Age: {age} years
+• Children: {parity}
+• Fertility goal: {fertility}
+• Smoker: {smoking}
+• Breastfeeding: {breastfeeding}
+• Migraines: {migraine}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ RECOMMENDED METHODS FOR YOU:
+
+"""
     
-    Based on WHO Medical Eligibility Criteria (MEC), recommend 2-3 contraceptive methods.
-    For each method, explain:
-    1. Why it's suitable for this person
-    2. Effectiveness percentage
-    3. Common side effects
-    4. One myth vs fact
+    # Age-based recommendations
+    if age < 20:
+        response += """
+1️⃣ MALE CONDOMS
+   • Effectiveness: 85% with typical use
+   • Why it's good for you: No hormones, protects against STIs
+   • Side effects: None
+   • Myth vs Fact: "Condoms reduce pleasure" → False, modern condoms are thin
+
+2️⃣ PROGESTIN-ONLY PILL (POP)
+   • Effectiveness: 93% with perfect use
+   • Why it's good for you: Safe for young women
+   • Side effects: Irregular bleeding, headaches
+   • Myth vs Fact: "Pills cause infertility" → False, fertility returns immediately
+
+"""
+    elif age < 35:
+        response += """
+1️⃣ PROGESTIN-ONLY PILL (POP)
+   • Effectiveness: 93% with perfect use
+   • Why it's good for you: Highly effective, reversible
+   • Side effects: Irregular bleeding, breast tenderness
+   • Myth vs Fact: "Hormonal methods make you gain weight" → Limited evidence
+
+2️⃣ COPPER IUD
+   • Effectiveness: 99% - one of the most effective
+   • Why it's good for you: Long-acting (5-10 years), no hormones
+   • Side effects: Heavier periods, more cramping
+   • Myth vs Fact: "IUDs cause infertility" → False, fertility returns immediately
+
+"""
+    else:
+        response += """
+1️⃣ PROGESTIN-ONLY PILL (POP)
+   • Effectiveness: 93% with perfect use
+   • Why it's good for you: Safe for women over 35
+   • Side effects: Irregular bleeding, headaches
+   • Myth vs Fact: "Pills are dangerous after 35" → Only combined pills with smoking
+
+2️⃣ COPPER IUD
+   • Effectiveness: 99% - one of the most effective
+   • Why it's good for you: No hormones, works for years
+   • Side effects: Heavier periods, cramping
+   • Myth vs Fact: "IUDs are painful" → Mild discomfort at insertion only
+
+"""
     
-    Keep response clear, helpful, and culturally sensitive.
-    """
+    # Add condoms as third option for everyone
+    response += """
+3️⃣ MALE CONDOMS
+   • Effectiveness: 85% with typical use
+   • Why it's good for you: Protects against STIs, no side effects
+   • Side effects: None
+   • Myth vs Fact: "Condoms are not effective" → When used correctly, very effective
+
+"""
     
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        print(f"Gemini API error: {e}")
-        return "Unable to generate recommendation at this time. Please consult a healthcare provider."
+    # Add restrictions if needed
+    if smoking and age > 35:
+        response += """
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ METHODS NOT RECOMMENDED FOR YOU:
+
+⚠️ COMBINED ORAL CONTRACEPTIVES
+   • Reason: Age > 35 + smoking increases cardiovascular risk
+   • WHO Category: 4 (Unacceptable health risk)
+
+"""
+    
+    if migraine == "with_aura":
+        response += """
+⚠️ COMBINED ORAL CONTRACEPTIVES
+   • Reason: Migraine with aura increases stroke risk
+   • WHO Category: 4 (Unacceptable health risk)
+
+"""
+    
+    response += """
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 IMPORTANT REMINDERS:
+• Always consult a healthcare provider before starting any method
+• Regular check-ups are recommended
+• No method is 100% effective except abstinence
+• You can change methods if you experience side effects
+
+📞 Need more help? Visit your nearest health facility.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+    
+    return response
 
 def translate_to_swahili(text: str) -> str:
     """
-    Translate English text to Swahili for multilingual support
+    Translate English to Swahili - mock version
     """
-    prompt = f"""
-    Translate the following contraceptive health information from English to Swahili.
-    Use simple, clear Swahili that a young woman can understand.
-    Keep medical terms accurate.
+    # Common translations
+    translations = {
+        "PROFILE": "TAARIFA ZAKO",
+        "YOUR RESULTS": "MATOKEO YAKO",
+        "RECOMMENDED METHODS FOR YOU": "NJIA ZINAZOPENDWA KWA AJILI YAKO",
+        "METHODS NOT RECOMMENDED FOR YOU": "NJIA ZISIZOPENDWA KWA AJILI YAKO",
+        "Age": "Umri",
+        "Children": "Watoto",
+        "Fertility goal": "Lengo la uzazi",
+        "Smoker": "Mvutaji sigara",
+        "Breastfeeding": "Kunyonyesha",
+        "Migraines": "Kichwa kali",
+        "Effectiveness": "Ufanisi",
+        "Why it's good for you": "Kwa nini inafaa kwako",
+        "Side effects": "Madhara",
+        "Myth vs Fact": "Uongo vs Ukweli",
+        "IMPORTANT REMINDERS": "VIKUMBUKO MUHIMU",
+        "Always consult a healthcare provider": "Daima shauriana na mtoa huduma ya afya"
+    }
     
-    Text to translate: {text}
+    result = text
+    for eng, swa in translations.items():
+        result = result.replace(eng, swa)
     
-    Swahili translation:
-    """
-    
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        print(f"Translation error: {e}")
-        return text  # Return original if translation fails
+    return result
 
 def get_myth_busting(method_name: str) -> str:
     """
-    Get myth vs fact for a specific contraceptive method
+    Get myth vs fact for a specific method
     """
-    prompt = f"""
-    Provide one common myth and the corresponding fact about {method_name}.
-    
-    Format:
-    Myth: [the myth]
-    Fact: [the truth]
-    """
-    
-    try:
-        response = model.generate_content(prompt)
-        return response.text
-    except Exception as e:
-        return f"Myth: {method_name} causes infertility. Fact: {method_name} does not affect future fertility."
-
-# Test the AI client
-if __name__ == "__main__":
-    test_user = {
-        "age": 28,
-        "parity": 1,
-        "fertility_intention": "long_term",
-        "smoking": False,
-        "breastfeeding": False,
-        "migraine_type": "none"
+    myths = {
+        "pill": "Myth: Pills cause infertility.\nFact: Fertility returns immediately after stopping.",
+        "iud": "Myth: IUDs can get lost inside you.\nFact: IUDs are safely placed by a provider.",
+        "condom": "Myth: Condoms are not effective.\nFact: When used correctly, condoms are 98% effective.",
+        "implant": "Myth: Implants will make you infertile.\nFact: Implants are fully reversible.",
+        "injectable": "Myth: Injectables cause permanent infertility.\nFact: Fertility returns, may take 6-12 months."
     }
     
-    print("Testing AI Recommendation:")
-    print(get_ai_recommendation(test_user))
-    print("\n" + "="*50 + "\n")
+    for key, myth in myths.items():
+        if key in method_name.lower():
+            return myth
     
-    print("Testing Swahili Translation:")
-    print(translate_to_swahili("Use condoms to prevent pregnancy and sexually transmitted infections."))
+    return f"Myth: {method_name} causes infertility.\nFact: {method_name} does not affect future fertility."
+
+print("✅ AI Client running in MOCK MODE (no API keys needed)")
