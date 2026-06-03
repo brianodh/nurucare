@@ -1,0 +1,15 @@
+{
+  "test_suite": "Edge Case Tests - Contraindications",
+  "date": "2026-06-01T11:36:34.175259",
+  "total_tests": 29,
+  "passed": 29,
+  "failed": 0,
+  "categories": {
+    "single_contraindications": 5,
+    "multiple_contraindications": 3,
+    "boundary_cases": 4,
+    "healthy_baseline": 1,
+    "provider_warning": 4,
+    "safe_methods": 12
+  }
+}

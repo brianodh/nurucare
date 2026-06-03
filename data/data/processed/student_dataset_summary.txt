@@ -1,0 +1,24 @@
+======================================================================
+DATASET 5: Student Dataset - SUMMARY
+======================================================================
+
+Total students: 2,484
+Total columns extracted: 51
+
+Gender distribution:
+  female: 1374 (55.3%)
+  male: 1101 (44.3%)
+
+Sexually active students: 2484 (100.0%)
+
+Contraceptive awareness (% who have heard of):
+  pill: 100.0%
+  condoms: 100.0%
+  injectables: 100.0%
+  iud: 100.0%
+  implants: 100.0%
+  emergency pill: 100.0%
+  female sterilization: 100.0%
+  male sterilization: 100.0%
+  withdrawal: 100.0%
+  rhythm: 100.0%

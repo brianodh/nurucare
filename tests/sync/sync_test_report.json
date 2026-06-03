@@ -1,0 +1,25 @@
+{
+  "test_suite": "Partner Sync Flow Tests",
+  "date": "2026-06-01T12:13:42.271177",
+  "test_categories": {
+    "token_generation": 5,
+    "session_keys": 4,
+    "sync_manager": 7
+  },
+  "total_tests": 16,
+  "security_features": [
+    "SHA-256 hashing for stored tokens",
+    "No plain-text token storage",
+    "Automatic expiry (24h / 15min)",
+    "One-time use enforcement",
+    "Cryptographically secure randomness"
+  ],
+  "flow_steps_tested": [
+    "Token generation",
+    "Token hashing",
+    "Token verification",
+    "Partner linking",
+    "Session key generation",
+    "Nurse access verification"
+  ]
+}

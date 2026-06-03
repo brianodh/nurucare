@@ -3,6 +3,19 @@ WHO MEC Guardrail Engine - Deterministic Safety Rules
 Ensures clinical safety before any personalization
 """
 
+# =========================================================
+# Add project root to Python path
+# =========================================================
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+# =========================================================
+# Continue with normal imports
+# =========================================================
+
 import json
 from typing import Dict, List, Any
 from pathlib import Path
