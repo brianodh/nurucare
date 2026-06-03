@@ -82,7 +82,34 @@ export default function MaleDashboard() {
             </div>
           )}
         </Card>
-
+{connected && (
+  <Card className="p-6 rounded-2xl mb-8">
+    <h3 className="font-heading font-semibold text-lg mb-4 flex items-center gap-2">
+      <Heart className="w-5 h-5 text-secondary" /> Partner Health Summary
+    </h3>
+    <div className="grid sm:grid-cols-2 gap-4">
+      <div className="bg-muted/40 rounded-xl p-4">
+        <p className="text-xs text-muted-foreground mb-1">Current Method</p>
+        <p className="font-semibold text-sm">Hormonal IUD</p>
+      </div>
+      <div className="bg-muted/40 rounded-xl p-4">
+        <p className="text-xs text-muted-foreground mb-1">Cycle Status</p>
+        <p className="font-semibold text-sm">Regular – 28 days</p>
+      </div>
+      <div className="bg-muted/40 rounded-xl p-4">
+        <p className="text-xs text-muted-foreground mb-1">Side Effects Reported</p>
+        <p className="font-semibold text-sm">Mild spotting (Week 1–2)</p>
+      </div>
+      <div className="bg-muted/40 rounded-xl p-4">
+        <p className="text-xs text-muted-foreground mb-1">Next Check-in</p>
+        <p className="font-semibold text-sm">June 15, 2026</p>
+      </div>
+    </div>
+    <p className="text-xs text-muted-foreground mt-4">
+      * Data shared by your partner. Only visible to you.
+    </p>
+  </Card>
+)}
         <Card className="p-6 rounded-2xl">
           <h3 className="font-heading font-semibold text-lg mb-4">{t('male_myths_title')}</h3>
           <Accordion type="single" collapsible className="space-y-2">

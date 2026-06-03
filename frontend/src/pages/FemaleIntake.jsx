@@ -9,6 +9,7 @@ import IntakeStep3 from '../components/intake/IntakeStep3';
 import IntakeStep4 from '../components/intake/IntakeStep4';
 import IntakeStep5 from '../components/intake/IntakeStep5';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const stepLabels = ['Basic Info', 'Health Metrics', 'Fertility Profile', 'Side Effects', 'Results'];
 
@@ -24,6 +25,22 @@ export default function FemaleIntake() {
     if (step === 3) return true;
     return false;
   };
+
+  function GenerateKeyButton({ data }) {
+  const navigate = useNavigate();
+
+  const handleGenerate = () => {
+    // Generate a random 6-character alphanumeric session key
+    const key = Math.random().toString(36).substring(2, 8).toUpperCase();
+    navigate('/female/session', { state: { sessionKey: key, intakeData: data } });
+  };
+
+  return (
+    <Button onClick={handleGenerate} className="gap-2 rounded-full">
+      <CheckCircle className="w-4 h-4" /> Generate Session Key
+    </Button>
+  );
+}
 
   return (
     <div className="min-h-[85vh] py-8">
@@ -83,11 +100,7 @@ export default function FemaleIntake() {
               <Link to="/education">
                 <Button variant="outline" className="rounded-full">Learn More</Button>
               </Link>
-              <Link to="/female/session">
-                <Button className="gap-2 rounded-full">
-                  <CheckCircle className="w-4 h-4" /> Generate Session Key
-                </Button>
-              </Link>
+              <GenerateKeyButton data={data} />
             </div>
           )}
         </div>
