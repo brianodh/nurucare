@@ -5,37 +5,57 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Search, Shield, AlertTriangle, CheckCircle, Info, XCircle, Lock } from 'lucide-react';
-import { mockRecommendations } from '@/lib/mockData';
+import { Search, Shield, AlertTriangle, CheckCircle, Info, XCircle, Lock, Loader2 } from 'lucide-react';
+import { getPatientBySessionKey } from '@/api/apiClient';
+import { useToast } from '@/components/ui/use-toast';
 
-const mockPatientData = {
-  sessionId: 'SC-482901',
-  age: 24,
-  relationshipStatus: 'In a Relationship',
-  systolic: 118,
-  diastolic: 76,
-  smoking: false,
-  migraine: 'none',
-  cycleLength: 28,
-  irregularPeriods: false,
-  breastfeeding: false,
-  fertilityIntention: 'Long-term',
-  sideEffectConcerns: ['mood_shifts', 'weight_gain'],
-  riskLevel: 'Low',
+const riskColors = {
+  Low: 'bg-secondary/10 text-secondary',
+  Medium: 'bg-accent/10 text-accent',
+  High: 'bg-destructive/10 text-destructive',
 };
 
 export default function PatientLookup() {
+  const { toast } = useToast();
   const [code, setCode] = useState('');
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
-  const lookup = () => {
-    if (code.length < 6) return;
+  const lookup = async () => {
+    if (code.trim().length < 6) return;
     setLoading(true);
-    setTimeout(() => {
-      setPatient(mockPatientData);
+    setNotFound(false);
+    setPatient(null);
+
+    try {
+      const response = await getPatientBySessionKey(code.trim());
+
+      if (response.success && response.patient_data) {
+        setPatient(response.patient_data);
+      } else {
+        setNotFound(true);
+        toast({
+          title: 'Not found',
+          description: response.error || 'Invalid or expired session key.',
+          variant: 'destructive',
+        });
+      }
+    } catch (err) {
+      console.error('Patient lookup failed:', err);
+      setNotFound(true);
+      toast({
+        title: 'Lookup failed',
+        description: 'Could not reach the server. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setLoading(false);
-    }, 1200);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') lookup();
   };
 
   return (
@@ -50,15 +70,21 @@ export default function PatientLookup() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Enter session key..."
+              placeholder="Enter session key…"
               value={code}
-              onChange={e => setCode(e.target.value)}
+              onChange={(e) => setCode(e.target.value)}
+              onKeyDown={handleKeyDown}
               maxLength={6}
               className="pl-9 font-mono"
             />
           </div>
-          <Button onClick={lookup} disabled={code.length < 6 || loading} className="rounded-full">
-            {loading ? 'Searching...' : 'Lookup'}
+          <Button
+            onClick={lookup}
+            disabled={code.trim().length < 6 || loading}
+            className="rounded-full gap-2"
+          >
+            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            {loading ? 'Searching…' : 'Lookup'}
           </Button>
         </div>
         <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground">
@@ -66,81 +92,82 @@ export default function PatientLookup() {
         </div>
       </Card>
 
-      {loading && (
-        <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-4 border-muted border-t-primary rounded-full animate-spin" />
-        </div>
+      {/* Not found */}
+      {notFound && !loading && (
+        <Card className="p-5 rounded-2xl border-destructive/30 bg-destructive/5">
+          <div className="flex items-center gap-3">
+            <XCircle className="w-5 h-5 text-destructive flex-shrink-0" />
+            <p className="text-sm text-destructive">No patient found for that session key. It may have expired or been entered incorrectly.</p>
+          </div>
+        </Card>
       )}
 
+      {/* Patient data */}
       {patient && !loading && (
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <Card className="p-5 rounded-2xl">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-heading font-semibold">Patient Profile</h3>
-              <Badge variant="secondary" className="bg-secondary/10 text-secondary">
-                {patient.riskLevel} Risk
-              </Badge>
+              {patient.risk_level && (
+                <Badge variant="secondary" className={riskColors[patient.risk_level] || 'bg-muted text-muted-foreground'}>
+                  {patient.risk_level} Risk
+                </Badge>
+              )}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: 'Age', value: patient.age },
-                { label: 'BP', value: `${patient.systolic}/${patient.diastolic}` },
-                { label: 'Cycle Length', value: `${patient.cycleLength} days` },
-                { label: 'Fertility Plan', value: patient.fertilityIntention },
-                { label: 'Smoking', value: patient.smoking ? 'Yes' : 'No' },
-                { label: 'Migraine', value: patient.migraine === 'none' ? 'None' : patient.migraine },
-                { label: 'Breastfeeding', value: patient.breastfeeding ? 'Yes' : 'No' },
-                { label: 'Relationship', value: patient.relationshipStatus },
-              ].map(item => (
-                <div key={item.label} className="bg-muted/50 rounded-xl p-3">
-                  <p className="text-xs text-muted-foreground">{item.label}</p>
-                  <p className="font-medium text-sm mt-0.5">{item.value}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
 
-          <Card className="p-5 rounded-2xl">
-            <h3 className="font-heading font-semibold mb-4 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-secondary" /> Recommendations
-            </h3>
-            <div className="space-y-3">
-              {mockRecommendations.safe.map(m => (
-                <div key={m.name} className="flex items-center gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="font-medium text-sm">{m.name}</p>
-                      <Badge variant="outline" className="text-xs">{m.category}</Badge>
-                    </div>
-                    <Progress value={m.confidence} className="h-1.5" />
+            {/* Show whatever fields the backend returns */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {Object.entries(patient)
+                .filter(([k]) => !['recommendations', 'restricted_methods', 'ai_response', 'id'].includes(k))
+                .map(([key, value]) => (
+                  <div key={key} className="bg-muted/50 rounded-xl p-3">
+                    <p className="text-xs text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</p>
+                    <p className="font-medium text-sm mt-0.5 truncate">
+                      {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : String(value ?? '—')}
+                    </p>
                   </div>
-                  <span className="text-sm font-bold text-secondary">{m.confidence}%</span>
+                ))}
+            </div>
+          </Card>
+
+          {/* Recommendations if included in response */}
+          {Array.isArray(patient.recommendations) && patient.recommendations.length > 0 && (
+            <Card className="p-5 rounded-2xl">
+              <h3 className="font-heading font-semibold mb-4 flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-secondary" /> Recommendations
+              </h3>
+              <div className="space-y-3">
+                {patient.recommendations.map((m, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-medium text-sm">{m.name}</p>
+                      </div>
+                      {m.effectiveness != null && (
+                        <Progress value={m.effectiveness} className="h-1.5" />
+                      )}
+                    </div>
+                    {m.effectiveness != null && (
+                      <span className="text-sm font-bold text-secondary">{m.effectiveness}%</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {/* AI analysis if present */}
+          {patient.ai_response && (
+            <Card className="p-5 rounded-2xl bg-primary/5 border-primary/20">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-sm mb-1">AI Analysis</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{patient.ai_response}</p>
                 </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="p-5 rounded-2xl">
-            <h3 className="font-heading font-semibold mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-accent" /> Restricted Methods
-            </h3>
-            {mockRecommendations.restricted.map(m => (
-              <div key={m.name} className="bg-accent/5 border border-accent/20 rounded-xl p-4 mb-3 last:mb-0">
-                <p className="font-medium text-sm">{m.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{m.reason}</p>
               </div>
-            ))}
-          </Card>
-
-          <Card className="p-5 rounded-2xl bg-primary/5 border-primary/20">
-            <div className="flex items-start gap-3">
-              <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-sm mb-1">AI Analysis</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{mockRecommendations.explanation}</p>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          )}
         </motion.div>
       )}
     </div>

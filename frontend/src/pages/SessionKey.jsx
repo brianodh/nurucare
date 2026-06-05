@@ -2,26 +2,52 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Key, Copy, Clock, CheckCircle, Shield } from 'lucide-react';
+import { Key, Copy, Clock, CheckCircle, Shield, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { useLocation } from 'react-router-dom';
 import { useLang } from '@/lib/i18n';
+import { generateSessionKey } from '@/api/apiClient';
 
 export default function SessionKey() {
   const { state } = useLocation();
   const { t } = useLang();
-  const preloadedKey = state?.sessionKey || null;
-  const [sessionKey] = useState(preloadedKey || '');
-  const generated = !!preloadedKey;
-  const [timeLeft, setTimeLeft] = useState(900);
-  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
+  // If FemaleIntake navigates here with a pre-generated key + patient ID, use it.
+  const preloadedKey = state?.sessionKey || null;
+  const patientId = state?.patientId || state?.sessionId || `patient_${Date.now()}`;
+
+  const [sessionKey, setSessionKey] = useState(preloadedKey || '');
+  const [generated, setGenerated] = useState(!!preloadedKey);
+  const [loading, setLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(900);   // 15 min
+  const [copied, setCopied] = useState(false);
+
+  // Countdown timer
   useEffect(() => {
     if (!generated || timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft(v => v - 1), 1000);
+    const timer = setInterval(() => setTimeLeft((v) => v - 1), 1000);
     return () => clearInterval(timer);
   }, [generated, timeLeft]);
+
+  const handleGenerate = async () => {
+    setLoading(true);
+    try {
+      const response = await generateSessionKey(patientId);
+      setSessionKey(response.session_key);
+      setTimeLeft((response.expires_in_minutes ?? 15) * 60);
+      setGenerated(true);
+    } catch (err) {
+      console.error('Failed to generate session key:', err);
+      toast({
+        title: 'Error',
+        description: 'Could not generate a session key. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const copyKey = () => {
     navigator.clipboard.writeText(sessionKey).catch(() => {});
@@ -53,7 +79,15 @@ export default function SessionKey() {
                   <div className="flex items-start gap-2"><Shield className="w-4 h-4 flex-shrink-0 mt-0.5" /> {t('session_once')}</div>
                   <div className="flex items-start gap-2"><Shield className="w-4 h-4 flex-shrink-0 mt-0.5" /> {t('session_anon')}</div>
                 </div>
-                <p className="text-sm text-center text-muted-foreground">{t('session_complete_first')}</p>
+
+                <Button
+                  onClick={handleGenerate}
+                  disabled={loading}
+                  className="w-full rounded-full gap-2"
+                >
+                  {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {loading ? 'Generating…' : 'Generate Session Key'}
+                </Button>
               </div>
             ) : (
               <div className="space-y-6">
@@ -71,9 +105,12 @@ export default function SessionKey() {
                   {copied ? t('session_copied') : t('session_copy')}
                 </Button>
                 {timeLeft <= 0 && (
-                  <div className="text-center">
-                    <p className="text-sm text-destructive mb-3">{t('session_expired')}</p>
-                    <p className="text-xs text-muted-foreground">{t('session_new')}</p>
+                  <div className="text-center space-y-3">
+                    <p className="text-sm text-destructive">{t('session_expired')}</p>
+                    <Button onClick={handleGenerate} size="sm" className="rounded-full" disabled={loading}>
+                      {loading && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
+                      Generate New Key
+                    </Button>
                   </div>
                 )}
               </div>

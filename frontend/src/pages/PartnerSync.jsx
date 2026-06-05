@@ -3,47 +3,90 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Users, Copy, Clock, CheckCircle, Link2 } from 'lucide-react';
+import { Users, Copy, Clock, CheckCircle, Link2, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { generateSyncToken, verifySyncToken } from '@/api/apiClient';
+
+// Simple anonymous user id persisted in sessionStorage
+function getAnonymousId() {
+  let id = sessionStorage.getItem('nuru_anon_id');
+  if (!id) {
+    id = 'anon_' + Math.random().toString(36).slice(2, 10);
+    sessionStorage.setItem('nuru_anon_id', id);
+  }
+  return id;
+}
 
 export default function PartnerSync() {
-  const [token, setToken] = useState('');
-  const [generated, setGenerated] = useState(false);
-  const [partnerToken, setPartnerToken] = useState('');
-  const [connected, setConnected] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
-  const generateToken = () => {
-    const t = 'SC-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-    setToken(t);
-    setGenerated(true);
-    setTimeLeft(1800);
-  };
+  const [token, setToken] = useState('');
+  const [generated, setGenerated] = useState(false);
+  const [generating, setGenerating] = useState(false);
+
+  const [partnerToken, setPartnerToken] = useState('');
+  const [connected, setConnected] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (!generated || timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
+    const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearInterval(timer);
   }, [generated, timeLeft]);
 
+  // ── Generate token ─────────────────────────────────────────────────────────
+  const handleGenerate = async () => {
+    setGenerating(true);
+    try {
+      const response = await generateSyncToken();
+      setToken(response.token);
+      setGenerated(true);
+      setTimeLeft((response.expires_in_hours ?? 24) * 3600);
+    } catch (err) {
+      console.error('Token generation failed:', err);
+      toast({ title: 'Error', description: 'Could not generate token. Is the backend running?', variant: 'destructive' });
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  // ── Copy token ─────────────────────────────────────────────────────────────
   const copyToken = () => {
-    navigator.clipboard.writeText(token);
+    navigator.clipboard.writeText(token).catch(() => {});
     setCopied(true);
     toast({ title: 'Token copied!', description: 'Share this with your partner.' });
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const connectPartner = () => {
-    if (partnerToken.length >= 6) {
-      setConnected(true);
-      toast({ title: 'Partner connected!', description: 'You can now share health decisions together.' });
+  // ── Verify / connect ───────────────────────────────────────────────────────
+  const connectPartner = async () => {
+    if (partnerToken.trim().length < 6) return;
+    setConnecting(true);
+    try {
+      const response = await verifySyncToken(partnerToken.trim(), getAnonymousId());
+      if (response.success) {
+        setConnected(true);
+        toast({ title: 'Partner connected!', description: 'You can now share health decisions together.' });
+      } else {
+        toast({ title: 'Invalid token', description: response.message || 'Please check the token and try again.', variant: 'destructive' });
+      }
+    } catch (err) {
+      const msg = err?.response?.data?.detail || 'Token invalid or expired.';
+      toast({ title: 'Connection failed', description: msg, variant: 'destructive' });
+    } finally {
+      setConnecting(false);
     }
   };
 
-  const minutes = Math.floor(timeLeft / 60);
+  const hours = Math.floor(timeLeft / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
+  const timerDisplay = hours > 0
+    ? `${hours}h ${minutes}m`
+    : `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
   return (
     <div className="min-h-[85vh] py-12">
@@ -57,19 +100,23 @@ export default function PartnerSync() {
         </motion.div>
 
         <div className="space-y-6">
+          {/* Generate token */}
           <Card className="p-6 rounded-2xl">
             <h3 className="font-heading font-semibold mb-4">Generate Sync Token</h3>
             {!generated ? (
-              <Button onClick={generateToken} className="w-full rounded-full">Generate Anonymous Token</Button>
+              <Button onClick={handleGenerate} disabled={generating} className="w-full rounded-full gap-2">
+                {generating && <Loader2 className="w-4 h-4 animate-spin" />}
+                {generating ? 'Generating…' : 'Generate Anonymous Token'}
+              </Button>
             ) : (
               <div className="space-y-4">
-                <div className="bg-muted rounded-xl p-4 text-center">
-                  <p className="text-2xl font-heading font-bold tracking-wider">{token}</p>
+                <div className="bg-muted rounded-xl p-4 text-center overflow-x-auto">
+                  <p className="text-lg sm:text-xl font-heading font-bold tracking-wider break-all">{token}</p>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
                   <Clock className="w-4 h-4" />
                   <span className={`font-mono ${timeLeft < 300 ? 'text-destructive' : ''}`}>
-                    {minutes}:{seconds.toString().padStart(2, '0')}
+                    {timerDisplay}
                   </span>
                 </div>
                 <Button onClick={copyToken} variant="outline" className="w-full rounded-full gap-2">
@@ -80,6 +127,7 @@ export default function PartnerSync() {
             )}
           </Card>
 
+          {/* Connect with partner */}
           <Card className="p-6 rounded-2xl">
             <h3 className="font-heading font-semibold mb-4">Connect with Partner</h3>
             {!connected ? (
@@ -87,10 +135,17 @@ export default function PartnerSync() {
                 <Input
                   placeholder="Enter partner's sync token"
                   value={partnerToken}
-                  onChange={e => setPartnerToken(e.target.value)}
+                  onChange={(e) => setPartnerToken(e.target.value)}
+                  className="font-mono"
                 />
-                <Button onClick={connectPartner} variant="secondary" className="w-full rounded-full gap-2">
-                  <Link2 className="w-4 h-4" /> Connect
+                <Button
+                  onClick={connectPartner}
+                  variant="secondary"
+                  disabled={connecting || partnerToken.trim().length < 6}
+                  className="w-full rounded-full gap-2"
+                >
+                  {connecting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Link2 className="w-4 h-4" />}
+                  {connecting ? 'Connecting…' : 'Connect'}
                 </Button>
               </div>
             ) : (
