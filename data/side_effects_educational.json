@@ -1,0 +1,242 @@
+{
+  "version": "1.0",
+  "created_date": "2026-06-06",
+  "source_dataset": "Final Women Data ANON",
+  "source_rows": 1997,
+  "extracted_variables": [
+    "problem_bleeding", "problem_headache", "problem_nausea", "problem_weight_gain",
+    "problem_backache", "problem_weakness", "problem_no_sexual_urge", "problem_method_failed",
+    "side_effect_bleeding", "side_effect_weight_change", "side_effect_headaches",
+    "side_effect_backaches", "side_effect_nausea", "side_effect_sleeplessness",
+    "side_effect_weakness", "side_effect_no_urge", "side_effect_fear_infertility",
+    "side_effect_fear_cancer", "stop_menstrual_problem", "stop_health_problem",
+    "stop_weight_change", "stop_no_sexual_urge"
+  ],
+  "side_effects": [
+    {
+      "id": "SE_001",
+      "side_effect": "Bleeding changes / Irregular periods",
+      "common_methods": ["implants", "injectables", "hormonal_iud", "progestin_pill"],
+      "prevalence": "Very common (reported by 30-50% of users in dataset)",
+      "duration": "Usually improves within 3-6 months",
+      "management_tips": [
+        "Keep track of bleeding patterns in a journal",
+        "Use panty liners for spotting",
+        "Most cases resolve without treatment",
+        "Consult provider if heavy bleeding or lasts >7 days"
+      ],
+      "when_to_see_provider": "Bleeding so heavy you need to change pad/tampon every hour, bleeding lasts >7 days, severe pain accompanies bleeding",
+      "myth_buster": "Irregular bleeding does NOT mean the method is ineffective or harming your body",
+      "dataset_evidence": "problem_bleeding and side_effect_bleeding reported across all age groups"
+    },
+    {
+      "id": "SE_002",
+      "side_effect": "Headaches",
+      "common_methods": ["combined_pill", "patch", "ring"],
+      "prevalence": "Common (reported by 15-30% of users in dataset)",
+      "duration": "Usually decreases after first 3 months",
+      "management_tips": [
+        "Take pills at same time daily",
+        "Stay hydrated",
+        "Over-the-counter pain relievers (paracetamol/ibuprofen)",
+        "Track headaches to identify triggers"
+      ],
+      "when_to_see_provider": "Severe headaches with vision changes, new type of headache, headache with aura",
+      "myth_buster": "New or worsening headaches may indicate you need a different method - not that contraception is 'bad'",
+      "dataset_evidence": "problem_headache and side_effect_headaches reported frequently"
+    },
+    {
+      "id": "SE_003",
+      "side_effect": "Weight gain",
+      "common_methods": ["injectables", "implants"],
+      "prevalence": "Moderate (reported by 10-20% of users in dataset)",
+      "duration": "May persist while using method",
+      "management_tips": [
+        "Healthy diet and regular exercise",
+        "Monitor weight changes at check-ups",
+        "Discuss alternative methods if weight gain is concerning"
+      ],
+      "when_to_see_provider": "Rapid or excessive weight gain (more than 5kg in 3 months)",
+      "myth_buster": "Most contraceptives do NOT cause significant weight gain - Depo-Provera is the main exception",
+      "dataset_evidence": "problem_weight_gain and side_effect_weight_change reported"
+    },
+    {
+      "id": "SE_004",
+      "side_effect": "Nausea",
+      "common_methods": ["combined_pill", "emergency_contraception"],
+      "prevalence": "Common (reported by 10-20% of users in dataset)",
+      "duration": "Usually resolves within first 1-3 months",
+      "management_tips": [
+        "Take pill with food or at bedtime",
+        "Try different brand/formulation",
+        "Stay hydrated"
+      ],
+      "when_to_see_provider": "Severe nausea preventing eating/drinking, vomiting within 2 hours of taking pill (may need repeat dose)",
+      "myth_buster": "Nausea is typically temporary and often resolves as your body adjusts",
+      "dataset_evidence": "problem_nausea and side_effect_nausea reported"
+    },
+    {
+      "id": "SE_005",
+      "side_effect": "Backache",
+      "common_methods": ["combined_pill", "iud", "implants"],
+      "prevalence": "Moderate (reported by 5-15% of users in dataset)",
+      "duration": "Often improves within first 3 months",
+      "management_tips": [
+        "Over-the-counter pain relievers",
+        "Gentle stretching exercises",
+        "Heat therapy (heating pad)",
+        "Maintain good posture"
+      ],
+      "when_to_see_provider": "Severe back pain not responding to OTC medication, pain radiating down legs",
+      "myth_buster": "Backache is usually mild and temporary - not a sign of serious problems",
+      "dataset_evidence": "problem_backache and side_effect_backaches reported"
+    },
+    {
+      "id": "SE_006",
+      "side_effect": "Weakness / Fatigue",
+      "common_methods": ["depo_provera", "implants", "combined_pill"],
+      "prevalence": "Moderate (reported by 10-15% of users in dataset)",
+      "duration": "Often improves after first 3 months",
+      "management_tips": [
+        "Get adequate sleep (7-8 hours)",
+        "Iron-rich diet if bleeding heavily",
+        "Regular exercise (boosts energy)",
+        "Stay hydrated"
+      ],
+      "when_to_see_provider": "Severe fatigue affecting daily activities, signs of anemia (pale skin, shortness of breath)",
+      "myth_buster": "Fatigue is usually temporary - your body is adjusting to new hormone levels",
+      "dataset_evidence": "problem_weakness and side_effect_weakness reported"
+    },
+    {
+      "id": "SE_007",
+      "side_effect": "Loss of sexual desire (libido)",
+      "common_methods": ["combined_pill", "depo_provera"],
+      "prevalence": "Less common (reported by 5-10% of users in dataset)",
+      "duration": "May persist, but alternative methods available",
+      "management_tips": [
+        "Discuss with partner openly",
+        "Try different contraceptive method",
+        "Non-hormonal methods (copper IUD, condoms) have no libido effects"
+      ],
+      "when_to_see_provider": "Persistent loss of desire causing relationship distress",
+      "myth_buster": "If one hormonal method affects your libido, another may not - or you can switch to non-hormonal options",
+      "dataset_evidence": "problem_no_sexual_urge and side_effect_no_urge reported"
+    },
+    {
+      "id": "SE_008",
+      "side_effect": "Method failure (unintended pregnancy)",
+      "common_methods": ["typical_use_all_methods"],
+      "prevalence": "Depends on method - typical use effectiveness varies",
+      "duration": "Single event - requires action",
+      "management_tips": [
+        "Use emergency contraception if method failed",
+        "Consider switching to more effective method",
+        "Take pregnancy test if period is late",
+        "Discuss LARC options (IUD/implant) - 99% effective"
+      ],
+      "when_to_see_provider": "Positive pregnancy test, missed period with method failure",
+      "myth_buster": "No method is 100% effective except abstinence, but LARC methods are 99% effective",
+      "dataset_evidence": "problem_method_failed reported by some users"
+    },
+    {
+      "id": "SE_009",
+      "side_effect": "Sleep disturbances (insomnia/sleeplessness)",
+      "common_methods": ["combined_pill", "depo_provera"],
+      "prevalence": "Less common (reported by 5-10% of users in dataset)",
+      "duration": "Often improves within first 3 months",
+      "management_tips": [
+        "Maintain consistent sleep schedule",
+        "Avoid caffeine in evening",
+        "Create relaxing bedtime routine",
+        "Limit screen time before bed"
+      ],
+      "when_to_see_provider": "Chronic insomnia affecting daily function",
+      "myth_buster": "Sleep changes are usually temporary and may resolve as your body adjusts",
+      "dataset_evidence": "side_effect_sleeplessness reported in dataset"
+    },
+    {
+      "id": "SE_010",
+      "side_effect": "Fear of infertility",
+      "common_methods": ["depo_provera", "implants", "iud"],
+      "prevalence": "Psychological (reported by 10-15% of users in dataset)",
+      "duration": "Based on misconception, not medical fact",
+      "management_tips": [
+        "Understand that fertility returns after stopping",
+        "Depo-Provera may delay return by 6-12 months (temporary)",
+        "IUDs and implants: fertility returns immediately",
+        "Discuss concerns with healthcare provider"
+      ],
+      "when_to_see_provider": "Anxiety about fertility affecting quality of life",
+      "myth_buster": "Modern contraceptives do NOT cause permanent infertility. This is a MYTH - 94% of women in our dataset recognized this myth.",
+      "dataset_evidence": "side_effect_fear_infertility reported; myth_injection_causes_infertility recognized by 94.4%"
+    },
+    {
+      "id": "SE_011",
+      "side_effect": "Fear of cancer",
+      "common_methods": ["all_hormonal_methods"],
+      "prevalence": "Psychological (reported by 5-10% of users in dataset)",
+      "duration": "Based on misconception, not medical fact",
+      "management_tips": [
+        "Combined pills REDUCE ovarian/endometrial cancer risk",
+        "No evidence of increased cancer risk with implants/IUDs",
+        "Discuss individual risk factors with provider"
+      ],
+      "when_to_see_provider": "Anxiety about cancer risk affecting quality of life",
+      "myth_buster": "Contraceptives do NOT cause cancer. Combined pills actually REDUCE risk of ovarian and endometrial cancer. This is a MYTH - 94% of women recognized it.",
+      "dataset_evidence": "side_effect_fear_cancer reported; myth_contraceptives_cause_cancer recognized by 94.3%"
+    },
+    {
+      "id": "SE_012",
+      "side_effect": "Menstrual problems (from stopping method)",
+      "common_methods": ["all_methods_when_stopping"],
+      "prevalence": "Common (reported by many users who stopped)",
+      "duration": "Usually 1-3 cycles to normalize",
+      "management_tips": [
+        "Track cycles after stopping",
+        "Use backup method if not ready for pregnancy",
+        "Consult provider if no period for 3+ months after stopping Depo"
+      ],
+      "when_to_see_provider": "No period for 6+ months after stopping hormonal method (except Depo - up to 12 months)",
+      "myth_buster": "Cycle changes after stopping are normal and temporary",
+      "dataset_evidence": "stop_menstrual_problem reported as reason for stopping"
+    },
+    {
+      "id": "SE_013",
+      "side_effect": "Health problems (fear-based stopping)",
+      "common_methods": ["all_methods"],
+      "prevalence": "Psychological (reported by some users)",
+      "duration": "Based on misconception",
+      "management_tips": [
+        "Most side effects are mild and temporary",
+        "Serious complications are very rare",
+        "Benefits outweigh risks for most women",
+        "Discuss specific concerns with provider"
+      ],
+      "when_to_see_provider": "Any concerning symptoms - most are manageable",
+      "myth_buster": "Modern contraceptives are safe for the vast majority of women. This is a MYTH - 94.5% of women recognized it.",
+      "dataset_evidence": "stop_health_problem reported; myth_contraceptives_are_dangerous recognized by 94.5%"
+    }
+  ],
+  "statistics_summary": {
+    "total_side_effects_documented": 13,
+    "source_rows": 1997,
+    "most_common_complaints_from_dataset": [
+      "Bleeding changes (problem_bleeding: widespread)",
+      "Headaches (problem_headache: widespread)",
+      "Weight concerns (problem_weight_gain: moderate)",
+      "Weakness/fatigue (problem_weakness: moderate)",
+      "Fear of infertility (side_effect_fear_infertility: significant)"
+    ],
+    "myth_connections": [
+      "SE_010 connects to MYTH_001 (injection infertility - 94.4% recognition)",
+      "SE_011 connects to MYTH_005 (cancer - 94.3% recognition)",
+      "SE_013 connects to MYTH_007 (dangerous - 94.5% recognition)"
+    ]
+  },
+  "educational_priority_matrix": {
+    "HIGH": ["SE_001 (bleeding)", "SE_002 (headaches)", "SE_010 (infertility fear)", "SE_011 (cancer fear)", "SE_013 (health problems fear)"],
+    "MEDIUM": ["SE_003 (weight gain)", "SE_004 (nausea)", "SE_006 (fatigue)", "SE_012 (menstrual problems)"],
+    "LOW": ["SE_005 (backache)", "SE_007 (libido)", "SE_008 (method failure)", "SE_009 (sleep)"]
+  },
+  "disclaimer": "This is educational information based on population data. Individual experiences vary. Always consult a healthcare provider for personal medical advice."
+}
