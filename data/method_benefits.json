@@ -1,0 +1,294 @@
+{
+  "version": "1.0",
+  "created_date": "2026-05-27",
+  "source_dataset": "Client Service Statistics (216,539 service records)",
+  "methods": [
+    {
+      "id": "male_condom",
+      "name": "Male Condom",
+      "name_swahili": "Kondomu ya Kiume",
+      "effectiveness_typical": 85,
+      "effectiveness_perfect": 98,
+      "duration": "Single use",
+      "pros": [
+        "Protects against STIs including HIV",
+        "No prescription needed",
+        "No side effects",
+        "Available at pharmacies and shops",
+        "Male partner can share responsibility"
+      ],
+      "cons": [
+        "Must use correctly every time",
+        "Can break or slip",
+        "Some men dislike sensation",
+        "Requires partner cooperation"
+      ],
+      "how_to_use": "Roll onto erect penis before any genital contact. Hold tip to remove air. After ejaculation, withdraw while holding base.",
+      "adoption_rate": "40.3% of clients (87,245 users)",
+      "best_for": "People wanting STI protection, occasional sex, or as backup method",
+      "who_mec_category": 1
+    },
+    {
+      "id": "female_condom",
+      "name": "Female Condom",
+      "name_swahili": "Kondomu ya Kike",
+      "effectiveness_typical": 79,
+      "effectiveness_perfect": 95,
+      "duration": "Single use",
+      "pros": [
+        "Protects against STIs including HIV",
+        "Woman-controlled",
+        "No side effects",
+        "Can be inserted hours before sex"
+      ],
+      "cons": [
+        "Less available than male condoms",
+        "More expensive",
+        "Can be noisy",
+        "Requires practice to insert correctly"
+      ],
+      "how_to_use": "Insert closed end into vagina. Outer ring remains outside. Ensure penis enters sheath.",
+      "adoption_rate": "Less common in dataset",
+      "best_for": "Women wanting STI protection and control",
+      "who_mec_category": 1
+    },
+    {
+      "id": "combined_pill",
+      "name": "Combined Oral Contraceptive Pill",
+      "name_swahili": "Kidonge cha Uzazi wa Mpango Mseto",
+      "effectiveness_typical": 93,
+      "effectiveness_perfect": 99,
+      "duration": "Daily",
+      "pros": [
+        "Highly effective",
+        "Regulates menstrual cycles",
+        "Reduces cramps and PMS",
+        "Lighter periods",
+        "Reduces acne",
+        "Reduces ovarian cancer risk"
+      ],
+      "cons": [
+        "Must take daily at same time",
+        "May have side effects (nausea, headaches)",
+        "Does NOT protect against STIs",
+        "Not safe for some women (smokers >35, migraine with aura)"
+      ],
+      "how_to_use": "Take one pill daily at same time. Start pack on day 1 of period or first Sunday after period.",
+      "adoption_rate": "22.2% of clients (48,127 users)",
+      "best_for": "Women wanting highly effective, reversible method who can take daily pill",
+      "who_mec_category": "1-4 (depends on health conditions)"
+    },
+    {
+      "id": "progestin_pill",
+      "name": "Progestin-Only Pill (Mini-Pill)",
+      "name_swahili": "Kidogo cha Projestini Pekee",
+      "effectiveness_typical": 93,
+      "effectiveness_perfect": 99,
+      "duration": "Daily",
+      "pros": [
+        "Safe while breastfeeding",
+        "Safe for women who can't take estrogen",
+        "May reduce menstrual pain"
+      ],
+      "cons": [
+        "Must take at exact same time daily (3-hour window)",
+        "May cause irregular bleeding",
+        "Does NOT protect against STIs"
+      ],
+      "how_to_use": "Take one pill at same time every day. No breaks between packs.",
+      "adoption_rate": "Included in pill category",
+      "best_for": "Breastfeeding mothers, women with contraindications to estrogen",
+      "who_mec_category": 1
+    },
+    {
+      "id": "injectables",
+      "name": "Injectable (Depo-Provera)",
+      "name_swahili": "Sindano ya Uzazi wa Mpango",
+      "effectiveness_typical": 94,
+      "effectiveness_perfect": 99,
+      "duration": "Every 3 months",
+      "pros": [
+        "Private - nobody knows you're using it",
+        "No daily pill to remember",
+        "May stop periods completely",
+        "Effective for 3 months"
+      ],
+      "cons": [
+        "Requires clinic visit every 3 months",
+        "May cause weight gain",
+        "May delay return to fertility (6-12 months)",
+        "Irregular bleeding common first months"
+      ],
+      "how_to_use": "Get injection from healthcare provider every 12-13 weeks.",
+      "adoption_rate": "15.2% of clients (32,852 users)",
+      "best_for": "Women wanting private, infrequent dosing who don't plan pregnancy soon",
+      "who_mec_category": 1
+    },
+    {
+      "id": "implants",
+      "name": "Implant (Jadelle/Implanon)",
+      "name_swahili": "Kipandikizi",
+      "effectiveness_typical": 99,
+      "effectiveness_perfect": 99,
+      "duration": "3-5 years",
+      "pros": [
+        "Most effective reversible method (99.9%)",
+        "Lasts years - 'set and forget'",
+        "Reversible - fertility returns quickly",
+        "Discrete - can't see or feel during sex"
+      ],
+      "cons": [
+        "Requires minor procedure to insert/remove",
+        "Irregular bleeding common (improves with time)",
+        "Does NOT protect against STIs"
+      ],
+      "how_to_use": "Small rod inserted under skin of upper arm by trained provider. Remove when ready for pregnancy.",
+      "adoption_rate": "15.7% of clients (33,967 users)",
+      "best_for": "Women wanting long-term, highly effective contraception without daily effort",
+      "who_mec_category": 1
+    },
+    {
+      "id": "iud_copper",
+      "name": "Copper IUD",
+      "name_swahili": "Kifaa cha Ndani ya Uzazi (Shaba)",
+      "effectiveness_typical": 99,
+      "effectiveness_perfect": 99,
+      "duration": "Up to 10 years",
+      "pros": [
+        "No hormones - no hormonal side effects",
+        "Lasts up to 10 years",
+        "Reversible - fertility returns immediately",
+        "Can be used as emergency contraception"
+      ],
+      "cons": [
+        "Requires insertion by trained provider",
+        "May cause heavier, more painful periods",
+        "Does NOT protect against STIs"
+      ],
+      "how_to_use": "T-shaped device inserted into uterus by provider. Check strings monthly.",
+      "adoption_rate": "2.1% of clients (4,624 users)",
+      "best_for": "Women wanting long-term, hormone-free contraception",
+      "who_mec_category": 1
+    },
+    {
+      "id": "iud_hormonal",
+      "name": "Hormonal IUD (Mirena)",
+      "name_swahili": "Kifaa cha Ndani ya Uzazi (Homoni)",
+      "effectiveness_typical": 99,
+      "effectiveness_perfect": 99,
+      "duration": "3-5 years",
+      "pros": [
+        "Lighter, less painful periods (may stop completely)",
+        "Lasts 3-5 years",
+        "Highly effective",
+        "Reversible"
+      ],
+      "cons": [
+        "Requires insertion by trained provider",
+        "Irregular bleeding first 3-6 months",
+        "Does NOT protect against STIs"
+      ],
+      "how_to_use": "T-shaped device inserted into uterus by provider. Releases local hormones.",
+      "adoption_rate": "Included in IUD category",
+      "best_for": "Women wanting long-term contraception with lighter periods",
+      "who_mec_category": 1
+    },
+    {
+      "id": "emergency",
+      "name": "Emergency Contraception (EC)",
+      "name_swahili": "Uzazi wa Mpango wa Dharura (P2)",
+      "effectiveness_typical": 85,
+      "effectiveness_perfect": 95,
+      "duration": "Single use (within 72 hours)",
+      "pros": [
+        "Backup after unprotected sex",
+        "Available at pharmacies without prescription",
+        "Copper IUD as EC is 99% effective"
+      ],
+      "cons": [
+        "Only for emergencies - not regular use",
+        "Less effective than regular contraception",
+        "May cause nausea",
+        "Does NOT protect against STIs"
+      ],
+      "how_to_use": "Take pill(s) as directed within 72 hours (120 hours for some brands) of unprotected sex.",
+      "adoption_rate": "Emergency method",
+      "best_for": "Emergency backup after condom break, missed pills, or unprotected sex",
+      "who_mec_category": 1
+    },
+    {
+      "id": "lam",
+      "name": "Lactational Amenorrhea Method (LAM)",
+      "name_swahili": "Njia ya Kunyonyesha",
+      "effectiveness_typical": 98,
+      "effectiveness_perfect": 98,
+      "duration": "First 6 months postpartum only",
+      "pros": [
+        "No cost",
+        "No side effects",
+        "No hormones",
+        "Works with breastfeeding"
+      ],
+      "cons": [
+        "Only works first 6 months",
+        "Requires exclusive breastfeeding",
+        "No STI protection"
+      ],
+      "how_to_use": "Breastfeed exclusively (no formula/water) with less than 4-hour gaps day and night.",
+      "adoption_rate": "Postpartum method",
+      "best_for": "Exclusively breastfeeding mothers in first 6 months",
+      "who_mec_category": 1
+    },
+    {
+      "id": "withdrawal",
+      "name": "Withdrawal Method",
+      "name_swahili": "Kujitenga Kabla ya Kutoa Manii",
+      "effectiveness_typical": 78,
+      "effectiveness_perfect": 96,
+      "duration": "Each act of intercourse",
+      "pros": [
+        "No cost",
+        "No side effects",
+        "Always available"
+      ],
+      "cons": [
+        "Requires great self-control",
+        "Pre-ejaculate may contain sperm",
+        "No STI protection",
+        "High failure rate with typical use"
+      ],
+      "how_to_use": "Penis withdrawn completely before ejaculation, away from vulva/vagina.",
+      "adoption_rate": "Common among adolescents",
+      "best_for": "Couples willing to accept higher failure risk; better than nothing",
+      "who_mec_category": 1
+    },
+    {
+      "id": "rhythm",
+      "name": "Rhythm / Safe Days Method",
+      "name_swahili": "Njia ya Siku Salama",
+      "effectiveness_typical": 76,
+      "effectiveness_perfect": 90,
+      "duration": "Each cycle",
+      "pros": [
+        "No cost",
+        "No side effects",
+        "No hormones"
+      ],
+      "cons": [
+        "Requires tracking cycles accurately",
+        "Irregular cycles make it unreliable",
+        "No STI protection",
+        "High failure rate"
+      ],
+      "how_to_use": "Track cycle length for 6+ months. Avoid sex on fertile days (days 8-19 of 28-day cycle).",
+      "adoption_rate": "Common in some communities",
+      "best_for": "Women with very regular cycles willing to abstain or use backup during fertile window",
+      "who_mec_category": 1
+    }
+  ],
+  "statistics_summary": {
+    "total_methods_documented": 11,
+    "source_records": "216,539 service records",
+    "most_adopted": "Condoms (40.3%), Pills (22.2%), Implants (15.7%)"
+  }
+}
