@@ -1,0 +1,309 @@
+{
+  "version": "1.0",
+  "created_date": "2026-05-27",
+  "source_datasets": [
+    {
+      "name": "Final Women Data ANON",
+      "rows": 1997,
+      "variables": ["myth_injection_causes_infertility", "myth_contraceptives_cause_health_problems", "myth_contraceptives_harm_womb", "myth_contraceptives_reduce_sexual_urge", "myth_contraceptives_cause_cancer", "myth_contraceptives_cause_deformed_babies", "myth_contraceptives_are_dangerous"]
+    },
+    {
+      "name": "Student Dataset",
+      "rows": 2484,
+      "variables": ["myth_condoms_mean_promiscuous", "myth_condoms_mean_no_trust", "myth_contraceptives_encourage_sex", "myth_acceptable_to_beat_wife", "myth_sex_only_man_woman"]
+    },
+    {
+      "name": "MC Baseline",
+      "rows": 96,
+      "variables": ["menstrual_myth_swimming_dangerous", "menstrual_myth_periods_clean_dirty_blood", "menstrual_myth_blood_comes_from_urethra", "menstrual_myth_all_get_bad_tempered"]
+    }
+  ],
+  "myths": [
+    {
+      "id": "MYTH_001",
+      "category": "contraceptive_safety",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptive injection causes permanent infertility",
+      "truth": "Fertility returns to normal after stopping injections",
+      "explanation": "Depo-Provera (the injection) may delay return to fertility by 6-12 months after the last injection, but it does NOT cause permanent infertility. Most women become pregnant within 12-18 months of stopping. This is a temporary effect, not permanent damage.",
+      "myth_prevalence": "94.4% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "ACOG Practice Bulletin No. 206",
+        "Final Women Dataset (v378)"
+      ],
+      "target_audience": "Women considering injectable contraception",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_002",
+      "category": "contraceptive_safety",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "People who use contraception end up with health problems",
+      "truth": "Most side effects are mild and temporary; contraceptives are generally safe",
+      "explanation": "Modern contraceptives are extensively tested and approved by WHO and national health authorities. While some methods may have side effects (nausea, headaches, mood changes), these are typically mild and resolve within the first 3 months. Serious complications are rare. The health benefits of preventing unintended pregnancy often outweigh potential risks.",
+      "myth_prevalence": "94.5% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "CDC Contraception Guidance",
+        "Final Women Dataset (v379)"
+      ],
+      "target_audience": "All contraceptive users",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_003",
+      "category": "contraceptive_safety",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptives can harm your womb (uterus)",
+      "truth": "Contraceptives do NOT cause long-term damage to the uterus",
+      "explanation": "Hormonal contraceptives (pills, implants, IUDs) do not damage the uterus. In fact, hormonal IUDs are used to TREAT heavy bleeding and uterine conditions. The copper IUD is also safe for long-term use (up to 10 years). Fertility returns to normal after stopping any contraceptive method.",
+      "myth_prevalence": "94.3% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "Final Women Dataset (v380)"
+      ],
+      "target_audience": "Women concerned about long-term effects",
+      "educational_priority": "MEDIUM"
+    },
+    {
+      "id": "MYTH_004",
+      "category": "side_effects",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptics reduce sexual urge (libido)",
+      "truth": "Most contraceptives do NOT significantly affect libido; some may even improve sexual satisfaction",
+      "explanation": "While some women report changes in libido with hormonal contraceptives, most studies show no significant difference. For many women, contraception increases sexual satisfaction by removing fear of unintended pregnancy. If you experience libido changes, switching to a different method (like non-hormonal options) can help.",
+      "myth_prevalence": "94.0% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "Final Women Dataset (v381)"
+      ],
+      "target_audience": "All contraceptive users",
+      "educational_priority": "MEDIUM"
+    },
+    {
+      "id": "MYTH_005",
+      "category": "contraceptive_safety",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptives cause cancer",
+      "truth": "Some contraceptives REDUCE cancer risk; none significantly increase risk for most women",
+      "explanation": "Combined oral contraceptives actually REDUCE the risk of ovarian cancer (by 30-50%) and endometrial cancer. They may slightly increase breast cancer risk (very small absolute increase), but this returns to normal after stopping. For most women, the benefits far outweigh any risks. Non-hormonal methods (condoms, copper IUD) have no cancer risk.",
+      "myth_prevalence": "94.3% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "American Cancer Society",
+        "Final Women Dataset (v382)"
+      ],
+      "target_audience": "Women concerned about long-term health",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_006",
+      "category": "pregnancy_concerns",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptives can give you deformed babies",
+      "truth": "Contraceptives do NOT cause birth defects",
+      "explanation": "There is NO evidence that contraceptive use causes birth defects. If you become pregnant while using contraception (which is rare with correct use), stopping the method does not increase risk of birth defects. The only concern is that some methods (like IUDs) should be removed if pregnancy occurs to prevent infection.",
+      "myth_prevalence": "94.3% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "ACOG",
+        "Final Women Dataset (v383)"
+      ],
+      "target_audience": "Women planning future pregnancy",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_007",
+      "category": "contraceptive_safety",
+      "source_dataset": "Final Women Data ANON",
+      "myth_statement": "Contraceptives are dangerous to your health",
+      "truth": "Modern contraceptives are safe for the vast majority of women when used correctly",
+      "explanation": "All contraceptive methods undergo rigorous testing and approval by WHO and national regulators. While each method has potential side effects, serious complications are rare. The health risks of unintended pregnancy (which can cause maternal morbidity and mortality) are far greater than the risks of contraception for most women.",
+      "myth_prevalence": "94.5% of adult women responded to this myth",
+      "sample_responses": ["Strongly Agree", "Agree", "Strongly Disagree", "Disagree"],
+      "sources": [
+        "WHO MEC Guidelines 2024",
+        "Final Women Dataset (v384)"
+      ],
+      "target_audience": "All contraceptive users",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_008",
+      "category": "adolescent_myths",
+      "source_dataset": "Student Dataset",
+      "myth_statement": "Young people who carry condoms are promiscuous or unfaithful",
+      "truth": "Carrying condoms shows responsibility, not promiscuity",
+      "explanation": "Carrying condoms is a sign of being prepared and responsible about your sexual health. It shows you care about preventing pregnancy and STIs, including HIV. Many responsible young people carry condoms 'just in case' - it doesn't mean they plan to have sex, just that they want to be safe if they do.",
+      "myth_prevalence": "98.1% of students responded to this myth",
+      "sample_responses": [
+        {"response": "agree", "count": "many"},
+        {"response": "disagree", "count": "many"},
+        {"response": "prefer not to answer", "count": "few"}
+      ],
+      "sources": [
+        "Student Dataset (s801b)",
+        "WHO Guidelines on Adolescent Sexual Health"
+      ],
+      "target_audience": "Adolescents and young adults",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_009",
+      "category": "adolescent_myths",
+      "source_dataset": "Student Dataset",
+      "myth_statement": "Using a condom means you don't trust your partner",
+      "truth": "Using condoms shows mutual respect and shared responsibility",
+      "explanation": "Condoms protect BOTH partners from STIs and unintended pregnancy. Using condoms is not about trust - it's about health. Many committed couples use condoms because they respect each other's health and want to prevent pregnancy until they're ready. It's a sign of maturity, not mistrust.",
+      "myth_prevalence": "98.7% of students responded to this myth",
+      "sample_responses": [
+        {"response": "agree", "count": "some"},
+        {"response": "disagree", "count": "most"}
+      ],
+      "sources": [
+        "Student Dataset (s801c)"
+      ],
+      "target_audience": "Adolescents and young adults",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_010",
+      "category": "policy_myths",
+      "source_dataset": "Student Dataset",
+      "myth_statement": "Making contraceptives available to young people encourages sexual activity",
+      "truth": "Access to contraceptives does NOT increase sexual activity; it increases SAFE sexual activity",
+      "explanation": "Decades of research show that providing contraceptives to young people does NOT make them start having sex earlier or have more partners. What it DOES do is increase the likelihood that sexually active young people use protection, reducing rates of unintended pregnancy and STIs. Education + access = safer choices.",
+      "myth_prevalence": "99.1% of students responded to this myth",
+      "sample_responses": [
+        {"response": "agree", "count": "some"},
+        {"response": "disagree", "count": "most"}
+      ],
+      "sources": [
+        "Student Dataset (s801e)",
+        "WHO Guidelines on Adolescent Sexual Health"
+      ],
+      "target_audience": "Parents, educators, policymakers",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_011",
+      "category": "menstrual_myths",
+      "source_dataset": "MC Baseline",
+      "myth_statement": "It is dangerous to go swimming during your period",
+      "truth": "Swimming during your period is perfectly safe",
+      "explanation": "Water does not enter the vagina during swimming (water pressure keeps it out). Tampons or menstrual cups work perfectly while swimming. There is no medical reason to avoid swimming during menstruation. This myth likely comes from cultural taboos, not medical facts.",
+      "myth_prevalence": "Documented in MC Baseline dataset",
+      "sample_responses": ["True", "False", "D/know"],
+      "sources": [
+        "MC Baseline Dataset (v201g)",
+        "ACOG Menstrual Health Guidelines"
+      ],
+      "target_audience": "Adolescent girls and young women",
+      "educational_priority": "MEDIUM"
+    },
+    {
+      "id": "MYTH_012",
+      "category": "menstrual_myths",
+      "source_dataset": "MC Baseline",
+      "myth_statement": "Menstruation cleans the body of dirty blood",
+      "truth": "Menstrual blood is normal blood mixed with uterine lining - not 'dirty'",
+      "explanation": "Menstrual blood is not 'toxins' or 'dirty blood'. It's the same blood that circulates in your body, mixed with tissue from the uterine lining that sheds each month. The body has other organs (liver, kidneys) that remove toxins. Menstruation is a normal biological process, not a 'cleansing' mechanism.",
+      "myth_prevalence": "Documented in MC Baseline dataset",
+      "sample_responses": ["True", "False", "D/know"],
+      "sources": [
+        "MC Baseline Dataset (v201i)"
+      ],
+      "target_audience": "Adolescent girls",
+      "educational_priority": "MEDIUM"
+    },
+    {
+      "id": "MYTH_013",
+      "category": "menstrual_myths",
+      "source_dataset": "MC Baseline",
+      "myth_statement": "Menstrual blood leaves the body through the urethra",
+      "truth": "Menstrual blood leaves through the vagina, which is a separate opening from the urethra",
+      "explanation": "The female body has three separate openings: the urethra (for urine), the vagina (for menstrual blood and childbirth), and the anus (for stool). Menstrual blood comes from the uterus and exits through the vagina - NOT the urethra. This is basic anatomy that many people misunderstand.",
+      "myth_prevalence": "Documented in MC Baseline dataset",
+      "sample_responses": ["True", "False", "D/know"],
+      "sources": [
+        "MC Baseline Dataset (v201m)"
+      ],
+      "target_audience": "Adolescent girls",
+      "educational_priority": "HIGH"
+    },
+    {
+      "id": "MYTH_014",
+      "category": "menstrual_myths",
+      "source_dataset": "MC Baseline",
+      "myth_statement": "All girls/women get bad tempered or have mood swings before their periods",
+      "truth": "Not all women experience significant mood changes before their periods",
+      "explanation": "While some women experience premenstrual syndrome (PMS) symptoms including mood changes, not all women do. The severity varies greatly between individuals. Some women have no mood symptoms at all. If mood changes significantly impact daily life, it's worth discussing with a healthcare provider as there may be treatments available.",
+      "myth_prevalence": "Documented in MC Baseline dataset",
+      "sample_responses": ["True", "False", "D/know"],
+      "sources": [
+        "MC Baseline Dataset (v201n)"
+      ],
+      "target_audience": "Adolescent girls and young women",
+      "educational_priority": "MEDIUM"
+    },
+    {
+      "id": "MYTH_015",
+      "category": "adolescent_myths",
+      "source_dataset": "Student Dataset",
+      "myth_statement": "It's acceptable for a man to beat his partner if she refuses sex",
+      "truth": "Domestic violence is NEVER acceptable under ANY circumstances",
+      "explanation": "Physical violence against a partner is illegal and morally wrong in all situations. Sexual consent must be freely given and can be withdrawn at any time. No means no, regardless of relationship status. If you or someone you know is experiencing domestic violence, please contact local support services.",
+      "myth_prevalence": "99.4% of students responded to this myth",
+      "sample_responses": [
+        {"response": "agree", "count": "few"},
+        {"response": "disagree", "count": "most"}
+      ],
+      "sources": [
+        "Student Dataset (s801h)",
+        "WHO Guidelines on Intimate Partner Violence"
+      ],
+      "target_audience": "Adolescents and young adults",
+      "educational_priority": "CRITICAL - GBV education needed"
+    },
+    {
+      "id": "MYTH_016",
+      "category": "adolescent_myths",
+      "source_dataset": "Student Dataset",
+      "myth_statement": "Sexual relationships should only be between a man and a woman",
+      "truth": "Sexual orientation is diverse and all consensual relationships deserve respect",
+      "explanation": "People have different sexual orientations (heterosexual, homosexual, bisexual, etc.). All consensual relationships between adults deserve respect. There is no medical or scientific basis for restricting relationships to only man-woman pairs. Everyone deserves respect regardless of sexual orientation.",
+      "myth_prevalence": "98.9% of students responded to this myth",
+      "sample_responses": [
+        {"response": "agree", "count": "some"},
+        {"response": "disagree", "count": "some"},
+        {"response": "prefer not to answer", "count": "some"}
+      ],
+      "sources": [
+        "Student Dataset (s801i)",
+        "WHO Guidelines on Sexual Health"
+      ],
+      "target_audience": "Adolescents and young adults",
+      "educational_priority": "HIGH - inclusive education needed"
+    }
+  ],
+  "statistics_summary": {
+    "total_myths": 16,
+    "adult_women_response_rate": "94.0-94.5%",
+    "adolescent_response_rate": "98-99%",
+    "most_widespread_myth_adults": "Contraceptives are dangerous (94.5%)",
+    "most_widespread_myth_adolescents": "Contraceptives encourage sex (99.1%)",
+    "most_concerning_myth": "Acceptable to beat wife (99.4% responded - needs GBV education)"
+  },
+  "educational_priority_matrix": {
+    "CRITICAL": ["MYTH_015 (GBV)"],
+    "HIGH": ["MYTH_001", "MYTH_002", "MYTH_005", "MYTH_006", "MYTH_007", "MYTH_008", "MYTH_009", "MYTH_010", "MYTH_013", "MYTH_016"],
+    "MEDIUM": ["MYTH_003", "MYTH_004", "MYTH_011", "MYTH_012", "MYTH_014"]
+  }
+}
