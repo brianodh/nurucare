@@ -16,7 +16,7 @@
 // API Base URL - change this based on environment
 // Development: http://localhost:8000
 // Production: https://your-api-domain.com
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // Timeout in milliseconds (5 seconds)
 const CONNECTION_TIMEOUT = 5000;
