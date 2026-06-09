@@ -1,13 +1,12 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import { LanguageProvider } from "@/lib/i18n"; 
+import { LanguageProvider } from "@/lib/i18n";
 
-// Check layout paths (Make sure casing matches your folders precisely!)
 import AppLayout from './components/layout/AppLayout';
 import NurseLayout from './components/nurse/NurseLayout';
 import Landing from './pages/Landing';
@@ -20,6 +19,28 @@ import MaleDashboard from './pages/MaleDashboard';
 import NurseDashboard from './pages/nurse/NurseDashboard';
 import PatientLookup from './pages/nurse/PatientLookup';
 import NurseAnalytics from './pages/nurse/NurseAnalytics';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+
+// ─── Route guard: patients must be signed in ──────────────────────────────────
+function RequirePatientAuth({ children }) {
+  const { isAuthenticated, isLoadingAuth } = useAuth();
+  const location = useLocation();
+
+  if (isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+
+  return children;
+}
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -27,7 +48,7 @@ const AuthenticatedApp = () => {
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-background">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
       </div>
     );
   }
@@ -44,20 +65,28 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
+        {/* Public routes */}
         <Route path="/" element={<Landing />} />
-        <Route path="/roles" element={<RoleSelection />} />
-        <Route path="/female/intake" element={<FemaleIntake />} />
-        <Route path="/female/session" element={<SessionKey />} />
-        <Route path="/female/sync" element={<PartnerSync />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/education" element={<Education />} />
-        <Route path="/male/dashboard" element={<MaleDashboard />} />
-        <Route path="/partner-sync" element={<PartnerSync />} />
+
+        {/* Patient-protected routes */}
+        <Route path="/roles" element={<RequirePatientAuth><RoleSelection /></RequirePatientAuth>} />
+        <Route path="/female/intake" element={<RequirePatientAuth><FemaleIntake /></RequirePatientAuth>} />
+        <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
+        <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
+        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
       </Route>
+
+      {/* Nurse routes (use their own auth — session-key based) */}
       <Route element={<NurseLayout />}>
         <Route path="/nurse/dashboard" element={<NurseDashboard />} />
         <Route path="/nurse/lookup" element={<PatientLookup />} />
         <Route path="/nurse/analytics" element={<NurseAnalytics />} />
       </Route>
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

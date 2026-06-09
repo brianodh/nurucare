@@ -2,22 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Heart, Moon, Sun } from 'lucide-react';
-// Change this line:
-import { useLang } from '@/lib/i18n.jsx'; // 🚀 Added .jsx extension explicitly
-
+import { Menu, Heart, Moon, Sun, LogOut, UserCircle } from 'lucide-react';
+import { useLang } from '@/lib/i18n.jsx';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [dark, setDark] = useState(false);
   const location = useLocation();
   const isLanding = location.pathname === '/';
-  
-// Ensure useLang is imported at the top of the file
-const langContext = useLang(); 
-const t = langContext ? langContext.t : (key) => key;
-
+  const langContext = useLang();
+  const t = langContext ? langContext.t : (key) => key;
+  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -32,7 +29,7 @@ const t = langContext ? langContext.t : (key) => key;
 
   const navLinks = [
     { label: t('nav_home'), to: '/' },
-    { label: t('nav_get_started'), to: '/roles' },
+    { label: t('nav_get_started'), to: isAuthenticated ? '/roles' : '/signup' },
     { label: t('nav_education'), to: '/education' },
   ];
 
@@ -64,23 +61,73 @@ const t = langContext ? langContext.t : (key) => key;
             <Button variant="ghost" size="icon" onClick={toggleDark} className="rounded-full">
               {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
-            <Link to="/roles" className="hidden md:block">
-              <Button size="sm" className="rounded-full px-5">{t('nav_start_free')}</Button>
-            </Link>
+
+            {isAuthenticated ? (
+              /* ── Signed-in state ── */
+              <div className="hidden md:flex items-center gap-2">
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground px-2">
+                  <UserCircle className="w-4 h-4 text-primary" />
+                  <span className="font-medium text-foreground">
+                    {user?.name?.split(' ')[0] ?? 'Patient'}
+                  </span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full gap-1.5 text-muted-foreground hover:text-destructive"
+                  onClick={logout}
+                >
+                  <LogOut className="w-4 h-4" /> Sign out
+                </Button>
+              </div>
+            ) : (
+              /* ── Signed-out state ── */
+              <div className="hidden md:flex items-center gap-2">
+                <Link to="/login">
+                  <Button variant="ghost" size="sm" className="rounded-full px-4">Sign in</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button size="sm" className="rounded-full px-5">{t('nav_start_free')}</Button>
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile hamburger */}
             <Sheet>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon"><Menu className="w-5 h-5" /></Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-72">
                 <div className="flex flex-col gap-4 mt-8">
+                  {isAuthenticated && (
+                    <div className="flex items-center gap-2 px-2 pb-2 border-b">
+                      <UserCircle className="w-5 h-5 text-primary" />
+                      <span className="font-medium">{user?.name ?? 'Patient'}</span>
+                    </div>
+                  )}
                   {navLinks.map(l => (
                     <Link key={l.to} to={l.to}>
                       <Button variant="ghost" className="w-full justify-start">{l.label}</Button>
                     </Link>
                   ))}
-                  <Link to="/roles">
-                    <Button className="w-full rounded-full">{t('nav_start_free')}</Button>
-                  </Link>
+                  {isAuthenticated ? (
+                    <Button
+                      variant="outline"
+                      className="w-full rounded-full gap-2 text-destructive border-destructive/30"
+                      onClick={logout}
+                    >
+                      <LogOut className="w-4 h-4" /> Sign out
+                    </Button>
+                  ) : (
+                    <>
+                      <Link to="/login">
+                        <Button variant="outline" className="w-full rounded-full">Sign in</Button>
+                      </Link>
+                      <Link to="/signup">
+                        <Button className="w-full rounded-full">{t('nav_start_free')}</Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>

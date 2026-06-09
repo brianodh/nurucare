@@ -27,7 +27,7 @@ export default function HeroSection() {
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-xl">{t('hero_sub')}</p>
             <div className="flex flex-wrap gap-4 mt-8">
-              <Link to="/roles">
+              <Link to="/signup">
                 <Button size="lg" className="rounded-full px-8 gap-2 text-base">
                   {t('hero_cta_start')} <ArrowRight className="w-4 h-4" />
                 </Button>
