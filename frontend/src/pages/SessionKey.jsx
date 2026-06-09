@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Key, Copy, Clock, CheckCircle, Shield, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useLang } from '@/lib/i18n';
 import { generateSessionKey } from '@/api/apiClient';
+import { Users } from 'lucide-react';
 
 export default function SessionKey() {
   const { state } = useLocation();
@@ -104,6 +105,11 @@ export default function SessionKey() {
                   {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   {copied ? t('session_copied') : t('session_copy')}
                 </Button>
+                <Link to="/female/sync" className="block">
+                  <Button variant="outline" className="w-full rounded-full gap-2">
+                    <Users className="w-4 h-4" /> Partner Sync
+                  </Button>
+                </Link>
                 {timeLeft <= 0 && (
                   <div className="text-center space-y-3">
                     <p className="text-sm text-destructive">{t('session_expired')}</p>

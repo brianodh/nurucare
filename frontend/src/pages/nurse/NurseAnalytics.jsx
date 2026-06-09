@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { mockDashboardStats } from '@/lib/mockData';
+import { getDashboardStats } from '@/api/apiClient';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  PieChart, Pie, Cell,
 } from 'recharts';
 
 export default function NurseAnalytics() {
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    getDashboardStats().then(setStats).catch(() => {});
+  }, []);
+
+  const ageDemographics = stats?.ageDemographics ?? mockDashboardStats.ageDemographics;
   return (
     <div className="space-y-6">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
@@ -19,7 +27,7 @@ export default function NurseAnalytics() {
         <Card className="p-5 rounded-2xl">
           <h3 className="font-heading font-semibold mb-4">Age Demographics</h3>
           <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={mockDashboardStats.ageDemographics}>
+            <BarChart data={ageDemographics}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,14%,88%)" />
               <XAxis dataKey="range" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />

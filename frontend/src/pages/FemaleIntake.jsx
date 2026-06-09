@@ -8,14 +8,28 @@ import IntakeStep2 from '../components/intake/IntakeStep2';
 import IntakeStep3 from '../components/intake/IntakeStep3';
 import IntakeStep4 from '../components/intake/IntakeStep4';
 import IntakeStep5 from '../components/intake/IntakeStep5';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { submitIntake, generateSessionKey } from '@/api/apiClient';
+import { useToast } from '@/components/ui/use-toast';
+import { Loader2, Users } from 'lucide-react';
+import { useProgress } from '@/lib/useProgress';
 
 const stepLabels = ['Basic Info', 'Health Metrics', 'Fertility Profile', 'Side Effects', 'Results'];
 
 export default function FemaleIntake() {
-  const [step, setStep] = useState(0);
-  const [data, setData] = useState({});
+  const { progress, update, clear } = useProgress();
+  const [step, setStep] = useState(progress.intakeStep ?? 0);
+  const [data, setData] = useState(progress.intakeData ?? {});
+
+  // persist on every change
+  const handleStepChange = (next) => {
+    setStep(next);
+    update({ intakeStep: next, lastPath: '/female/intake' });
+  };
+  const handleDataChange = (next) => {
+    setData(next);
+    update({ intakeData: next });
+  };
   const totalSteps = 5;
 
   const canNext = () => {
@@ -27,20 +41,45 @@ export default function FemaleIntake() {
   };
 
   function GenerateKeyButton({ data }) {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { toast } = useToast();
+    const [loading, setLoading] = React.useState(false);
 
-  const handleGenerate = () => {
-    // Generate a random 6-character alphanumeric session key
-    const key = Math.random().toString(36).substring(2, 8).toUpperCase();
-    navigate('/female/session', { state: { sessionKey: key, intakeData: data } });
-  };
+    const handleGenerate = async () => {
+      setLoading(true);
+      try {
+        const intakePayload = {
+          age: Number(data.age),
+          gender: data.gender || 'female',
+          systolic_bp: data.systolic_bp ? Number(data.systolic_bp) : null,
+          diastolic_bp: data.diastolic_bp ? Number(data.diastolic_bp) : null,
+          smoking: data.smoking || false,
+          migraine_type: data.migraine_type || 'none',
+          is_pregnant: data.is_pregnant || false,
+          breastfeeding: data.breastfeeding || false,
+          fertility_intention: data.fertility_intention || 'unsure',
+          parity: Number(data.parity) || 0,
+        };
+        const intakeResult = await submitIntake(intakePayload);
+        const profileId = intakeResult.session_id;
+        const keyResult = await generateSessionKey(profileId);
+        clear();
+        navigate('/female/session', { state: { sessionKey: keyResult.session_key, patientId: profileId } });
+      } catch (err) {
+        console.error('Failed to generate session key:', err);
+        toast({ title: 'Error', description: 'Could not save data or generate key. Please try again.', variant: 'destructive' });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return (
-    <Button onClick={handleGenerate} className="gap-2 rounded-full">
-      <CheckCircle className="w-4 h-4" /> Generate Session Key
-    </Button>
-  );
-}
+    return (
+      <Button onClick={handleGenerate} disabled={loading} className="gap-2 rounded-full">
+        {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
+        {loading ? 'Saving…' : 'Generate Session Key'}
+      </Button>
+    );
+  }
 
   return (
     <div className="min-h-[85vh] py-8">
@@ -69,10 +108,10 @@ export default function FemaleIntake() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
             >
-              {step === 0 && <IntakeStep1 data={data} onChange={setData} />}
-              {step === 1 && <IntakeStep2 data={data} onChange={setData} />}
-              {step === 2 && <IntakeStep3 data={data} onChange={setData} />}
-              {step === 3 && <IntakeStep4 data={data} onChange={setData} />}
+              {step === 0 && <IntakeStep1 data={data} onChange={handleDataChange} />}
+              {step === 1 && <IntakeStep2 data={data} onChange={handleDataChange} />}
+              {step === 2 && <IntakeStep3 data={data} onChange={handleDataChange} />}
+              {step === 3 && <IntakeStep4 data={data} onChange={handleDataChange} />}
               {step === 4 && <IntakeStep5 data={data} />}
             </motion.div>
           </AnimatePresence>
@@ -81,7 +120,7 @@ export default function FemaleIntake() {
         <div className="flex justify-between mt-6">
           <Button
             variant="outline"
-            onClick={() => setStep(s => s - 1)}
+            onClick={() => handleStepChange(s => s - 1)}
             disabled={step === 0}
             className="gap-2 rounded-full"
           >
@@ -89,7 +128,7 @@ export default function FemaleIntake() {
           </Button>
           {step < totalSteps - 1 ? (
             <Button
-              onClick={() => setStep(s => s + 1)}
+              onClick={() => handleStepChange(s => s + 1)}
               disabled={!canNext()}
               className="gap-2 rounded-full"
             >
@@ -99,6 +138,11 @@ export default function FemaleIntake() {
             <div className="flex gap-3">
               <Link to="/education">
                 <Button variant="outline" className="rounded-full">Learn More</Button>
+              </Link>
+              <Link to="/female/sync">
+                <Button variant="outline" className="rounded-full gap-2">
+                  <Users className="w-4 h-4" /> Partner Sync
+                </Button>
               </Link>
               <GenerateKeyButton data={data} />
             </div>

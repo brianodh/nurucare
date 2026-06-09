@@ -49,6 +49,9 @@ export const getRecommendations = (intakeData) =>
  * @param {string} patientId
  * @returns {Promise<{ session_key, expires_in_minutes }>}
  */
+export const getDashboardStats = () =>
+  apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data);
+
 export const generateSessionKey = (patientId) =>
   apiClient.post('/api/v1/session-key', { patient_id: patientId }).then((r) => r.data);
 
