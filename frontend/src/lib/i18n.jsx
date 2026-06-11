@@ -13,7 +13,7 @@ export const translations = {
     hero_h1_1: 'Your body.',
     hero_h1_2: 'Your choice.',
     hero_h1_3: 'Your journey.',
-    hero_sub: 'SautiCare empowers African youth, women, and couples with personalized, science-backed contraceptive guidance — free from stigma, rooted in compassion.',
+    hero_sub: 'NuruCare empowers African youth, women, and couples with personalized, science-backed contraceptive guidance — free from stigma, rooted in compassion.',
     hero_cta_start: 'Start Assessment',
     hero_cta_learn: 'Learn More',
     hero_privacy: 'Privacy-First',
