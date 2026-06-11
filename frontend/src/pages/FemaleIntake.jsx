@@ -12,7 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { submitIntake, generateSessionKey } from '@/api/apiClient';
 import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Users } from 'lucide-react';
-import { useProgress } from '@/lib/useProgress';
+import { useProgress } from '../lib/useProgress';
 
 const stepLabels = ['Basic Info', 'Health Metrics', 'Fertility Profile', 'Side Effects', 'Results'];
 
