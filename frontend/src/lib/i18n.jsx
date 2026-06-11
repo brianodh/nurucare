@@ -67,7 +67,7 @@ export const translations = {
     // ─── Testimonials ────────────────────────────
     testimonials_label: 'Testimonials',
     testimonials_h2: 'Voices of empowerment',
-    t1_text: 'SautiCare helped me understand my options without judgment. I finally feel confident in my choice.',
+    t1_text: 'NuruCare helped me understand my options without judgment. I finally feel confident in my choice.',
     t1_role: 'Female Client',
     t2_text: 'The dashboard saves me hours. I can review patient profiles quickly and provide better-informed consultations.',
     t2_role: 'Healthcare Provider',
@@ -77,8 +77,8 @@ export const translations = {
     // ─── FAQ ─────────────────────────────────────
     faq_label: 'FAQ',
     faq_h2: 'Common questions',
-    faq_1_q: 'Is SautiCare a medical diagnosis tool?',
-    faq_1_a: 'No. SautiCare is an educational and decision-support platform. Our recommendations are based on WHO medical eligibility criteria but should not replace professional medical advice. Always consult a healthcare provider for medical decisions.',
+    faq_1_q: 'Is NuruCare a medical diagnosis tool?',
+    faq_1_a: 'No. NuruCare is an educational and decision-support platform. Our recommendations are based on WHO medical eligibility criteria but should not replace professional medical advice. Always consult a healthcare provider for medical decisions.',
     faq_2_q: 'How is my data protected?',
     faq_2_a: 'We use session-based access with expiring keys. Your health data is never permanently stored without your explicit consent. All consultations use anonymous identifiers.',
     faq_3_q: 'Can my partner see my health information?',
@@ -87,11 +87,11 @@ export const translations = {
     faq_4_a: 'Our recommendation engine is built on WHO Medical Eligibility Criteria for Contraceptive Use (MEC), reviewed by reproductive health professionals.',
     faq_5_q: 'Is this service free?',
     faq_5_a: 'The core assessment, educational content, and recommendation features are free. Premium features like extended nurse consultations may have associated costs in the future.',
-    faq_6_q: 'Can healthcare providers use SautiCare?',
+    faq_6_q: 'Can healthcare providers use NuruCare?',
     faq_6_a: 'Yes! Nurses and health experts have a dedicated dashboard to review patient profiles (with session-key access), view analytics, and provide data-driven consultations.',
 
     // ─── Role Selection ──────────────────────────
-    roles_title: 'Welcome to SautiCare',
+    roles_title: 'Welcome to NuruCare',
     roles_sub: 'Choose your role to get started with a personalized experience.',
     role_female_title: 'Female Client',
     role_female_desc: 'Get personalized contraceptive recommendations based on your unique health profile.',
@@ -230,7 +230,7 @@ export const translations = {
     hero_h1_1: 'Mwili wako.',
     hero_h1_2: 'Chaguo lako.',
     hero_h1_3: 'Safari yako.',
-    hero_sub: 'SautiCare inawapa vijana wa Afrika, wanawake, na wanandoa mwongozo wa uzazi wa mpango unaobinafsishwa — bila unyanyapaa, umejengwa juu ya huruma.',
+    hero_sub: 'NuruCare inawapa vijana wa Afrika, wanawake, na wanandoa mwongozo wa uzazi wa mpango unaobinafsishwa — bila unyanyapaa, umejengwa juu ya huruma.',
     hero_cta_start: 'Anza Tathmini',
     hero_cta_learn: 'Jifunze Zaidi',
     hero_privacy: 'Faragha Kwanza',
@@ -284,7 +284,7 @@ export const translations = {
     // ─── Testimonials ────────────────────────────
     testimonials_label: 'Ushuhuda',
     testimonials_h2: 'Sauti za uwezo',
-    t1_text: 'SautiCare ilinisaidia kuelewa chaguo zangu bila hukumu. Hatimaye nahisi imara katika uamuzi wangu.',
+    t1_text: 'NuruCare ilinisaidia kuelewa chaguo zangu bila hukumu. Hatimaye nahisi imara katika uamuzi wangu.',
     t1_role: 'Mteja wa Kike',
     t2_text: 'Dashibodi inaniokolea muda. Ninaweza kupitia wasifu wa wagonjwa haraka na kutoa mashauriano bora zaidi.',
     t2_role: 'Mtoa Huduma za Afya',
@@ -294,8 +294,8 @@ export const translations = {
     // ─── FAQ ─────────────────────────────────────
     faq_label: 'Maswali ya Kawaida',
     faq_h2: 'Maswali yanayoulizwa mara kwa mara',
-    faq_1_q: 'Je, SautiCare ni zana ya utambuzi wa matibabu?',
-    faq_1_a: 'Hapana. SautiCare ni jukwaa la elimu na msaada wa maamuzi. Mapendekezo yetu yanategemea vigezo vya kustahili dawa vya WHO lakini hayapaswi kuchukua nafasi ya ushauri wa kitaalamu wa matibabu. Daima wasiliana na mtoa huduma wa afya kwa maamuzi ya matibabu.',
+    faq_1_q: 'Je, NuruCare ni zana ya utambuzi wa matibabu?',
+    faq_1_a: 'Hapana. NuruCare ni jukwaa la elimu na msaada wa maamuzi. Mapendekezo yetu yanategemea vigezo vya kustahili dawa vya WHO lakini hayapaswi kuchukua nafasi ya ushauri wa kitaalamu wa matibabu. Daima wasiliana na mtoa huduma wa afya kwa maamuzi ya matibabu.',
     faq_2_q: 'Je, data yangu inalindwaje?',
     faq_2_a: 'Tunatumia ufikiaji unaotegemea kikao na funguo zinazokwisha muda. Data yako ya afya haiwekwi kudumu bila idhini yako wazi. Mashauriano yote yanatumia vitambulisho vya kujificha.',
     faq_3_q: 'Je, mwenzi wangu anaweza kuona maelezo yangu ya afya?',
@@ -304,11 +304,11 @@ export const translations = {
     faq_4_a: 'Injini yetu ya mapendekezo imejengwa juu ya Vigezo vya Kustahili Dawa vya WHO kwa Matumizi ya Uzazi wa Mpango (MEC), iliyopitiwa na wataalamu wa afya ya uzazi.',
     faq_5_q: 'Je, huduma hii ni bure?',
     faq_5_a: 'Tathmini ya msingi, maudhui ya elimu, na vipengele vya mapendekezo ni bure. Vipengele vya malipo kama mashauriano ya muuguzi yaliyopanuliwa vinaweza kuwa na gharama zinazohusiana katika siku zijazo.',
-    faq_6_q: 'Je, watoa huduma za afya wanaweza kutumia SautiCare?',
+    faq_6_q: 'Je, watoa huduma za afya wanaweza kutumia NuruCare?',
     faq_6_a: 'Ndiyo! Wauguzi na wataalamu wa afya wana dashibodi maalum ya kupitia wasifu wa wagonjwa (na ufikiaji wa funguo za kikao), kuona uchambuzi, na kutoa mashauriano yanayotegemea data.',
 
     // ─── Role Selection ──────────────────────────
-    roles_title: 'Karibu SautiCare',
+    roles_title: 'Karibu NuruCare',
     roles_sub: 'Chagua jukumu lako kuanza uzoefu uliobinafsishwa.',
     role_female_title: 'Mteja wa Kike',
     role_female_desc: 'Pata mapendekezo ya uzazi wa mpango yaliyobinafsishwa kulingana na wasifu wako wa kipekee wa afya.',
