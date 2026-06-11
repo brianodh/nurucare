@@ -52,16 +52,16 @@ export const getRecommendations = (intakeData) =>
 export const getDashboardStats = () =>
   apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data);
 
-export const generateSessionKey = (patientId) =>
-  apiClient.post('/api/v1/session-key', { patient_id: patientId }).then((r) => r.data);
+export const generateSessionKey = (profileId) =>
+  apiClient.post('/api/v1/session-key', { profile_id: profileId || null }).then((r) => r.data);
 
 /**
  * Nurse: look up patient data by session key.
  * @param {string} sessionKey
- * @returns {Promise<{ success, patient_data, expires_at } | { success, error }>}
+ * @returns {Promise<{ success, patient_data } | { success, error }>}
  */
 export const getPatientBySessionKey = (sessionKey) =>
-  apiClient.post('/api/v1/nurse/patient', null, { params: { session_key: sessionKey } }).then((r) => r.data);
+  apiClient.post('/api/v1/nurse/verify-session', { session_key: sessionKey }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // PARTNER SYNC
@@ -71,17 +71,17 @@ export const getPatientBySessionKey = (sessionKey) =>
  * Generate an anonymous partner sync token.
  * @returns {Promise<{ token, expires_in_hours }>}
  */
-export const generateSyncToken = () =>
-  apiClient.post('/api/v1/sync/token').then((r) => r.data);
+export const generateSyncToken = (profileId) =>
+  apiClient.post('/api/v1/sync/token', { profile_id: profileId || null }).then((r) => r.data);
 
 /**
  * Verify / redeem a partner sync token.
  * @param {string} token - token from partner
- * @param {string} yourId - current user's id (can be anonymous uuid)
- * @returns {Promise<{ success, partner_id, message }>}
+ * @param {string} [profileId] - current user's profile id (optional)
+ * @returns {Promise<{ success, linked_profile_id, message }>}
  */
-export const verifySyncToken = (token, yourId) =>
-  apiClient.post('/api/v1/sync/verify', { token, your_id: yourId }).then((r) => r.data);
+export const verifySyncToken = (token, profileId) =>
+  apiClient.post('/api/v1/sync/verify', { token, profile_id: profileId || null }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // TRANSLATE

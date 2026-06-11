@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Users, Copy, Clock, CheckCircle, Link2, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { generateSyncToken, verifySyncToken } from '@/api/apiClient';
+import { getSavedProfileId } from '@/lib/useProgress';
 
 // Simple anonymous user id persisted in sessionStorage
 function getAnonymousId() {
@@ -41,7 +42,8 @@ export default function PartnerSync() {
   const handleGenerate = async () => {
     setGenerating(true);
     try {
-      const response = await generateSyncToken();
+      const savedProfileId = getSavedProfileId();
+      const response = await generateSyncToken(savedProfileId);
       setToken(response.token);
       setGenerated(true);
       setTimeLeft((response.expires_in_hours ?? 24) * 3600);

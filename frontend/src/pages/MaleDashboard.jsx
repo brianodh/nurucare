@@ -4,8 +4,9 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Users, Shield, Heart, BookOpen, CheckCircle, XCircle, Link2, Loader2 } from 'lucide-react';
+import { Users, Shield, Heart, BookOpen, CheckCircle, XCircle, Link2, Loader2, Info, AlertTriangle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { useLang } from '@/lib/i18n';
 import { verifySyncToken } from '@/api/apiClient';
@@ -25,12 +26,78 @@ function getAnonymousId() {
   return id;
 }
 
+function PartnerSummary({ profile }) {
+  if (!profile) return null;
+
+  const fields = [
+    { label: 'Age', value: profile.age },
+    { label: 'Smoking', value: profile.smoking ? 'Yes' : 'No' },
+    { label: 'Migraine Type', value: profile.migraine_type?.replace(/_/g, ' ') || '—' },
+    { label: 'Breastfeeding', value: profile.breastfeeding ? 'Yes' : 'No' },
+    { label: 'Blood Pressure', value: profile.systolic_bp && profile.diastolic_bp ? `${profile.systolic_bp}/${profile.diastolic_bp}` : '—' },
+    { label: 'Duration Preference', value: profile.duration_pref?.replace(/_/g, ' ') || '—' },
+  ];
+
+  const isHighRisk =
+    (profile.smoking && profile.age > 35) || profile.migraine_type === 'with_aura';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 mt-4"
+    >
+      {isHighRisk && (
+        <div className="flex items-start gap-3 bg-destructive/10 border border-destructive/30 rounded-xl p-4">
+          <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-semibold text-destructive">High Risk Profile</p>
+            <p className="text-xs text-destructive/80 mt-0.5">
+              Your partner should consult a healthcare provider before starting any contraceptive method.
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {fields.map(({ label, value }) => (
+          <div key={label} className="bg-muted/50 rounded-xl p-3">
+            <p className="text-xs text-muted-foreground">{label}</p>
+            <p className="font-medium text-sm mt-0.5 capitalize">{String(value ?? '—')}</p>
+          </div>
+        ))}
+      </div>
+
+      {Array.isArray(profile.allowed_methods) && profile.allowed_methods.length > 0 && (
+        <div>
+          <p className="text-sm font-medium mb-2 flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 text-secondary" /> Safe Methods for Your Partner
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {profile.allowed_methods.slice(0, 5).map((m) => (
+              <Badge key={m} variant="secondary" className="text-xs capitalize">
+                {m.replace(/_/g, ' ')}
+              </Badge>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="bg-muted rounded-xl p-3 flex items-start gap-2 text-xs text-muted-foreground">
+        <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
+        This is a summary to support informed conversations. Always consult a healthcare provider.
+      </div>
+    </motion.div>
+  );
+}
+
 export default function MaleDashboard() {
   const { t } = useLang();
   const { toast } = useToast();
   const [partnerToken, setPartnerToken] = useState('');
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
+  const [partnerProfile, setPartnerProfile] = useState(null);
 
   const educationCards = [
     { titleKey: 'male_card1_title', descKey: 'male_card1_desc', color: 'bg-primary/10 text-primary', Icon: Shield },
@@ -46,16 +113,20 @@ export default function MaleDashboard() {
       const response = await verifySyncToken(partnerToken.trim(), getAnonymousId());
       if (response.success) {
         setConnected(true);
+        // Backend returns the partner's profile directly — no second step needed
+        if (response.partner_profile) {
+          setPartnerProfile(response.partner_profile);
+        }
         toast({ title: t('male_connected'), description: t('male_connected_sub') });
       } else {
         toast({
           title: 'Connection failed',
-          description: response.message || 'Invalid or expired token. Ask your partner to generate a new one.',
+          description: response.message || 'Invalid or expired token.',
           variant: 'destructive',
         });
       }
     } catch (err) {
-      const msg = err?.response?.data?.detail || 'Could not connect. Please check the token and try again.';
+      const msg = err?.response?.data?.detail || 'Could not connect. Please check the token.';
       toast({ title: 'Connection failed', description: msg, variant: 'destructive' });
     } finally {
       setConnecting(false);
@@ -110,12 +181,12 @@ export default function MaleDashboard() {
                   className="rounded-full sm:w-auto w-full gap-2"
                 >
                   {connecting && <Loader2 className="w-4 h-4 animate-spin" />}
-                  {connecting ? 'Connectingâ€¦' : 'Connect'}
+                  {connecting ? 'Connecting…' : 'Connect'}
                 </Button>
               </div>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-2">
               <div className="flex items-center gap-3 bg-secondary/10 rounded-xl p-4">
                 <CheckCircle className="w-5 h-5 text-secondary flex-shrink-0" />
                 <div>
@@ -123,18 +194,15 @@ export default function MaleDashboard() {
                   <p className="text-xs text-muted-foreground">{t('male_connected_sub')}</p>
                 </div>
               </div>
-              <div className="bg-muted/50 rounded-xl p-4 text-sm text-muted-foreground">
-                <p className="font-medium text-foreground mb-1">View Partner's Health Summary</p>
-                <p>Ask your partner to generate a <strong>Session Key</strong> from their assessment results, then enter it to view their summary.</p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-3 rounded-full"
-                  onClick={() => window.location.href = '/nurse/lookup'}
-                >
-                  Enter Session Key
-                </Button>
-              </div>
+
+              {/* Show partner summary directly — no session key needed */}
+              {partnerProfile ? (
+                <PartnerSummary profile={partnerProfile} />
+              ) : (
+                <div className="bg-muted/50 rounded-xl p-4 text-sm text-muted-foreground">
+                  <p>Partner connected. Ask them to complete the health assessment to view their summary here.</p>
+                </div>
+              )}
             </div>
           )}
         </Card>
