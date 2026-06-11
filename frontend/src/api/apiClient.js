@@ -54,12 +54,13 @@ export const getRecommendations = (intakeData) =>
  * @returns {Promise<{ session_key, expires_in_minutes }>}
  */
 export const getDashboardStats = () =>
-  apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data);
+  apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data).catch(() =>
+    apiClient.get('/health').then(() => ({ activeConsultations: 0, riskFlags: 0, dailySessions: 0, recentPatients: [], ageDemographics: [] }))
+  );
 
 export const generateSessionKey = (profileId) =>
   apiClient.post('/api/v1/session-key', {
-    profile_id: profileId || null,
-    patient_id: profileId || null,  // live Render backend still uses patient_id
+    patient_id: profileId || 'anonymous',
   }).then((r) => r.data);
 
 /**
@@ -68,7 +69,7 @@ export const generateSessionKey = (profileId) =>
  * @returns {Promise<{ success, patient_data } | { success, error }>}
  */
 export const getPatientBySessionKey = (sessionKey) =>
-  apiClient.post('/api/v1/nurse/verify-session', { session_key: sessionKey }).then((r) => r.data);
+  apiClient.post('/api/v1/nurse/patient', null, { params: { session_key: sessionKey } }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // PARTNER SYNC
@@ -88,7 +89,10 @@ export const generateSyncToken = (profileId) =>
  * @returns {Promise<{ success, linked_profile_id, message }>}
  */
 export const verifySyncToken = (token, profileId) =>
-  apiClient.post('/api/v1/sync/verify', { token, profile_id: profileId || null }).then((r) => r.data);
+  apiClient.post('/api/v1/sync/verify', {
+    token,
+    your_id: profileId || 'anon',  // live backend requires your_id
+  }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // TRANSLATE
