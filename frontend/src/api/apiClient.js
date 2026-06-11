@@ -28,7 +28,11 @@ export const checkHealth = () => apiClient.get('/health');
  * @returns {Promise<{ success, message, session_id }>}
  */
 export const submitIntake = (intakeData) =>
-  apiClient.post('/api/v1/intake', intakeData).then((r) => r.data);
+  apiClient.post('/api/v1/intake', intakeData).then((r) => {
+    const data = r.data;
+    // live Render backend returns session_id, local returns profile_id — normalise
+    return { ...data, profile_id: data.profile_id || data.session_id };
+  });
 
 /**
  * Get AI-powered contraceptive recommendations.
@@ -53,7 +57,10 @@ export const getDashboardStats = () =>
   apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data);
 
 export const generateSessionKey = (profileId) =>
-  apiClient.post('/api/v1/session-key', { profile_id: profileId || null }).then((r) => r.data);
+  apiClient.post('/api/v1/session-key', {
+    profile_id: profileId || null,
+    patient_id: profileId || null,  // live Render backend still uses patient_id
+  }).then((r) => r.data);
 
 /**
  * Nurse: look up patient data by session key.
