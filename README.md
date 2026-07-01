@@ -56,13 +56,32 @@ cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+Create a backend .env file with;
+1. SUPABASE_URL
+2. SUPABASE_KEY
+3. GEMINI_API_KEY (optional if you only want mock-style behavior)
+4. SECRET_KEY
+
+Start API using main app:
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ### Frontend Setup
 ```bash
 cd frontend
 npm install
+
+Create frontend .env with:
+VITE_API_URL=http://127.0.0.1:8000
+
 npm run dev
+```
+
+### Previewing the App
+```bash
+Visit http://localhost:5173
+Backend health check: http://127.0.0.1:8000/health (as GET)
 ```
 
 ### Team
