@@ -2,7 +2,6 @@
 
 ## AI-Powered Contraceptive Decision-Support Platform for Sub-Saharan Africa
 
->>>>>>> eef013d00e517daf4068a979320caca55785db4d
 > *"Nuru" means "Light" in Swahili — illuminating informed contraceptive choices.*
 
 ## Overview
@@ -26,29 +25,68 @@ NuruCare is an ethical, explainable AI platform that helps individuals in Sub-Sa
 | Backend | FastAPI (Python) |
 | Database | PostgreSQL + Supabase |
 | AI | Gemini Flash API + pgvector |
-| Deployment | Vercel / Render |
+| Deployment | Docker + Docker Compose |
 
 ## Project Structure
+
+```
 nurucare/
-├── backend/ # FastAPI backend
-├── frontend/ # React frontend
-├── data/ # Datasets + synthetic profiles
-├── notebooks/ # Jupyter notebooks
-├── docs/ # Documentation
-├── tests/ # Unit tests
-├── .github/ # CI/CD workflows
-└── pitch/ # Presentation materials
-<<<<<<< HEAD
-=======
+├── backend/       # FastAPI backend
+├── frontend/      # React frontend
+├── data/          # Datasets + synthetic profiles
+├── notebooks/     # Jupyter notebooks
+├── docs/          # Documentation
+├── tests/         # Unit tests
+├── .github/       # CI/CD workflows
+├── Dockerfile     # Multi-stage Docker build
+├── docker-compose.yml  # Docker orchestration
+└── nginx.conf     # Nginx configuration for static files
+```
 
+## Quick Start with Docker
 
->>>>>>> eef013d00e517daf4068a979320caca55785db4d
-## Setup Instructions
+This is the easiest way to get NuruCare up and running!
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Steps
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd nurucare
+   ```
+
+2. **Copy the example environment file**:
+   ```bash
+   cp .env.example .env
+   ```
+   Optional: Edit `.env` to add your API keys (GEMINI_API_KEY, SUPABASE_URL, etc.)
+
+3. **Start all services**:
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the application**:
+   - Frontend: http://localhost
+   - Backend API: http://localhost:8000
+   - Health Check: http://localhost:8000/health
+
+5. **Stop services**:
+   ```bash
+   docker-compose down
+   ```
+
+## Local Development (Without Docker)
 
 ### Prerequisites
 - Python 3.11+
 - Node.js 18+
 - Git
+- PostgreSQL (or use Docker for DB only)
 
 ### Backend Setup
 ```bash
@@ -57,13 +95,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-Create a backend .env file with;
-1. SUPABASE_URL
-2. SUPABASE_KEY
-3. GEMINI_API_KEY (optional if you only want mock-style behavior)
-4. SECRET_KEY
-
-Start API using main app:
+# Create a backend .env file with your configuration
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
@@ -72,19 +104,24 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 cd frontend
 npm install
 
-Create frontend .env with:
-VITE_API_URL=http://127.0.0.1:8000
-
+# Create a .env file with VITE_API_URL=http://localhost:8000
 npm run dev
 ```
 
-### Previewing the App
-```bash
-Visit http://localhost:5173
-Backend health check: http://127.0.0.1:8000/health (as GET)
-```
+## Environment Variables
 
-### Team
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `SECRET_KEY` | Secret key for JWT tokens | `nurucare-dev-secret-change-in-production` |
+| `VITE_API_URL` | Backend API URL for frontend | `http://localhost:8000` |
+| `DATABASE_URL` | PostgreSQL database URL | `postgresql://nurucare:nurucare@db:5432/nurucare` |
+| `STORAGE_BACKEND` | Database backend (`local` or `supabase`) | `local` |
+| `SUPABASE_URL` | Supabase project URL | - |
+| `SUPABASE_KEY` | Supabase service role key | - |
+| `GEMINI_API_KEY` | Google Gemini API key for AI recommendations | - |
+
+## Team
+
 | Role | Name |
 |-------|------------|
 | AI Lead + Coordinator | Brian Odhiambo Ouma |
@@ -93,14 +130,11 @@ Backend health check: http://127.0.0.1:8000/health (as GET)
 | Full Stack + Deployment | Uvyne Chepchirchir Rop |
 | Health Expert + QA | Moffat Mose |
 
-<<<<<<< HEAD
-### Licence
-=======
-### License
->>>>>>> eef013d00e517daf4068a979320caca55785db4d
+## License
+
 MIT License
 
-### Acknowledgments
-WHO MEC Guidelines (2024)
+## Acknowledgments
 
-Data Science Africa 2026 Hackathon
+- WHO MEC Guidelines (2024)
+- Data Science Africa 2026 Hackathon

@@ -60,7 +60,7 @@ export const getDashboardStats = () =>
 
 export const generateSessionKey = (profileId) =>
   apiClient.post('/api/v1/session-key', {
-    patient_id: profileId || 'anonymous',
+    profile_id: profileId || null,
   }).then((r) => r.data);
 
 /**
@@ -69,7 +69,7 @@ export const generateSessionKey = (profileId) =>
  * @returns {Promise<{ success, patient_data } | { success, error }>}
  */
 export const getPatientBySessionKey = (sessionKey) =>
-  apiClient.post('/api/v1/nurse/patient', null, { params: { session_key: sessionKey } }).then((r) => r.data);
+  apiClient.post('/api/v1/nurse/verify-session', { session_key: sessionKey }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // PARTNER SYNC
@@ -91,7 +91,7 @@ export const generateSyncToken = (profileId) =>
 export const verifySyncToken = (token, profileId) =>
   apiClient.post('/api/v1/sync/verify', {
     token,
-    your_id: profileId || 'anon',  // live backend requires your_id
+    profile_id: profileId || null,
   }).then((r) => r.data);
 
 // ─────────────────────────────────────────────

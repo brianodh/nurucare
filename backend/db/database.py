@@ -112,18 +112,18 @@ def get_db():
 def init_db():
     """Initialize database - create all tables"""
     Base.metadata.create_all(bind=engine)
-    print("✅ Database tables created successfully")
+    print("[OK] Database tables created successfully")
 
 
 def test_connection():
     """Test database connection"""
     try:
         connection = engine.connect()
-        print("✅ Database connection successful")
+        print("[OK] Database connection successful")
         connection.close()
         return True
     except Exception as e:
-        print(f"❌ Database connection failed: {e}")
+        print(f"[ERROR] Database connection failed: {e}")
         return False
 
 
@@ -185,6 +185,6 @@ if __name__ == "__main__":
     if test_connection():
         # Initialize tables
         init_db()
-        print("\n✅ Database setup complete!")
+        print("\n[OK] Database setup complete!")
     else:
-        print("\n❌ Please check your PostgreSQL connection and try again.")
+        print("\n[ERROR] Please check your PostgreSQL connection and try again.")
