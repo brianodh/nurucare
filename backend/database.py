@@ -83,6 +83,7 @@ def _ensure_local_schema() -> None:
       profile_id uuid REFERENCES profiles(profile_id) ON DELETE CASCADE,
       sync_token_hash varchar(255) NOT NULL,
       expires_at timestamptz NOT NULL,
+      used boolean NOT NULL DEFAULT false,
       created_at timestamptz NOT NULL DEFAULT now()
     );
 
@@ -378,29 +379,40 @@ def verify_sync_token(token: str):
         token_hash = _hash_token(token)
         if _supabase:
             result = _supabase.table("partner_sync") \
-                .select("profile_id, expires_at") \
+                .select("profile_id, expires_at, used") \
                 .eq("sync_token_hash", token_hash) \
                 .execute()
             if not result.data:
                 return {"success": False, "error": "Invalid token"}
             row = result.data[0]
+            if row["used"]:
+                return {"success": False, "error": "Token already used"}
             expires_at = _parse_datetime(row["expires_at"])
             if expires_at < datetime.now(timezone.utc):
                 return {"success": False, "error": "Token expired"}
+            # Mark token as used
+            _supabase.table("partner_sync").update({"used": True}).eq("sync_token_hash", token_hash).execute()
             return {"success": True, "from_user_id": row["profile_id"]}
 
         with _local_connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "SELECT profile_id, expires_at FROM partner_sync WHERE sync_token_hash = %s ORDER BY created_at DESC LIMIT 1",
+                    "SELECT profile_id, expires_at, used FROM partner_sync WHERE sync_token_hash = %s ORDER BY created_at DESC LIMIT 1",
                     (token_hash,),
                 )
                 row = cursor.fetchone()
         if not row:
             return {"success": False, "error": "Invalid token"}
+        if row["used"]:
+            return {"success": False, "error": "Token already used"}
         expires_at = _parse_datetime(row["expires_at"])
         if expires_at < datetime.now(timezone.utc):
             return {"success": False, "error": "Token expired"}
+        # Mark token as used
+        with _local_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("UPDATE partner_sync SET used = true WHERE sync_token_hash = %s", (token_hash,))
+            connection.commit()
         return {"success": True, "from_user_id": str(row["profile_id"])}
     except Exception as exc:
         return {"success": False, "error": str(exc)}

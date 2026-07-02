@@ -4,7 +4,7 @@ NuruCare - Backend API
 
 import secrets
 import string
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Optional
 
@@ -24,6 +24,22 @@ from auth import (
     require_nurse, optional_auth, get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
+
+# ── Token Generation Helper ──────────────────────────────────
+ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"  # Removed confusing chars 0,O,1,I,l,5,S
+
+def generate_user_friendly_token(prefix="NX"):
+    """Generate a human-readable token like NX-7K9-2M4"""
+    random_bytes = secrets.token_bytes(8)
+    num = int.from_bytes(random_bytes, byteorder='big')
+    parts = []
+    for _ in range(2):
+        part = []
+        for _ in range(3):
+            num, char_index = divmod(num, len(ALPHABET))
+            part.append(ALPHABET[char_index])
+        parts.append(''.join(part))
+    return f"{prefix}-{parts[0]}-{parts[1]}"
 
 # ── Enums ─────────────────────────────────────────────────
 class Gender(str, Enum):
@@ -256,7 +272,7 @@ async def generate_sync_token(request: SyncGenerateRequest):
             raise HTTPException(status_code=500, detail="Failed to create anonymous profile")
         profile_id = created["profile_id"]
 
-    token = secrets.token_urlsafe(32)
+    token = generate_user_friendly_token()
     result = save_sync_token(token, profile_id)
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to generate sync token"))
