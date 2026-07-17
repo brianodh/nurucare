@@ -11,11 +11,46 @@ export const apiClient = axios.create({
 });
 
 // ─────────────────────────────────────────────
+// AXIOS INTERCEPTOR FOR AUTH TOKEN
+// ─────────────────────────────────────────────
+const AUTH_STORAGE_KEY = 'nurucare_patient';
+
+apiClient.interceptors.request.use((config) => {
+  const stored = localStorage.getItem(AUTH_STORAGE_KEY);
+  if (stored) {
+    try {
+      const user = JSON.parse(stored);
+      if (user.access_token) {
+        config.headers.Authorization = `Bearer ${user.access_token}`;
+      }
+    } catch (e) {
+      console.warn('Failed to parse stored user', e);
+    }
+  }
+  return config;
+});
+
+// ─────────────────────────────────────────────
 // HEALTH
 // ─────────────────────────────────────────────
 
 /** Check backend is alive */
 export const checkHealth = () => apiClient.get('/health');
+
+// ─────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────
+
+/** Nurse login with username and password */
+export const nurseLogin = (username, password) =>
+  apiClient.post('/api/v1/auth/nurse/login', { username, password }).then(r => r.data);
+
+/** Create anonymous patient session */
+export const createPatientSession = () =>
+  apiClient.post('/api/v1/auth/patient/session').then(r => r.data);
+
+/** Get current authenticated user info */
+export const getMe = () => apiClient.get('/api/v1/auth/me').then(r => r.data);
 
 // ─────────────────────────────────────────────
 // INTAKE & RECOMMENDATIONS

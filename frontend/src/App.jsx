@@ -24,7 +24,7 @@ import Login from './pages/Login';
 
 // ─── Route guard: patients must be signed in ──────────────────────────────────
 function RequirePatientAuth({ children }) {
-  const { isAuthenticated, isLoadingAuth } = useAuth();
+  const { isAuthenticated, user, isLoadingAuth } = useAuth();
   const location = useLocation();
 
   if (isLoadingAuth) {
@@ -35,7 +35,27 @@ function RequirePatientAuth({ children }) {
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || user?.role !== 'patient') {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+
+  return children;
+}
+
+// ─── Route guard: nurses must be signed in ─────────────────────────────────────
+function RequireNurseAuth({ children }) {
+  const { isAuthenticated, user, isLoadingAuth } = useAuth();
+  const location = useLocation();
+
+  if (isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated || user?.role !== 'nurse') {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
@@ -80,8 +100,8 @@ const AuthenticatedApp = () => {
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
       </Route>
 
-      {/* Nurse routes (use their own auth — session-key based) */}
-      <Route element={<NurseLayout />}>
+      {/* Nurse routes (protected) */}
+      <Route element={<RequireNurseAuth><NurseLayout /></RequireNurseAuth>}>
         <Route path="/nurse/dashboard" element={<NurseDashboard />} />
         <Route path="/nurse/lookup" element={<PatientLookup />} />
         <Route path="/nurse/analytics" element={<NurseAnalytics />} />

@@ -21,7 +21,7 @@ from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
     NurseLoginRequest, TokenResponse, PatientSessionResponse,
     create_access_token, pwd_context, NURSE_ACCOUNTS,
-    require_nurse, optional_auth, get_current_user,
+    require_nurse, require_patient, optional_auth, get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
 
@@ -161,10 +161,22 @@ async def get_me(user: dict = Depends(get_current_user)):
 async def submit_intake(intake_data: IntakeData, user: Optional[dict] = Depends(optional_auth)):
     """Save full intake data — updates the profile if patient is authenticated"""
     profile_id = user.get("sub") if user and user.get("role") == "patient" else None
-    result = save_intake_data(None, intake_data.dict())
+    result = save_intake_data(profile_id, intake_data.dict())
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to save intake"))
     return {"success": True, "message": "Intake data received", "profile_id": result["profile_id"]}
+
+
+@app.get("/api/v1/patient/profile")
+async def get_patient_profile(user: dict = Depends(get_current_user)):
+    """Get current patient's profile"""
+    if user.get("role") != "patient":
+        raise HTTPException(status_code=403, detail="Patient access required")
+    profile_id = user.get("sub")
+    result = get_profile_by_id(profile_id)
+    if not result["success"]:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return {"success": True, "profile": result["data"]}
 
 @app.post("/api/v1/recommend")
 async def get_recommendations(intake_data: IntakeData):
@@ -219,9 +231,11 @@ async def get_recommendations(intake_data: IntakeData):
 # ═══════════════════════════════════════════════════════════
 
 @app.post("/api/v1/session-key")
-async def generate_session_key(request: SessionKeyRequest):
+async def generate_session_key(request: SessionKeyRequest, user: Optional[dict] = Depends(optional_auth)):
     """Patient generates a 6-digit code to share with nurse. Auto-creates a profile if none provided."""
     profile_id = request.profile_id
+    if not profile_id and user and user.get("role") == "patient":
+        profile_id = user.get("sub")
 
     # Auto-create anonymous profile if not provided
     if not profile_id:
@@ -258,9 +272,11 @@ async def nurse_verify_session(request: NurseVerifySessionRequest):
 # ═══════════════════════════════════════════════════════════
 
 @app.post("/api/v1/sync/token")
-async def generate_sync_token(request: SyncGenerateRequest):
+async def generate_sync_token(request: SyncGenerateRequest, user: Optional[dict] = Depends(optional_auth)):
     """Generate anonymous partner sync token. Auto-creates a profile if none provided."""
     profile_id = request.profile_id
+    if not profile_id and user and user.get("role") == "patient":
+        profile_id = user.get("sub")
 
     # Auto-create anonymous profile if not provided
     if not profile_id:

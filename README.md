@@ -2,7 +2,7 @@
 
 ## AI-Powered Contraceptive Decision-Support Platform for Sub-Saharan Africa
 
-> *"Nuru" means "Light" in Swahili — illuminating informed contraceptive choices.*
+> *"Nuru" means "Light" in Swahili illuminating informed contraceptive choices.*
 
 ## Overview
 
