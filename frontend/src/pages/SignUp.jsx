@@ -217,10 +217,28 @@ export default function SignUp() {
     try {
       if (role === 'nurse') {
         // For nurses, we'll just do loginNurse since we have hardcoded accounts
-        await loginNurse({ username: nurseForm.username, password: nurseForm.password });
+        await signUp({
+          full_name: nurseForm.name,
+          email: nurseForm.email,
+          username: nurseForm.username,
+          password: nurseForm.password,
+          consentGiven: true,
+          gender: nurseForm.gender,
+          role: 'nurse',
+          institution_name: nurseForm.institutionName,
+          institution_address: nurseForm.institutionAddress
+        });
         navigate('/nurse/dashboard');
       } else {
-        await signUp({ name: patientForm.name, email: patientForm.email, username: patientForm.username, password: patientForm.password, consentGiven: true, gender: patientForm.gender });
+        await signUp({
+          full_name: patientForm.name,
+          email: patientForm.email,
+          username: patientForm.username,
+          password: patientForm.password,
+          consentGiven: true,
+          gender: patientForm.gender,
+          role: 'patient'
+        });
         // Conditional routing based on gender
         if (patientForm.gender === 'female') {
           navigate('/female/intake');

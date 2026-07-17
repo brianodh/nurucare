@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { nurseLogin, createPatientSession, getMe } from '@/api/apiClient';
+import { nurseLogin, createPatientSession, getMe, signup as signupApi, login as loginApi } from '@/api/apiClient';
 
 const AuthContext = createContext();
 
@@ -77,18 +77,47 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ── Sign Up ────────────────────────────────────────────────────────────────
-  const signUp = async ({ name, email, username, password, consentGiven, gender }) => {
+  const signUp = async ({ full_name, email, username, password, consentGiven, gender, role, institution_name, institution_address }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
     }
-    // For now, create a patient session
-    return await loginPatient();
+    const res = await signupApi({
+      username,
+      email,
+      password,
+      full_name,
+      role,
+      gender,
+      institution_name,
+      institution_address
+    });
+    const newUser = {
+      id: res.user_id,
+      name: full_name,
+      role: res.role,
+      access_token: res.access_token,
+      token_type: 'bearer'
+    };
+    persistUser(newUser);
+    setUser(newUser);
+    setIsAuthenticated(true);
+    return newUser;
   };
 
   // ── Login ──────────────────────────────────────────────────────────────────
-  const login = async ({ email, password }) => {
-    // For now, create a patient session
-    return await loginPatient();
+  const login = async ({ username, password }) => {
+    const res = await loginApi(username, password);
+    const loggedInUser = {
+      id: username,
+      name: res.name,
+      role: res.role,
+      access_token: res.access_token,
+      token_type: res.token_type
+    };
+    persistUser(loggedInUser);
+    setUser(loggedInUser);
+    setIsAuthenticated(true);
+    return loggedInUser;
   };
 
   // ── Logout ─────────────────────────────────────────────────────────────────

@@ -58,8 +58,24 @@ def _ensure_local_schema() -> None:
     schema_sql = """
     CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+    CREATE TABLE IF NOT EXISTS users (
+      user_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      username varchar(50) NOT NULL UNIQUE,
+      email varchar(255) NOT NULL UNIQUE,
+      password_hash varchar(255) NOT NULL,
+      full_name varchar(255),
+      role varchar(20) NOT NULL CHECK (role in ('patient', 'nurse')),
+      gender varchar(20),
+      institution_name varchar(255),
+      institution_address text,
+      is_verified boolean NOT NULL DEFAULT false,
+      created_at timestamptz NOT NULL DEFAULT now(),
+      updated_at timestamptz NOT NULL DEFAULT now()
+    );
+
     CREATE TABLE IF NOT EXISTS profiles (
       profile_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      user_id uuid REFERENCES users(user_id) ON DELETE CASCADE,
       age int NOT NULL,
       systolic_bp int NOT NULL,
       diastolic_bp int NOT NULL,
@@ -99,6 +115,8 @@ def _ensure_local_schema() -> None:
     CREATE INDEX IF NOT EXISTS idx_profiles_age ON profiles(age);
     CREATE INDEX IF NOT EXISTS idx_partner_sync_expires_at ON partner_sync(expires_at);
     CREATE INDEX IF NOT EXISTS idx_nurse_sessions_expires_at ON nurse_sessions(expires_at);
+    CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+    CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     """
 
     with _local_connection() as connection:
@@ -106,6 +124,101 @@ def _ensure_local_schema() -> None:
             cursor.execute(schema_sql)
         connection.commit()
 
+
+def create_user(
+    username: str,
+    email: str,
+    password_hash: str,
+    full_name: Optional[str] = None,
+    role: str = "patient",
+    gender: Optional[str] = None,
+    institution_name: Optional[str] = None,
+    institution_address: Optional[str] = None
+) -> dict:
+    if _use_supabase():
+        try:
+            payload = {
+                "username": username,
+                "email": email,
+                "password_hash": password_hash,
+                "full_name": full_name,
+                "role": role,
+                "gender": gender,
+                "institution_name": institution_name,
+                "institution_address": institution_address
+            }
+            result = _supabase.table("users").insert(payload).execute()
+            print(f"[OK] Supabase: Created user {username}")
+            return {"success": True, "user_id": result.data[0]["user_id"]}
+        except Exception as exc:
+            print(f"[ERROR] Supabase error: {exc}")
+            return {"success": False, "error": str(exc)}
+    try:
+        sql = """
+            INSERT INTO users (
+                username, email, password_hash, full_name, role, gender, 
+                institution_name, institution_address
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING user_id;
+        """
+        params = (
+            username, email, password_hash, full_name, role, gender,
+            institution_name, institution_address
+        )
+        with _local_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(sql, params)
+                user_id = cursor.fetchone()["user_id"]
+            connection.commit()
+        print(f"[OK] Local DB: Created user {username}")
+        return {"success": True, "user_id": str(user_id)}
+    except Exception as exc:
+        print(f"[ERROR] Local DB error: {exc}")
+        return {"success": False, "error": str(exc)}
+
+def get_user_by_username(username: str) -> dict:
+    if _use_supabase():
+        try:
+            result = _supabase.table("users").select("*").eq("username", username).execute()
+            if not result.data:
+                return {"success": False, "error": "User not found"}
+            return {"success": True, "user": result.data[0]}
+        except Exception as exc:
+            print(f"[ERROR] Supabase error: {exc}")
+            return {"success": False, "error": str(exc)}
+    try:
+        with _local_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+                row = cursor.fetchone()
+        if not row:
+            return {"success": False, "error": "User not found"}
+        return {"success": True, "user": row}
+    except Exception as exc:
+        print(f"[ERROR] Local DB error: {exc}")
+        return {"success": False, "error": str(exc)}
+
+def get_user_by_email(email: str) -> dict:
+    if _use_supabase():
+        try:
+            result = _supabase.table("users").select("*").eq("email", email).execute()
+            if not result.data:
+                return {"success": False, "error": "User not found"}
+            return {"success": True, "user": result.data[0]}
+        except Exception as exc:
+            print(f"[ERROR] Supabase error: {exc}")
+            return {"success": False, "error": str(exc)}
+    try:
+        with _local_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+                row = cursor.fetchone()
+        if not row:
+            return {"success": False, "error": "User not found"}
+        return {"success": True, "user": row}
+    except Exception as exc:
+        print(f"[ERROR] Local DB error: {exc}")
+        return {"success": False, "error": str(exc)}
 
 if not _use_supabase():
     try:

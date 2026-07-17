@@ -15,12 +15,12 @@ from pydantic import BaseModel
 from database import (
     save_intake_data, save_session_key, save_sync_token,
     verify_session_key, verify_sync_token, get_profile_by_id,
-    get_dashboard_data,
+    get_dashboard_data, create_user, get_user_by_username, get_user_by_email
 )
 from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
     NurseLoginRequest, TokenResponse, PatientSessionResponse,
-    create_access_token, verify_password, NURSE_ACCOUNTS,
+    create_access_token, verify_password, hash_password,
     require_nurse, require_patient, optional_auth, get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
@@ -87,6 +87,20 @@ class TranslateRequest(BaseModel):
     text: str
     target_language: str = "swahili"
 
+class SignupRequest(BaseModel):
+    username: str
+    email: str
+    password: str
+    full_name: Optional[str] = None
+    role: str = "patient"
+    gender: Optional[str] = None
+    institution_name: Optional[str] = None
+    institution_address: Optional[str] = None
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
 # ── App ───────────────────────────────────────────────────
 app = FastAPI(
     title="NuruCare API",
@@ -115,20 +129,109 @@ async def health_check():
 # AUTH ENDPOINTS
 # ═══════════════════════════════════════════════════════════
 
+@app.post("/api/v1/auth/signup")
+async def signup(request: SignupRequest):
+    """Sign up a new user (patient or nurse)"""
+    # Validate password complexity
+    if len(request.password) < 8:
+        raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
+    if not any(c.isdigit() for c in request.password):
+        raise HTTPException(status_code=400, detail="Password must contain at least one number")
+    
+    # Check if username already exists
+    existing_user = get_user_by_username(request.username)
+    if existing_user["success"]:
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    # Check if email already exists
+    existing_email = get_user_by_email(request.email)
+    if existing_email["success"]:
+        raise HTTPException(status_code=400, detail="Email already exists")
+    
+    # Hash the password
+    hashed_password = hash_password(request.password)
+    
+    # Create the user
+    result = create_user(
+        username=request.username,
+        email=request.email,
+        password_hash=hashed_password,
+        full_name=request.full_name,
+        role=request.role,
+        gender=request.gender,
+        institution_name=request.institution_name,
+        institution_address=request.institution_address
+    )
+    
+    if not result["success"]:
+        raise HTTPException(status_code=500, detail=result.get("error", "Failed to create user"))
+    
+    # Create a token
+    token = create_access_token(
+        {"sub": result["user_id"], "role": request.role, "name": request.full_name}
+    )
+    
+    return {
+        "success": True,
+        "message": "User created successfully",
+        "user_id": result["user_id"],
+        "access_token": token,
+        "role": request.role
+    }
+
+@app.post("/api/v1/auth/login", response_model=TokenResponse)
+async def login(request: LoginRequest):
+    """Login a user (patient or nurse) using username/password"""
+    user_result = get_user_by_username(request.username)
+    if not user_result["success"]:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    user = user_result["user"]
+    if not verify_password(request.password, user["password_hash"]):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    token = create_access_token({
+        "sub": str(user["user_id"]), 
+        "role": user["role"], 
+        "name": user.get("full_name")
+    })
+    return TokenResponse(
+        access_token=token,
+        role=user["role"],
+        name=user.get("full_name"),
+        expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+    )
+
 @app.post("/api/v1/auth/nurse/login", response_model=TokenResponse)
 async def nurse_login(request: NurseLoginRequest):
     """Nurse login with username + password → JWT"""
+    user_result = get_user_by_username(request.username)
+    if user_result["success"]:
+        user = user_result["user"]
+        if verify_password(request.password, user["password_hash"]) and user["role"] == "nurse":
+            token = create_access_token({
+                "sub": str(user["user_id"]), 
+                "role": user["role"], 
+                "name": user.get("full_name")
+            })
+            return TokenResponse(
+                access_token=token,
+                role=user["role"],
+                name=user.get("full_name"),
+                expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+            )
+    # Fallback to hardcoded accounts for backwards compatibility
+    from auth import NURSE_ACCOUNTS
     account = NURSE_ACCOUNTS.get(request.username)
-    if not account or not (account["password"] == request.password):
-        raise HTTPException(status_code=401, detail="Invalid username or password")
-
-    token = create_access_token({"sub": request.username, "role": "nurse", "name": account["name"]})
-    return TokenResponse(
-        access_token=token,
-        role="nurse",
-        name=account["name"],
-        expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-    )
+    if account and account["password"] == request.password:
+        token = create_access_token({"sub": request.username, "role": "nurse", "name": account["name"]})
+        return TokenResponse(
+            access_token=token,
+            role="nurse",
+            name=account["name"],
+            expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        )
+    raise HTTPException(status_code=401, detail="Invalid username or password")
 
 @app.post("/api/v1/auth/patient/session", response_model=PatientSessionResponse)
 async def create_patient_session():

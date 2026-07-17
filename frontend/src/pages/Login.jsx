@@ -10,7 +10,7 @@ import { useAuth } from '@/lib/AuthContext';
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginNurse, loginPatient } = useAuth();
+  const { loginNurse, loginPatient, login } = useAuth();
 
   const [form, setForm] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
@@ -27,10 +27,22 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      await loginNurse({ username: form.username, password: form.password });
-      navigate('/nurse/dashboard', { replace: true });
+      const loggedInUser = await login({ username: form.username, password: form.password });
+      // Route based on role
+      if (loggedInUser.role === 'nurse') {
+        navigate('/nurse/dashboard', { replace: true });
+      } else {
+        // Check if there's a gender to route to intake
+        navigate(location.state?.from || '/roles', { replace: true });
+      }
     } catch (err) {
-      setError(err.response?.data?.detail || err.message || 'Invalid username or password. Please try again.');
+      // Fallback to loginNurse if needed
+      try {
+        await loginNurse({ username: form.username, password: form.password });
+        navigate('/nurse/dashboard', { replace: true });
+      } catch (nurseErr) {
+        setError(err.response?.data?.detail || err.message || 'Invalid username or password. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

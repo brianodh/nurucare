@@ -49,6 +49,14 @@ export const nurseLogin = (username, password) =>
 export const createPatientSession = () =>
   apiClient.post('/api/v1/auth/patient/session').then(r => r.data);
 
+/** Sign up a new user (patient or nurse) */
+export const signup = (userData) =>
+  apiClient.post('/api/v1/auth/signup', userData).then(r => r.data);
+
+/** Login a user (patient or nurse) */
+export const login = (username, password) =>
+  apiClient.post('/api/v1/auth/login', { username, password }).then(r => r.data);
+
 /** Get current authenticated user info */
 export const getMe = () => apiClient.get('/api/v1/auth/me').then(r => r.data);
 
