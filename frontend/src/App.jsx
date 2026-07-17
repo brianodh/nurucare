@@ -12,6 +12,7 @@ import NurseLayout from './components/nurse/NurseLayout';
 import Landing from './pages/Landing';
 import RoleSelection from './pages/RoleSelection';
 import FemaleIntake from './pages/FemaleIntake';
+import MaleIntake from './pages/MaleIntake';
 import Education from './pages/Education';
 import SessionKey from './pages/SessionKey';
 import PartnerSync from './pages/PartnerSync';
@@ -94,9 +95,10 @@ const AuthenticatedApp = () => {
         {/* Patient-protected routes */}
         <Route path="/roles" element={<RequirePatientAuth><RoleSelection /></RequirePatientAuth>} />
         <Route path="/female/intake" element={<RequirePatientAuth><FemaleIntake /></RequirePatientAuth>} />
-        <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
-        <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
-        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+              <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
+              <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
+              <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
+              <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
       </Route>
 

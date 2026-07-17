@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ── Sign Up ────────────────────────────────────────────────────────────────
-  const signUp = async ({ name, email, password, consentGiven }) => {
+  const signUp = async ({ name, email, username, password, consentGiven, gender }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
     }

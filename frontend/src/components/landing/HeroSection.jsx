@@ -1,12 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Heart, Sparkles } from 'lucide-react';
+import { ArrowRight, Shield, Heart, Sparkles, User } from 'lucide-react';
 import { useLang } from '@/lib/i18n';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function HeroSection() {
   const { t } = useLang();
+  const { loginPatient } = useAuth();
+  const navigate = useNavigate();
+  const [anonymousLoading, setAnonymousLoading] = React.useState(false);
+
+  const handleAnonymousLogin = async () => {
+    setAnonymousLoading(true);
+    try {
+      await loginPatient();
+      navigate('/roles');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setAnonymousLoading(false);
+    }
+  };
+
   return (
     <section className="relative overflow-hidden min-h-[90vh] flex items-center">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5" />
@@ -32,8 +49,8 @@ export default function HeroSection() {
                   {t('hero_cta_start')} <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
-              <Button variant="outline" size="lg" className="rounded-full px-8 text-base">
-                {t('hero_cta_learn')}
+              <Button variant="outline" size="lg" className="rounded-full px-8 text-base" onClick={handleAnonymousLogin} disabled={anonymousLoading}>
+                {anonymousLoading ? 'Entering...' : <><User className="w-4 h-4" /> Enter as Anonymous</>}
               </Button>
             </div>
             <div className="flex items-center gap-6 mt-10 text-sm text-muted-foreground">

@@ -20,7 +20,7 @@ from database import (
 from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
     NurseLoginRequest, TokenResponse, PatientSessionResponse,
-    create_access_token, pwd_context, NURSE_ACCOUNTS,
+    create_access_token, verify_password, NURSE_ACCOUNTS,
     require_nurse, require_patient, optional_auth, get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
@@ -119,7 +119,7 @@ async def health_check():
 async def nurse_login(request: NurseLoginRequest):
     """Nurse login with username + password → JWT"""
     account = NURSE_ACCOUNTS.get(request.username)
-    if not account or account["password"] != request.password:
+    if not account or not verify_password(request.password, account["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     token = create_access_token({"sub": request.username, "role": "nurse", "name": account["name"]})

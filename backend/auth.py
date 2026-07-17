@@ -10,18 +10,31 @@ import time
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
+import bcrypt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel
 
 SECRET_KEY = os.getenv("SECRET_KEY", "nurucare-dev-secret-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 8  # 8 hours for nurses
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 bearer_scheme = HTTPBearer(auto_error=False)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify a plain text password against a bcrypt hash."""
+    return bcrypt.checkpw(
+        plain_password.encode("utf-8"),
+        hashed_password.encode("utf-8")
+    )
+
+
+def hash_password(password: str) -> str:
+    """Hash a plain text password using bcrypt."""
+    salt = bcrypt.gensalt(rounds=12)
+    return bcrypt.hashpw(password.encode("utf-8"), salt).decode("utf-8")
 
 # ── Hardcoded nurse accounts (replace with DB in production) ──
 # Default password for both accounts: NuruCare2026
@@ -29,13 +42,13 @@ bearer_scheme = HTTPBearer(auto_error=False)
 NURSE_ACCOUNTS = {
     "nurse.demo": {
         "username": "nurse.demo",
-        "password": "NuruCare2026",
+        "password_hash": "$2b$12$TCaduey3hfO/wb6.o/ywyuh2S5EJVQMYwTuAEwJHQCAyCnLStXPqy",
         "role": "nurse",
         "name": "Demo Nurse",
     },
     "dr.alex": {
         "username": "dr.alex",
-        "password": "NuruCare2026",
+        "password_hash": "$2b$12$TCaduey3hfO/wb6.o/ywyuh2S5EJVQMYwTuAEwJHQCAyCnLStXPqy",
         "role": "nurse",
         "name": "Dr. Alex Nuru",
     },
