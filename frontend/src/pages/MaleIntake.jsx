@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, CheckCircle, RotateCcw, Loader2, Users } from 'lucide-react';
 import IntakeStep1 from '../components/intake/IntakeStep1';
 import IntakeStep2 from '../components/intake/IntakeStep2';
-import IntakeStep3 from '../components/intake/IntakeStep3';
+import MaleIntakeStep3 from '../components/intake/MaleIntakeStep3';
 import IntakeStep4 from '../components/intake/IntakeStep4';
 import IntakeStep5 from '../components/intake/IntakeStep5';
 import { Link, useNavigate } from 'react-router-dom';
@@ -198,7 +198,7 @@ export default function MaleIntake() {
             >
               {step === 0 && <IntakeStep1 data={data} onChange={handleDataChange} />}
               {step === 1 && <IntakeStep2 data={data} onChange={handleDataChange} />}
-              {step === 2 && <IntakeStep3 data={data} onChange={handleDataChange} />}
+              {step === 2 && <MaleIntakeStep3 data={data} onChange={handleDataChange} />}
               {step === 3 && <IntakeStep4 data={data} onChange={handleDataChange} />}
               {step === 4 && <IntakeStep5 data={data} apiResult={apiResult} online={true} />}
             </motion.div>

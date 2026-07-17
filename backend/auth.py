@@ -38,17 +38,16 @@ def hash_password(password: str) -> str:
 
 # ── Hardcoded nurse accounts (replace with DB in production) ──
 # Default password for both accounts: NuruCare2026
-# Hashes pre-computed to avoid startup cost
 NURSE_ACCOUNTS = {
     "nurse.demo": {
         "username": "nurse.demo",
-        "password_hash": "$2b$12$TCaduey3hfO/wb6.o/ywyuh2S5EJVQMYwTuAEwJHQCAyCnLStXPqy",
+        "password": "NuruCare2026",
         "role": "nurse",
         "name": "Demo Nurse",
     },
     "dr.alex": {
         "username": "dr.alex",
-        "password_hash": "$2b$12$TCaduey3hfO/wb6.o/ywyuh2S5EJVQMYwTuAEwJHQCAyCnLStXPqy",
+        "password": "NuruCare2026",
         "role": "nurse",
         "name": "Dr. Alex Nuru",
     },

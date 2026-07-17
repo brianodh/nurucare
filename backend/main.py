@@ -119,7 +119,7 @@ async def health_check():
 async def nurse_login(request: NurseLoginRequest):
     """Nurse login with username + password → JWT"""
     account = NURSE_ACCOUNTS.get(request.username)
-    if not account or not verify_password(request.password, account["password_hash"]):
+    if not account or not (account["password"] == request.password):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     token = create_access_token({"sub": request.username, "role": "nurse", "name": account["name"]})
