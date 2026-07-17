@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle, User, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/lib/AuthContext';
 
 // ─── Consent Modal ────────────────────────────────────────────────────────────
@@ -134,9 +135,10 @@ function ConsentModal({ onAccept, onDecline }) {
 // ─── Sign Up Page ─────────────────────────────────────────────────────────────
 export default function SignUp() {
   const navigate = useNavigate();
-  const { signUp } = useAuth();
+  const { signUp, loginNurse, loginPatient } = useAuth();
 
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
+  const [role, setRole] = useState('patient'); // 'patient' or 'nurse'
   const [showPassword, setShowPassword] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
   const [error, setError] = useState('');
@@ -145,8 +147,8 @@ export default function SignUp() {
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const validate = () => {
-    if (!form.name.trim()) return 'Please enter your name.';
-    if (!form.email.includes('@')) return 'Please enter a valid email address.';
+    if (role === 'patient' && !form.name.trim()) return 'Please enter your name.';
+    if (role === 'patient' && !form.email.includes('@')) return 'Please enter a valid email address.';
     if (form.password.length < 8) return 'Password must be at least 8 characters.';
     if (form.password !== form.confirm) return 'Passwords do not match.';
     return null;
@@ -157,17 +159,27 @@ export default function SignUp() {
     const err = validate();
     if (err) { setError(err); return; }
     setError('');
-    setShowConsent(true);
+    if (role === 'patient') {
+      setShowConsent(true);
+    } else {
+      handleConsentAccept(); // Nurses can skip consent for now (since they are using demo accounts)
+    }
   };
 
   const handleConsentAccept = async () => {
     setShowConsent(false);
     setLoading(true);
     try {
-      await signUp({ name: form.name, email: form.email, password: form.password, consentGiven: true });
-      navigate('/roles');
+      if (role === 'nurse') {
+        // For nurses, we'll just do loginNurse since we have hardcoded accounts
+        await loginNurse({ username: form.email, password: form.password });
+        navigate('/nurse/dashboard');
+      } else {
+        await signUp({ name: form.name, email: form.email, password: form.password, consentGiven: true });
+        navigate('/roles');
+      }
     } catch (err) {
-      setError(err.message || 'Sign up failed. Please try again.');
+      setError(err.response?.data?.detail || err.message || 'Sign up failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -202,76 +214,139 @@ export default function SignUp() {
           </div>
 
           <div className="bg-card rounded-2xl border shadow-sm p-6 sm:p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-1.5">
-                <Label htmlFor="name">Full name</Label>
-                <Input
-                  id="name"
-                  placeholder="Amina Wanjiru"
-                  value={form.name}
-                  onChange={set('name')}
-                  autoComplete="name"
-                />
-              </div>
+            <Tabs defaultValue="patient" value={role} onValueChange={setRole} className="w-full">
+              <TabsList className="w-full mb-6">
+                <TabsTrigger value="patient" className="flex-1 gap-2">
+                  <User className="w-4 h-4" /> Patient
+                </TabsTrigger>
+                <TabsTrigger value="nurse" className="flex-1 gap-2">
+                  <Stethoscope className="w-4 h-4" /> Nurse
+                </TabsTrigger>
+              </TabsList>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="email">Email address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={form.email}
-                  onChange={set('email')}
-                  autoComplete="email"
-                />
-              </div>
+              <TabsContent value="patient">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="name">Full name</Label>
+                    <Input
+                      id="name"
+                      placeholder="Amina Wanjiru"
+                      value={form.name}
+                      onChange={set('name')}
+                      autoComplete="name"
+                    />
+                  </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Min. 8 characters"
-                    value={form.password}
-                    onChange={set('password')}
-                    autoComplete="new-password"
-                    className="pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    tabIndex={-1}
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email">Email address</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={form.email}
+                      onChange={set('email')}
+                      autoComplete="email"
+                    />
+                  </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="confirm">Confirm password</Label>
-                <Input
-                  id="confirm"
-                  type="password"
-                  placeholder="Re-enter password"
-                  value={form.confirm}
-                  onChange={set('confirm')}
-                  autoComplete="new-password"
-                />
-              </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="password">Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Min. 8 characters"
+                        value={form.password}
+                        onChange={set('password')}
+                        autoComplete="new-password"
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
 
-              {error && (
-                <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                  {error}
-                </div>
-              )}
+                  <div className="space-y-1.5">
+                    <Label htmlFor="confirm">Confirm password</Label>
+                    <Input
+                      id="confirm"
+                      type="password"
+                      placeholder="Re-enter password"
+                      value={form.confirm}
+                      onChange={set('confirm')}
+                      autoComplete="new-password"
+                    />
+                  </div>
 
-              <Button type="submit" className="w-full rounded-full gap-2" disabled={loading}>
-                {loading ? 'Creating account…' : <>Continue <ArrowRight className="w-4 h-4" /></>}
-              </Button>
-            </form>
+                  {error && (
+                    <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      {error}
+                    </div>
+                  )}
+
+                  <Button type="submit" className="w-full rounded-full gap-2" disabled={loading}>
+                    {loading ? 'Creating account…' : <>Continue <ArrowRight className="w-4 h-4" /></>}
+                  </Button>
+                </form>
+              </TabsContent>
+
+              <TabsContent value="nurse">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="nurse-username">Username</Label>
+                    <Input
+                      id="nurse-username"
+                      placeholder="nurse.demo"
+                      value={form.email}
+                      onChange={set('email')}
+                      autoComplete="username"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Demo: nurse.demo / NuruCare2026</p>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="nurse-password">Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="nurse-password"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="••••••••"
+                        value={form.password}
+                        onChange={set('password')}
+                        autoComplete="current-password"
+                        className="pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  {error && (
+                    <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      {error}
+                    </div>
+                  )}
+
+                  <Button type="submit" className="w-full rounded-full gap-2" disabled={loading}>
+                    {loading ? 'Signing in…' : <>Sign in as Nurse <ArrowRight className="w-4 h-4" /></>}
+                  </Button>
+                </form>
+              </TabsContent>
+            </Tabs>
 
             <p className="text-center text-sm text-muted-foreground mt-6">
               Already have an account?{' '}
