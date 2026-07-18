@@ -156,6 +156,9 @@ export default function FemaleIntake() {
             <Link to="/education">
               <Button variant="outline" className="rounded-full">Learn More</Button>
             </Link>
+            <Link to="/female/dashboard">
+              <Button variant="secondary" className="rounded-full">Go to Dashboard</Button>
+            </Link>
             <Link to="/female/sync">
               <Button variant="outline" className="rounded-full gap-2">
                 <Users className="w-4 h-4" /> Partner Sync

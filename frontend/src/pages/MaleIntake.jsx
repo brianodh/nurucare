@@ -154,15 +154,18 @@ export default function MaleIntake() {
           </div>
 
           <div className="flex gap-3 mt-6 justify-end flex-wrap">
-            <Link to="/education">
-              <Button variant="outline" className="rounded-full">Learn More</Button>
-            </Link>
-            <GenerateKeyButton
-              profileId={profileId}
-              data={data}
-              onSaved={setProfileId}
-            />
-          </div>
+              <Link to="/education">
+                <Button variant="outline" className="rounded-full">Learn More</Button>
+              </Link>
+              <Link to="/male/dashboard">
+                <Button variant="secondary" className="rounded-full">Go to Dashboard</Button>
+              </Link>
+              <GenerateKeyButton
+                profileId={profileId}
+                data={data}
+                onSaved={setProfileId}
+              />
+            </div>
         </div>
       </div>
     );

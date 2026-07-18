@@ -17,6 +17,7 @@ import Education from './pages/Education';
 import SessionKey from './pages/SessionKey';
 import PartnerSync from './pages/PartnerSync';
 import MaleDashboard from './pages/MaleDashboard';
+import UnifiedDashboard from './pages/UnifiedDashboard';
 import NurseDashboard from './pages/nurse/NurseDashboard';
 import PatientLookup from './pages/nurse/PatientLookup';
 import NurseAnalytics from './pages/nurse/NurseAnalytics';
@@ -98,7 +99,8 @@ const AuthenticatedApp = () => {
               <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
               <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
               <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
-              <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+              <Route path="/male/dashboard" element={<RequirePatientAuth><UnifiedDashboard gender="male" /></RequirePatientAuth>} />
+        <Route path="/female/dashboard" element={<RequirePatientAuth><UnifiedDashboard gender="female" /></RequirePatientAuth>} />
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
       </Route>
 
