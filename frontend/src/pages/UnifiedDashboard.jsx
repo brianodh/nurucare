@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -20,11 +20,10 @@ import {
   X,
   ChevronRight
 } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
@@ -261,6 +260,8 @@ const OnboardingTour = ({ onClose }) => {
     { title: 'Notifications', desc: 'Stay updated with important health reminders.', icon: Bell, highlight: 'notifications' }
   ];
 
+  const CurrentIcon = tourSteps[step].icon;
+
   return (
     <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-4">
       <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-background rounded-2xl max-w-lg w-full p-6 shadow-2xl">
@@ -270,7 +271,7 @@ const OnboardingTour = ({ onClose }) => {
         </div>
         <div className="text-center">
           <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 ${step === 0 ? 'bg-primary/10' : step === 1 ? 'bg-secondary/10' : step === 2 ? 'bg-accent/10' : 'bg-muted'}`}>
-            <tourSteps[step].icon className={`w-8 h-8 ${step === 0 ? 'text-primary' : step === 1 ? 'text-secondary' : step === 2 ? 'text-accent' : 'text-muted-foreground'}`} />
+            <CurrentIcon className={`w-8 h-8 ${step === 0 ? 'text-primary' : step === 1 ? 'text-secondary' : step === 2 ? 'text-accent' : 'text-muted-foreground'}`} />
           </div>
           <h4 className="font-medium text-lg mb-2">{tourSteps[step].title}</h4>
           <p className="text-muted-foreground text-sm mb-6">{tourSteps[step].desc}</p>
