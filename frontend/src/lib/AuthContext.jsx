@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
     }
-    const res = await signupApi({
+    const res = await signup({
       username,
       email,
       password,
@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
       id: res.user_id,
       name: full_name,
       role: res.role,
+      gender: gender,
       access_token: res.access_token,
       token_type: 'bearer'
     };
@@ -138,7 +139,9 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         isAuthenticated,
+        setIsAuthenticated,
         isLoadingAuth,
         isLoadingPublicSettings,
         authError,

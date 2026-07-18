@@ -28,9 +28,9 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: t('nav_home'), to: '/' },
-    { label: t('nav_get_started'), to: isAuthenticated ? '/roles' : '/signup' },
-    { label: t('nav_education'), to: '/education' },
+    { label: t('home'), to: '/' },
+    { label: t('getStarted'), to: isAuthenticated ? '/roles' : '/signup' },
+    { label: t('education'), to: '/education' },
   ];
 
   return (
@@ -124,8 +124,8 @@ export default function Navbar() {
                         <Button variant="outline" className="w-full rounded-full">Sign in</Button>
                       </Link>
                       <Link to="/signup">
-                        <Button className="w-full rounded-full">{t('nav_start_free')}</Button>
-                      </Link>
+                    <Button className="w-full rounded-full">{t('startFree')}</Button>
+                  </Link>
                     </>
                   )}
                 </div>

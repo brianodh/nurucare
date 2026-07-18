@@ -6,11 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/lib/AuthContext';
+import { getMe } from '@/api/apiClient';
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginNurse, loginPatient, login } = useAuth();
+  const { loginNurse, loginPatient, login, setUser, setIsAuthenticated, user } = useAuth();
 
   const [form, setForm] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
@@ -28,12 +29,31 @@ export default function Login() {
     setLoading(true);
     try {
       const loggedInUser = await login({ username: form.username, password: form.password });
-      // Route based on role
+      // If login doesn't return gender, fetch using getMe
+      if (!loggedInUser.gender) {
+        try {
+          const meData = await getMe();
+          loggedInUser.gender = meData.gender;
+          // Update persisted user with gender
+          const STORAGE_KEY = 'nurucare_patient';
+          const updatedUser = { ...loggedInUser, gender: meData.gender };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser));
+          setUser(updatedUser);
+        } catch (e) {
+          console.warn('Could not fetch user details', e);
+        }
+      }
+      // Route based on role and gender
       if (loggedInUser.role === 'nurse') {
         navigate('/nurse/dashboard', { replace: true });
       } else {
-        // Check if there's a gender to route to intake
-        navigate(location.state?.from || '/roles', { replace: true });
+        if (loggedInUser.gender === 'female') {
+          navigate('/female/dashboard', { replace: true });
+        } else if (loggedInUser.gender === 'male') {
+          navigate('/male/dashboard', { replace: true });
+        } else {
+          navigate(location.state?.from || '/roles', { replace: true });
+        }
       }
     } catch (err) {
       // Fallback to loginNurse if needed
