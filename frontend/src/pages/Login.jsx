@@ -48,9 +48,9 @@ export default function Login() {
         navigate('/nurse/dashboard', { replace: true });
       } else {
         if (loggedInUser.gender === 'female') {
-          navigate('/female/dashboard', { replace: true });
+          navigate('/patient/female/dashboard', { replace: true });
         } else if (loggedInUser.gender === 'male') {
-          navigate('/male/dashboard', { replace: true });
+          navigate('/patient/male/dashboard', { replace: true });
         } else {
           navigate(location.state?.from || '/roles', { replace: true });
         }

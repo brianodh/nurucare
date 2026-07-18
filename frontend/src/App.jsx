@@ -16,13 +16,15 @@ import MaleIntake from './pages/MaleIntake';
 import Education from './pages/Education';
 import SessionKey from './pages/SessionKey';
 import PartnerSync from './pages/PartnerSync';
-import MaleDashboard from './pages/MaleDashboard';
-import UnifiedDashboard from './pages/UnifiedDashboard';
 import NurseDashboard from './pages/nurse/NurseDashboard';
 import PatientLookup from './pages/nurse/PatientLookup';
 import NurseAnalytics from './pages/nurse/NurseAnalytics';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import ProfilePage from './pages/Profile';
+import MaleDashboard from './pages/patient/male/Dashboard';
+import FemaleDashboard from './pages/patient/female/Dashboard';
+import MaleSync from './pages/patient/male/Sync';
 
 // ─── Route guard: patients must be signed in ──────────────────────────────────
 function RequirePatientAuth({ children }) {
@@ -94,14 +96,19 @@ const AuthenticatedApp = () => {
         <Route path="/education" element={<Education />} />
 
         {/* Patient-protected routes */}
+        <Route path="/profile" element={<RequirePatientAuth><ProfilePage /></RequirePatientAuth>} />
         <Route path="/roles" element={<RequirePatientAuth><RoleSelection /></RequirePatientAuth>} />
         <Route path="/female/intake" element={<RequirePatientAuth><FemaleIntake /></RequirePatientAuth>} />
-              <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
-              <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
-              <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
-              <Route path="/male/dashboard" element={<RequirePatientAuth><UnifiedDashboard gender="male" /></RequirePatientAuth>} />
-        <Route path="/female/dashboard" element={<RequirePatientAuth><UnifiedDashboard gender="female" /></RequirePatientAuth>} />
+        <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
+        <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
+        <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
+        <Route path="/patient/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/male/sync" element={<RequirePatientAuth><MaleSync /></RequirePatientAuth>} />
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
+        {/* Backward compatibility routes */}
+        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
       </Route>
 
       {/* Nurse routes (protected) */}
