@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, CheckCircle, RotateCcw, Loader2, Users } from 'lucide-react';
 import IntakeStep1 from '../components/intake/IntakeStep1';
 import IntakeStep2 from '../components/intake/IntakeStep2';
-import IntakeStep3 from '../components/intake/IntakeStep3';
+import MaleIntakeStep3 from '../components/intake/MaleIntakeStep3';
 import IntakeStep4 from '../components/intake/IntakeStep4';
 import IntakeStep5 from '../components/intake/IntakeStep5';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,7 +36,7 @@ function GenerateKeyButton({ profileId, data, onSaved }) {
       }
 
       const keyResult = await generateSessionKey(pid);
-      navigate('/female/session', { state: { sessionKey: keyResult.session_key, patientId: pid } });
+      navigate('/male/dashboard', { state: { sessionKey: keyResult.session_key, patientId: pid } });
     } catch (err) {
       toast({ title: 'Error', description: 'Could not generate session key. Please try again.', variant: 'destructive' });
     } finally {
@@ -54,19 +55,19 @@ function GenerateKeyButton({ profileId, data, onSaved }) {
 function buildPayload(data) {
   return {
     age: Number(data.age) || 0,
-    gender: 'female',
+    gender: 'male',
     systolic_bp: Number(data.systolic) || 120,
     diastolic_bp: Number(data.diastolic) || 80,
     smoking: data.smoking || false,
     migraine_type: data.migraine || 'none',
     is_pregnant: false,
-    breastfeeding: data.breastfeeding || false,
+    breastfeeding: false,
     fertility_intention: data.fertilityIntention || 'short_term',
     parity: 0,
   };
 }
 
-export default function FemaleIntake() {
+export default function MaleIntake() {
   const { progress, update, clear, markCompleted } = useProgress();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -153,23 +154,18 @@ export default function FemaleIntake() {
           </div>
 
           <div className="flex gap-3 mt-6 justify-end flex-wrap">
-            <Link to="/education">
-              <Button variant="outline" className="rounded-full">Learn More</Button>
-            </Link>
-            <Link to="/female/dashboard">
-              <Button variant="secondary" className="rounded-full">Go to Dashboard</Button>
-            </Link>
-            <Link to="/female/sync">
-              <Button variant="outline" className="rounded-full gap-2">
-                <Users className="w-4 h-4" /> Partner Sync
-              </Button>
-            </Link>
-            <GenerateKeyButton
-              profileId={profileId}
-              data={data}
-              onSaved={setProfileId}
-            />
-          </div>
+              <Link to="/education">
+                <Button variant="outline" className="rounded-full">Learn More</Button>
+              </Link>
+              <Link to="/male/dashboard">
+                <Button variant="secondary" className="rounded-full">Go to Dashboard</Button>
+              </Link>
+              <GenerateKeyButton
+                profileId={profileId}
+                data={data}
+                onSaved={setProfileId}
+              />
+            </div>
         </div>
       </div>
     );
@@ -205,7 +201,7 @@ export default function FemaleIntake() {
             >
               {step === 0 && <IntakeStep1 data={data} onChange={handleDataChange} />}
               {step === 1 && <IntakeStep2 data={data} onChange={handleDataChange} />}
-              {step === 2 && <IntakeStep3 data={data} onChange={handleDataChange} />}
+              {step === 2 && <MaleIntakeStep3 data={data} onChange={handleDataChange} />}
               {step === 3 && <IntakeStep4 data={data} onChange={handleDataChange} />}
               {step === 4 && <IntakeStep5 data={data} apiResult={apiResult} online={true} />}
             </motion.div>
@@ -238,11 +234,6 @@ export default function FemaleIntake() {
             <div className="flex gap-3 flex-wrap justify-end">
               <Link to="/education">
                 <Button variant="outline" className="rounded-full">Learn More</Button>
-              </Link>
-              <Link to="/female/sync">
-                <Button variant="outline" className="rounded-full gap-2">
-                  <Users className="w-4 h-4" /> Partner Sync
-                </Button>
               </Link>
               <GenerateKeyButton
                 profileId={profileId}

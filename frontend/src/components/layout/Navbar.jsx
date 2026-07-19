@@ -28,9 +28,9 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: t('nav_home'), to: '/' },
-    { label: t('nav_get_started'), to: isAuthenticated ? '/roles' : '/signup' },
-    { label: t('nav_education'), to: '/education' },
+    { label: t('home'), to: '/' },
+    { label: t('getStarted'), to: isAuthenticated ? '/roles' : '/signup' },
+    { label: t('education'), to: '/education' },
   ];
 
   return (
@@ -65,12 +65,12 @@ export default function Navbar() {
             {isAuthenticated ? (
               /* ── Signed-in state ── */
               <div className="hidden md:flex items-center gap-2">
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground px-2">
+                <Link to="/profile" className="flex items-center gap-1.5 text-sm text-muted-foreground px-2 hover:text-primary transition-colors">
                   <UserCircle className="w-4 h-4 text-primary" />
                   <span className="font-medium text-foreground">
                     {user?.name?.split(' ')[0] ?? 'Patient'}
                   </span>
-                </div>
+                </Link>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -87,7 +87,7 @@ export default function Navbar() {
                   <Button variant="ghost" size="sm" className="rounded-full px-4">Sign in</Button>
                 </Link>
                 <Link to="/signup">
-                  <Button size="sm" className="rounded-full px-5">{t('nav_start_free')}</Button>
+                  <Button size="sm" className="rounded-full px-5">{t('startFree')}</Button>
                 </Link>
               </div>
             )}
@@ -100,10 +100,10 @@ export default function Navbar() {
               <SheetContent side="right" className="w-72">
                 <div className="flex flex-col gap-4 mt-8">
                   {isAuthenticated && (
-                    <div className="flex items-center gap-2 px-2 pb-2 border-b">
+                    <Link to="/profile" className="flex items-center gap-2 px-2 pb-2 border-b hover:text-primary transition-colors">
                       <UserCircle className="w-5 h-5 text-primary" />
                       <span className="font-medium">{user?.name ?? 'Patient'}</span>
-                    </div>
+                    </Link>
                   )}
                   {navLinks.map(l => (
                     <Link key={l.to} to={l.to}>
@@ -124,8 +124,8 @@ export default function Navbar() {
                         <Button variant="outline" className="w-full rounded-full">Sign in</Button>
                       </Link>
                       <Link to="/signup">
-                        <Button className="w-full rounded-full">{t('nav_start_free')}</Button>
-                      </Link>
+                    <Button className="w-full rounded-full">{t('startFree')}</Button>
+                  </Link>
                     </>
                   )}
                 </div>

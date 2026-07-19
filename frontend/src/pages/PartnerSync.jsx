@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Users, Copy, Clock, CheckCircle, Link2, Loader2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { generateSyncToken, verifySyncToken } from '@/api/apiClient';
+import { getSavedProfileId } from '@/lib/useProgress';
 
 // Simple anonymous user id persisted in sessionStorage
 function getAnonymousId() {
@@ -41,7 +42,8 @@ export default function PartnerSync() {
   const handleGenerate = async () => {
     setGenerating(true);
     try {
-      const response = await generateSyncToken();
+      const savedProfileId = getSavedProfileId();
+      const response = await generateSyncToken(savedProfileId);
       setToken(response.token);
       setGenerated(true);
       setTimeLeft((response.expires_in_hours ?? 24) * 3600);
@@ -63,10 +65,11 @@ export default function PartnerSync() {
 
   // ── Verify / connect ───────────────────────────────────────────────────────
   const connectPartner = async () => {
-    if (partnerToken.trim().length < 6) return;
+    const trimmedToken = partnerToken.trim();
+    if (trimmedToken.length < 6) return;
     setConnecting(true);
     try {
-      const response = await verifySyncToken(partnerToken.trim(), getAnonymousId());
+      const response = await verifySyncToken(trimmedToken, getAnonymousId());
       if (response.success) {
         setConnected(true);
         toast({ title: 'Partner connected!', description: 'You can now share health decisions together.' });
@@ -96,29 +99,26 @@ export default function PartnerSync() {
             <Users className="w-7 h-7 text-accent" />
           </div>
           <h1 className="font-heading font-bold text-2xl">Partner Sync</h1>
-          <p className="text-muted-foreground text-sm mt-2">Securely share health decisions with your partner.</p>
+          <p className="text-muted-foreground text-sm mt-2">Share health decisions securely with your partner using a sync token.</p>
         </motion.div>
 
         <div className="space-y-6">
           {/* Generate token */}
           <Card className="p-6 rounded-2xl">
-            <h3 className="font-heading font-semibold mb-4">Generate Sync Token</h3>
+            <h3 className="font-heading font-semibold mb-4">Generate Partner Sync Token</h3>
             {!generated ? (
               <Button onClick={handleGenerate} disabled={generating} className="w-full rounded-full gap-2">
                 {generating && <Loader2 className="w-4 h-4 animate-spin" />}
-                {generating ? 'Generating…' : 'Generate Anonymous Token'}
+                {generating ? 'Generating…' : 'Generate Sync Token'}
               </Button>
             ) : (
               <div className="space-y-4">
                 <div className="bg-muted rounded-xl p-4 text-center overflow-x-auto">
                   <p className="text-lg sm:text-xl font-heading font-bold tracking-wider break-all">{token}</p>
                 </div>
-                <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                  <Clock className="w-4 h-4" />
-                  <span className={`font-mono ${timeLeft < 300 ? 'text-destructive' : ''}`}>
-                    {timerDisplay}
-                  </span>
-                </div>
+                <p className="text-sm text-muted-foreground text-center">
+                  This token expires in {timerDisplay}. Share it with your partner to connect.
+                </p>
                 <Button onClick={copyToken} variant="outline" className="w-full rounded-full gap-2">
                   {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   {copied ? 'Copied!' : 'Copy Token'}
@@ -133,7 +133,7 @@ export default function PartnerSync() {
             {!connected ? (
               <div className="space-y-3">
                 <Input
-                  placeholder="Enter partner's sync token"
+                  placeholder="Enter your partner's sync token (e.g., NX-7K9-2M4)"
                   value={partnerToken}
                   onChange={(e) => setPartnerToken(e.target.value)}
                   className="font-mono"
@@ -145,7 +145,7 @@ export default function PartnerSync() {
                   className="w-full rounded-full gap-2"
                 >
                   {connecting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Link2 className="w-4 h-4" />}
-                  {connecting ? 'Connecting…' : 'Connect'}
+                  {connecting ? 'Connecting…' : 'Connect to Partner'}
                 </Button>
               </div>
             ) : (

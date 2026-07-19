@@ -1,41 +1,84 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Eye, EyeOff, ArrowRight, Shield, AlertCircle } from 'lucide-react';
+import { Heart, Eye, EyeOff, ArrowRight, Shield, AlertCircle, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/lib/AuthContext';
+import { getMe } from '@/api/apiClient';
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth();
+  const { loginNurse, loginPatient, login, setUser, setIsAuthenticated, user } = useAuth();
 
-  const from = location.state?.from || '/roles';
-
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
+  const [anonymousLoading, setAnonymousLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) {
+    if (!form.username || !form.password) {
       setError('Please fill in all fields.');
       return;
     }
     setError('');
     setLoading(true);
     try {
-      await login({ email: form.email, password: form.password });
-      navigate(from, { replace: true });
+      const loggedInUser = await login({ username: form.username, password: form.password });
+      // If login doesn't return gender, fetch using getMe
+      if (!loggedInUser.gender) {
+        try {
+          const meData = await getMe();
+          loggedInUser.gender = meData.gender;
+          // Update persisted user with gender
+          const STORAGE_KEY = 'nurucare_patient';
+          const updatedUser = { ...loggedInUser, gender: meData.gender };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser));
+          setUser(updatedUser);
+        } catch (e) {
+          console.warn('Could not fetch user details', e);
+        }
+      }
+      // Route based on role and gender
+      if (loggedInUser.role === 'nurse') {
+        navigate('/nurse/dashboard', { replace: true });
+      } else {
+        if (loggedInUser.gender === 'female') {
+          navigate('/patient/female/dashboard', { replace: true });
+        } else if (loggedInUser.gender === 'male') {
+          navigate('/patient/male/dashboard', { replace: true });
+        } else {
+          navigate(location.state?.from || '/roles', { replace: true });
+        }
+      }
     } catch (err) {
-      setError(err.message || 'Invalid email or password. Please try again.');
+      // Fallback to loginNurse if needed
+      try {
+        await loginNurse({ username: form.username, password: form.password });
+        navigate('/nurse/dashboard', { replace: true });
+      } catch (nurseErr) {
+        setError(err.response?.data?.detail || err.message || 'Invalid username or password. Please try again.');
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAnonymousLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setAnonymousLoading(true);
+    try {
+      await loginPatient();
+      navigate(location.state?.from || '/roles', { replace: true });
+    } catch (err) {
+      setError(err.message || 'Failed to create session. Please try again.');
+    } finally {
+      setAnonymousLoading(false);
     }
   };
 
@@ -53,38 +96,35 @@ export default function Login() {
           </div>
           <h1 className="font-heading font-bold text-2xl">Welcome back</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Sign in to continue your health assessment
+            Sign in to continue your health journey
           </p>
         </div>
 
         <div className="bg-card rounded-2xl border shadow-sm p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1.5">
-              <Label htmlFor="email">Email address</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={set('email')}
-                autoComplete="email"
+                id="username"
+                type="text"
+                placeholder="nurse.demo"
+                value={form.username}
+                onChange={(e) => setForm(f => ({ ...f, username: e.target.value }))}
+                autoComplete="username"
               />
             </div>
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <span className="text-xs text-primary hover:underline cursor-pointer">
-                  Forgot password?
-                </span>
               </div>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Your password"
+                  placeholder="••••••••"
                   value={form.password}
-                  onChange={set('password')}
+                  onChange={(e) => setForm(f => ({ ...f, password: e.target.value }))}
                   autoComplete="current-password"
                   className="pr-10"
                 />
@@ -107,7 +147,20 @@ export default function Login() {
             )}
 
             <Button type="submit" className="w-full rounded-full gap-2" disabled={loading}>
-              {loading ? 'Signing inâ€¦' : <>Sign in <ArrowRight className="w-4 h-4" /></>}
+              {loading ? 'Signing in…' : <>Sign in <ArrowRight className="w-4 h-4" /></>}
+            </Button>
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">Or continue as</span>
+              </div>
+            </div>
+
+            <Button type="button" variant="outline" className="w-full rounded-full gap-2" onClick={handleAnonymousLogin} disabled={anonymousLoading}>
+              {anonymousLoading ? 'Creating session…' : <> <User className="w-4 h-4" /> Anonymous Patient</>}
             </Button>
           </form>
 

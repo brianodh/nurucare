@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { nurseLogin, createPatientSession, getMe, signup as signupApi, login as loginApi } from '@/api/apiClient';
 
 const AuthContext = createContext();
 
@@ -43,27 +44,61 @@ export const AuthProvider = ({ children }) => {
     setAuthChecked(true);
   }, []);
 
+  // ── Nurse Login ─────────────────────────────────────────────────────────────
+  const loginNurse = async ({ username, password }) => {
+    const res = await nurseLogin(username, password);
+    const nurseUser = {
+      id: username,
+      name: res.name,
+      role: res.role,
+      access_token: res.access_token,
+      token_type: res.token_type,
+    };
+    persistUser(nurseUser);
+    setUser(nurseUser);
+    setIsAuthenticated(true);
+    return nurseUser;
+  };
+
+  // ── Patient Session ─────────────────────────────────────────────────────────
+  const loginPatient = async () => {
+    const res = await createPatientSession();
+    const patientUser = {
+      id: res.profile_id,
+      profile_id: res.profile_id,
+      role: 'patient',
+      access_token: res.access_token,
+      token_type: res.token_type,
+    };
+    persistUser(patientUser);
+    setUser(patientUser);
+    setIsAuthenticated(true);
+    return patientUser;
+  };
+
   // ── Sign Up ────────────────────────────────────────────────────────────────
-  // consentGiven must be true before this is called (enforced by ConsentModal in SignUp.jsx)
-  const signUp = async ({ name, email, password, consentGiven }) => {
+  const signUp = async ({ full_name, email, username, password, consentGiven, gender, role, institution_name, institution_address }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
     }
-
-    // TODO: swap this block for a real API call when the backend is ready:
-    // const res = await apiClient.post('/api/v1/auth/register', { name, email, password, consent: true });
-    // const newUser = res.data;
-
-    // Mock — creates a local patient record
-    const newUser = {
-      id: `usr_${Date.now()}`,
-      name,
+    const res = await signup({
+      username,
       email,
-      role: 'patient',
-      consentGiven: true,
-      consentDate: new Date().toISOString(),
+      password,
+      full_name,
+      role,
+      gender,
+      institution_name,
+      institution_address
+    });
+    const newUser = {
+      id: res.user_id,
+      name: full_name,
+      role: res.role,
+      gender: gender,
+      access_token: res.access_token,
+      token_type: 'bearer'
     };
-
     persistUser(newUser);
     setUser(newUser);
     setIsAuthenticated(true);
@@ -71,26 +106,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ── Login ──────────────────────────────────────────────────────────────────
-  const login = async ({ email, password }) => {
-    // TODO: replace with real API call:
-    // const res = await apiClient.post('/api/v1/auth/login', { email, password });
-    // const loggedInUser = res.data;
-
-    // Mock — checks localStorage for a matching patient
-    const stored = loadStoredUser();
-    if (!stored || stored.email !== email) {
-      throw new Error('No account found with that email. Please sign up first.');
-    }
-    // In production the backend verifies the password hash — skip here.
-
-    setUser(stored);
+  const login = async ({ username, password }) => {
+    const res = await loginApi(username, password);
+    const loggedInUser = {
+      id: username,
+      name: res.name,
+      role: res.role,
+      access_token: res.access_token,
+      token_type: res.token_type
+    };
+    persistUser(loggedInUser);
+    setUser(loggedInUser);
     setIsAuthenticated(true);
-    return stored;
+    return loggedInUser;
   };
 
   // ── Logout ─────────────────────────────────────────────────────────────────
   const logout = async () => {
-    // Optional: await apiClient.post('/api/v1/auth/logout');
     persistUser(null);
     setUser(null);
     setIsAuthenticated(false);
@@ -107,7 +139,9 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         isAuthenticated,
+        setIsAuthenticated,
         isLoadingAuth,
         isLoadingPublicSettings,
         authError,
@@ -115,6 +149,8 @@ export const AuthProvider = ({ children }) => {
         authChecked,
         signUp,
         login,
+        loginNurse,
+        loginPatient,
         logout,
         navigateToLogin,
         checkUserAuth,

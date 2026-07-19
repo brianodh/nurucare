@@ -7,6 +7,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useLocation, Link } from 'react-router-dom';
 import { useLang } from '@/lib/i18n';
 import { generateSessionKey } from '@/api/apiClient';
+import { getSavedProfileId } from '@/lib/useProgress';
 import { Users } from 'lucide-react';
 
 export default function SessionKey() {
@@ -16,7 +17,7 @@ export default function SessionKey() {
 
   // If FemaleIntake navigates here with a pre-generated key + patient ID, use it.
   const preloadedKey = state?.sessionKey || null;
-  const patientId = state?.patientId || state?.sessionId || `patient_${Date.now()}`;
+  const patientId = state?.patientId || state?.sessionId || getSavedProfileId() || null;
 
   const [sessionKey, setSessionKey] = useState(preloadedKey || '');
   const [generated, setGenerated] = useState(!!preloadedKey);

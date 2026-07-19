@@ -2,29 +2,33 @@ import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
-import PageNotFound from './lib/PageNotFound';
+import PageNotFound from '@/lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import { LanguageProvider } from "@/lib/i18n";
+import { LanguageProvider } from "@/lib/i18n.jsx";
 
 import AppLayout from './components/layout/AppLayout';
 import NurseLayout from './components/nurse/NurseLayout';
 import Landing from './pages/Landing';
 import RoleSelection from './pages/RoleSelection';
 import FemaleIntake from './pages/FemaleIntake';
+import MaleIntake from './pages/MaleIntake';
 import Education from './pages/Education';
 import SessionKey from './pages/SessionKey';
 import PartnerSync from './pages/PartnerSync';
-import MaleDashboard from './pages/MaleDashboard';
 import NurseDashboard from './pages/nurse/NurseDashboard';
 import PatientLookup from './pages/nurse/PatientLookup';
 import NurseAnalytics from './pages/nurse/NurseAnalytics';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import ProfilePage from './pages/Profile';
+import MaleDashboard from './pages/patient/male/Dashboard';
+import FemaleDashboard from './pages/patient/female/Dashboard';
+import MaleSync from './pages/patient/male/Sync';
 
 // ─── Route guard: patients must be signed in ──────────────────────────────────
 function RequirePatientAuth({ children }) {
-  const { isAuthenticated, isLoadingAuth } = useAuth();
+  const { isAuthenticated, user, isLoadingAuth } = useAuth();
   const location = useLocation();
 
   if (isLoadingAuth) {
@@ -35,7 +39,27 @@ function RequirePatientAuth({ children }) {
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || user?.role !== 'patient') {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+
+  return children;
+}
+
+// ─── Route guard: nurses must be signed in ─────────────────────────────────────
+function RequireNurseAuth({ children }) {
+  const { isAuthenticated, user, isLoadingAuth } = useAuth();
+  const location = useLocation();
+
+  if (isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated || user?.role !== 'nurse') {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
@@ -72,16 +96,23 @@ const AuthenticatedApp = () => {
         <Route path="/education" element={<Education />} />
 
         {/* Patient-protected routes */}
+        <Route path="/profile" element={<RequirePatientAuth><ProfilePage /></RequirePatientAuth>} />
         <Route path="/roles" element={<RequirePatientAuth><RoleSelection /></RequirePatientAuth>} />
         <Route path="/female/intake" element={<RequirePatientAuth><FemaleIntake /></RequirePatientAuth>} />
+        <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
         <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
         <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
-        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/male/sync" element={<RequirePatientAuth><MaleSync /></RequirePatientAuth>} />
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
+        {/* Backward compatibility routes */}
+        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
+        <Route path="/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
       </Route>
 
-      {/* Nurse routes (use their own auth — session-key based) */}
-      <Route element={<NurseLayout />}>
+      {/* Nurse routes (protected) */}
+      <Route element={<RequireNurseAuth><NurseLayout /></RequireNurseAuth>}>
         <Route path="/nurse/dashboard" element={<NurseDashboard />} />
         <Route path="/nurse/lookup" element={<PatientLookup />} />
         <Route path="/nurse/analytics" element={<NurseAnalytics />} />

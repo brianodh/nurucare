@@ -176,4 +176,4 @@ def get_myth_busting(method_name: str) -> str:
     
     return f"Myth: {method_name} causes infertility.\nFact: {method_name} does not affect future fertility."
 
-print("✅ AI Client running in MOCK MODE (no API keys needed)")
+print("[OK] AI Client running in MOCK MODE (no API keys needed)")

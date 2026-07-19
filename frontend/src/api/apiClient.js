@@ -11,11 +11,54 @@ export const apiClient = axios.create({
 });
 
 // ─────────────────────────────────────────────
+// AXIOS INTERCEPTOR FOR AUTH TOKEN
+// ─────────────────────────────────────────────
+const AUTH_STORAGE_KEY = 'nurucare_patient';
+
+apiClient.interceptors.request.use((config) => {
+  const stored = localStorage.getItem(AUTH_STORAGE_KEY);
+  if (stored) {
+    try {
+      const user = JSON.parse(stored);
+      if (user.access_token) {
+        config.headers.Authorization = `Bearer ${user.access_token}`;
+      }
+    } catch (e) {
+      console.warn('Failed to parse stored user', e);
+    }
+  }
+  return config;
+});
+
+// ─────────────────────────────────────────────
 // HEALTH
 // ─────────────────────────────────────────────
 
 /** Check backend is alive */
 export const checkHealth = () => apiClient.get('/health');
+
+// ─────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────
+
+/** Nurse login with username and password */
+export const nurseLogin = (username, password) =>
+  apiClient.post('/api/v1/auth/nurse/login', { username, password }).then(r => r.data);
+
+/** Create anonymous patient session */
+export const createPatientSession = () =>
+  apiClient.post('/api/v1/auth/patient/session').then(r => r.data);
+
+/** Sign up a new user (patient or nurse) */
+export const signup = (userData) =>
+  apiClient.post('/api/v1/auth/signup', userData).then(r => r.data);
+
+/** Login a user (patient or nurse) */
+export const login = (username, password) =>
+  apiClient.post('/api/v1/auth/login', { username, password }).then(r => r.data);
+
+/** Get current authenticated user info */
+export const getMe = () => apiClient.get('/api/v1/auth/me').then(r => r.data);
 
 // ─────────────────────────────────────────────
 // INTAKE & RECOMMENDATIONS
@@ -28,7 +71,11 @@ export const checkHealth = () => apiClient.get('/health');
  * @returns {Promise<{ success, message, session_id }>}
  */
 export const submitIntake = (intakeData) =>
-  apiClient.post('/api/v1/intake', intakeData).then((r) => r.data);
+  apiClient.post('/api/v1/intake', intakeData).then((r) => {
+    const data = r.data;
+    // live Render backend returns session_id, local returns profile_id — normalise
+    return { ...data, profile_id: data.profile_id || data.session_id };
+  });
 
 /**
  * Get AI-powered contraceptive recommendations.
@@ -50,18 +97,22 @@ export const getRecommendations = (intakeData) =>
  * @returns {Promise<{ session_key, expires_in_minutes }>}
  */
 export const getDashboardStats = () =>
-  apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data);
+  apiClient.get('/api/v1/nurse/dashboard').then((r) => r.data).catch(() =>
+    apiClient.get('/health').then(() => ({ activeConsultations: 0, riskFlags: 0, dailySessions: 0, recentPatients: [], ageDemographics: [] }))
+  );
 
-export const generateSessionKey = (patientId) =>
-  apiClient.post('/api/v1/session-key', { patient_id: patientId }).then((r) => r.data);
+export const generateSessionKey = (profileId) =>
+  apiClient.post('/api/v1/session-key', {
+    profile_id: profileId || null,
+  }).then((r) => r.data);
 
 /**
  * Nurse: look up patient data by session key.
  * @param {string} sessionKey
- * @returns {Promise<{ success, patient_data, expires_at } | { success, error }>}
+ * @returns {Promise<{ success, patient_data } | { success, error }>}
  */
 export const getPatientBySessionKey = (sessionKey) =>
-  apiClient.post('/api/v1/nurse/patient', null, { params: { session_key: sessionKey } }).then((r) => r.data);
+  apiClient.post('/api/v1/nurse/verify-session', { session_key: sessionKey }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // PARTNER SYNC
@@ -71,17 +122,20 @@ export const getPatientBySessionKey = (sessionKey) =>
  * Generate an anonymous partner sync token.
  * @returns {Promise<{ token, expires_in_hours }>}
  */
-export const generateSyncToken = () =>
-  apiClient.post('/api/v1/sync/token').then((r) => r.data);
+export const generateSyncToken = (profileId) =>
+  apiClient.post('/api/v1/sync/token', { profile_id: profileId || null }).then((r) => r.data);
 
 /**
  * Verify / redeem a partner sync token.
  * @param {string} token - token from partner
- * @param {string} yourId - current user's id (can be anonymous uuid)
- * @returns {Promise<{ success, partner_id, message }>}
+ * @param {string} [profileId] - current user's profile id (optional)
+ * @returns {Promise<{ success, linked_profile_id, message }>}
  */
-export const verifySyncToken = (token, yourId) =>
-  apiClient.post('/api/v1/sync/verify', { token, your_id: yourId }).then((r) => r.data);
+export const verifySyncToken = (token, profileId) =>
+  apiClient.post('/api/v1/sync/verify', {
+    token,
+    profile_id: profileId || null,
+  }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // TRANSLATE
