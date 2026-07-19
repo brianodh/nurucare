@@ -27,9 +27,10 @@ from auth import (
 )
 
 # ============================================
-# IMPORT USSD ROUTER
+# IMPORT USSD ROUTERS
 # ============================================
 from api.endpoints.ussd import router as ussd_router
+from api.endpoints.ussd_complete import router as ussd_complete_router
 
 # ============================================
 # TOKEN GENERATION HELPER
@@ -137,8 +138,9 @@ app.add_middleware(
 # ============================================
 # INCLUDE ROUTERS
 # ============================================
-# Include the USSD router - makes endpoints available at /api/v1/ussd/*
+# Include USSD routers - makes endpoints available at /api/v1/ussd/*
 app.include_router(ussd_router, prefix="/api/v1")
+app.include_router(ussd_complete_router, prefix="/api/v1")
 
 
 # ============================================
