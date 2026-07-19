@@ -22,6 +22,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from engine.recommendation_pipeline import RecommendationPipeline
 
+# ============================================
+# IMPORT THE NEW SESSION MANAGER
+# ============================================
+
+# Use the professional session manager from Step 4
+from ussd.session_manager import get_session_manager
+
 # Initialize router
 router = APIRouter(prefix="/ussd", tags=["USSD"])
 
@@ -55,58 +62,11 @@ class USSDResponse(BaseModel):
 
 
 # ============================================
-# SESSION MANAGEMENT (In-Memory for Hackathon)
+# SESSION MANAGEMENT - Using Professional Manager
 # ============================================
 
-class USSDSessionManager:
-    """
-    Manages USSD sessions - stores user progress and data.
-    
-    For production, use Redis or a database. For the hackathon,
-    in-memory storage is sufficient.
-    """
-    
-    def __init__(self):
-        self._sessions: Dict[str, Dict] = {}
-    
-    def get_session(self, session_id: str) -> Dict[str, Any]:
-        """Get or create a session"""
-        if session_id not in self._sessions:
-            self._sessions[session_id] = {
-                "step": 0,
-                "data": {},
-                "created_at": datetime.now().isoformat()
-            }
-        return self._sessions[session_id]
-    
-    def update_session(self, session_id: str, data: Dict[str, Any]):
-        """Update session data"""
-        session = self.get_session(session_id)
-        session["data"].update(data)
-        self._sessions[session_id] = session
-    
-    def set_step(self, session_id: str, step: int):
-        """Set current step"""
-        session = self.get_session(session_id)
-        session["step"] = step
-        self._sessions[session_id] = session
-    
-    def get_step(self, session_id: str) -> int:
-        """Get current step"""
-        return self.get_session(session_id)["step"]
-    
-    def delete_session(self, session_id: str):
-        """Delete session when complete"""
-        if session_id in self._sessions:
-            del self._sessions[session_id]
-    
-    def get_data(self, session_id: str) -> Dict[str, Any]:
-        """Get all collected data"""
-        return self.get_session(session_id)["data"]
-
-
-# Initialize session manager
-session_manager = USSDSessionManager()
+# Initialize session manager (uses in-memory or Redis automatically)
+session_manager = get_session_manager()
 
 
 # ============================================
@@ -118,6 +78,7 @@ class USSDFlow:
     Complete USSD intake flow handler.
     
     Manages the step-by-step conversation with the user.
+    Uses the professional session manager for data persistence.
     """
     
     def __init__(self):
@@ -646,11 +607,13 @@ async def ussd_callback(request: USSDRequest):
         phone_number = request.phoneNumber
         text = request.text
         
+        # Set phone number in session
+        session_manager.set_phone_number(session_id, phone_number)
+        
         # Determine the user's input (last segment)
         user_input = text.split('*')[-1] if text else ""
         
         # Get or create session
-        session = session_manager.get_session(session_id)
         current_step = session_manager.get_step(session_id)
         
         # If this is a new session, reset step to 0
@@ -699,5 +662,5 @@ async def ussd_health_check():
     return {
         "status": "ok",
         "service": "NuruCare USSD",
-        "active_sessions": len(session_manager._sessions)
+        "active_sessions": session_manager.count_active_sessions()
     }
