@@ -1,5 +1,6 @@
 """
 NuruCare - Backend API (Full Version - Works without API keys)
+Updated to include USSD handler for offline accessibility
 """
 
 from fastapi import FastAPI, HTTPException
@@ -15,6 +16,11 @@ import secrets
 # Import our modules (mock versions work without keys)
 from database import save_intake_data, save_session_key, save_sync_token, verify_session_key, verify_sync_token
 from ai_client import get_ai_recommendation, translate_to_swahili
+
+# ============================================
+# IMPORT USSD ROUTER
+# ============================================
+from api.endpoints.ussd import router as ussd_router
 
 # ============================================
 # ENUMS
@@ -88,6 +94,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ============================================
+# INCLUDE ROUTERS
+# ============================================
+
+# Include the USSD router
+# This makes the USSD endpoints available at /api/v1/ussd/*
+app.include_router(ussd_router, prefix="/api/v1")
 
 # ============================================
 # HEALTH ENDPOINTS
