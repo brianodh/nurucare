@@ -88,6 +88,68 @@ export const getRecommendations = (intakeData) =>
   apiClient.post('/api/v1/recommend', intakeData).then((r) => r.data);
 
 // ─────────────────────────────────────────────
+// PATIENT PROFILE (dashboard + intake persisted data)
+// ─────────────────────────────────────────────
+
+/** Fetch the currently authenticated patient's full profile + safety score.
+ *  Response: { success, profile, safety_score: { score, risk_level, flags } }
+ */
+export const getPatientProfile = () =>
+  apiClient.get('/api/v1/patient/profile').then((r) => r.data);
+
+/** Partial update of the patient's profile (e.g. side_effects, BP, etc.)
+ *  @param {Partial<{side_effects, duration_pref, age, smoking, migraine_type,
+ *    systolic_bp, diastolic_bp, breastfeeding, postpartum_weeks, last_period_date}>} patch
+ */
+export const updatePatientProfile = (patch) =>
+  apiClient.put('/api/v1/patient/profile', patch).then((r) => r.data);
+
+/** Append one side-effect entry to the profile's side_effects jsonb array.
+ *  @param {{symptom, severity, started_on, notes?, method?}} entry
+ */
+export const appendSideEffect = (entry) =>
+  apiClient.post('/api/v1/patient/profile/side-effects', entry).then((r) => r.data);
+
+/** Client-side helper for computing a 0-100 safety score from profile flags.
+ *  Mirrors database.compute_safety_score so offline dashboards still render real
+ *  numbers without a backend fetch.  Never hardcodes a static score.
+ */
+export const computeSafetyScore = (profile = {}) => {
+  if (!profile || typeof profile !== 'object') {
+    return { score: 0, risk_level: 'high', flags: ['No profile data yet'] };
+  }
+  const age = Number(profile.age) || 0;
+  const smoking = Boolean(profile.smoking);
+  const migraine = profile.migraine_type || 'none';
+  const breastfeeding = Boolean(profile.breastfeeding);
+  const systolic = Number(profile.systolic_bp) || 0;
+  const diastolic = Number(profile.diastolic_bp) || 0;
+
+  const flags = [];
+  if (smoking && age > 35)
+    flags.push('Age >35 + smoking — WHO MEC Category 4 risk for combined methods');
+  if (migraine === 'with_aura')
+    flags.push('Migraine with aura — WHO MEC Category 4 risk for combined methods');
+  if (migraine === 'without_aura')
+    flags.push('Migraine without aura — monitor blood pressure closely with combined methods');
+  if (breastfeeding)
+    flags.push('Breastfeeding — only progestogen-only methods are recommended in the first 6 weeks');
+  if (systolic >= 140 || diastolic >= 90)
+    flags.push('Elevated blood pressure — discuss options with a provider before starting combined methods');
+
+  let score = 100;
+  if (smoking && age > 35) score -= 40;
+  if (migraine === 'with_aura') score -= 30;
+  if (migraine === 'without_aura') score -= 8;
+  if (breastfeeding) score -= 5;
+  if (systolic >= 140 || diastolic >= 90) score -= 12;
+  score = Math.max(0, Math.min(100, Math.round(score)));
+
+  const risk_level = score < 60 ? 'high' : score < 85 ? 'medium' : 'low';
+  return { score, risk_level, flags };
+};
+
+// ─────────────────────────────────────────────
 // SESSION KEY  (patient → nurse handoff)
 // ─────────────────────────────────────────────
 

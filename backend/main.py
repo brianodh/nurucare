@@ -16,7 +16,8 @@ from pydantic import BaseModel
 from database import (
     save_intake_data, save_session_key, save_sync_token,
     verify_session_key, verify_sync_token, get_profile_by_id,
-    get_dashboard_data, create_user, get_user_by_username, get_user_by_email
+    get_dashboard_data, create_user, get_user_by_username, get_user_by_email,
+    update_profile_fields, compute_safety_score,
 )
 from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
@@ -299,14 +300,87 @@ async def submit_intake(intake_data: IntakeData, user: Optional[dict] = Depends(
 
 @app.get("/api/v1/patient/profile")
 async def get_patient_profile(user: dict = Depends(get_current_user)):
-    """Get current patient's profile"""
+    """Get current patient's profile with computed safety score."""
     if user.get("role") != "patient":
         raise HTTPException(status_code=403, detail="Patient access required")
     profile_id = user.get("sub")
     result = get_profile_by_id(profile_id)
     if not result["success"]:
         raise HTTPException(status_code=404, detail="Profile not found")
-    return {"success": True, "profile": result["data"]}
+    profile = result["data"]
+    score_bundle = compute_safety_score(profile)
+    return {
+        "success": True,
+        "profile": profile,
+        "safety_score": score_bundle,
+    }
+
+
+class PatientProfileUpdate(BaseModel):
+    side_effects: Optional[list] = None
+    duration_pref: Optional[str] = None
+    last_period_date: Optional[str] = None
+    postpartum_weeks: Optional[int] = None
+    breastfeeding: Optional[bool] = None
+    smoking: Optional[bool] = None
+    migraine_type: Optional[str] = None
+    systolic_bp: Optional[int] = None
+    diastolic_bp: Optional[int] = None
+    age: Optional[int] = None
+
+
+@app.put("/api/v1/patient/profile")
+async def update_patient_profile(
+    payload: PatientProfileUpdate,
+    user: dict = Depends(get_current_user),
+):
+    """Partial update of the patient's profile (e.g. to log new side effects)."""
+    if user.get("role") != "patient":
+        raise HTTPException(status_code=403, detail="Patient access required")
+    profile_id = user.get("sub")
+    patch = payload.model_dump(exclude_unset=True)
+    result = update_profile_fields(profile_id, patch)
+    if not result["success"]:
+        raise HTTPException(status_code=400 if "fields" in result["error"].lower() else 404, detail=result.get("error"))
+    updated = result["data"]
+    return {
+        "success": True,
+        "profile": updated,
+        "safety_score": compute_safety_score(updated),
+    }
+
+
+@app.post("/api/v1/patient/profile/side-effects")
+async def append_side_effect_log(
+    payload: dict,
+    user: dict = Depends(get_current_user),
+):
+    """Append a single side-effect entry to the side_effects jsonb array.
+    payload: { symptom, severity, started_on, notes?, method? }
+    """
+    if user.get("role") != "patient":
+        raise HTTPException(status_code=403, detail="Patient access required")
+    profile_id = user.get("sub")
+    existing_profile = get_profile_by_id(profile_id)
+    if not existing_profile["success"]:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    current = existing_profile["data"].get("side_effects") or []
+    if not isinstance(current, list):
+        current = []
+    entry = {
+        "id": payload.get("id") or ("se_" + secrets.token_hex(5)),
+        "symptom": payload.get("symptom"),
+        "severity": payload.get("severity", "mild"),
+        "started_on": payload.get("started_on") or datetime.now(timezone.utc).date().isoformat(),
+        "notes": payload.get("notes") or "",
+        "method": payload.get("method") or "",
+        "logged_at": datetime.now(timezone.utc).isoformat(),
+    }
+    next_list = current + [entry]
+    saved = update_profile_fields(profile_id, {"side_effects": next_list})
+    if not saved["success"]:
+        raise HTTPException(status_code=500, detail=saved.get("error"))
+    return {"success": True, "side_effects": next_list, "entry": entry}
 
 @app.post("/api/v1/recommend")
 async def get_recommendations(intake_data: IntakeData):

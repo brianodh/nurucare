@@ -48,10 +48,8 @@ export default function Login() {
         navigate('/nurse/dashboard', { replace: true });
       } else if (loggedInUser.role === 'admin') {
         navigate('/admin/dashboard', { replace: true });
-      } else if (loggedInUser.gender === 'female') {
-        navigate('/patient/female/dashboard', { replace: true });
-      } else if (loggedInUser.gender === 'male') {
-        navigate('/patient/male/dashboard', { replace: true });
+      } else if (loggedInUser.gender === 'female' || loggedInUser.gender === 'male') {
+        navigate('/patient/dashboard', { replace: true });
       } else {
         // Incomplete profile (e.g. legacy account with no gender) — continue through
         // the role/intake flow so the user can finish onboarding.

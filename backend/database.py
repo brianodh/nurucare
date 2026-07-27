@@ -529,3 +529,119 @@ def verify_sync_token(token: str):
         return {"success": True, "from_user_id": str(row["profile_id"])}
     except Exception as exc:
         return {"success": False, "error": str(exc)}
+
+
+def compute_safety_score(profile: dict) -> dict:
+    """Compute a 0-100 safety/health score from profile flags + risk band.
+
+    Uses the EXACT same flag logic the nurse dashboard aggregates
+    (get_dashboard_data -> risk_flags: smoking+age>35 OR migraine_with_aura)
+    so patient view never disagrees with the nurse view. Returns:
+      score: int 0-100
+      risk_level: 'low' | 'medium' | 'high'
+      flags: list[str] of active risk descriptions (empty if none)
+    """
+    age = int(profile.get("age") or 0)
+    smoking = bool(profile.get("smoking"))
+    migraine = profile.get("migraine_type") or "none"
+    breastfeeding = bool(profile.get("breastfeeding"))
+    systolic = int(profile.get("systolic_bp") or 0)
+    diastolic = int(profile.get("diastolic_bp") or 0)
+
+    flags = []
+    if smoking and age > 35:
+        flags.append("Age >35 + smoking — WHO MEC Category 4 risk for combined methods")
+    if migraine == "with_aura":
+        flags.append("Migraine with aura — WHO MEC Category 4 risk for combined methods")
+    if migraine == "without_aura":
+        flags.append("Migraine without aura — monitor blood pressure closely with combined methods")
+    if breastfeeding:
+        flags.append("Breastfeeding — only progestogen-only methods are recommended in the first 6 weeks")
+    if systolic >= 140 or diastolic >= 90:
+        flags.append("Elevated blood pressure — discuss options with a provider before starting combined methods")
+
+    # Base score = 100; each flag deducts a weighted amount
+    deductions = {
+        "age_35_smoking": 40,
+        "migraine_with_aura": 30,
+        "migraine_without_aura": 8,
+        "breastfeeding": 5,
+        "hypertension": 12,
+    }
+    score = 100
+    if smoking and age > 35:
+        score -= deductions["age_35_smoking"]
+    if migraine == "with_aura":
+        score -= deductions["migraine_with_aura"]
+    if migraine == "without_aura":
+        score -= deductions["migraine_without_aura"]
+    if breastfeeding:
+        score -= deductions["breastfeeding"]
+    if systolic >= 140 or diastolic >= 90:
+        score -= deductions["hypertension"]
+
+    score = max(0, min(100, int(score)))
+
+    if score < 60:
+        level = "high"
+    elif score < 85:
+        level = "medium"
+    else:
+        level = "low"
+
+    return {"score": score, "risk_level": level, "flags": flags}
+
+
+def update_profile_fields(profile_id: str, fields: dict) -> dict:
+    """Partial update of a profile row (e.g. side_effects).
+    fields is a dict of column_name -> new_value. Supports Supabase + local PG.
+    """
+    allowed_cols = {
+        "side_effects", "duration_pref", "last_period_date",
+        "postpartum_weeks", "breastfeeding", "smoking",
+        "migraine_type", "systolic_bp", "diastolic_bp", "age",
+        "allowed_methods", "restricted_methods", "explanations",
+        "confidence_score"
+    }
+    safe = {k: v for k, v in fields.items() if k in allowed_cols}
+    if not safe:
+        return {"success": False, "error": "No updatable fields provided"}
+
+    try:
+        if _supabase:
+            # Serialize jsonb fields
+            for col in ("side_effects", "allowed_methods", "restricted_methods", "explanations"):
+                if col in safe and safe[col] is not None:
+                    pass  # supabase client handles dict -> jsonb automatically
+            result = (
+                _supabase.table("profiles")
+                .update(safe)
+                .eq("profile_id", profile_id)
+                .execute()
+            )
+            if not result.data or len(result.data) == 0:
+                return {"success": False, "error": "Profile not found"}
+            return {"success": True, "data": result.data[0]}
+
+        assignments = []
+        params = {"profile_id": profile_id}
+        for col, val in safe.items():
+            placeholder = f"%({col})s"
+            if col in ("side_effects", "allowed_methods", "restricted_methods", "explanations"):
+                assignments.append(f'{col} = {placeholder}::jsonb')
+                params[col] = Json(val) if val is not None else None
+            else:
+                assignments.append(f'{col} = {placeholder}')
+                params[col] = val
+
+        sql = f'UPDATE profiles SET {", ".join(assignments)} WHERE profile_id = %(profile_id)s::uuid RETURNING *;'
+        with _local_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(sql, params)
+                row = cursor.fetchone()
+            connection.commit()
+        if not row:
+            return {"success": False, "error": "Profile not found"}
+        return {"success": True, "data": row}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}

@@ -22,9 +22,8 @@ import NurseAnalytics from './pages/nurse/NurseAnalytics';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import ProfilePage from './pages/Profile';
-import MaleDashboard from './pages/patient/male/Dashboard';
-import FemaleDashboard from './pages/patient/female/Dashboard';
 import MaleSync from './pages/patient/male/Sync';
+import PatientDashboard from './pages/patient/Dashboard';
 
 // ─── Route guard: patients must be signed in ──────────────────────────────────
 function RequirePatientAuth({ children }) {
@@ -102,13 +101,14 @@ const AuthenticatedApp = () => {
         <Route path="/male/intake" element={<RequirePatientAuth><MaleIntake /></RequirePatientAuth>} />
         <Route path="/female/session" element={<RequirePatientAuth><SessionKey /></RequirePatientAuth>} />
         <Route path="/female/sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
-        <Route path="/patient/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
-        <Route path="/patient/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
+        <Route path="/patient/male/dashboard" element={<RequirePatientAuth><Navigate to="/patient/dashboard" replace /></RequirePatientAuth>} />
+        <Route path="/patient/female/dashboard" element={<RequirePatientAuth><Navigate to="/patient/dashboard" replace /></RequirePatientAuth>} />
+        <Route path="/patient/dashboard" element={<RequirePatientAuth><PatientDashboard /></RequirePatientAuth>} />
         <Route path="/patient/male/sync" element={<RequirePatientAuth><MaleSync /></RequirePatientAuth>} />
         <Route path="/partner-sync" element={<RequirePatientAuth><PartnerSync /></RequirePatientAuth>} />
         {/* Backward compatibility routes */}
-        <Route path="/male/dashboard" element={<RequirePatientAuth><MaleDashboard /></RequirePatientAuth>} />
-        <Route path="/female/dashboard" element={<RequirePatientAuth><FemaleDashboard /></RequirePatientAuth>} />
+        <Route path="/male/dashboard" element={<RequirePatientAuth><Navigate to="/patient/dashboard" replace /></RequirePatientAuth>} />
+        <Route path="/female/dashboard" element={<RequirePatientAuth><Navigate to="/patient/dashboard" replace /></RequirePatientAuth>} />
       </Route>
 
       {/* Nurse routes (protected) */}
