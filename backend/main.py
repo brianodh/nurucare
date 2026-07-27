@@ -301,7 +301,7 @@ async def get_patient_profile(user: dict = Depends(get_current_user)):
 
 @app.post("/api/v1/recommend")
 async def get_recommendations(intake_data: IntakeData):
-    """Get contraceptive recommendations — WHO MEC rules + AI"""
+    """Get contraceptive recommendations WHO MEC rules + AI"""
     import asyncio
     from concurrent.futures import ThreadPoolExecutor
 
@@ -441,7 +441,7 @@ async def verify_sync_token_endpoint(request: SyncVerifyRequest):
 # ============================================
 @app.get("/api/v1/nurse/dashboard")
 async def get_dashboard(nurse: dict = Depends(require_nurse)):
-    """Fetch dashboard stats — nurse JWT required"""
+    """Fetch dashboard stats nurse JWT required"""
     result = get_dashboard_data()
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error"))

@@ -21,7 +21,7 @@ function toBackendPayload(data) {
   };
 }
 
-// Renders the raw AI text cleanly — strip emoji/bullets and show as paragraphs
+// Renders the raw AI text cleanly strip emoji/bullets and show as paragraphs
 function AITextBlock({ text }) {
   if (!text) return null;
 
@@ -198,14 +198,14 @@ export default function IntakeStep5({ data }) {
         </div>
       )}
 
-      {/* AI Explanation — collapsible */}
+      {/* AI Explanation collapsible */}
       {aiText && (
         <CollapsibleSection icon={Info} title={t('s5_ai_label') || 'AI Explanation'}>
           <AITextBlock text={aiText} />
         </CollapsibleSection>
       )}
 
-      {/* Swahili version — collapsible */}
+      {/* Swahili version collapsible */}
       {swahiliText && (
         <CollapsibleSection icon={Info} title="Swahili / Kiswahili">
           <AITextBlock text={swahiliText} />

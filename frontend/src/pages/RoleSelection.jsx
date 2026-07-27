@@ -73,7 +73,7 @@ export default function RoleSelection() {
               <RotateCcw className="w-5 h-5 text-primary flex-shrink-0" />
               <div>
                 <p className="font-medium text-sm">Continue your assessment</p>
-                <p className="text-xs text-muted-foreground">Step {(saved.intakeStep ?? 0) + 1} of 5 — saved {formatTime(saved.savedAt)}</p>
+                <p className="text-xs text-muted-foreground">Step {(saved.intakeStep ?? 0) + 1} of 5 saved {formatTime(saved.savedAt)}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">

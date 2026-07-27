@@ -229,7 +229,7 @@
       "source_dataset": "MC Baseline",
       "myth_statement": "Menstrual blood leaves the body through the urethra",
       "truth": "Menstrual blood leaves through the vagina, which is a separate opening from the urethra",
-      "explanation": "The female body has three separate openings: the urethra (for urine), the vagina (for menstrual blood and childbirth), and the anus (for stool). Menstrual blood comes from the uterus and exits through the vagina - NOT the urethra. This is basic anatomy that many people misunderstand.",
+      "explanation": "The female body has three separate openings: the urethra (for urine), the vagina (for menstrual blood and childbirth) and the anus (for stool). Menstrual blood comes from the uterus and exits through the vagina - NOT the urethra. This is basic anatomy that many people misunderstand.",
       "myth_prevalence": "Documented in MC Baseline dataset",
       "sample_responses": ["True", "False", "D/know"],
       "sources": [

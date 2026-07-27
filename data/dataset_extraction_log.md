@@ -18,7 +18,7 @@
 
 
 
-This document logs the complete process of extracting, cleaning, and validating all datasets used in NuruCare. A total of \*\*5 primary datasets\*\* were processed, comprising \*\*224,331 unique records\*\* and \*\*300+ extracted variables\*\*.
+This document logs the complete process of extracting, cleaning and validating all datasets used in NuruCare. A total of \*\*5 primary datasets\*\* were processed, comprising \*\*224,331 unique records\*\* and \*\*300+ extracted variables\*\*.
 
 
 

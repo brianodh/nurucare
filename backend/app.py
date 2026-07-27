@@ -12,7 +12,7 @@ logging.basicConfig(
 
 app = FastAPI(
     title="NuruCare API",
-    description="Backend gateway for intake, guardrails, partner sync, and nurse session workflows.",
+    description="Backend gateway for intake, guardrails, partner sync and nurse session workflows.",
     version="1.0.0",
 )
 

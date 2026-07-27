@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains all datasets used for training, validating, and testing the NuruCare AI contraceptive decision-support platform. Data comes from real family planning service records, clinical surveys, and student questionnaires across Kenya.
+This directory contains all datasets used for training, validating and testing the NuruCare AI contraceptive decision-support platform. Data comes from real family planning service records, clinical surveys and student questionnaires across Kenya.
 
 **Total records analyzed:** ~224,000+
 

@@ -6,7 +6,7 @@
 
 ## Overview
 
-NuruCare is an ethical, explainable AI platform that helps individuals in Sub-Saharan Africa make safer, personalized, and informed contraceptive choices based on their health profiles, preferences, and reproductive goals. The project prioritizes privacy, safety, and accessibility.
+NuruCare is an ethical, explainable AI platform that helps individuals in Sub-Saharan Africa make safer, personalized and informed contraceptive choices based on their health profiles, preferences and reproductive goals. The project prioritizes privacy, safety and accessibility.
 
 ## Features
 
@@ -263,7 +263,7 @@ docker-compose up -d
 # Stop all containers but keep them (can be restarted later)
 docker-compose stop
 
-# OR stop and remove containers, networks, and volumes (CAUTION: removes data)
+# OR stop and remove containers, networks and volumes (CAUTION: removes data)
 docker-compose down
 ```
 
@@ -375,7 +375,7 @@ docker-compose up --build -d
 ```
 
 #### Issue: Can't access the app from another device
-If you want to access the app from another device on your network, ensure your firewall allows inbound connections on ports 3000 and 8000, and use your machine's local IP address instead of `localhost`.
+If you want to access the app from another device on your network, ensure your firewall allows inbound connections on ports 3000 and 8000 and use your machine's local IP address instead of `localhost`.
 
 ---
 
@@ -386,7 +386,7 @@ If you want to access the app from another device on your network, ensure your f
 docker-compose down
 ```
 
-#### Remove containers, networks, and volumes (DATA LOSS WARNING)
+#### Remove containers, networks and volumes (DATA LOSS WARNING)
 This will delete all database data:
 ```bash
 docker-compose down -v
@@ -394,7 +394,7 @@ docker-compose down -v
 
 #### Remove unused Docker resources
 ```bash
-# Remove stopped containers, unused networks, and dangling images
+# Remove stopped containers, unused networks and dangling images
 docker system prune
 
 # Remove all unused images, not just dangling ones

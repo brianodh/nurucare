@@ -60,7 +60,7 @@ class WHOMECGuardrail:
     def _check_condition(self, condition: str, profile: Dict) -> bool:
         """Evaluate a condition string against the user profile"""
         # Convert condition string to evaluatable expression
-        # Handle common operators: >, <, >=, <=, ==, AND
+        # Handle common operators: >, <, >=, <=, == and
         try:
             # Create a safe evaluation context
             context = {

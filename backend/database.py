@@ -314,7 +314,7 @@ def save_intake_data(session_id: str, intake_data: dict):
 
 
 def save_session_key(session_key: str, profile_id: str):
-    """Save nurse session key — profile_id must already exist in profiles table"""
+    """Save nurse session key profile_id must already exist in profiles table"""
     expires_at = (datetime.now(timezone.utc) + timedelta(minutes=15)).isoformat()
     if _supabase:
         try:

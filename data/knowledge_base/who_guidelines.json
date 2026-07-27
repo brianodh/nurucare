@@ -5,7 +5,7 @@
       "id": "WHO_MEC_001",
       "title": "Combined Oral Contraceptives - Age >35 with Smoking",
       "category": "combined_hormonal",
-      "content": "Women over 35 who smoke should not use combined oral contraceptives (Category 4). The combination of age and smoking significantly increases the risk of cardiovascular events including stroke, heart attack, and venous thromboembolism. Alternative progestin-only methods (mini-pill, implant, injection, IUD) or non-hormonal methods (condoms, copper IUD) are safe options.",
+      "content": "Women over 35 who smoke should not use combined oral contraceptives (Category 4). The combination of age and smoking significantly increases the risk of cardiovascular events including stroke, heart attack and venous thromboembolism. Alternative progestin-only methods (mini-pill, implant, injection, IUD) or non-hormonal methods (condoms, copper IUD) are safe options.",
       "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_copper", "male_condom"],
       "category_level": 4
     },
@@ -13,7 +13,7 @@
       "id": "WHO_MEC_002",
       "title": "Combined Oral Contraceptives - Migraine with Aura",
       "category": "combined_hormonal",
-      "content": "Women who experience migraine with aura should not use combined oral contraceptives (Category 4). Migraine with aura is associated with an increased risk of ischemic stroke, and estrogen-containing contraceptives further elevate this risk. Progestin-only methods are safe alternatives.",
+      "content": "Women who experience migraine with aura should not use combined oral contraceptives (Category 4). Migraine with aura is associated with an increased risk of ischemic stroke and estrogen-containing contraceptives further elevate this risk. Progestin-only methods are safe alternatives.",
       "recommended_alternatives": ["progestin_only_pill", "implants", "injectables", "iud_hormonal", "iud_copper"],
       "category_level": 4
     },
@@ -59,7 +59,7 @@
       "id": "WHO_BENEFITS_001",
       "title": "Non-Contraceptive Benefits of Hormonal Methods",
       "category": "benefits",
-      "content": "Combined oral contraceptives provide non-contraceptive benefits including: lighter and more regular periods, reduced menstrual pain, lower risk of ovarian cancer (by 50% after 5+ years), lower risk of endometrial cancer, improved acne, and reduced symptoms of endometriosis.",
+      "content": "Combined oral contraceptives provide non-contraceptive benefits including: lighter and more regular periods, reduced menstrual pain, lower risk of ovarian cancer (by 50% after 5+ years), lower risk of endometrial cancer, improved acne and reduced symptoms of endometriosis.",
       "category_level": null
     },
     {
@@ -73,14 +73,14 @@
       "id": "WHO_EMERGENCY_001",
       "title": "Emergency Contraception",
       "category": "emergency",
-      "content": "Emergency contraceptive pills (ECPs) can prevent pregnancy after unprotected sex. Levonorgestrel (P2) is effective up to 72 hours (3 days) after sex - take as soon as possible. Ulipristal acetate (Ella) is effective up to 120 hours (5 days) after sex. Copper IUD is the most effective emergency contraception (99% effective) and can be inserted up to 5 days after unprotected sex, and then continues as ongoing contraception.",
+      "content": "Emergency contraceptive pills (ECPs) can prevent pregnancy after unprotected sex. Levonorgestrel (P2) is effective up to 72 hours (3 days) after sex - take as soon as possible. Ulipristal acetate (Ella) is effective up to 120 hours (5 days) after sex. Copper IUD is the most effective emergency contraception (99% effective) and can be inserted up to 5 days after unprotected sex and then continues as ongoing contraception.",
       "category_level": null
     },
     {
       "id": "WHO_LACTATION_001",
       "title": "Lactational Amenorrhea Method (LAM)",
       "category": "breastfeeding",
-      "content": "LAM is a contraceptive method for breastfeeding women. It is effective when: (1) baby is less than 6 months old, (2) mother is exclusively breastfeeding (no formula or solid food), and (3) mother has not yet had a period. Under these conditions, LAM is 98% effective. After 6 months or when any of these conditions change, another method should be added.",
+      "content": "LAM is a contraceptive method for breastfeeding women. It is effective when: (1) baby is less than 6 months old, (2) mother is exclusively breastfeeding (no formula or solid food) and (3) mother has not yet had a period. Under these conditions, LAM is 98% effective. After 6 months or when any of these conditions change, another method should be added.",
       "category_level": null
     }
   ]

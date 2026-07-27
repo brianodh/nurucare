@@ -3,7 +3,7 @@ NuruCare - Complete USSD Handler with All Questions
 ====================================================
 
 This module provides a clean, structured implementation of the USSD flow
-with all intake questions, session management, and AI integration.
+with all intake questions, session management and AI integration.
 
 USSD Flow:
 0. Welcome → 1. Terms → 2. Age → 3. Relationship → 4. Systolic BP

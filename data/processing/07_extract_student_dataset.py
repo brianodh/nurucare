@@ -1,7 +1,7 @@
 """
 Dataset 5: Student Dataset - Variable Extraction
 Extracts variables for: Adolescent myths, knowledge gaps, contraceptive use, 
-preferred information sources, and demographics.
+preferred information sources and demographics.
 
 This dataset has 2,484 students - critical for the adolescent perspective!
 """

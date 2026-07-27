@@ -387,7 +387,7 @@ class RecommendationPipeline:
             include_educational: Whether to include educational content
             
         Returns:
-            Dictionary with recommendations, restrictions, and explanations
+            Dictionary with recommendations, restrictions and explanations
         """
         print("\n" + "=" * 60)
         print("🎯 Generating Recommendations")

@@ -396,7 +396,7 @@ export default function UnifiedDashboard({ gender = 'female' }) {
   const tourSteps = useMemo(() => {
     return [
       { title: 'Welcome!', desc: 'This is your personalized dashboard. Let\'s take a quick tour.', Icon: Heart },
-      { title: 'Overview', desc: 'View your health score, trends, and quick actions.', Icon: TrendingUp },
+      { title: 'Overview', desc: 'View your health score, trends and quick actions.', Icon: TrendingUp },
       { title: 'Education Hub', desc: 'Find health information tailored to your needs.', Icon: BookOpen },
       { title: 'Partner Sync', desc: 'Connect with your partner to share health info securely.', Icon: Link2 },
       { title: 'Notifications', desc: 'Stay updated with important health reminders.', Icon: Bell },

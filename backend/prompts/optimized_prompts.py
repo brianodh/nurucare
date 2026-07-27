@@ -257,7 +257,7 @@ class RAGPipeline:
         query = f"""
         A {age}-year-old person {fertility_text} needs contraceptive recommendations.
         Safe methods include: {', '.join(allowed_methods[:5]) if allowed_methods else 'various methods'}.
-        Please provide medical guidelines, effectiveness information, and safety considerations.
+        Please provide medical guidelines, effectiveness information and safety considerations.
         """
         return query.strip()
     

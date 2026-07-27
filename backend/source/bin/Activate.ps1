@@ -115,7 +115,7 @@ function global:deactivate ([switch]$NonDestructive) {
 <#
 .Description
 Get-PyVenvConfig parses the values from the pyvenv.cfg file located in the
-given folder, and returns them in a map.
+given folder and returns them in a map.
 
 For each line in the pyvenv.cfg file, if that line can be parsed into exactly
 two strings separated by `=` (with any amount of whitespace surrounding the =)
@@ -134,7 +134,7 @@ function Get-PyVenvConfig(
 ) {
     Write-Verbose "Given ConfigDir=$ConfigDir, obtain values in pyvenv.cfg"
 
-    # Ensure the file exists, and issue a warning if it doesn't (but still allow the function to continue).
+    # Ensure the file exists and issue a warning if it doesn't (but still allow the function to continue).
     $pyvenvConfigPath = Join-Path -Resolve -Path $ConfigDir -ChildPath 'pyvenv.cfg' -ErrorAction Continue
 
     # An empty map will be returned if no config file is found.

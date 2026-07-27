@@ -1,6 +1,6 @@
 # NuruCare Project TODO List
 
-A comprehensive, categorized backlog of incomplete items, bugs, technical debt, and future features for the NuruCare platform.
+A comprehensive, categorized backlog of incomplete items, bugs, technical debt and future features for the NuruCare platform.
 
 ## High Priority Items
 

@@ -69,7 +69,7 @@
       "category": "contraceptive",
       "myth_statement": "Making contraceptives available to young people encourages sexual activity",
       "truth_statement": "Contraceptive access does not increase sexual activity",
-      "explanation": "Numerous studies worldwide have shown that providing contraceptives to adolescents does NOT increase sexual activity. What it does do: increase contraceptive use among sexually active teens, reduce unintended pregnancy rates, and reduce abortion rates. Comprehensive sex education plus contraceptive access is the most effective approach.",
+      "explanation": "Numerous studies worldwide have shown that providing contraceptives to adolescents does NOT increase sexual activity. What it does do: increase contraceptive use among sexually active teens, reduce unintended pregnancy rates and reduce abortion rates. Comprehensive sex education plus contraceptive access is the most effective approach.",
       "prevalence": "99.1% of students in our dataset recognized this myth",
       "source": "Guttmacher Institute, WHO"
     },
@@ -110,7 +110,7 @@
       "id": "MENSTRUAL_MYTH_004",
       "category": "menstrual",
       "myth_statement": "All girls get bad tempered or have mood swings before their periods",
-      "truth_statement": "Not everyone experiences PMS, and severity varies greatly",
+      "truth_statement": "Not everyone experiences PMS and severity varies greatly",
       "explanation": "While some women experience premenstrual syndrome (PMS), many do not. Among those who do, severity varies from mild to severe. Normalizing all emotions as 'just PMS' can dismiss legitimate feelings and concerns.",
       "source": "ACOG"
     }

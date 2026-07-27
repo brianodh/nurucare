@@ -481,7 +481,7 @@ class CryptographicSyncManager:
     """
     Manages cryptographic synchronization between partners.
     
-    This combines token generation, storage, and verification
+    This combines token generation, storage and verification
     with privacy-preserving techniques.
     """
     

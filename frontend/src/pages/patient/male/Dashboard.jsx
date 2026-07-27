@@ -63,7 +63,7 @@ const maleEducationCards = [
   },
   {
     title: 'Vasectomy Info',
-    description: 'Understand what vasectomy is, how it works, and what to expect.',
+    description: 'Understand what vasectomy is, how it works and what to expect.',
     icon: Stethoscope,
     color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300',
   },

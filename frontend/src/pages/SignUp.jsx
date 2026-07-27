@@ -54,7 +54,7 @@ function ConsentModal({ onAccept, onDecline }) {
           <section>
             <h3 className="font-semibold mb-1">What data we collect</h3>
             <ul className="list-disc list-inside text-muted-foreground space-y-1">
-              <li>Name, age, and contact email</li>
+              <li>Name, age and contact email</li>
               <li>Reproductive and menstrual health information you enter during intake</li>
               <li>Blood pressure and other biometric data you provide</li>
               <li>Conversation history with our AI health assistant</li>
@@ -88,7 +88,7 @@ function ConsentModal({ onAccept, onDecline }) {
               <li>Access or download a copy of your data at any time</li>
               <li>Request correction of inaccurate information</li>
               <li>Request deletion of your account and all associated data</li>
-              <li>Withdraw consent — this will disable personalised features</li>
+              <li>Withdraw consent this will disable personalised features</li>
             </ul>
           </section>
 

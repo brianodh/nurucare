@@ -1,6 +1,6 @@
 """
 NuruCare Authentication
-- Anonymous patient sessions (no email/name — UUID only)
+- Anonymous patient sessions (no email/name UUID only)
 - Nurse login with username + password → JWT
 - Role-based access control: patient | nurse
 """
@@ -122,7 +122,7 @@ def require_patient(user: dict = Depends(get_current_user)) -> dict:
     return user
 
 
-# Optional auth — returns user if token present, None if not
+# Optional auth returns user if token present, None if not
 def optional_auth(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme),
 ) -> Optional[dict]:

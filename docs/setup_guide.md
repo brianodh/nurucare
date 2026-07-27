@@ -58,7 +58,7 @@ text
 
 ---
 
-# FILE 2: `api_endpoints_design.md` — Copy EVERYTHING below
+# FILE 2: `api_endpoints_design.md` Copy EVERYTHING below
 
 ```markdown
 # NuruCare API Endpoints Design

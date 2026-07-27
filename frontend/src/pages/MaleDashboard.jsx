@@ -113,7 +113,7 @@ export default function MaleDashboard() {
       const response = await verifySyncToken(partnerToken.trim(), getAnonymousId());
       if (response.success) {
         setConnected(true);
-        // Backend returns the partner's profile directly — no second step needed
+        // Backend returns the partner's profile directly no second step needed
         if (response.partner_profile) {
           setPartnerProfile(response.partner_profile);
         }
@@ -195,7 +195,7 @@ export default function MaleDashboard() {
                 </div>
               </div>
 
-              {/* Show partner summary directly — no session key needed */}
+              {/* Show partner summary directly no session key needed */}
               {partnerProfile ? (
                 <PartnerSummary profile={partnerProfile} />
               ) : (

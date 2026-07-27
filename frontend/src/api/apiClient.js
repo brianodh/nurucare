@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Pulls from .env file locally — set VITE_API_URL=http://127.0.0.1:8000
+// Pulls from .env file locally set VITE_API_URL=http://127.0.0.1:8000
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 export const apiClient = axios.create({
@@ -73,7 +73,7 @@ export const getMe = () => apiClient.get('/api/v1/auth/me').then(r => r.data);
 export const submitIntake = (intakeData) =>
   apiClient.post('/api/v1/intake', intakeData).then((r) => {
     const data = r.data;
-    // live Render backend returns session_id, local returns profile_id — normalise
+    // live Render backend returns session_id, local returns profile_id normalise
     return { ...data, profile_id: data.profile_id || data.session_id };
   });
 
@@ -151,7 +151,7 @@ export const translateText = (text, targetLanguage = 'swahili') =>
   apiClient.post('/api/v1/translate', { text, target_language: targetLanguage }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
-// LEGACY MOCK — kept so nothing crashes
+// LEGACY MOCK kept so nothing crashes
 // ─────────────────────────────────────────────
 export const base44 = {
   auth: {
