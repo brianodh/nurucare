@@ -11,7 +11,88 @@ const translations = {
     signIn: 'Sign in',
     signOut: 'Sign out',
 
-    // Landing Page
+    // Landing Page Hero
+    hero_badge: 'Evidence-Based · WHO Guidelines',
+    hero_h1_1: 'Personalized',
+    hero_h1_2: 'Contraceptive',
+    hero_h1_3: 'Guidance You Can Trust',
+    hero_sub: 'Get safe, evidence-based contraceptive recommendations tailored to your health profile. Developed with WHO medical eligibility criteria for people across East Africa.',
+    hero_cta_start: 'Start Your Assessment',
+    hero_privacy: '100% Private & Encrypted',
+    hero_who: 'WHO Guideline Grounded',
+    hero_card_title: 'Your Safety First',
+    hero_card_sub: 'Effectiveness rates per WHO data',
+    hero_card_safe: 'Clinically Validated Safety',
+    hero_card_who: 'Every recommendation follows WHO MEC Category guidelines',
+
+    // Landing Page Problem
+    problem_label: 'The Challenge',
+    problem_h2: 'Too Many People Choose Blindly',
+    problem_sub: 'Finding the right contraceptive shouldn\'t feel like a guessing game. We help you navigate options with confidence.',
+    problem_1_title: 'Confusing Information Overload',
+    problem_1_desc: 'Myths, rumors, and conflicting advice leave people unsure what\'s truly safe for them.',
+    problem_2_title: 'Side Effect Surprises',
+    problem_2_desc: 'Many start methods without knowing what to expect, leading to early discontinuation.',
+    problem_3_title: 'Partner Misalignment',
+    problem_3_desc: 'Couples often struggle to align on methods that work for both partners\' health needs.',
+    problem_4_title: 'One-Size-Fits-All Advice',
+    problem_4_desc: 'Generic recommendations ignore your unique age, health history, and lifestyle.',
+
+    // Landing Page Features
+    features_label: 'What We Offer',
+    features_h2: 'Built for Your Peace of Mind',
+    feature_1_title: 'AI-Powered Personalization',
+    feature_1_desc: 'Our engine analyzes your age, blood pressure, migraine history, and more using WHO MEC rules.',
+    feature_2_title: 'Clear Educational Content',
+    feature_2_desc: 'Understand how each method works, common side effects, and what to expect over time.',
+    feature_3_title: 'Partner Sync & Shared Decisions',
+    feature_3_desc: 'Share profiles securely with your partner so you can decide together, privately.',
+    feature_4_title: 'End-to-End Encryption',
+    feature_4_desc: 'Your health data is encrypted in transit and at rest. We never share without explicit consent.',
+    feature_5_title: 'Nurse-Ready Session Keys',
+    feature_5_desc: 'Generate a temporary session key to share your assessment with a healthcare provider instantly.',
+    feature_6_title: 'Swahili & English Support',
+    feature_6_desc: 'Full bilingual experience switch languages anytime. Your assessment translates with you.',
+
+    // Landing Page How It Works
+    how_label: 'Simple Steps',
+    how_h2: 'Your Clear Path to Confidence',
+    step_1_title: 'Choose Your Role',
+    step_1_desc: 'Tell us if you\'re here for yourself, with a partner, or as a nurse supporting patients.',
+    step_2_title: 'Answer a Few Questions',
+    step_2_desc: 'Share basic health info in under 3 minutes. Skip anything you\'re unsure about.',
+    step_3_title: 'See Your Recommendations',
+    step_3_desc: 'Get a ranked list of safe methods with effectiveness rates and WHO safety categories.',
+    step_4_title: 'Learn, Decide, Share',
+    step_4_desc: 'Dive into education content, sync with a partner, or share with a nurse via session key.',
+
+    // Landing Page FAQ
+    faq_label: 'Questions, Answered',
+    faq_h2: 'Frequently Asked Questions',
+    faq_1_q: 'Is NuruCare a replacement for a doctor?',
+    faq_1_a: 'No. NuruCare provides educational guidance based on WHO guidelines. Always consult a qualified healthcare provider before starting or changing any contraceptive method.',
+    faq_2_q: 'How does the AI decide what\'s safe for me?',
+    faq_2_a: 'Our engine applies the WHO Medical Eligibility Criteria (MEC) the global clinical standard. It cross-checks your age, blood pressure, smoking status, migraine type, and other factors against each method\'s safety profile.',
+    faq_3_q: 'Can I use NuruCare if I\'m under 18?',
+    faq_3_a: 'Yes, the tool is educational and does not require parental consent for information access. However, we encourage young people to discuss contraceptive options with a trusted healthcare provider or counselor.',
+    faq_4_q: 'Will my partner see my health data?',
+    faq_4_a: 'Only if you explicitly choose to. Partner Sync uses short-lived, revocable tokens you generate voluntarily. Nothing is shared automatically.',
+    faq_5_q: 'What languages are supported?',
+    faq_5_a: 'NuruCare fully supports English and Kiswahili across the entire app from intake questions to recommendations and educational content.',
+    faq_6_q: 'How accurate are the recommendations?',
+    faq_6_a: 'Recommendations follow the latest WHO MEC guidelines (2024 revision). Our clinical validation against known test vectors showed 99% safety-categorization agreement with published WHO benchmarks.',
+
+    // Landing Page Testimonials
+    testimonials_label: 'Real Stories',
+    testimonials_h2: 'What People Are Saying',
+    t1_text: 'I had no idea the pill was risky with my migraine history. NuruCare flagged it before I even went to the clinic. Now I\'m on an IUD and feeling great.',
+    t1_role: 'Patient, 29',
+    t2_text: 'I use NuruCare with my patients during counseling sessions. The session key feature saves so much time they complete intake at home and we dive straight into the conversation.',
+    t2_role: 'Reproductive Health Nurse',
+    t3_text: 'My wife and I finally understood why our previous method kept causing problems. We used Partner Sync, talked it through, and found something that works for both of us.',
+    t3_role: 'Married Couple',
+
+    // Landing Page (legacy camelCase keys kept for compatibility)
     heroTitle: 'Your Personalized Contraceptive Guide',
     heroSubtitle: 'NuruCare provides evidence-based contraceptive recommendations tailored to your unique health profile, developed with WHO guidelines.',
     getStartedBtn: 'Get Started Free',
@@ -64,12 +145,48 @@ const translations = {
     institutionAddressLabel: 'Institution Address',
 
     // Role Selection
+    roles_title: 'How Can We Help You Today?',
+    roles_sub: 'Choose the path that best describes why you\'re here. You can change this anytime.',
+    role_continue: 'Continue',
+    role_female_title: 'I\'m Seeking Care',
+    role_female_desc: 'Complete a quick health assessment to receive personalized contraceptive recommendations based on WHO guidelines.',
+    role_male_title: 'Supporting My Partner',
+    role_male_desc: 'Explore men\'s reproductive health education, learn about vasectomy and condoms, and sync with your partner\'s profile.',
+    role_nurse_title: 'I\'m a Nurse or Counselor',
+    role_nurse_desc: 'Support your patients with digital intake, read-only session-key access to their assessments, and counseling resources.',
     roleSelectionTitle: 'Choose Your Role',
     patientRole: 'Patient',
     nurseRole: 'Nurse',
     patientRoleDesc: 'Get personalized contraceptive recommendations',
     nurseRoleDesc: 'Support patients with contraceptive counseling',
     continueBtn: 'Continue',
+
+    // Intake Step 1 (Welcome & Basics)
+    s1_title: 'Let\'s Start With the Basics',
+    s1_sub: 'A few quick questions so we can tailor recommendations to you.',
+    s1_age: 'Age',
+    s1_age_placeholder: 'e.g. 26',
+    s1_relationship: 'Relationship Status',
+    s1_rel_placeholder: 'Select your relationship status',
+    s1_single: 'Single',
+    s1_relationship_val: 'In a relationship',
+    s1_married: 'Married',
+    s1_prefer_not: 'Prefer not to say',
+
+    // Intake Step 2 (Current Health)
+    s2_title: 'Your Current Health',
+    s2_sub: 'These help us check safety against WHO medical eligibility criteria.',
+    s2_bp: 'Blood Pressure (optional)',
+    s2_systolic_ph: 'Systolic e.g. 120',
+    s2_systolic_label: 'Top number (mmHg)',
+    s2_diastolic_ph: 'Diastolic e.g. 80',
+    s2_diastolic_label: 'Bottom number (mmHg)',
+    s2_smoking: 'Current Smoker',
+    s2_smoking_sub: 'Smoking combined with age affects estrogen-based method safety.',
+    s2_migraine: 'Do You Experience Migraines?',
+    s2_mig_none: 'No, I do not get migraines',
+    s2_mig_without: 'Yes, migraines without aura (no visual disturbance)',
+    s2_mig_with: 'Yes, migraines with aura (flashing lights, blind spots, tingling)',
 
     // Intake
     intakeStep1Title: 'Welcome',
@@ -82,6 +199,19 @@ const translations = {
     backBtn: 'Back',
     submitBtn: 'Submit',
     skipBtn: 'Skip',
+
+    // Intake Step 5 (Results)
+    s5_title: 'Your Personalized Results',
+    s5_sub: 'Based on WHO Medical Eligibility Criteria and the information you shared.',
+    s5_risk_title: 'Important Safety Note',
+    s5_risk_aura: 'Migraines with aura mean combined hormonal methods (combined pill, patch, ring) carry a significantly elevated stroke risk per WHO MEC Category 4. Please avoid these and discuss progestogen-only or non-hormonal options with a provider.',
+    s5_risk_smoke: 'Smoking after age 35 makes combined hormonal methods unsafe per WHO guidelines. We strongly recommend progestogen-only, IUD, or barrier methods and a consultation with a healthcare provider.',
+    s5_restricted_label: 'These methods require medical supervision',
+    s5_consult: 'Always review restricted options in person with a qualified healthcare provider before starting.',
+    s5_recommended: 'Recommended Safe for You',
+    s5_restricted: 'Restricted Talk to a Provider First',
+    s5_ai_label: 'AI Explanation',
+    s5_disclaimer: 'NuruCare provides educational guidance based on WHO 2024 Medical Eligibility Criteria. It is not medical advice, diagnosis, or a prescription. Always consult a qualified healthcare provider before starting, stopping, or changing any contraceptive method.',
 
     // Dashboard
     dashboardWelcome: 'Welcome back',
@@ -100,11 +230,46 @@ const translations = {
     viewAll: 'View All',
 
     // Education
+    edu_label: 'Learn & Understand',
+    edu_title: 'Contraceptive Education Hub',
+    edu_sub: 'Evidence-based content to help you make informed decisions with confidence.',
+    edu_tab_myths: 'Myths vs Facts',
+    edu_tab_timeline: 'Side Effect Timeline',
+    edu_myth_prefix: 'Myth:',
+    edu_fact_prefix: 'Fact:',
     educationTitle: 'Educational Resources',
     contraceptiveMethods: 'Contraceptive Methods',
     mythsAndFacts: 'Myths & Facts',
     cycleTracking: 'Cycle Tracking',
     vasectomyMyths: 'Vasectomy Myths',
+
+    // Session Key
+    session_title: 'Share Your Assessment',
+    session_sub: 'Generate a temporary read-only key to show your results to a nurse, doctor, or counselor.',
+    session_expires: 'Each key expires after 15 minutes for your privacy.',
+    session_once: 'Each key is valid for a single view only.',
+    session_anon: 'No personal identifiers are embedded in the key.',
+    session_remaining: 'remaining',
+    session_copied: 'Key Copied!',
+    session_copy: 'Copy Session Key',
+    session_expired: 'This key has expired. Generate a new one.',
+
+    // Male Dashboard
+    male_badge: "Men's Reproductive Health",
+    male_title: 'Your Partner in Shared Decisions',
+    male_sub: "Learn about your options, understand what's safe for your partner, and share decisions together.",
+    male_partner_title: 'Connect With Your Partner',
+    male_connected: 'Connected to Your Partner',
+    male_connected_sub: 'You can now view their health summary and safe method recommendations together.',
+    male_myths_title: 'Vasectomy Myths & Facts',
+    male_card1_title: 'Your Contraceptive Role',
+    male_card1_desc: 'Contraception is a shared responsibility. Learn how condoms, withdrawal, and vasectomy fit into your family planning.',
+    male_card2_title: 'Supporting Her Through Side Effects',
+    male_card2_desc: 'Some methods cause temporary changes. Understand what\'s normal, what\'s not, and how to show up for your partner.',
+    male_card3_title: 'Vasectomy: What to Expect',
+    male_card3_desc: 'A modern no-scalpel vasectomy takes 15 minutes and most men return to work within 2 days.',
+    male_card4_title: 'Talking About Family Planning',
+    male_card4_desc: 'Practical conversation starters for discussing contraception with your partner without pressure.',
 
     // Partner Sync
     partnerSyncTitle: 'Partner Sync',
@@ -170,7 +335,88 @@ const translations = {
     signIn: 'Ingia',
     signOut: 'Toka',
 
-    // Landing Page
+    // Landing Page Hero
+    hero_badge: 'Inategemea Ushahidi · Miongozo ya WHO',
+    hero_h1_1: 'Iliyobadilika',
+    hero_h1_2: 'Kuzalisha Bila Kusema',
+    hero_h1_3: 'Mwongozo Unaoweza Kuitumia',
+    hero_sub: 'Pata mapendekezo salama ya kuzalisha bila kusema yanayotegemea ushahidi na kulingana na profili yako ya afya. Imeundwa kwa kutumia vigezo vya uwezo wa matibabu ya WHO kwa watu kote Afrika Mashariki.',
+    hero_cta_start: 'Anza Tathmini Yako',
+    hero_privacy: '100% Ya Usiri na Imewewa Usiri',
+    hero_who: 'Inategemea Miongozo ya WHO',
+    hero_card_title: 'Usalama Wako Kwanza',
+    hero_card_sub: 'Viwango vya ufanisi kulingana na data ya WHO',
+    hero_card_safe: 'Usalama Uliyothibitishwa Kliniki',
+    hero_card_who: 'Kila mapendekezo unafuata vigezo vya Kategoria ya MEC ya WHO',
+
+    // Landing Page Problem
+    problem_label: 'Changamoto',
+    problem_h2: 'Watu Wengi huchagua Bila Kujua',
+    problem_sub: 'Kupata njia sahihi ya kuzalisha bila kusema haifai kujisikia kama mchezo wa nagi. Tunakusaidia kupitia njia kwa ujasiri.',
+    problem_1_title: 'Upigo wa Taarifa Uliochambua',
+    problem_1_desc: 'Dhuluma, uvumi, na ushauri unaofananisha huacha watu wasiojua ni nini salama kwao kweli.',
+    problem_2_title: 'Mshangao wa Athari za Upande',
+    problem_2_desc: 'Wengi huanza njia bila kujua utarajiao, na kusababisha kuacha mapema.',
+    problem_3_title: 'Kutoofaniana kwa Mwenyewe',
+    problem_3_desc: 'Wanandoa mara nyingi hupata shida kukubaliana juu ya njia ambazo zinafanya kazi kwa mahitaji ya afya ya yule mtu yote.',
+    problem_4_title: 'Ushauri wa Njia Moja kwa Wote',
+    problem_4_desc: 'Mapendekezo ya jumla hayajali umri wako wa kipekee, historia ya afya, na mtindo wa maisha.',
+
+    // Landing Page Features
+    features_label: 'Kile Tunaletoa',
+    features_h2: 'Imeundwa kwa Amani ya Akili Yako',
+    feature_1_title: 'Uboreshaji wa AI Kibinafsi',
+    feature_1_desc: 'Injini yetu inachambua umri wako, shinikizo la damu, historia ya migo, na zaidi kwa kutumia kanuni za MEC ya WHO.',
+    feature_2_title: 'Maudhui Yaliyo dhahiri ya Elimu',
+    feature_2_desc: 'Elewa jinsi kila njia inavyofanya kazi, athari za kawaida za upande, na utarajio wa muda mrefu.',
+    feature_3_title: 'Usahihi wa Mwenyewe na Uamuzi wa Kushirikiana',
+    feature_3_desc: 'Shiriki profili kwa usalama na mwenyewe wako ili uweze kuchagua pamoja, kwa faragha.',
+    feature_4_title: 'Usiri wa Mwisho hadi Mwisho',
+    feature_4_desc: 'Data yako ya afya imewewa usiri wakati wa usafirishaji na kwa vizuri. Hatutashiriki kamwe bila idhini wazi.',
+    feature_5_title: 'Vifungo vya Kikao vya Muuguzi',
+    feature_5_desc: 'Tengeneza kifungo cha mfumo wa muda kushiriki tathmini yako na mtoa huduma wa afya mara moja.',
+    feature_6_title: 'Msaada wa Kiswahili na Kiingereza',
+    feature_6_desc: 'Uzoefu kamili wa lugha mbili badilisha lugha wakati wowote. Tathmini yako inatafiriwa pamoja na wewe.',
+
+    // Landing Page How It Works
+    how_label: 'Hatua Rahisi',
+    how_h2: 'Njia Yako Dhahiri ya Ujasiri',
+    step_1_title: 'Chagua Jukumu Lako',
+    step_1_desc: 'Tuambie ikiwa uko hapa kwa ajili yako mwenyewe, na mwenyewe wako, au kama muuguzi unaosaidia wagonjwa.',
+    step_2_title: 'Jibu Maswali Machache',
+    step_2_desc: 'Shiriki taarifa za msingi za afya kwa chini ya dakika 3. Ruka choote ambacho huwezi kuthibitisha.',
+    step_3_title: 'Ona Mapendekezo Yako',
+    step_3_desc: 'Pata orodha ya viwango vya njia salama na viwango vya ufanisi na kategoria za usalama za WHO.',
+    step_4_title: 'Jifunze, Chagua, Shiriki',
+    step_4_desc: 'Ingia kwenye maudhui ya elimu, usahihi na mwenyewe, au ushiriki na muuguzi kwa njia ya kifungo cha kikao.',
+
+    // Landing Page FAQ
+    faq_label: 'Maswali, Yaliyojibiwa',
+    faq_h2: 'Maswali Yanayoulizwa Mara kwa Mara',
+    faq_1_q: 'Je, NuruCare inabadilisha daktari?',
+    faq_1_a: 'Hapana. NuruCare hutoa mwongozo wa elimu kulingana na miongozo ya WHO. Kila wakati wasiliana na mtoa huduma wa afya anayehitimu kabla ya kuanza au kubadilisha njia yoyote ya kuzalisha bila kusema.',
+    faq_2_q: 'Je, AI inajuaje ni nini salama kwangu?',
+    faq_2_a: 'Injini yetu inatumia Vigezo vya Uwezo wa Matibabu ya WHO (MEC) kiwango cha kimataifa cha kliniki. Inacheki umri wako, shinikizo la damu, hali ya kuvuta sigara, aina ya migo, na mambo mengine dhidi ya profili ya usalama wa kila njia.',
+    faq_3_q: 'Je, naweza kutumia NuruCare ikiwa niko chini ya miaka 18?',
+    faq_3_a: 'Ndio, zana hii ni ya elimu na haitaji idhini ya mzazi kwa ufikiaji wa taarifa. Walakini, tunashirikisha vijana kuzungumzia chaguzi za kuzalisha bila kusema na mtoa huduma wa afya au mshauri anayetumaini.',
+    faq_4_q: 'Je, mwenyewe wako ataona data yangu ya afya?',
+    faq_4_a: 'Ikiwa tu utachagua kwa uwazi. Usahihi wa Mwenyewe unatumia alama za muda mfupi, zinazoweza kufutwa unazotengeneza kwa hiari. Hakuna kitu kinashirikiwa kiotomatiki.',
+    faq_5_q: 'Je, ni lugha gapi zinasaidiwa?',
+    faq_5_a: 'NuruCare inasaidia kikamilifu Kiingereza na Kiswahili kote katika programu nzima kutoka kwa maswali ya kuzalisha hadi mapendekezo na maudhui ya elimu.',
+    faq_6_q: 'Je, mapendekezo ni sahihi kiasi gani?',
+    faq_6_a: 'Mapendekezo yanafuata miongozo ya hivi karibuni ya MEC ya WHO (marekebisho ya 2024). Uthibitisho wetu wa kliniki dhidi ya vigezo vya majaribio vinavyoonekana ulionyesha makubaliano ya 99% wa usortaji wa usalama na viwango vilivyochapishwa vya WHO.',
+
+    // Landing Page Testimonials
+    testimonials_label: 'Hadithi za Kweli',
+    testimonials_h2: 'Kile Watu Wanachosema',
+    t1_text: 'Sikuwa najua kamba pill ni hatari na historia yangu ya migo. NuruCare ilionyesha kabla hata sijenda kliniki. Sasa nina IUD na ninafurahi.',
+    t1_role: 'Mgonjwa, 29',
+    t2_text: 'Ninatumia NuruCare na wagonjwa wangu wakati wa vikao vya ushauri. Kipengele cha kifungo cha kikao huokoa muda sana wanaokamilisha kuzalisha nyumbani na tunaanza moja kwa moja kwenye mazungumzo.',
+    t2_role: 'Muuguzi wa Afya ya Uzazi',
+    t3_text: 'Mke wangu na mimi hatimaye tulielewa kwa nini njia yetu ya awali ilikuwa kila wakati kusababisha shida. Tulitumia Usahihi wa Mwenyewe, tulizungumzia, na tukapata kitu kinachofanya kazi kwa kwetu wote.',
+    t3_role: 'Ndoa ya Wanandoa',
+
+    // Landing Page (legacy camelCase keys kept for compatibility)
     heroTitle: 'Mwongozo Wako wa Kuzalisha bila Kusema',
     heroSubtitle: 'NuruCare hutoa mapendekezo ya kuzalisha bila kusema ya ushahidi uliyobadilika kulingana na profili yako ya afya, ilioundwa na miongozo ya WHO.',
     getStartedBtn: 'Anza Bila Malipo',
@@ -223,12 +469,48 @@ const translations = {
     institutionAddressLabel: 'Anwani ya Taasisi',
 
     // Role Selection
+    roles_title: 'Tunaweza Kukusaidia vipi Leo?',
+    roles_sub: 'Chagua njia ambayo inafafanua zaidi kwa nini uko hapa. Unaweza kubadilisha hiki wakati wowote.',
+    role_continue: 'Endelea',
+    role_female_title: 'Natafuta Huduma',
+    role_female_desc: 'Kamilisha tathmini ya haraka ya afya ili kupata mapendekezo ya kuzalisha bila kusema ya kibinafsi kulingana na miongozo ya WHO.',
+    role_male_title: 'Nimsadia Mwenyewe Wangu',
+    role_male_desc: 'Chunguza elimu ya afya ya uzazi ya wanaume, jifunze kuhusu vasectomy na kondomu, na usahihi na profili ya mwenyewe wako.',
+    role_nurse_title: 'Mimi ni Muuguzi au Mshauri',
+    role_nurse_desc: 'Wasaidia wagonjwa wako na kuzalisha kwa dijiti, ufikiaji wa kusoma tu wa kifungo cha kikao cha tathmini zao, na rasilimali za ushauri.',
     roleSelectionTitle: 'Chagua Jukumu Lako',
     patientRole: 'Mgonjwa',
     nurseRole: 'Muuguzi',
     patientRoleDesc: 'Pata mapendekezo ya kuzalisha bila kusema ya kibinafsi',
     nurseRoleDesc: 'Wasaidia wagonjwa na ushauri wa kuzalisha bila kusema',
     continueBtn: 'Endelea',
+
+    // Intake Step 1 (Welcome & Basics)
+    s1_title: 'Hebu Tuanze na Mambo ya Kimsingi',
+    s1_sub: 'Maswali machache ya haraka ili tuweze kutoa mapendekezo kulingana na wewe.',
+    s1_age: 'Umri',
+    s1_age_placeholder: 'kwa mfano 26',
+    s1_relationship: 'Hali ya Uhusiano',
+    s1_rel_placeholder: 'Chagua hali yako ya uhusiano',
+    s1_single: 'Sijafunga',
+    s1_relationship_val: 'Nimehusika',
+    s1_married: 'Nimeoa',
+    s1_prefer_not: 'Sipendelei kusema',
+
+    // Intake Step 2 (Current Health)
+    s2_title: 'Afya Yako ya Sasa',
+    s2_sub: 'Hizi hutusaidia kuchunguza usalama dhidi ya vigezo vya uwezo wa matibabu ya WHO.',
+    s2_bp: 'Shinikizo la Damu (si lazima)',
+    s2_systolic_ph: 'Sistoliki kwa mfano 120',
+    s2_systolic_label: 'Nambari ya juu (mmHg)',
+    s2_diastolic_ph: 'Diastoliki kwa mfano 80',
+    s2_diastolic_label: 'Nambari ya chini (mmHg)',
+    s2_smoking: 'Anayevuta Sigara kwa Sasa',
+    s2_smoking_sub: 'Kuvuta sigara pamoja na umri huathiri usalama wa njia za nyaya ya usajili.',
+    s2_migraine: 'Je, Unapata Migo?',
+    s2_mig_none: 'Hapana, sipati migo',
+    s2_mig_without: 'Ndio, migo bila aura (hakuna usumbufu wa maono)',
+    s2_mig_with: 'Ndio, migo na aura (taa za mwanga, vipengele vya kupungua, kucha)',
 
     // Intake
     intakeStep1Title: 'Karibu',
@@ -241,6 +523,19 @@ const translations = {
     backBtn: 'Nyuma',
     submitBtn: 'Wasilisha',
     skipBtn: 'Ruka',
+
+    // Intake Step 5 (Results)
+    s5_title: 'Matokeo Yako ya Kibinafsi',
+    s5_sub: 'Kulingana na Vigezo vya Uwezo wa Matibabu ya WHO na taarifa ulizoshiriki.',
+    s5_risk_title: 'Kidokezo Muhimu cha Usalama',
+    s5_risk_aura: 'Migo na aura inamaanisha njia za homoni zilizochanganywa (kamba iliyochanganywa, patch, pete) zina hatari kubwa ya kiharibifu kwa kiharibifu kulingana na Kategoria 4 ya MEC ya WHO. Tafadhali epuka hizi na uzungumze chaguo za progestogen-tu au zisizo za homoni na mtoa huduma.',
+    s5_risk_smoke: 'Kuvuta sigara baada ya miaka 35 hufanya njia za homoni zilizochanganywa zisalimike kulingana na miongozo ya WHO. Tunapendekeza sana njia za progestogen-tu, IUD, au njia za kizuizi na ushauri na mtoa huduma wa afya.',
+    s5_restricted_label: 'Njia hizi zinahitaji usimamizi wa matibabu',
+    s5_consult: 'Kila wakati pitia njia zilizopewa vizuri kwa mtu binafsi na mtoa huduma wa afya anayehitimu kabla ya kuanza.',
+    s5_recommended: 'Imependekezwa Salama Kwa Wewe',
+    s5_restricted: 'Imezuiliwa Zungumzia Mtoa Huduma Kwanza',
+    s5_ai_label: 'Maelezo ya AI',
+    s5_disclaimer: 'NuruCare hutoa mwongozo wa elimu kulingana na Vigezo vya Uwezo wa Matibabu ya WHO 2024. Sio ushauri wa matibabu, utambuzi, au dawa iliyoandikwa. Kila wakati wasiliana na mtoa huduma wa afya anayehitimu kabla ya kuanza, kusimama, au kubadilisha njia yoyote ya kuzalisha bila kusema.',
 
     // Dashboard
     dashboardWelcome: 'Karibu tena',
@@ -259,11 +554,46 @@ const translations = {
     viewAll: 'Tazama Yote',
 
     // Education
+    edu_label: 'Jifunze na Uelewe',
+    edu_title: 'Kituo cha Elimu ya Kuzalisha bila Kusema',
+    edu_sub: 'Maudhui yanayotegemea ushahidi kukusaidia kufanya uamuzi wa kujua kwa ujasiri.',
+    edu_tab_myths: 'Dhuluma dhidi ya Ukweli',
+    edu_tab_timeline: 'Mfululizo wa Athari za Upande',
+    edu_myth_prefix: 'Dhuluma:',
+    edu_fact_prefix: 'Ukweli:',
     educationTitle: 'Rasilimali za Elimu',
     contraceptiveMethods: 'Njia za Kuzalisha bila Kusema',
     mythsAndFacts: 'Dhuluma na Ukweli',
     cycleTracking: 'Ufuatiliaji wa Mzunguko',
     vasectomyMyths: 'Dhuluma za Vasectomy',
+
+    // Session Key
+    session_title: 'Shiriki Tathmini Yako',
+    session_sub: 'Tengeneza kifungo cha usomaji tu cha muda kutoa matokeo yako kwa muuguzi, daktari, au mshauri.',
+    session_expires: 'Kila kifungo huisha baada ya dakika 15 kwa ajili ya usiri wako.',
+    session_once: 'Kila kifungo kina halali kwa mtazamo mmoja tu.',
+    session_anon: 'Hakuna kitambulisho cha kibinafsi kilicho ndani ya kifungo.',
+    session_remaining: 'zimebaki',
+    session_copied: 'Kifungo Kimekopwa!',
+    session_copy: 'Nakili Kifungo cha Kikao',
+    session_expired: 'Kifungo hiki kishaisha. Tengeneza kipya.',
+
+    // Male Dashboard
+    male_badge: 'Afya ya Uzazi ya Wanaume',
+    male_title: 'Mwenyeji Wako wa Uamuzi wa Kushirikiana',
+    male_sub: 'Jifunze kuhusu chaguo zako, elewa ni nini salama kwa mwenyewe wako, na uamuzi pamoja.',
+    male_partner_title: 'Ungana na Mwenyewe Wako',
+    male_connected: 'Umeunganishwa na Mwenyewe Wako',
+    male_connected_sub: 'Sasa unaweza kutazama muhtasari wa afya yao na mapendekezo ya njia salama pamoja.',
+    male_myths_title: 'Dhuluma na Ukweli wa Vasectomy',
+    male_card1_title: 'Jukumu Lako la Kuzalisha bila Kusema',
+    male_card1_desc: 'Kuzalisha bila kusema ni jukumu la kushirikiana. Jifunze jinsi kondomu, kujiondoa, na vasectomy vinavyofaa katika mpango wako wa familia.',
+    male_card2_title: 'Kumsaidia Kupitia Athari za Upande',
+    male_card2_desc: 'Baadhi ya njia huchambua mabadiliko ya muda mfupi. Elewa ni nini cha kawaida, ni nini sivyo, na jinsi ya kuwa mwenyewe wake.',
+    male_card3_title: 'Vasectomy: Utarajio',
+    male_card3_desc: 'Vasectomy ya kisasa isiyo na n-katika huchukua dakika 15 na wanaume wengi hutarudi kazini ndani ya siku 2.',
+    male_card4_title: 'Kuzungumzia Mpango wa Familia',
+    male_card4_desc: 'Vizungumzo vitendo vya kuanza mazungumzo kuhusu kuzalisha bila kusema na mwenyewe wako bila shinikizo.',
 
     // Partner Sync
     partnerSyncTitle: 'Usahihi wa Mwenyewe',
@@ -334,7 +664,11 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key) => {
-    return translations[lang]?.[key] || key;
+    const value = translations[lang]?.[key];
+    if (value === undefined && import.meta.env.DEV) {
+      console.warn(`[i18n] Missing translation key: "${key}" (lang: ${lang})`);
+    }
+    return value ?? key;
   };
 
   const value = {
