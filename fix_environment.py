@@ -23,8 +23,8 @@ connected = False
 
 for pwd in passwords_to_try:
     try:
-        import psycopg2
-        conn = psycopg2.connect(
+        import psycopg
+        conn = psycopg.connect(
             host="localhost",
             port=5432,
             user="postgres",
@@ -90,8 +90,8 @@ print("-" * 50)
 
 if connected:
     try:
-        import psycopg2
-        conn = psycopg2.connect(
+        import psycopg
+        conn = psycopg.connect(
             host="localhost",
             port=5432,
             user="postgres",

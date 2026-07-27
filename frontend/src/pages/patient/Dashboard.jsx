@@ -48,9 +48,9 @@ import {
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useAuth } from '@/lib/AuthContext';
 import { useLang } from '@/lib/i18n.jsx';
-import NotificationCenter from '../components/NotificationCenter';
-import PartnerSummary from '../components/PartnerSummary';
-import OnboardingTour from '../components/OnboardingTour';
+import NotificationCenter from './components/NotificationCenter';
+import PartnerSummary from './components/PartnerSummary';
+import OnboardingTour from './components/OnboardingTour';
 import { useToast } from '@/components/ui/use-toast';
 import {
   getPatientProfile,
@@ -86,7 +86,7 @@ const FEMALE_EDUCATION = [
   {
     title: 'Cycle Tracking',
     description:
-      'Understand your menstrual cycle, recognise fertile windows, and spot changes that may need a provider check.',
+      'Understand your menstrual cycle, recognise fertile windows and spot changes that may need a provider check.',
     icon: Calendar,
     color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300',
   },
@@ -110,14 +110,14 @@ const MALE_EDUCATION = [
   {
     title: 'Contraception Basics',
     description:
-      'Learn the contraceptive options that involve or affect you — condoms, vasectomy, partner methods, and effectiveness.',
+      'Learn the contraceptive options that involve or affect you — condoms, vasectomy, partner methods and effectiveness.',
     icon: BookOpen,
     color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300',
   },
   {
     title: 'Vasectomy Info',
     description:
-      'What vasectomy is, how the no-scalpel procedure works, recovery, and when it becomes effective.',
+      'What vasectomy is, how the no-scalpel procedure works, recovery and when it becomes effective.',
     icon: Stethoscope,
     color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300',
   },

@@ -13,9 +13,9 @@ import os
 from datetime import datetime, timedelta, timezone
 from typing import Any, Optional
 
-import psycopg2
+import psycopg
 from dotenv import load_dotenv
-from psycopg2.extras import Json, RealDictCursor
+from psycopg.extras import Json, RealDictCursor
 from supabase import Client, create_client
 
 load_dotenv()
@@ -51,7 +51,7 @@ else:
 
 
 def _local_connection():
-    return psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    return psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
 
 
 def _ensure_local_schema() -> None:
