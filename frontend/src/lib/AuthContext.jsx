@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
       id: username,
       name: res.name,
       role: res.role,
+      gender: res.gender,
       access_token: res.access_token,
       token_type: res.token_type,
     };
@@ -112,6 +113,7 @@ export const AuthProvider = ({ children }) => {
       id: username,
       name: res.name,
       role: res.role,
+      gender: res.gender,
       access_token: res.access_token,
       token_type: res.token_type
     };

@@ -28,32 +28,34 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      const loggedInUser = await login({ username: form.username, password: form.password });
-      // If login doesn't return gender, fetch using getMe
-      if (!loggedInUser.gender) {
+      let loggedInUser = await login({ username: form.username, password: form.password });
+      // Safety net: if a legacy/stale token didn't carry gender, try to recover via getMe
+      if (loggedInUser.role !== 'nurse' && !loggedInUser.gender) {
         try {
           const meData = await getMe();
-          loggedInUser.gender = meData.gender;
-          // Update persisted user with gender
-          const STORAGE_KEY = 'nurucare_patient';
-          const updatedUser = { ...loggedInUser, gender: meData.gender };
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser));
-          setUser(updatedUser);
+          if (meData?.gender) {
+            const updatedUser = { ...loggedInUser, gender: meData.gender };
+            loggedInUser = updatedUser;
+            localStorage.setItem('nurucare_patient', JSON.stringify(updatedUser));
+            setUser(updatedUser);
+          }
         } catch (e) {
-          console.warn('Could not fetch user details', e);
+          console.warn('Could not fetch user details via getMe', e);
         }
       }
       // Route based on role and gender
       if (loggedInUser.role === 'nurse') {
         navigate('/nurse/dashboard', { replace: true });
+      } else if (loggedInUser.role === 'admin') {
+        navigate('/admin/dashboard', { replace: true });
+      } else if (loggedInUser.gender === 'female') {
+        navigate('/patient/female/dashboard', { replace: true });
+      } else if (loggedInUser.gender === 'male') {
+        navigate('/patient/male/dashboard', { replace: true });
       } else {
-        if (loggedInUser.gender === 'female') {
-          navigate('/patient/female/dashboard', { replace: true });
-        } else if (loggedInUser.gender === 'male') {
-          navigate('/patient/male/dashboard', { replace: true });
-        } else {
-          navigate(location.state?.from || '/roles', { replace: true });
-        }
+        // Incomplete profile (e.g. legacy account with no gender) — continue through
+        // the role/intake flow so the user can finish onboarding.
+        navigate(location.state?.from || '/roles', { replace: true });
       }
     } catch (err) {
       // Fallback to loginNurse if needed

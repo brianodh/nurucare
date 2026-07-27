@@ -65,6 +65,7 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     role: str
     name: str
+    gender: Optional[str] = None
     expires_in: int
 
 

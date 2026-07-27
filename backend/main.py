@@ -191,7 +191,7 @@ async def signup(request: SignupRequest):
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to create user"))
     
     token = create_access_token(
-        {"sub": result["user_id"], "role": request.role, "name": request.full_name}
+        {"sub": result["user_id"], "role": request.role, "name": request.full_name, "gender": request.gender}
     )
     
     return {
@@ -216,12 +216,14 @@ async def login(request: LoginRequest):
     token = create_access_token({
         "sub": str(user["user_id"]), 
         "role": user["role"], 
-        "name": user.get("full_name")
+        "name": user.get("full_name"),
+        "gender": user.get("gender"),
     })
     return TokenResponse(
         access_token=token,
         role=user["role"],
         name=user.get("full_name"),
+        gender=user.get("gender"),
         expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
 
@@ -233,17 +235,19 @@ async def nurse_login(request: NurseLoginRequest):
         user = user_result["user"]
         if verify_password(request.password, user["password_hash"]) and user["role"] == "nurse":
             token = create_access_token({
-                "sub": str(user["user_id"]), 
-                "role": user["role"], 
-                "name": user.get("full_name")
+                "sub": str(user["user_id"]),
+                "role": user["role"],
+                "name": user.get("full_name"),
+                "gender": user.get("gender"),
             })
             return TokenResponse(
                 access_token=token,
                 role=user["role"],
                 name=user.get("full_name"),
+                gender=user.get("gender"),
                 expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
             )
-    
+
     from auth import NURSE_ACCOUNTS
     account = NURSE_ACCOUNTS.get(request.username)
     if account and account["password"] == request.password:
@@ -273,7 +277,12 @@ async def create_patient_session():
 @app.get("/api/v1/auth/me")
 async def get_me(user: dict = Depends(get_current_user)):
     """Return current authenticated user info"""
-    return {"sub": user.get("sub"), "role": user.get("role"), "name": user.get("name")}
+    return {
+        "sub": user.get("sub"),
+        "role": user.get("role"),
+        "name": user.get("name"),
+        "gender": user.get("gender"),
+    }
 
 
 # ============================================
