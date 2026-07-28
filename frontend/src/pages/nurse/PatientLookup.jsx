@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Search, Shield, AlertTriangle, CheckCircle, Info, XCircle, Lock, Loader2 } from 'lucide-react';
 import { getPatientBySessionKey } from '@/api/apiClient';
 import { useToast } from '@/components/ui/use-toast';
+import { useLang } from '@/lib/i18n';
 
 const riskColors = {
   Low: 'bg-secondary/10 text-secondary',
@@ -16,6 +17,7 @@ const riskColors = {
 };
 
 export default function PatientLookup() {
+  const { t } = useLang();
   const { toast } = useToast();
   const [code, setCode] = useState('');
   const [patient, setPatient] = useState(null);
@@ -36,8 +38,8 @@ export default function PatientLookup() {
       } else {
         setNotFound(true);
         toast({
-          title: 'Not found',
-          description: response.error || 'Invalid or expired session key.',
+          title: t('error'),
+          description: response.error || t('nurse_lookup_not_found'),
           variant: 'destructive',
         });
       }
@@ -45,8 +47,8 @@ export default function PatientLookup() {
       console.error('Patient lookup failed:', err);
       setNotFound(true);
       toast({
-        title: 'Lookup failed',
-        description: 'Could not reach the server. Please try again.',
+        title: t('nurse_lookup_failed_title'),
+        description: t('nurse_lookup_failed_desc'),
         variant: 'destructive',
       });
     } finally {
@@ -61,8 +63,8 @@ export default function PatientLookup() {
   return (
     <div className="space-y-6">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="font-heading text-2xl font-bold">Patient Lookup</h1>
-        <p className="text-muted-foreground text-sm mt-1">Enter a 6-digit session key to access patient summary.</p>
+        <h1 className="font-heading text-2xl font-bold">{t('nurse_lookup_title')}</h1>
+        <p className="text-muted-foreground text-sm mt-1">{t('nurse_lookup_sub')}</p>
       </motion.div>
 
       <Card className="p-5 rounded-2xl">
@@ -70,7 +72,7 @@ export default function PatientLookup() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Enter session key…"
+              placeholder={t('nurse_lookup_placeholder')}
               value={code}
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -84,11 +86,11 @@ export default function PatientLookup() {
             className="rounded-full gap-2"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-            {loading ? 'Searching…' : 'Lookup'}
+            {loading ? t('nurse_lookup_searching') : t('nurse_lookup_btn')}
           </Button>
         </div>
         <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground">
-          <Lock className="w-3 h-3" /> Access is temporary and session-based
+          <Lock className="w-3 h-3" /> {t('nurse_lookup_access_note')}
         </div>
       </Card>
 
@@ -97,7 +99,7 @@ export default function PatientLookup() {
         <Card className="p-5 rounded-2xl border-destructive/30 bg-destructive/5">
           <div className="flex items-center gap-3">
             <XCircle className="w-5 h-5 text-destructive flex-shrink-0" />
-            <p className="text-sm text-destructive">No patient found for that session key. It may have expired or been entered incorrectly.</p>
+            <p className="text-sm text-destructive">{t('nurse_lookup_not_found')}</p>
           </div>
         </Card>
       )}
@@ -107,10 +109,10 @@ export default function PatientLookup() {
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <Card className="p-5 rounded-2xl">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-heading font-semibold">Patient Profile</h3>
+              <h3 className="font-heading font-semibold">{t('nurse_lookup_patient_profile')}</h3>
               {patient.risk_level && (
                 <Badge variant="secondary" className={riskColors[patient.risk_level] || 'bg-muted text-muted-foreground'}>
-                  {patient.risk_level} Risk
+                  {patient.risk_level} {t('nurse_lookup_risk_suffix')}
                 </Badge>
               )}
             </div>
@@ -134,7 +136,7 @@ export default function PatientLookup() {
           {Array.isArray(patient.recommendations) && patient.recommendations.length > 0 && (
             <Card className="p-5 rounded-2xl">
               <h3 className="font-heading font-semibold mb-4 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-secondary" /> Recommendations
+                <CheckCircle className="w-5 h-5 text-secondary" /> {t('nurse_lookup_recommendations')}
               </h3>
               <div className="space-y-3">
                 {patient.recommendations.map((m, i) => (
@@ -162,7 +164,7 @@ export default function PatientLookup() {
               <div className="flex items-start gap-3">
                 <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium text-sm mb-1">AI Analysis</p>
+                  <p className="font-medium text-sm mb-1">{t('nurse_lookup_ai_analysis')}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{patient.ai_response}</p>
                 </div>
               </div>

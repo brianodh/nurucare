@@ -264,7 +264,7 @@ async def nurse_login(request: NurseLoginRequest):
         user = user_result["user"]
         if not user.get("is_active", True):
             raise HTTPException(status_code=403, detail="Account deactivated. Contact an admin.")
-        if verify_password(request.password, user["password_hash"]) and user["role"] in ("nurse", "admin"):
+        if verify_password(request.password, user["password_hash"]) and user["role"] == "nurse":
             token = create_access_token({
                 "sub": str(user["user_id"]),
                 "role": user["role"],
@@ -280,7 +280,9 @@ async def nurse_login(request: NurseLoginRequest):
             )
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
-    from auth import NURSE_ACCOUNTS
+    from auth import NURSE_ACCOUNTS, DEMO_MODE
+    if not DEMO_MODE:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
     account = NURSE_ACCOUNTS.get(request.username)
     if account and account["password"] == request.password:
         token = create_access_token({"sub": request.username, "role": "nurse", "name": account["name"]})
@@ -489,8 +491,11 @@ async def generate_session_key(request: SessionKeyRequest, user: Optional[dict] 
     return {"session_key": session_key, "profile_id": profile_id, "expires_in_minutes": 15}
 
 @app.post("/api/v1/nurse/verify-session")
-async def nurse_verify_session(request: NurseVerifySessionRequest):
-    """Nurse enters 6-digit code → gets patient profile"""
+async def nurse_verify_session(
+    request: NurseVerifySessionRequest,
+    nurse: dict = Depends(require_nurse),
+):
+    """Nurse enters 6-digit code → gets patient profile. Nurse JWT required."""
     result = verify_session_key(request.session_key)
     if not result["success"]:
         raise HTTPException(status_code=400, detail=result.get("error", "Invalid or expired session key"))

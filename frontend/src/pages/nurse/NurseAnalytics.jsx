@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { mockDashboardStats } from '@/lib/mockData';
 import { getDashboardStats } from '@/api/apiClient';
+import { useLang } from '@/lib/i18n.jsx';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell,
@@ -10,6 +11,7 @@ import {
 
 export default function NurseAnalytics() {
   const [stats, setStats] = useState(null);
+  const { t } = useLang();
 
   useEffect(() => {
     getDashboardStats().then(setStats).catch(() => {});
@@ -19,13 +21,13 @@ export default function NurseAnalytics() {
   return (
     <div className="space-y-6">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="font-heading text-2xl font-bold">Analytics</h1>
-        <p className="text-muted-foreground text-sm mt-1">Insights from consultation data.</p>
+        <h1 className="font-heading text-2xl font-bold">{t('nurse_analytics_title')}</h1>
+        <p className="text-muted-foreground text-sm mt-1">{t('nurse_analytics_sub')}</p>
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-6">
         <Card className="p-5 rounded-2xl">
-          <h3 className="font-heading font-semibold mb-4">Age Demographics</h3>
+          <h3 className="font-heading font-semibold mb-4">{t('nurse_analytics_age_demo')}</h3>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={ageDemographics}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,14%,88%)" />
@@ -38,7 +40,7 @@ export default function NurseAnalytics() {
         </Card>
 
         <Card className="p-5 rounded-2xl">
-          <h3 className="font-heading font-semibold mb-4">Risk Distribution</h3>
+          <h3 className="font-heading font-semibold mb-4">{t('nurse_analytics_risk_dist')}</h3>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie
@@ -69,7 +71,7 @@ export default function NurseAnalytics() {
         </Card>
 
         <Card className="p-5 rounded-2xl lg:col-span-2">
-          <h3 className="font-heading font-semibold mb-4">Recommendation Categories</h3>
+          <h3 className="font-heading font-semibold mb-4">{t('nurse_analytics_rec_cats')}</h3>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={mockDashboardStats.recommendationDistribution} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,14%,88%)" />

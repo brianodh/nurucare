@@ -36,22 +36,31 @@ def hash_password(password: str) -> str:
     salt = bcrypt.gensalt(rounds=12)
     return bcrypt.hashpw(password.encode("utf-8"), salt).decode("utf-8")
 
-# ── Hardcoded nurse accounts (replace with DB in production) ──
+# ── Hardcoded nurse accounts (DEMO MODE ONLY) ──
 # Default password for both accounts: NuruCare2026
-NURSE_ACCOUNTS = {
-    "nurse.demo": {
-        "username": "nurse.demo",
-        "password": "NuruCare2026",
-        "role": "nurse",
-        "name": "Demo Nurse",
-    },
-    "dr.alex": {
-        "username": "dr.alex",
-        "password": "NuruCare2026",
-        "role": "nurse",
-        "name": "Dr. Alex Nuru",
-    },
-}
+# ONLY active when DEMO_MODE=true env var is set.
+# In production/staging, nurse accounts live in the `users` table and are
+# created via the admin panel (POST /api/v1/admin/users/create-nurse).
+DEMO_MODE = os.getenv("DEMO_MODE", "").lower() in ("1", "true", "yes", "on")
+
+NURSE_ACCOUNTS = (
+    {
+        "nurse.demo": {
+            "username": "nurse.demo",
+            "password": "NuruCare2026",
+            "role": "nurse",
+            "name": "Demo Nurse",
+        },
+        "dr.alex": {
+            "username": "dr.alex",
+            "password": "NuruCare2026",
+            "role": "nurse",
+            "name": "Dr. Alex Nuru",
+        },
+    }
+    if DEMO_MODE
+    else {}
+)
 
 
 # ── Pydantic models ────────────────────────────────────────

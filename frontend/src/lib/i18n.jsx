@@ -325,6 +325,52 @@ const translations = {
     week: 'Week',
     month: 'Month',
     year: 'Year',
+
+    // Nurse Dashboard
+    nurse_dash_title: 'Dashboard Overview',
+    nurse_dash_sub: "Welcome back. Here's today's summary.",
+    nurse_dash_loading: 'Loading live data…',
+    nurse_dash_total_profiles: 'Total Profiles',
+    nurse_dash_risk_flags: 'Risk Flags',
+    nurse_dash_today_sessions: "Today's Sessions",
+    nurse_dash_this_week: 'This Week',
+    nurse_dash_recent_patients: 'Recent Patients',
+    nurse_dash_no_patients: 'No patient profiles yet.',
+    nurse_dash_profile_id: 'Profile ID',
+    nurse_dash_age: 'Age',
+    nurse_dash_status: 'Status',
+    nurse_dash_risk: 'Risk',
+    nurse_dash_recommendation: 'Recommendation',
+    nurse_dash_rec_dist: 'Recommendation Distribution',
+
+    // Nurse Patient Lookup
+    nurse_lookup_title: 'Patient Lookup',
+    nurse_lookup_sub: 'Enter a 6-digit session key to access patient summary.',
+    nurse_lookup_placeholder: 'Enter session key…',
+    nurse_lookup_btn: 'Lookup',
+    nurse_lookup_searching: 'Searching…',
+    nurse_lookup_access_note: 'Access is temporary and session-based',
+    nurse_lookup_not_found: 'No patient found for that session key. It may have expired or been entered incorrectly.',
+    nurse_lookup_failed_title: 'Lookup failed',
+    nurse_lookup_failed_desc: 'Could not reach the server. Please try again.',
+    nurse_lookup_patient_profile: 'Patient Profile',
+    nurse_lookup_risk_suffix: 'Risk',
+    nurse_lookup_recommendations: 'Recommendations',
+    nurse_lookup_ai_analysis: 'AI Analysis',
+
+    // Nurse Sidebar / Portal
+    nurse_portal_title: 'Nurse Portal',
+    nurse_portal_sub: 'NuruCare Pro',
+    nurse_nav_overview: 'Overview',
+    nurse_nav_lookup: 'Patient Lookup',
+    nurse_nav_analytics: 'Analytics',
+
+    // Nurse Analytics
+    nurse_analytics_title: 'Analytics',
+    nurse_analytics_sub: 'Insights from consultation data.',
+    nurse_analytics_age_demo: 'Age Demographics',
+    nurse_analytics_risk_dist: 'Risk Distribution',
+    nurse_analytics_rec_cats: 'Recommendation Categories',
   },
   sw: {
     // Navigation
@@ -649,6 +695,52 @@ const translations = {
     week: 'Wiki',
     month: 'Mwezi',
     year: 'Mwaka',
+
+    // Nurse Dashboard
+    nurse_dash_title: 'Muhtasari wa Dashibodi',
+    nurse_dash_sub: 'Karibu tena. Hapa kuna muhtasari wa leo.',
+    nurse_dash_loading: 'Inapakia data ya moja kwa moja…',
+    nurse_dash_total_profiles: 'Jumla ya Profili',
+    nurse_dash_risk_flags: 'Bendera za Hatari',
+    nurse_dash_today_sessions: 'Vikao vya Leo',
+    nurse_dash_this_week: 'Wiki Hii',
+    nurse_dash_recent_patients: 'Wagonjwa wa Hivi Karibuni',
+    nurse_dash_no_patients: 'Hakuna profili za wagonjwa bado.',
+    nurse_dash_profile_id: 'Kitambulisho cha Profili',
+    nurse_dash_age: 'Umri',
+    nurse_dash_status: 'Hali',
+    nurse_dash_risk: 'Hatari',
+    nurse_dash_recommendation: 'Mapendekezo',
+    nurse_dash_rec_dist: 'Usambazaji wa Mapendekezo',
+
+    // Nurse Patient Lookup
+    nurse_lookup_title: 'Tafuta Mgonjwa',
+    nurse_lookup_sub: 'Ingiza kifungo cha tarakimu 6 cha kikao kupata muhtasari wa mgonjwa.',
+    nurse_lookup_placeholder: 'Ingiza kifungo cha kikao…',
+    nurse_lookup_btn: 'Tafuta',
+    nurse_lookup_searching: 'Inatafuta…',
+    nurse_lookup_access_note: 'Ufikiaji ni wa muda na unategemea kikao',
+    nurse_lookup_not_found: 'Hakuna mgonjwa aliyepatikana kwa kifungo hicho cha kikao. Inaweza kuwa imeisha au kuingizwa vibaya.',
+    nurse_lookup_failed_title: 'Utafutaji umeshindwa',
+    nurse_lookup_failed_desc: 'Imeshindwa kufika kwa seva. Tafadhali jaribu tena.',
+    nurse_lookup_patient_profile: 'Profili ya Mgonjwa',
+    nurse_lookup_risk_suffix: 'Hatari',
+    nurse_lookup_recommendations: 'Mapendekezo',
+    nurse_lookup_ai_analysis: 'Uchambuzi wa AI',
+
+    // Nurse Sidebar / Portal
+    nurse_portal_title: 'Portal ya Muuguzi',
+    nurse_portal_sub: 'NuruCare Pro',
+    nurse_nav_overview: 'Muhtasari',
+    nurse_nav_lookup: 'Tafuta Mgonjwa',
+    nurse_nav_analytics: 'Uchambuzi',
+
+    // Nurse Analytics
+    nurse_analytics_title: 'Uchambuzi',
+    nurse_analytics_sub: 'Maelezo kutoka kwa data ya ushauri.',
+    nurse_analytics_age_demo: 'Umri wa Watu',
+    nurse_analytics_risk_dist: 'Usambazaji wa Hatari',
+    nurse_analytics_rec_cats: 'Kategoria za Mapendekezo',
   },
 };
 

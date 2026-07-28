@@ -6,12 +6,14 @@ import { Users, AlertTriangle, Activity, Calendar, Loader2 } from 'lucide-react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { getDashboardStats } from '@/api/apiClient';
 import { mockDashboardStats } from '@/lib/mockData';
+import { useLang } from '@/lib/i18n';
 
 const PIE_COLORS = ['hsl(243,60%,55%)', 'hsl(174,52%,46%)', 'hsl(336,60%,65%)', 'hsl(43,74%,66%)', 'hsl(220,10%,70%)'];
 const riskColors = { Low: 'bg-secondary/10 text-secondary', Medium: 'bg-accent/10 text-accent', High: 'bg-destructive/10 text-destructive' };
 const statusColors = { Active: 'bg-secondary/10 text-secondary', Pending: 'bg-muted text-muted-foreground', Flagged: 'bg-destructive/10 text-destructive' };
 
 export default function NurseDashboard() {
+  const { t } = useLang();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -29,22 +31,22 @@ export default function NurseDashboard() {
   const pieData = mockDashboardStats.recommendationDistribution;
 
   const statCards = [
-    { title: 'Total Profiles', value: activeConsultations, icon: Users, color: 'text-primary bg-primary/10' },
-    { title: 'Risk Flags', value: riskFlags, icon: AlertTriangle, color: 'text-destructive bg-destructive/10' },
-    { title: 'Today\'s Sessions', value: dailySessions, icon: Activity, color: 'text-secondary bg-secondary/10' },
-    { title: 'This Week', value: stats ? Math.min(activeConsultations, 87) : 87, icon: Calendar, color: 'text-accent bg-accent/10' },
+    { title: t('nurse_dash_total_profiles'), value: activeConsultations, icon: Users, color: 'text-primary bg-primary/10' },
+    { title: t('nurse_dash_risk_flags'), value: riskFlags, icon: AlertTriangle, color: 'text-destructive bg-destructive/10' },
+    { title: t('nurse_dash_today_sessions'), value: dailySessions, icon: Activity, color: 'text-secondary bg-secondary/10' },
+    { title: t('nurse_dash_this_week'), value: stats ? Math.min(activeConsultations, 87) : 87, icon: Calendar, color: 'text-accent bg-accent/10' },
   ];
 
   return (
     <div className="space-y-6">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-        <h1 className="font-heading text-2xl font-bold">Dashboard Overview</h1>
-        <p className="text-muted-foreground text-sm mt-1">Welcome back. Here's today's summary.</p>
+        <h1 className="font-heading text-2xl font-bold">{t('nurse_dash_title')}</h1>
+        <p className="text-muted-foreground text-sm mt-1">{t('nurse_dash_sub')}</p>
       </motion.div>
 
       {loading ? (
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
-          <Loader2 className="w-4 h-4 animate-spin" /> Loading live data…
+          <Loader2 className="w-4 h-4 animate-spin" /> {t('nurse_dash_loading')}
         </div>
       ) : null}
 
@@ -66,19 +68,19 @@ export default function NurseDashboard() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <Card className="p-5 rounded-2xl lg:col-span-2">
-          <h3 className="font-heading font-semibold mb-4">Recent Patients</h3>
+          <h3 className="font-heading font-semibold mb-4">{t('nurse_dash_recent_patients')}</h3>
           {recentPatients.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No patient profiles yet.</p>
+            <p className="text-sm text-muted-foreground">{t('nurse_dash_no_patients')}</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-left text-muted-foreground border-b">
-                    <th className="pb-3 font-medium">Profile ID</th>
-                    <th className="pb-3 font-medium">Age</th>
-                    <th className="pb-3 font-medium">Status</th>
-                    <th className="pb-3 font-medium">Risk</th>
-                    <th className="pb-3 font-medium">Recommendation</th>
+                    <th className="pb-3 font-medium">{t('nurse_dash_profile_id')}</th>
+                    <th className="pb-3 font-medium">{t('nurse_dash_age')}</th>
+                    <th className="pb-3 font-medium">{t('nurse_dash_status')}</th>
+                    <th className="pb-3 font-medium">{t('nurse_dash_risk')}</th>
+                    <th className="pb-3 font-medium">{t('nurse_dash_recommendation')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -98,7 +100,7 @@ export default function NurseDashboard() {
         </Card>
 
         <Card className="p-5 rounded-2xl">
-          <h3 className="font-heading font-semibold mb-4">Recommendation Distribution</h3>
+          <h3 className="font-heading font-semibold mb-4">{t('nurse_dash_rec_dist')}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie data={pieData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" stroke="none">

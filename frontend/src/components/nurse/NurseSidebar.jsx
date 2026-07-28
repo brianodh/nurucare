@@ -2,15 +2,17 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, LayoutDashboard, Search, BarChart3, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const navItems = [
-  { icon: LayoutDashboard, label: 'Overview', path: '/nurse/dashboard' },
-  { icon: Search, label: 'Patient Lookup', path: '/nurse/lookup' },
-  { icon: BarChart3, label: 'Analytics', path: '/nurse/analytics' },
-];
+import { useLang } from '@/lib/i18n.jsx';
 
 export default function NurseSidebar({ open, onClose }) {
   const location = useLocation();
+  const { t } = useLang();
+
+  const navItems = [
+    { icon: LayoutDashboard, labelKey: 'nurse_nav_overview', path: '/nurse/dashboard' },
+    { icon: Search, labelKey: 'nurse_nav_lookup', path: '/nurse/lookup' },
+    { icon: BarChart3, labelKey: 'nurse_nav_analytics', path: '/nurse/analytics' },
+  ];
 
   return (
     <>
@@ -24,8 +26,8 @@ export default function NurseSidebar({ open, onClose }) {
               <Heart className="w-4 h-4 text-secondary" />
             </div>
             <div>
-              <p className="font-heading font-semibold text-sm">Nurse Portal</p>
-              <p className="text-xs text-muted-foreground">NuruCare Pro</p>
+              <p className="font-heading font-semibold text-sm">{t('nurse_portal_title')}</p>
+              <p className="text-xs text-muted-foreground">{t('nurse_portal_sub')}</p>
             </div>
           </div>
           <nav className="space-y-1">
@@ -37,7 +39,7 @@ export default function NurseSidebar({ open, onClose }) {
                   size="sm"
                 >
                   <item.icon className="w-4 h-4" />
-                  {item.label}
+                  {t(item.labelKey)}
                 </Button>
               </Link>
             ))}

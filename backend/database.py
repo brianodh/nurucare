@@ -452,6 +452,81 @@ def verify_session_key(session_key: str):
         return {"success": False, "error": str(exc)}
 
 
+# ═══════════════════════════════════════════════════════════════════
+# SINGLE SOURCE OF TRUTH — risk thresholds shared by both dashboards
+# ═══════════════════════════════════════════════════════════════════
+# These thresholds implement WHO MEC Category 3/4 rules and MUST be
+# the only place they are defined. Never re-derive these inline.
+#
+# Shared by:
+#   - get_dashboard_data()  (nurse dashboard aggregation)
+#   - compute_safety_score() (patient dashboard safety score)
+# ═══════════════════════════════════════════════════════════════════
+
+def compute_risk_flags(profile: dict) -> dict:
+    """Evaluate WHO-grounded risk flags from a profile dict.
+
+    Returns a dict of boolean flags + aggregate risk band so every
+    consumer (nurse dashboard, patient safety score, recommendation
+    engine) agrees on categorisation.
+    """
+    age = int(profile.get("age") or 0)
+    smoking = bool(profile.get("smoking"))
+    migraine = profile.get("migraine_type") or "none"
+    breastfeeding = bool(profile.get("breastfeeding"))
+    systolic = int(profile.get("systolic_bp") or 0)
+    diastolic = int(profile.get("diastolic_bp") or 0)
+
+    # WHO MEC Category 4 (unacceptable risk) — must be surfaced everywhere
+    who_cat4_age_smoking = smoking and age > 35
+    who_cat4_migraine_aura = migraine == "with_aura"
+
+    # WHO MEC Category 3 (advantages may not outweigh risks — clinical consult)
+    who_cat3_migraine_no_aura = migraine == "without_aura"
+    who_cat3_hypertension = systolic >= 140 or diastolic >= 90
+    who_cat3_breastfeeding_early = breastfeeding  # method-specific, flag as caution
+
+    # Aggregate bands used by UI visual layers
+    is_high_risk = who_cat4_age_smoking or who_cat4_migraine_aura
+    is_medium_risk = (
+        who_cat3_migraine_no_aura
+        or who_cat3_hypertension
+        or (smoking and age <= 35)
+    )
+
+    # For the nurse dashboard "risk flag" counter — only WHO MEC Cat 4 counts
+    has_cat4_flag = who_cat4_age_smoking or who_cat4_migraine_aura
+
+    # Risk band strings matching the patient dashboard compute_safety_score output
+    if is_high_risk:
+        risk_level = "high"
+    elif is_medium_risk:
+        risk_level = "medium"
+    else:
+        risk_level = "low"
+
+    return {
+        # Individual WHO-level flags
+        "who_cat4_age_smoking": who_cat4_age_smoking,
+        "who_cat4_migraine_aura": who_cat4_migraine_aura,
+        "who_cat3_migraine_no_aura": who_cat3_migraine_no_aura,
+        "who_cat3_hypertension": who_cat3_hypertension,
+        "who_cat3_breastfeeding_early": who_cat3_breastfeeding_early,
+        # Aggregates
+        "is_high_risk": is_high_risk,
+        "is_medium_risk": is_medium_risk,
+        "has_cat4_flag": has_cat4_flag,
+        "risk_level": risk_level,
+        # Raw values for callers that want them for description text
+        "_age": age,
+        "_smoking": smoking,
+        "_migraine": migraine,
+        "_breastfeeding": breastfeeding,
+        "_systolic": systolic,
+        "_diastolic": diastolic,
+    }
+
+
 def get_dashboard_data():
     try:
         if _supabase:
@@ -468,8 +543,7 @@ def get_dashboard_data():
         risk_flags = sum(
             1
             for profile in profiles
-            if (profile.get("smoking") and (profile.get("age") or 0) > 35)
-            or profile.get("migraine_type") == "with_aura"
+            if compute_risk_flags(profile)["has_cat4_flag"]
         )
 
         buckets = {"15-19": 0, "20-24": 0, "25-29": 0, "30-34": 0, "35-39": 0, "40+": 0}
@@ -490,15 +564,17 @@ def get_dashboard_data():
 
         recent = []
         for profile in profiles[:10]:
-            age = profile.get("age") or 0
-            is_high = (profile.get("smoking") and age > 35) or profile.get("migraine_type") == "with_aura"
-            is_medium = profile.get("smoking") or profile.get("migraine_type") == "without_aura"
+            risk = compute_risk_flags(profile)
+            age = risk["_age"]
+            is_high = risk["is_high_risk"]
+            is_medium = risk["is_medium_risk"]
+            band_title = "High" if is_high else ("Medium" if is_medium else "Low")
             recent.append({
                 "id": str(profile["profile_id"])[:8].upper(),
                 "age": age,
                 "status": "Flagged" if is_high else "Active",
-                "riskLevel": "High" if is_high else ("Medium" if is_medium else "Low"),
-                "recommendation": "Copper IUD" if not profile.get("breastfeeding") else "Progestin-only Pill",
+                "riskLevel": band_title,
+                "recommendation": "Copper IUD" if not risk["_breastfeeding"] else "Progestin-only Pill",
                 "lastVisit": str(profile.get("created_at", ""))[:10],
             })
 
@@ -579,33 +655,25 @@ def verify_sync_token(token: str):
 def compute_safety_score(profile: dict) -> dict:
     """Compute a 0-100 safety/health score from profile flags + risk band.
 
-    Uses the EXACT same flag logic the nurse dashboard aggregates
-    (get_dashboard_data -> risk_flags: smoking+age>35 OR migraine_with_aura)
-    so patient view never disagrees with the nurse view. Returns:
-      score: int 0-100
-      risk_level: 'low' | 'medium' | 'high'
-      flags: list[str] of active risk descriptions (empty if none)
+    Uses the shared compute_risk_flags() helper so flag detection never
+    drifts from the nurse dashboard aggregation. The weighted score
+    deductions are specific to the patient safety-score layer but the
+    boolean inputs come from the single source of truth.
     """
-    age = int(profile.get("age") or 0)
-    smoking = bool(profile.get("smoking"))
-    migraine = profile.get("migraine_type") or "none"
-    breastfeeding = bool(profile.get("breastfeeding"))
-    systolic = int(profile.get("systolic_bp") or 0)
-    diastolic = int(profile.get("diastolic_bp") or 0)
+    risk = compute_risk_flags(profile)
 
     flags = []
-    if smoking and age > 35:
+    if risk["who_cat4_age_smoking"]:
         flags.append("Age >35 + smoking — WHO MEC Category 4 risk for combined methods")
-    if migraine == "with_aura":
+    if risk["who_cat4_migraine_aura"]:
         flags.append("Migraine with aura — WHO MEC Category 4 risk for combined methods")
-    if migraine == "without_aura":
+    if risk["who_cat3_migraine_no_aura"]:
         flags.append("Migraine without aura — monitor blood pressure closely with combined methods")
-    if breastfeeding:
+    if risk["who_cat3_breastfeeding_early"]:
         flags.append("Breastfeeding — only progestogen-only methods are recommended in the first 6 weeks")
-    if systolic >= 140 or diastolic >= 90:
+    if risk["who_cat3_hypertension"]:
         flags.append("Elevated blood pressure — discuss options with a provider before starting combined methods")
 
-    # Base score = 100; each flag deducts a weighted amount
     deductions = {
         "age_35_smoking": 40,
         "migraine_with_aura": 30,
@@ -614,27 +682,20 @@ def compute_safety_score(profile: dict) -> dict:
         "hypertension": 12,
     }
     score = 100
-    if smoking and age > 35:
+    if risk["who_cat4_age_smoking"]:
         score -= deductions["age_35_smoking"]
-    if migraine == "with_aura":
+    if risk["who_cat4_migraine_aura"]:
         score -= deductions["migraine_with_aura"]
-    if migraine == "without_aura":
+    if risk["who_cat3_migraine_no_aura"]:
         score -= deductions["migraine_without_aura"]
-    if breastfeeding:
+    if risk["who_cat3_breastfeeding_early"]:
         score -= deductions["breastfeeding"]
-    if systolic >= 140 or diastolic >= 90:
+    if risk["who_cat3_hypertension"]:
         score -= deductions["hypertension"]
 
     score = max(0, min(100, int(score)))
 
-    if score < 60:
-        level = "high"
-    elif score < 85:
-        level = "medium"
-    else:
-        level = "low"
-
-    return {"score": score, "risk_level": level, "flags": flags}
+    return {"score": score, "risk_level": risk["risk_level"], "flags": flags}
 
 
 def update_profile_fields(profile_id: str, fields: dict) -> dict:
