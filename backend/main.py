@@ -23,15 +23,17 @@ from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
     NurseLoginRequest, TokenResponse, PatientSessionResponse,
     create_access_token, verify_password, hash_password,
-    require_nurse, require_patient, optional_auth, get_current_user,
+    require_nurse, require_patient, require_admin, optional_auth, get_current_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
+from database import get_system_health_detail
 
 # ============================================
-# IMPORT USSD ROUTERS
+# IMPORT USSD & ADMIN ROUTERS
 # ============================================
 from api.endpoints.ussd import router as ussd_router
 from api.endpoints.ussd_complete import router as ussd_complete_router
+from api.endpoints.admin import router as admin_router
 
 # ============================================
 # TOKEN GENERATION HELPER
@@ -142,6 +144,8 @@ app.add_middleware(
 # Include USSD routers - makes endpoints available at /api/v1/ussd/*
 app.include_router(ussd_router, prefix="/api/v1")
 app.include_router(ussd_complete_router, prefix="/api/v1")
+# Admin endpoints at /api/v1/admin/* — every route internally requires require_admin
+app.include_router(admin_router, prefix="/api/v1")
 
 
 # ============================================
@@ -153,7 +157,12 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    r = get_system_health_detail()
+    base = {"status": "healthy" if r["success"] and r["data"]["database"]["ok"] else "degraded",
+            "timestamp": datetime.now(timezone.utc).isoformat()}
+    if r["success"]:
+        base["details"] = r["data"]
+    return base
 
 
 # ============================================
@@ -161,22 +170,32 @@ async def health_check():
 # ============================================
 @app.post("/api/v1/auth/signup")
 async def signup(request: SignupRequest):
-    """Sign up a new user (patient or nurse)"""
+    """Sign up a new user (patient or nurse only).
+    Admin role is blocked here — admins can only be promoted by existing admins
+    via /api/v1/admin/users/update-role after account creation.
+    """
+    if request.role == "admin":
+        raise HTTPException(
+            status_code=403,
+            detail="Admin accounts cannot be created via public signup. Ask an existing admin to promote you."
+        )
+    if request.role not in ("patient", "nurse"):
+        raise HTTPException(status_code=400, detail="Invalid role")
     if len(request.password) < 8:
         raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
     if not any(c.isdigit() for c in request.password):
         raise HTTPException(status_code=400, detail="Password must contain at least one number")
-    
+
     existing_user = get_user_by_username(request.username)
     if existing_user["success"]:
         raise HTTPException(status_code=400, detail="Username already exists")
-    
+
     existing_email = get_user_by_email(request.email)
     if existing_email["success"]:
         raise HTTPException(status_code=400, detail="Email already exists")
-    
+
     hashed_password = hash_password(request.password)
-    
+
     result = create_user(
         username=request.username,
         email=request.email,
@@ -187,14 +206,14 @@ async def signup(request: SignupRequest):
         institution_name=request.institution_name,
         institution_address=request.institution_address
     )
-    
+
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to create user"))
-    
+
     token = create_access_token(
         {"sub": result["user_id"], "role": request.role, "name": request.full_name, "gender": request.gender}
     )
-    
+
     return {
         "success": True,
         "message": "User created successfully",
@@ -205,18 +224,22 @@ async def signup(request: SignupRequest):
 
 @app.post("/api/v1/auth/login", response_model=TokenResponse)
 async def login(request: LoginRequest):
-    """Login a user (patient or nurse) using username/password"""
+    """Login a user (patient, nurse, or admin) using username/password.
+    Rejects deactivated accounts (is_active=false)."""
     user_result = get_user_by_username(request.username)
     if not user_result["success"]:
         raise HTTPException(status_code=401, detail="Invalid username or password")
-    
+
     user = user_result["user"]
     if not verify_password(request.password, user["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid username or password")
-    
+
+    if not user.get("is_active", True):
+        raise HTTPException(status_code=403, detail="Account deactivated. Contact an admin.")
+
     token = create_access_token({
-        "sub": str(user["user_id"]), 
-        "role": user["role"], 
+        "sub": str(user["user_id"]),
+        "role": user["role"],
         "name": user.get("full_name"),
         "gender": user.get("gender"),
     })
@@ -230,11 +253,18 @@ async def login(request: LoginRequest):
 
 @app.post("/api/v1/auth/nurse/login", response_model=TokenResponse)
 async def nurse_login(request: NurseLoginRequest):
-    """Nurse login with username + password → JWT"""
+    """Nurse login with username + password → JWT.
+    Uses DB-backed users first (role=nurse). Deactivated accounts are rejected.
+    The legacy hardcoded NURSE_ACCOUNTS fallback is retained as a last-resort escape hatch
+    so an admin locked out of DB access can still get in — but it is only consulted when
+    no matching DB user exists at all, not when a DB user has the wrong password.
+    """
     user_result = get_user_by_username(request.username)
     if user_result["success"]:
         user = user_result["user"]
-        if verify_password(request.password, user["password_hash"]) and user["role"] == "nurse":
+        if not user.get("is_active", True):
+            raise HTTPException(status_code=403, detail="Account deactivated. Contact an admin.")
+        if verify_password(request.password, user["password_hash"]) and user["role"] in ("nurse", "admin"):
             token = create_access_token({
                 "sub": str(user["user_id"]),
                 "role": user["role"],
@@ -248,6 +278,7 @@ async def nurse_login(request: NurseLoginRequest):
                 gender=user.get("gender"),
                 expires_in=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
             )
+        raise HTTPException(status_code=401, detail="Invalid username or password")
 
     from auth import NURSE_ACCOUNTS
     account = NURSE_ACCOUNTS.get(request.username)

@@ -213,6 +213,62 @@ export const translateText = (text, targetLanguage = 'swahili') =>
   apiClient.post('/api/v1/translate', { text, target_language: targetLanguage }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
+// ADMIN — all require role === 'admin'
+// ─────────────────────────────────────────────
+
+export const getAdminOverview = () =>
+  apiClient.get('/api/v1/admin/overview').then((r) => r.data);
+
+export const getAdminSignupTrend = (days = 7) =>
+  apiClient.get(`/api/v1/admin/signup-trend?days=${days}`).then((r) => r.data);
+
+export const listContentItems = (contentType = null) =>
+  apiClient.get(contentType ? `/api/v1/admin/content?content_type=${encodeURIComponent(contentType)}` : '/api/v1/admin/content').then((r) => r.data);
+
+export const getContentItem = (contentType, itemKey) =>
+  apiClient.get(`/api/v1/admin/content/${encodeURIComponent(contentType)}/${encodeURIComponent(itemKey)}`).then((r) => r.data);
+
+export const upsertContentItem = (content_type, item_key, content_data) =>
+  apiClient.post('/api/v1/admin/content', { content_type, item_key, content_data }).then((r) => r.data);
+
+export const deleteContentItem = (content_type, item_key) =>
+  apiClient.delete('/api/v1/admin/content', { data: { content_type, item_key } }).then((r) => r.data);
+
+export const getWHOMECRules = () =>
+  apiClient.get('/api/v1/admin/who-mec-rules').then((r) => r.data);
+
+export const listAdminUsers = (role = null, search = null) => {
+  const params = new URLSearchParams();
+  if (role) params.set('role', role);
+  if (search) params.set('search', search);
+  return apiClient.get(`/api/v1/admin/users?${params.toString()}`).then((r) => r.data);
+};
+
+export const getAdminUser = (userId) =>
+  apiClient.get(`/api/v1/admin/users/${userId}`).then((r) => r.data);
+
+export const adminCreateNurse = (payload) =>
+  apiClient.post('/api/v1/admin/users/create-nurse', payload).then((r) => r.data);
+
+export const adminUpdateUserRole = (user_id, new_role) =>
+  apiClient.post('/api/v1/admin/users/update-role', { user_id, new_role }).then((r) => r.data);
+
+export const adminToggleUserActive = (user_id, is_active) =>
+  apiClient.post('/api/v1/admin/users/toggle-active', { user_id, is_active }).then((r) => r.data);
+
+export const getNurseSessionMonitor = () =>
+  apiClient.get('/api/v1/admin/monitor/nurse-sessions').then((r) => r.data);
+
+export const forceExpireNurseSession = (session_id) =>
+  apiClient.post('/api/v1/admin/monitor/nurse-sessions/force-expire', { session_id }).then((r) => r.data);
+
+export const getPartnerSyncMonitor = () =>
+  apiClient.get('/api/v1/admin/monitor/partner-sync').then((r) => r.data);
+
+export const getAdminSystemHealth = () =>
+  apiClient.get('/api/v1/admin/health').then((r) => r.data);
+
+// ─────────────────────────────────────────────
 // LEGACY MOCK kept so nothing crashes
 // ─────────────────────────────────────────────
 export const base44 = {

@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/lib/i18n.jsx";
 
 import AppLayout from './components/layout/AppLayout';
 import NurseLayout from './components/nurse/NurseLayout';
+import AdminLayout from './components/admin/AdminLayout';
 import Landing from './pages/Landing';
 import RoleSelection from './pages/RoleSelection';
 import FemaleIntake from './pages/FemaleIntake';
@@ -24,6 +25,12 @@ import Login from './pages/Login';
 import ProfilePage from './pages/Profile';
 import MaleSync from './pages/patient/male/Sync';
 import PatientDashboard from './pages/patient/Dashboard';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ContentManager from './pages/admin/ContentManager';
+import WHORulesConsole from './pages/admin/WHORulesConsole';
+import SystemHealth from './pages/admin/SystemHealth';
+import UserManagement from './pages/admin/UserManagement';
+import SessionMonitor from './pages/admin/SessionMonitor';
 
 // ─── Route guard: patients must be signed in ──────────────────────────────────
 function RequirePatientAuth({ children }) {
@@ -38,8 +45,13 @@ function RequirePatientAuth({ children }) {
     );
   }
 
-  if (!isAuthenticated || user?.role !== 'patient') {
+  if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+  if (user?.role !== 'patient') {
+    if (user?.role === 'nurse') return <Navigate to="/nurse/dashboard" replace />;
+    if (user?.role === 'admin') return <Navigate to="/admin/dashboard" replace />;
+    return <Navigate to="/roles" replace />;
   }
 
   return children;
@@ -58,8 +70,38 @@ function RequireNurseAuth({ children }) {
     );
   }
 
-  if (!isAuthenticated || user?.role !== 'nurse') {
+  if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+  if (user?.role !== 'nurse') {
+    if (user?.role === 'patient') return <Navigate to="/patient/dashboard" replace />;
+    if (user?.role === 'admin') return <Navigate to="/admin/dashboard" replace />;
+    return <Navigate to="/roles" replace />;
+  }
+
+  return children;
+}
+
+// ─── Route guard: admins must be signed in ────────────────────────────────────
+function RequireAdminAuth({ children }) {
+  const { isAuthenticated, user, isLoadingAuth } = useAuth();
+  const location = useLocation();
+
+  if (isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+  if (user?.role !== 'admin') {
+    if (user?.role === 'nurse') return <Navigate to="/nurse/dashboard" replace />;
+    if (user?.role === 'patient') return <Navigate to="/patient/dashboard" replace />;
+    return <Navigate to="/roles" replace />;
   }
 
   return children;
@@ -116,6 +158,17 @@ const AuthenticatedApp = () => {
         <Route path="/nurse/dashboard" element={<NurseDashboard />} />
         <Route path="/nurse/lookup" element={<PatientLookup />} />
         <Route path="/nurse/analytics" element={<NurseAnalytics />} />
+      </Route>
+
+      {/* Admin routes (protected — fully separate from NurseLayout / patient layouts) */}
+      <Route element={<RequireAdminAuth><AdminLayout /></RequireAdminAuth>}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/content" element={<ContentManager />} />
+        <Route path="/admin/who-rules" element={<WHORulesConsole />} />
+        <Route path="/admin/users" element={<UserManagement />} />
+        <Route path="/admin/sessions" element={<SessionMonitor />} />
+        <Route path="/admin/health" element={<SystemHealth />} />
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
 
       <Route path="*" element={<PageNotFound />} />

@@ -123,6 +123,15 @@ def require_patient(user: dict = Depends(get_current_user)) -> dict:
     return user
 
 
+def require_admin(user: dict = Depends(get_current_user)) -> dict:
+    if user.get("role") != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required",
+        )
+    return user
+
+
 # Optional auth returns user if token present, None if not
 def optional_auth(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme),

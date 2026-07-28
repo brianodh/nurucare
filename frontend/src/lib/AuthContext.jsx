@@ -23,6 +23,29 @@ const persistUser = (user) => {
   }
 };
 
+/**
+ * Client-side JWT payload decode. For UX convenience only (self-action guard etc).
+ * Backend always validates signatures properly; this never reads the secret.
+ */
+const decodeJwtPayload = (token) => {
+  if (!token || typeof token !== 'string') return null;
+  try {
+    const parts = token.split('.');
+    if (parts.length < 2) return null;
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const json = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+};
+
 // ─── Provider ─────────────────────────────────────────────────────────────────
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -47,8 +70,12 @@ export const AuthProvider = ({ children }) => {
   // ── Nurse Login ─────────────────────────────────────────────────────────────
   const loginNurse = async ({ username, password }) => {
     const res = await nurseLogin(username, password);
+    const jwt = decodeJwtPayload(res.access_token);
+    const sub = jwt?.sub || username;
     const nurseUser = {
-      id: username,
+      id: sub,
+      sub: sub,
+      username: username,
       name: res.name,
       role: res.role,
       gender: res.gender,
@@ -64,8 +91,11 @@ export const AuthProvider = ({ children }) => {
   // ── Patient Session ─────────────────────────────────────────────────────────
   const loginPatient = async () => {
     const res = await createPatientSession();
+    const jwt = decodeJwtPayload(res.access_token);
+    const sub = jwt?.sub || res.profile_id;
     const patientUser = {
-      id: res.profile_id,
+      id: sub,
+      sub: sub,
       profile_id: res.profile_id,
       role: 'patient',
       access_token: res.access_token,
@@ -92,8 +122,13 @@ export const AuthProvider = ({ children }) => {
       institution_name,
       institution_address
     });
+    const jwt = decodeJwtPayload(res.access_token);
+    const sub = jwt?.sub || res.user_id;
     const newUser = {
-      id: res.user_id,
+      id: sub,
+      sub: sub,
+      username: username,
+      email: email,
       name: full_name,
       role: res.role,
       gender: gender,
@@ -109,8 +144,12 @@ export const AuthProvider = ({ children }) => {
   // ── Login ──────────────────────────────────────────────────────────────────
   const login = async ({ username, password }) => {
     const res = await loginApi(username, password);
+    const jwt = decodeJwtPayload(res.access_token);
+    const sub = jwt?.sub || username;
     const loggedInUser = {
-      id: username,
+      id: sub,
+      sub: sub,
+      username: username,
       name: res.name,
       role: res.role,
       gender: res.gender,

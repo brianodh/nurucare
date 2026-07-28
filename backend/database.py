@@ -64,14 +64,19 @@ def _ensure_local_schema() -> None:
       email varchar(255) NOT NULL UNIQUE,
       password_hash varchar(255) NOT NULL,
       full_name varchar(255),
-      role varchar(20) NOT NULL CHECK (role in ('patient', 'nurse')),
+      role varchar(20) NOT NULL CHECK (role in ('patient', 'nurse', 'admin')),
       gender varchar(20),
       institution_name varchar(255),
       institution_address text,
       is_verified boolean NOT NULL DEFAULT false,
+      is_active boolean NOT NULL DEFAULT true,
       created_at timestamptz NOT NULL DEFAULT now(),
       updated_at timestamptz NOT NULL DEFAULT now()
     );
+
+    DO $$ BEGIN
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS is_active boolean NOT NULL DEFAULT true;
+    EXCEPTION WHEN duplicate_column THEN NULL; END $$;
 
     CREATE TABLE IF NOT EXISTS profiles (
       profile_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -91,8 +96,13 @@ def _ensure_local_schema() -> None:
       allowed_methods jsonb,
       explanations jsonb,
       confidence_score numeric(5,2),
+      intake_channel varchar(20) NOT NULL DEFAULT 'web',
       created_at timestamptz NOT NULL DEFAULT now()
     );
+
+    DO $$ BEGIN
+      ALTER TABLE profiles ADD COLUMN IF NOT EXISTS intake_channel varchar(20) NOT NULL DEFAULT 'web';
+    EXCEPTION WHEN duplicate_column THEN NULL; END $$;
 
     CREATE TABLE IF NOT EXISTS partner_sync (
       sync_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -109,14 +119,49 @@ def _ensure_local_schema() -> None:
       access_code varchar(6) NOT NULL,
       expires_at timestamptz NOT NULL,
       used boolean NOT NULL DEFAULT false,
+      force_expired boolean NOT NULL DEFAULT false,
       created_at timestamptz NOT NULL DEFAULT now()
     );
 
+    DO $$ BEGIN
+      ALTER TABLE nurse_sessions ADD COLUMN IF NOT EXISTS force_expired boolean NOT NULL DEFAULT false;
+    EXCEPTION WHEN duplicate_column THEN NULL; END $$;
+
+    CREATE TABLE IF NOT EXISTS content_items (
+      content_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      content_type varchar(50) NOT NULL,
+      item_key varchar(100) NOT NULL,
+      content_data jsonb NOT NULL,
+      version int NOT NULL DEFAULT 1,
+      updated_by uuid REFERENCES users(user_id),
+      created_at timestamptz NOT NULL DEFAULT now(),
+      updated_at timestamptz NOT NULL DEFAULT now(),
+      UNIQUE (content_type, item_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS ussd_sessions (
+      ussd_session_id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      external_session_id varchar(255),
+      phone_number varchar(50),
+      service_code varchar(50),
+      status varchar(20) NOT NULL DEFAULT 'active',
+      steps_completed int NOT NULL DEFAULT 0,
+      profile_id uuid REFERENCES profiles(profile_id) ON DELETE SET NULL,
+      created_at timestamptz NOT NULL DEFAULT now(),
+      completed_at timestamptz
+    );
+
     CREATE INDEX IF NOT EXISTS idx_profiles_age ON profiles(age);
+    CREATE INDEX IF NOT EXISTS idx_profiles_intake_channel ON profiles(intake_channel);
     CREATE INDEX IF NOT EXISTS idx_partner_sync_expires_at ON partner_sync(expires_at);
     CREATE INDEX IF NOT EXISTS idx_nurse_sessions_expires_at ON nurse_sessions(expires_at);
     CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+    CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+    CREATE INDEX IF NOT EXISTS idx_users_is_active ON users(is_active);
+    CREATE INDEX IF NOT EXISTS idx_content_items_type ON content_items(content_type);
+    CREATE INDEX IF NOT EXISTS idx_ussd_sessions_status ON ussd_sessions(status);
+    CREATE INDEX IF NOT EXISTS idx_ussd_sessions_created_at ON ussd_sessions(created_at);
     """
 
     with _local_connection() as connection:
@@ -645,3 +690,528 @@ def update_profile_fields(profile_id: str, fields: dict) -> dict:
         return {"success": True, "data": row}
     except Exception as exc:
         return {"success": False, "error": str(exc)}
+
+
+# ================================================================
+# ADMIN DASHBOARD — LIVE QUERIES
+# ================================================================
+
+def get_admin_overview_stats() -> dict:
+    """Live platform stats for the admin landing tab.
+    Every number is a real DB query.
+    """
+    try:
+        if _supabase:
+            users_data = _supabase.table("users").select("*").execute().data
+            profiles_data = _supabase.table("profiles").select("*").execute().data
+            try:
+                ussd_data = _supabase.table("ussd_sessions").select("*").execute().data
+            except Exception:
+                ussd_data = []
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT * FROM users")
+                    users_data = cur.fetchall()
+                    cur.execute("SELECT * FROM profiles")
+                    profiles_data = cur.fetchall()
+                    try:
+                        cur.execute("SELECT * FROM ussd_sessions")
+                        ussd_data = cur.fetchall()
+                    except Exception:
+                        ussd_data = []
+
+        total_patients = sum(1 for u in users_data if u.get("role") == "patient" and u.get("is_active", True))
+        total_nurses = sum(1 for u in users_data if u.get("role") == "nurse" and u.get("is_active", True))
+        total_admins = sum(1 for u in users_data if u.get("role") == "admin" and u.get("is_active", True))
+
+        now = datetime.now(timezone.utc)
+        week_ago = now - timedelta(days=7)
+        week_ago_str = week_ago.date().isoformat()
+
+        new_this_week = 0
+        for u in users_data:
+            created = str(u.get("created_at", ""))[:10]
+            if created >= week_ago_str:
+                new_this_week += 1
+
+        web_intake = sum(1 for p in profiles_data if p.get("intake_channel", "web") == "web")
+        ussd_intake = sum(1 for p in profiles_data if p.get("intake_channel", "web") == "ussd")
+
+        ussd_total_sessions = len(ussd_data)
+        ussd_active = sum(1 for s in ussd_data if s.get("status") == "active")
+
+        return {"success": True, "data": {
+            "total_patients": total_patients,
+            "total_nurses": total_nurses,
+            "total_admins": total_admins,
+            "new_signups_this_week": new_this_week,
+            "channel_split": {
+                "web": web_intake,
+                "ussd": ussd_intake,
+            },
+            "ussd_sessions": {
+                "total": ussd_total_sessions,
+                "active": ussd_active,
+                "tracked": True if ussd_data is not None else False,
+            },
+            "total_profiles": len(profiles_data),
+        }}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def get_admin_signup_trend(days: int = 7) -> dict:
+    """Daily signup counts for the last N days as real COUNT/GROUP BY."""
+    try:
+        result = []
+        now = datetime.now(timezone.utc).date()
+        if _supabase:
+            users_data = _supabase.table("users").select("created_at, role").execute().data
+            by_day = {}
+            for u in users_data:
+                day = str(u.get("created_at", ""))[:10]
+                if day not in by_day:
+                    by_day[day] = {"patient": 0, "nurse": 0, "admin": 0, "total": 0}
+                role = u.get("role", "patient")
+                if role in by_day[day]:
+                    by_day[day][role] += 1
+                by_day[day]["total"] += 1
+            for i in range(days - 1, -1, -1):
+                d = (now - timedelta(days=i)).isoformat()
+                entry = by_day.get(d, {"patient": 0, "nurse": 0, "admin": 0, "total": 0})
+                result.append({"date": d, **entry})
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("""
+                        SELECT
+                            DATE(created_at) as signup_day,
+                            COUNT(*) FILTER (WHERE role='patient') as patients,
+                            COUNT(*) FILTER (WHERE role='nurse') as nurses,
+                            COUNT(*) FILTER (WHERE role='admin') as admins,
+                            COUNT(*) as total
+                        FROM users
+                        WHERE created_at >= NOW() - INTERVAL '%s days'
+                        GROUP BY signup_day
+                        ORDER BY signup_day ASC
+                    """, (days,))
+                    rows = cur.fetchall()
+            by_day = {str(r["signup_day"]): {
+                "patient": r["patients"], "nurse": r["nurses"],
+                "admin": r["admins"], "total": r["total"]
+            } for r in rows}
+            for i in range(days - 1, -1, -1):
+                d = (now - timedelta(days=i)).isoformat()
+                entry = by_day.get(d, {"patient": 0, "nurse": 0, "admin": 0, "total": 0})
+                result.append({"date": d, **entry})
+        return {"success": True, "data": result}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+# ================================================================
+# ADMIN — CONTENT MANAGER (content_items table + JSON file fallback)
+# ================================================================
+
+def list_content_items(content_type: Optional[str] = None) -> dict:
+    """List content items, optionally filtered by type.
+    Returns DB rows first; if DB empty, seed from JSON files in data/knowledge_base/."""
+    from pathlib import Path
+    import json as _json
+    try:
+        items = []
+        if _supabase:
+            q = _supabase.table("content_items").select("*")
+            if content_type:
+                q = q.eq("content_type", content_type)
+            items = q.execute().data
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    if content_type:
+                        cur.execute("SELECT * FROM content_items WHERE content_type = %s ORDER BY item_key", (content_type,))
+                    else:
+                        cur.execute("SELECT * FROM content_items ORDER BY content_type, item_key")
+                    items = cur.fetchall()
+
+        if len(items) == 0 and not content_type:
+            kb_dir = Path(__file__).parent.parent / "data" / "knowledge_base"
+            seed_map = {
+                "myths": kb_dir / "myths.json",
+                "who_guidelines": kb_dir / "who_guidelines.json",
+                "educational_content": kb_dir / "educational_content.json",
+            }
+            for ctype, fpath in seed_map.items():
+                if fpath.exists():
+                    try:
+                        with open(fpath, "r", encoding="utf-8") as f:
+                            raw = _json.load(f)
+                    except Exception:
+                        continue
+                    arr_key = None
+                    for k in ("myths", "guidelines", "methods"):
+                        if k in raw and isinstance(raw[k], list):
+                            arr_key = k
+                            break
+                    if arr_key is None:
+                        continue
+                    for idx, entry in enumerate(raw[arr_key]):
+                        item_key = entry.get("id") or entry.get("method_id") or f"{ctype}_{idx}"
+                        upsert_content_item(ctype, str(item_key), entry, None)
+            return list_content_items(content_type)
+        return {"success": True, "data": [dict(r) for r in items]}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def get_content_item(content_type: str, item_key: str) -> dict:
+    try:
+        if _supabase:
+            r = _supabase.table("content_items").select("*").eq("content_type", content_type).eq("item_key", item_key).execute()
+            if not r.data:
+                return {"success": False, "error": "Not found"}
+            return {"success": True, "data": r.data[0]}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT * FROM content_items WHERE content_type = %s AND item_key = %s", (content_type, item_key))
+                row = cur.fetchone()
+        if not row:
+            return {"success": False, "error": "Not found"}
+        return {"success": True, "data": dict(row)}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def upsert_content_item(content_type: str, item_key: str, content_data: dict, updated_by: Optional[str]) -> dict:
+    """Create or update a content item with version bump and audit fields."""
+    try:
+        existing = get_content_item(content_type, item_key)
+        next_version = 1
+        if existing["success"]:
+            next_version = int(existing["data"].get("version", 0)) + 1
+
+        if _supabase:
+            payload = {
+                "content_type": content_type,
+                "item_key": item_key,
+                "content_data": content_data,
+                "version": next_version,
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            }
+            if updated_by:
+                payload["updated_by"] = updated_by
+            r = _supabase.table("content_items").upsert(payload, on_conflict="content_type,item_key").execute()
+            return {"success": True, "data": r.data[0]}
+
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO content_items (content_type, item_key, content_data, version, updated_by, updated_at)
+                    VALUES (%s, %s, %s::jsonb, %s, %s::uuid, now())
+                    ON CONFLICT (content_type, item_key) DO UPDATE SET
+                        content_data = EXCLUDED.content_data,
+                        version = EXCLUDED.version,
+                        updated_by = EXCLUDED.updated_by,
+                        updated_at = now()
+                    RETURNING *
+                """, (content_type, item_key, Json(content_data), next_version, updated_by))
+                row = cur.fetchone()
+            conn.commit()
+        return {"success": True, "data": dict(row)}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def delete_content_item(content_type: str, item_key: str) -> dict:
+    try:
+        if _supabase:
+            _supabase.table("content_items").delete().eq("content_type", content_type).eq("item_key", item_key).execute()
+            return {"success": True}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("DELETE FROM content_items WHERE content_type = %s AND item_key = %s", (content_type, item_key))
+            conn.commit()
+        return {"success": True}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+# ================================================================
+# ADMIN — USER / ACCOUNT MANAGEMENT
+# ================================================================
+
+def list_all_users(role: Optional[str] = None, search: Optional[str] = None, limit: int = 200) -> dict:
+    """List/search all users. Never returns password_hash."""
+    try:
+        rows = []
+        if _supabase:
+            q = _supabase.table("users").select("user_id, username, email, full_name, role, gender, institution_name, is_verified, is_active, created_at, updated_at")
+            if role:
+                q = q.eq("role", role)
+            if search:
+                q = q.or_(f"username.ilike.%{search}%,email.ilike.%{search}%,full_name.ilike.%{search}%")
+            rows = q.limit(limit).order("created_at", desc=True).execute().data
+        else:
+            sql = """
+                SELECT user_id, username, email, full_name, role, gender,
+                       institution_name, is_verified, is_active, created_at, updated_at
+                FROM users
+                WHERE 1=1
+            """
+            params = []
+            if role:
+                sql += " AND role = %s"
+                params.append(role)
+            if search:
+                sql += " AND (username ILIKE %s OR email ILIKE %s OR full_name ILIKE %s)"
+                like = f"%{search}%"
+                params.extend([like, like, like])
+            sql += " ORDER BY created_at DESC LIMIT %s"
+            params.append(limit)
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(sql, params)
+                    rows = cur.fetchall()
+        return {"success": True, "data": [dict(r) for r in rows]}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def get_user_by_id_admin(user_id: str) -> dict:
+    """Get a user record (without password_hash) by ID."""
+    try:
+        if _supabase:
+            r = _supabase.table("users").select("user_id, username, email, full_name, role, gender, institution_name, institution_address, is_verified, is_active, created_at, updated_at").eq("user_id", user_id).execute()
+            if not r.data:
+                return {"success": False, "error": "User not found"}
+            return {"success": True, "data": r.data[0]}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    SELECT user_id, username, email, full_name, role, gender,
+                           institution_name, institution_address, is_verified, is_active,
+                           created_at, updated_at
+                    FROM users WHERE user_id = %s::uuid
+                """, (user_id,))
+                row = cur.fetchone()
+        if not row:
+            return {"success": False, "error": "User not found"}
+        return {"success": True, "data": dict(row)}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def update_user_role(user_id: str, new_role: str, actor_user_id: str) -> dict:
+    """Promote/demote a user's role. Caller must already have verified actor is admin."""
+    if new_role not in ("patient", "nurse", "admin"):
+        return {"success": False, "error": "Invalid role"}
+    try:
+        if _supabase:
+            r = _supabase.table("users").update({"role": new_role, "updated_at": datetime.now(timezone.utc).isoformat()}).eq("user_id", user_id).execute()
+            if not r.data:
+                return {"success": False, "error": "User not found"}
+            return {"success": True, "data": r.data[0]}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("UPDATE users SET role = %s, updated_at = now() WHERE user_id = %s::uuid RETURNING user_id, username, role, updated_at", (new_role, user_id))
+                row = cur.fetchone()
+            conn.commit()
+        if not row:
+            return {"success": False, "error": "User not found"}
+        return {"success": True, "data": dict(row)}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def toggle_user_active(user_id: str, is_active: bool) -> dict:
+    """Deactivate or reactivate a user account."""
+    try:
+        if _supabase:
+            r = _supabase.table("users").update({"is_active": is_active, "updated_at": datetime.now(timezone.utc).isoformat()}).eq("user_id", user_id).execute()
+            if not r.data:
+                return {"success": False, "error": "User not found"}
+            return {"success": True, "data": r.data[0]}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("UPDATE users SET is_active = %s, updated_at = now() WHERE user_id = %s::uuid RETURNING user_id, username, is_active, updated_at", (is_active, user_id))
+                row = cur.fetchone()
+            conn.commit()
+        if not row:
+            return {"success": False, "error": "User not found"}
+        return {"success": True, "data": dict(row)}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+# ================================================================
+# ADMIN — SESSION & SYNC MONITORING
+# ================================================================
+
+def get_nurse_session_monitor() -> dict:
+    """Active/expired nurse session counts + list of active codes."""
+    try:
+        now = datetime.now(timezone.utc)
+        if _supabase:
+            sessions = _supabase.table("nurse_sessions").select("*").order("created_at", desc=True).limit(200).execute().data
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT * FROM nurse_sessions ORDER BY created_at DESC LIMIT 200")
+                    sessions = cur.fetchall()
+
+        active = 0
+        expired = 0
+        used = 0
+        force_expired = 0
+        recent = []
+        for s in sessions:
+            is_force = bool(s.get("force_expired", False))
+            is_used = bool(s.get("used", False))
+            if is_force:
+                force_expired += 1
+            if is_used:
+                used += 1
+            exp = s.get("expires_at")
+            if isinstance(exp, str):
+                exp = _parse_datetime(exp)
+            if not exp:
+                continue
+            is_active = (not is_used) and (not is_force) and exp > now
+            if is_active:
+                active += 1
+            elif not is_used:
+                expired += 1
+            recent.append({
+                "session_id": str(s["session_id"]),
+                "profile_id": str(s.get("profile_id"))[:8].upper() if s.get("profile_id") else None,
+                "access_code": s["access_code"],
+                "created_at": str(s.get("created_at", ""))[:16],
+                "expires_at": str(s.get("expires_at", ""))[:16],
+                "status": "active" if is_active else ("used" if is_used else ("force_expired" if is_force else "expired")),
+            })
+        return {"success": True, "data": {
+            "active_count": active,
+            "expired_count": expired,
+            "used_count": used,
+            "force_expired_count": force_expired,
+            "sessions": recent[:50],
+        }}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def force_expire_nurse_session(session_id: str) -> dict:
+    """Admin force-expire a specific nurse access code."""
+    try:
+        if _supabase:
+            r = _supabase.table("nurse_sessions").update({"force_expired": True}).eq("session_id", session_id).execute()
+            if not r.data:
+                return {"success": False, "error": "Session not found"}
+            return {"success": True}
+        with _local_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("UPDATE nurse_sessions SET force_expired = true WHERE session_id = %s::uuid", (session_id,))
+            conn.commit()
+        return {"success": True}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+def get_partner_sync_monitor() -> dict:
+    """Partner sync token monitoring: active/expired/used counts + list."""
+    try:
+        now = datetime.now(timezone.utc)
+        if _supabase:
+            rows = _supabase.table("partner_sync").select("*").order("created_at", desc=True).limit(200).execute().data
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT * FROM partner_sync ORDER BY created_at DESC LIMIT 200")
+                    rows = cur.fetchall()
+
+        active = 0
+        expired = 0
+        used = 0
+        recent = []
+        for s in rows:
+            is_used = bool(s.get("used", False))
+            exp = s.get("expires_at")
+            if isinstance(exp, str):
+                exp = _parse_datetime(exp)
+            is_active = (not is_used) and exp and exp > now
+            if is_active:
+                active += 1
+            elif not is_used:
+                expired += 1
+            else:
+                used += 1
+            recent.append({
+                "sync_id": str(s["sync_id"]),
+                "profile_id": str(s.get("profile_id"))[:8].upper() if s.get("profile_id") else None,
+                "created_at": str(s.get("created_at", ""))[:16],
+                "expires_at": str(s.get("expires_at", ""))[:16],
+                "status": "active" if is_active else ("used" if is_used else "expired"),
+            })
+        return {"success": True, "data": {
+            "active_count": active,
+            "expired_count": expired,
+            "used_count": used,
+            "syncs": recent[:50],
+        }}
+    except Exception as exc:
+        return {"success": False, "error": str(exc)}
+
+
+# ================================================================
+# ADMIN — SYSTEM HEALTH
+# ================================================================
+
+def get_system_health_detail() -> dict:
+    """Extended health: DB connectivity + API key status + entrypoint flags."""
+    import os
+    db_ok = True
+    db_error = None
+    try:
+        if _supabase:
+            _supabase.table("users").select("user_id").limit(1).execute()
+        else:
+            with _local_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT 1")
+    except Exception as exc:
+        db_ok = False
+        db_error = str(exc)
+
+    gemini_key = os.getenv("GEMINI_API_KEY", "")
+    gemini_configured = bool(gemini_key) and not gemini_key.startswith("sk-xxx") and not gemini_key.startswith("your-")
+
+    engine_path = "hardcoded_fallback"
+    try:
+        from engine.guardrail import WHOMECGuardrail
+        WHOMECGuardrail()
+        engine_path = "engine_available_but_not_connected"
+    except Exception:
+        engine_path = "hardcoded_fallback"
+
+    return {"success": True, "data": {
+        "database": {
+            "ok": db_ok,
+            "backend": "supabase" if _use_supabase() else "local_postgres",
+            "error": db_error,
+        },
+        "gemini_api": {
+            "configured": gemini_configured,
+            "key_present": bool(gemini_key),
+            "redacted_key": (gemini_key[:4] + "..." + gemini_key[-4:]) if gemini_key else None,
+        },
+        "recommendation_engine": {
+            "active_path": engine_path,
+            "guardrail_loaded": engine_path != "hardcoded_fallback",
+        },
+        "entrypoint": {
+            "backend_main": "main.py",
+            "note": "FastAPI entrypoint; vite config is frontend-only.",
+        },
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }}
