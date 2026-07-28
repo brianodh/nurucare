@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle, User, Stethoscope } from 'lucide-react';
+import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/lib/AuthContext';
 
 // ─── Consent Modal ────────────────────────────────────────────────────────────
@@ -137,64 +135,38 @@ function ConsentModal({ onAccept, onDecline }) {
 // ─── Sign Up Page ─────────────────────────────────────────────────────────────
 export default function SignUp() {
   const navigate = useNavigate();
-  const { signUp, loginNurse, loginPatient } = useAuth();
+  const { signUp } = useAuth();
 
-  const [patientForm, setPatientForm] = useState({ name: '', email: '', username: '', password: '', confirm: '', gender: '' });
-  const [nurseForm, setNurseForm] = useState({ name: '', email: '', username: '', password: '', confirm: '', gender: '', institutionName: '', institutionAddress: '' });
-  const [role, setRole] = useState('patient'); // 'patient' or 'nurse'
+  const [form, setForm] = useState({ name: '', email: '', username: '', password: '', confirm: '', gender: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState('');
   const [generalError, setGeneralError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const currentForm = role === 'patient' ? patientForm : nurseForm;
-  const setCurrentFormField = (field) => (e) => {
-    if (role === 'patient') {
-      setPatientForm((f) => ({ ...f, [field]: e.target.value }));
-    } else {
-      setNurseForm((f) => ({ ...f, [field]: e.target.value }));
-    }
+  const setField = (field) => (e) => {
+    setForm((f) => ({ ...f, [field]: e.target.value }));
   };
   const setGender = (value) => {
-    if (role === 'patient') {
-      setPatientForm((f) => ({ ...f, gender: value }));
-    } else {
-      setNurseForm((f) => ({ ...f, gender: value }));
-    }
+    setForm((f) => ({ ...f, gender: value }));
   };
 
-  // Real-time password match validation
   useEffect(() => {
-    if (currentForm.password && currentForm.confirm) {
-      if (currentForm.password !== currentForm.confirm) {
-        setPasswordMatchError('Passwords do not match.');
-      } else {
-        setPasswordMatchError('');
-      }
+    if (form.password && form.confirm) {
+      setPasswordMatchError(form.password !== form.confirm ? 'Passwords do not match.' : '');
     } else {
       setPasswordMatchError('');
     }
-  }, [currentForm.password, currentForm.confirm, role]);
+  }, [form.password, form.confirm]);
 
   const validate = () => {
     const usernameRegex = /^[a-zA-Z0-9_]{4,}$/;
-    if (role === 'patient') {
-      if (!patientForm.name.trim()) return 'Please enter your name.';
-      if (!patientForm.username.trim() || !usernameRegex.test(patientForm.username)) 
-        return 'Please enter a valid username (at least 4 characters, alphanumeric/underscores only).';
-      if (!patientForm.email.includes('@')) return 'Please enter a valid email address.';
-      if (!patientForm.gender) return 'Please select your gender.';
-    } else {
-      if (!nurseForm.name.trim()) return 'Please enter your full legal name.';
-      if (!nurseForm.username.trim() || !usernameRegex.test(nurseForm.username)) 
-        return 'Please enter a valid username (at least 4 characters, alphanumeric/underscores only).';
-      if (!nurseForm.email.includes('@')) return 'Please enter a valid professional email address.';
-      if (!nurseForm.gender) return 'Please select your gender.';
-      if (!nurseForm.institutionName.trim()) return 'Please enter your medical institution name.';
-      if (!nurseForm.institutionAddress.trim()) return 'Please enter your institution address.';
-    }
-    if (currentForm.password.length < 8) return 'Password must be at least 8 characters.';
+    if (!form.name.trim()) return 'Please enter your name.';
+    if (!form.username.trim() || !usernameRegex.test(form.username))
+      return 'Please enter a valid username (at least 4 characters, alphanumeric/underscores only).';
+    if (!form.email.includes('@')) return 'Please enter a valid email address.';
+    if (!form.gender) return 'Please select your gender.';
+    if (form.password.length < 8) return 'Password must be at least 8 characters.';
     if (passwordMatchError) return passwordMatchError;
     return null;
   };
@@ -204,48 +176,23 @@ export default function SignUp() {
     const err = validate();
     if (err) { setGeneralError(err); return; }
     setGeneralError('');
-    if (role === 'patient') {
-      setShowConsent(true);
-    } else {
-      handleConsentAccept(); // Nurses can skip consent for now (since they are using demo accounts)
-    }
+    setShowConsent(true);
   };
 
   const handleConsentAccept = async () => {
     setShowConsent(false);
     setLoading(true);
     try {
-      if (role === 'nurse') {
-        // For nurses, we'll just do loginNurse since we have hardcoded accounts
-        await signUp({
-          full_name: nurseForm.name,
-          email: nurseForm.email,
-          username: nurseForm.username,
-          password: nurseForm.password,
-          consentGiven: true,
-          gender: nurseForm.gender,
-          role: 'nurse',
-          institution_name: nurseForm.institutionName,
-          institution_address: nurseForm.institutionAddress
-        });
-        navigate('/nurse/dashboard');
-      } else {
-        await signUp({
-          full_name: patientForm.name,
-          email: patientForm.email,
-          username: patientForm.username,
-          password: patientForm.password,
-          consentGiven: true,
-          gender: patientForm.gender,
-          role: 'patient'
-        });
-        // Conditional routing based on gender
-        if (patientForm.gender === 'female') {
-          navigate('/female/intake');
-        } else {
-          navigate('/male/intake');
-        }
-      }
+      await signUp({
+        full_name: form.name,
+        email: form.email,
+        username: form.username,
+        password: form.password,
+        consentGiven: true,
+        gender: form.gender,
+        role: 'patient',
+      });
+      navigate(form.gender === 'female' ? '/female/intake' : '/male/intake');
     } catch (err) {
       setGeneralError(err.response?.data?.detail || err.message || 'Sign up failed. Please try again.');
     } finally {
@@ -282,255 +229,124 @@ export default function SignUp() {
           </div>
 
           <div className="bg-card rounded-2xl border shadow-sm p-6 sm:p-8">
-            <Tabs defaultValue="patient" value={role} onValueChange={setRole} className="w-full">
-              <TabsList className="w-full mb-6">
-                <TabsTrigger value="patient" className="flex-1 gap-2">
-                  <User className="w-4 h-4" /> Patient
-                </TabsTrigger>
-                <TabsTrigger value="nurse" className="flex-1 gap-2">
-                  <Stethoscope className="w-4 h-4" /> Nurse
-                </TabsTrigger>
-              </TabsList>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-name">Full name</Label>
+                <Input
+                  id="signup-name"
+                  placeholder="Amina Wanjiru"
+                  value={form.name}
+                  onChange={setField('name')}
+                  autoComplete="name"
+                />
+              </div>
 
-              <TabsContent value="patient">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-name">Full name</Label>
-                    <Input
-                      id="patient-name"
-                      placeholder="Amina Wanjiru"
-                      value={patientForm.name}
-                      onChange={setCurrentFormField('name')}
-                      autoComplete="name"
-                    />
-                  </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-username">Username</Label>
+                <Input
+                  id="signup-username"
+                  placeholder="username123"
+                  value={form.username}
+                  onChange={setField('username')}
+                  autoComplete="username"
+                  pattern="^[a-zA-Z0-9_]{4,}$"
+                  title="Username must be at least 4 characters, alphanumeric only (underscores allowed)"
+                />
+              </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-username">Username</Label>
-                    <Input
-                      id="patient-username"
-                      placeholder="username123"
-                      value={patientForm.username}
-                      onChange={setCurrentFormField('username')}
-                      autoComplete="username"
-                      pattern="^[a-zA-Z0-9_]{4,}$"
-                      title="Username must be at least 4 characters, alphanumeric only (underscores allowed)"
-                    />
-                  </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-email">Email address</Label>
+                <Input
+                  id="signup-email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={form.email}
+                  onChange={setField('email')}
+                  autoComplete="email"
+                />
+              </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-email">Email address</Label>
-                    <Input
-                      id="patient-email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={patientForm.email}
-                      onChange={setCurrentFormField('email')}
-                      autoComplete="email"
-                    />
-                  </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-gender">Gender</Label>
+                <Select value={form.gender} onValueChange={setGender}>
+                  <SelectTrigger id="signup-gender">
+                    <SelectValue placeholder="Select gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="male">Male</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-gender">Gender</Label>
-                    <Select value={patientForm.gender} onValueChange={setGender}>
-                      <SelectTrigger id="patient-gender">
-                        <SelectValue placeholder="Select gender" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="male">Male</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-password">Password</Label>
+                <div className="relative">
+                  <Input
+                    id="signup-password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Min. 8 characters"
+                    value={form.password}
+                    onChange={setField('password')}
+                    autoComplete="new-password"
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-password">Password</Label>
-                    <div className="relative">
-                      <Input
-                        id="patient-password"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Min. 8 characters"
-                        value={patientForm.password}
-                        onChange={setCurrentFormField('password')}
-                        autoComplete="new-password"
-                        className="pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((v) => !v)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                        tabIndex={-1}
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-confirm">Confirm password</Label>
+                <div className="relative">
+                  <Input
+                    id="signup-confirm"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Re-enter password"
+                    value={form.confirm}
+                    onChange={setField('confirm')}
+                    autoComplete="new-password"
+                    className={passwordMatchError ? "border-destructive" : ""}
+                  />
+                </div>
+                {passwordMatchError && (
+                  <p className="text-xs text-destructive mt-1">{passwordMatchError}</p>
+                )}
+              </div>
 
-                  <div className="space-y-1.5">
-                    <Label htmlFor="patient-confirm">Confirm password</Label>
-                    <div className="relative">
-                      <Input
-                        id="patient-confirm"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Re-enter password"
-                        value={patientForm.confirm}
-                        onChange={setCurrentFormField('confirm')}
-                        autoComplete="new-password"
-                        className={passwordMatchError ? "border-destructive" : ""}
-                      />
-                    </div>
-                    {passwordMatchError && (
-                      <p className="text-xs text-destructive mt-1">{passwordMatchError}</p>
-                    )}
-                  </div>
+              {generalError && (
+                <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  {generalError}
+                </div>
+              )}
 
-                  {generalError && (
-                    <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                      {generalError}
-                    </div>
-                  )}
-
-                  <Button type="submit" className="w-full rounded-full gap-2" disabled={loading || !!passwordMatchError}>
-                    {loading ? 'Creating account…' : <>Continue <ArrowRight className="w-4 h-4" /></>}
-                  </Button>
-                </form>
-              </TabsContent>
-
-              <TabsContent value="nurse">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-name">Full legal name</Label>
-                    <Input
-                      id="nurse-name"
-                      placeholder="Dr. Alex Nuru"
-                      value={nurseForm.name}
-                      onChange={setCurrentFormField('name')}
-                      autoComplete="name"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-username">Username</Label>
-                    <Input
-                      id="nurse-username"
-                      placeholder="dr.alex"
-                      value={nurseForm.username}
-                      onChange={setCurrentFormField('username')}
-                      autoComplete="username"
-                      pattern="^[a-zA-Z0-9_]{4,}$"
-                      title="Username must be at least 4 characters, alphanumeric only (underscores allowed)"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-email">Professional email address</Label>
-                    <Input
-                      id="nurse-email"
-                      type="email"
-                      placeholder="alex@hospital.com"
-                      value={nurseForm.email}
-                      onChange={setCurrentFormField('email')}
-                      autoComplete="email"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-gender">Gender</Label>
-                    <Select value={nurseForm.gender} onValueChange={setGender}>
-                      <SelectTrigger id="nurse-gender">
-                        <SelectValue placeholder="Select gender" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="male">Male</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-institution-name">Medical institution name</Label>
-                    <Input
-                      id="nurse-institution-name"
-                      placeholder="Nairobi General Hospital"
-                      value={nurseForm.institutionName}
-                      onChange={setCurrentFormField('institutionName')}
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-institution-address">Institution address</Label>
-                    <Textarea
-                      id="nurse-institution-address"
-                      placeholder="Full physical address"
-                      value={nurseForm.institutionAddress}
-                      onChange={setCurrentFormField('institutionAddress')}
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-password">Password</Label>
-                    <div className="relative">
-                      <Input
-                        id="nurse-password"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Min. 8 characters"
-                        value={nurseForm.password}
-                        onChange={setCurrentFormField('password')}
-                        autoComplete="new-password"
-                        className="pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((v) => !v)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                        tabIndex={-1}
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <Label htmlFor="nurse-confirm">Confirm password</Label>
-                    <div className="relative">
-                      <Input
-                        id="nurse-confirm"
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Re-enter password"
-                        value={nurseForm.confirm}
-                        onChange={setCurrentFormField('confirm')}
-                        autoComplete="new-password"
-                        className={passwordMatchError ? "border-destructive" : ""}
-                      />
-                    </div>
-                    {passwordMatchError && (
-                      <p className="text-xs text-destructive mt-1">{passwordMatchError}</p>
-                    )}
-                  </div>
-
-                  {generalError && (
-                    <div className="flex items-start gap-2 text-sm text-destructive bg-destructive/5 rounded-xl px-3 py-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                      {generalError}
-                    </div>
-                  )}
-
-                  <Button type="submit" className="w-full rounded-full gap-2" disabled={loading || !!passwordMatchError}>
-                    {loading ? 'Signing in…' : <>Sign in as Nurse <ArrowRight className="w-4 h-4" /></>}
-                  </Button>
-                </form>
-              </TabsContent>
-            </Tabs>
+              <Button type="submit" className="w-full rounded-full gap-2" disabled={loading || !!passwordMatchError}>
+                {loading ? 'Creating account…' : <>Continue <ArrowRight className="w-4 h-4" /></>}
+              </Button>
+            </form>
 
             <p className="text-center text-sm text-muted-foreground mt-6">
-              Already have an account?{' '}
+              Are you a healthcare provider?{' '}
               <Link to="/login" className="text-primary font-medium hover:underline">
-                Sign in
+                Sign in here
               </Link>
+              {' '}— nurse accounts are created by NuruCare administrators.
             </p>
           </div>
+
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Already have an account?{' '}
+            <Link to="/login" className="text-primary font-medium hover:underline">
+              Sign in
+            </Link>
+          </p>
 
           <p className="text-xs text-center text-muted-foreground mt-4">
             <Shield className="w-3 h-3 inline mr-1" />

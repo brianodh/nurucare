@@ -3,15 +3,65 @@ NuruCare - Backend API (Full Version - Works without API keys)
 Updated to include USSD handler for offline accessibility
 """
 
+import os
 import secrets
 import string
+import sys
 from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Optional
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+load_dotenv()
+
+DEFAULT_SECRET_KEY = "nurucare-dev-secret-change-in-production"
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
+
+
+def _parse_allowed_origins() -> list:
+    raw = os.getenv("ALLOWED_ORIGINS", "")
+    if not raw:
+        dev_defaults = [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:5173",
+            "http://127.0.0.1:3000",
+        ]
+        if ENVIRONMENT in ("development", "dev", "local"):
+            print(f"[WARN] ALLOWED_ORIGINS not set — using dev defaults: {dev_defaults}")
+            return dev_defaults
+        print(f"[ERROR] ALLOWED_ORIGINS must be set in non-dev environments")
+        return []
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+def _validate_startup_config() -> None:
+    from auth import SECRET_KEY as AUTH_SECRET_KEY
+
+    is_prod = ENVIRONMENT in ("production", "prod")
+
+    if is_prod:
+        if not AUTH_SECRET_KEY or AUTH_SECRET_KEY == DEFAULT_SECRET_KEY:
+            print(
+                "[FATAL] Production environment detected but SECRET_KEY is unset or still set"
+                f" to the well-known default '{DEFAULT_SECRET_KEY}'. Refusing to boot."
+                " Generate a strong secret (e.g., openssl rand -hex 32) and set it"
+                " via the SECRET_KEY environment variable."
+            )
+            sys.exit(1)
+
+    origins = _parse_allowed_origins()
+    if is_prod and not origins:
+        print(
+            "[FATAL] Production environment requires ALLOWED_ORIGINS to be set"
+            " (comma-separated list, e.g., https://app.nurucare.org,https://nurucare.org)."
+            " Refusing to boot with an empty origin allow-list."
+        )
+        sys.exit(1)
 
 from database import (
     save_intake_data, save_session_key, save_sync_token,
@@ -35,6 +85,117 @@ from database import get_system_health_detail
 from api.endpoints.ussd import router as ussd_router
 from api.endpoints.ussd_complete import router as ussd_complete_router
 from api.endpoints.admin import router as admin_router
+
+# ============================================
+# RECOMMENDATION ENGINE (lazy loaded)
+# ============================================
+_RECOMMENDATION_PIPELINE = None
+
+
+def _get_recommendation_pipeline():
+    """Lazy-load the RecommendationPipeline so missing optional deps
+    (e.g. pgvector, RAG embeddings table) do not prevent the API from
+    booting. The pipeline is the same one used by the USSD flow — it
+    runs the full WHO MEC guardrail + ranked recommendations.
+    """
+    global _RECOMMENDATION_PIPELINE
+    if _RECOMMENDATION_PIPELINE is None:
+        from engine.recommendation_pipeline import RecommendationPipeline
+        _RECOMMENDATION_PIPELINE = RecommendationPipeline()
+    return _RECOMMENDATION_PIPELINE
+
+
+_FERTILITY_INTENT_MAP = {
+    "short_term": "want_soon",
+    "long_term": "want_later",
+    "no_more": "no_more",
+    "unsure": "unsure",
+}
+
+
+def _map_intake_to_pipeline(intake_data: IntakeData) -> dict:
+    """Map main.py IntakeData fields to RecommendationPipeline input dict."""
+    data = intake_data.model_dump()
+    data["fertility_intent"] = _FERTILITY_INTENT_MAP.get(
+        data.get("fertility_intention", "unsure"), "unsure"
+    )
+    data.pop("fertility_intention", None)
+    data.setdefault("systolic_bp", 0)
+    data.setdefault("diastolic_bp", 0)
+    data.setdefault("postpartum_weeks", 100)
+    return data
+
+
+def _format_restricted_for_api(restricted) -> list:
+    """Flatten pipeline restrictions to the {name, reason, who_category} shape
+    historically returned by /api/v1/recommend. Tolerates both a list of dicts
+    (pipeline output) and unexpected shapes (e.g. guardrail-native dict form).
+    """
+    out = []
+    seen = set()
+    if not restricted:
+        return out
+    if isinstance(restricted, dict):
+        restricted = [
+            {"method_id": k, "method_name": str(k).replace("_", " ").title(),
+             "category": v if isinstance(v, int) else 3,
+             "explanation": "Contraindicated per WHO MEC rules."}
+            for k, v in restricted.items()
+        ]
+    for r in restricted:
+        if isinstance(r, str):
+            out.append({
+                "name": r,
+                "reason": "Restricted per WHO MEC rules.",
+                "who_category": 3,
+            })
+            continue
+        if not isinstance(r, dict):
+            continue
+        name = r.get("method_name") or r.get("name")
+        if not name:
+            continue
+        category = r.get("category", r.get("who_category", 3))
+        key = (name, category)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({
+            "name": name,
+            "reason": r.get("explanation") or r.get("reason") or "WHO MEC restriction.",
+            "who_category": category,
+        })
+    return out
+
+
+def _format_recommended_for_api(recommended) -> list:
+    """Flatten pipeline recommendations to {name, effectiveness, explanation}.
+    Tolerates non-dict items defensively.
+    """
+    out = []
+    if not recommended:
+        return out
+    for m in recommended:
+        if isinstance(m, str):
+            out.append({
+                "name": m,
+                "effectiveness": 90,
+                "explanation": "",
+            })
+            continue
+        if not isinstance(m, dict):
+            continue
+        name = m.get("method_name") or m.get("name")
+        if not name:
+            continue
+        out.append({
+            "name": name,
+            "effectiveness": m.get("effectiveness", 90),
+            "explanation": m.get("explanation") or "",
+            "confidence_score": m.get("confidence_score"),
+            "type": m.get("type"),
+        })
+    return out
 
 # ============================================
 # TOKEN GENERATION HELPER
@@ -121,6 +282,9 @@ class LoginRequest(BaseModel):
     password: str
 
 
+_ALLOWED_ORIGINS = _parse_allowed_origins()
+_validate_startup_config()
+
 # ============================================
 # FASTAPI APP
 # ============================================
@@ -132,11 +296,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+print(f"[OK] CORS configured. Allowed origins: {_ALLOWED_ORIGINS}")
 
 
 # ============================================
@@ -171,17 +336,15 @@ async def health_check():
 # ============================================
 @app.post("/api/v1/auth/signup")
 async def signup(request: SignupRequest):
-    """Sign up a new user (patient or nurse only).
-    Admin role is blocked here — admins can only be promoted by existing admins
-    via /api/v1/admin/users/update-role after account creation.
+    """Public signup — creates patient accounts only.
+
+    Nurse and admin accounts are privileged roles that can only be created
+    by an existing admin via /api/v1/admin/users endpoints. The request may
+    send any role value; we override it to 'patient' here so there is no
+    privilege-escalation vector through the public signup API.
     """
-    if request.role == "admin":
-        raise HTTPException(
-            status_code=403,
-            detail="Admin accounts cannot be created via public signup. Ask an existing admin to promote you."
-        )
-    if request.role not in ("patient", "nurse"):
-        raise HTTPException(status_code=400, detail="Invalid role")
+    forced_role = "patient"
+
     if len(request.password) < 8:
         raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
     if not any(c.isdigit() for c in request.password):
@@ -202,25 +365,25 @@ async def signup(request: SignupRequest):
         email=request.email,
         password_hash=hashed_password,
         full_name=request.full_name,
-        role=request.role,
+        role=forced_role,
         gender=request.gender,
-        institution_name=request.institution_name,
-        institution_address=request.institution_address
+        institution_name=None,
+        institution_address=None,
     )
 
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to create user"))
 
     token = create_access_token(
-        {"sub": result["user_id"], "role": request.role, "name": request.full_name, "gender": request.gender}
+        {"sub": result["user_id"], "role": forced_role, "name": request.full_name, "gender": request.gender}
     )
 
     return {
         "success": True,
-        "message": "User created successfully",
+        "message": "Patient account created successfully",
         "user_id": result["user_id"],
         "access_token": token,
-        "role": request.role
+        "role": forced_role,
     }
 
 @app.post("/api/v1/auth/login", response_model=TokenResponse)
@@ -424,50 +587,99 @@ async def append_side_effect_log(
 
 @app.post("/api/v1/recommend")
 async def get_recommendations(intake_data: IntakeData):
-    """Get contraceptive recommendations WHO MEC rules + AI"""
+    """Get contraceptive recommendations using the unified WHO MEC guardrail +
+    recommendation pipeline (the same engine used by the USSD flow). Replaces the
+    legacy hardcoded age-band implementation so web and USSD share one engine.
+    """
     import asyncio
     from concurrent.futures import ThreadPoolExecutor
 
-    recommendations = []
-    restrictions = []
+    pipeline = _get_recommendation_pipeline()
+    profile = _map_intake_to_pipeline(intake_data)
 
-    # WHO MEC rules (instant)
-    if intake_data.age < 20:
-        recommendations.append({"name": "Male Condoms", "effectiveness": 85, "explanation": "No hormones, protects against STIs"})
-        recommendations.append({"name": "Progestin-only Pill", "effectiveness": 93, "explanation": "Safe for young users"})
-    elif intake_data.age < 35:
-        recommendations.append({"name": "Progestin-only Pill", "effectiveness": 93, "explanation": "Highly effective, reversible"})
-        recommendations.append({"name": "Copper IUD", "effectiveness": 99, "explanation": "Long-acting, no hormones"})
-    else:
-        recommendations.append({"name": "Progestin-only Pill", "effectiveness": 93, "explanation": "Safe for older users"})
-        recommendations.append({"name": "Copper IUD", "effectiveness": 99, "explanation": "Long-acting protection"})
+    try:
+        result = pipeline.recommend(profile)
+    except Exception as exc:
+        print(
+            f"[FATAL] Recommendation pipeline failed ({exc}). Returning a safe, "
+            "conservative empty response: no recommendations listed, provider "
+            "consultation required."
+        )
+        from engine.guardrail import WHOMECGuardrail
+        try:
+            guardrail = WHOMECGuardrail()
+            gr = guardrail.evaluate(profile)
+            # guardrail.restricted_methods is a dict {method_id: category_int} and
+            # explanations is a list of {rule_id, explanation}. Convert to the same
+            # list-of-dicts shape the pipeline produces so formatters work.
+            native_restricted = gr.get("restricted_methods") or {}
+            native_explanations = (gr.get("explanations") or [])
+            explanations_by_method = {}
+            for ex in native_explanations:
+                if isinstance(ex, dict):
+                    explanations_by_method[ex.get("rule_id")] = ex.get("explanation")
+            translated_restrictions = []
+            for method_id, category in native_restricted.items():
+                mid_human = method_id.replace("_", " ").title()
+                translated_restrictions.append({
+                    "method_id": method_id,
+                    "method_name": mid_human,
+                    "category": category,
+                    "explanation": explanations_by_method.get(method_id, "Contraindicated for this profile per WHO MEC rules."),
+                    "rule_id": method_id,
+                })
+            result = {
+                "recommended_methods": [],
+                "restricted_methods": translated_restrictions,
+                "requires_provider": bool(gr.get("requires_provider", True)),
+                "allowed_count": len(gr.get("allowed_methods", [])),
+                "restricted_count": len(translated_restrictions),
+                "timestamp": datetime.now().isoformat(),
+                "disclaimer": "Engine fallback: no ranked methods provided. Consult a healthcare provider.",
+            }
+        except Exception as exc2:
+            print(f"[FATAL] Guardrail fallback ALSO failed ({exc2}). Returning fully empty safe response.")
+            result = {
+                "recommended_methods": [],
+                "restricted_methods": [],
+                "requires_provider": True,
+                "timestamp": datetime.now().isoformat(),
+                "disclaimer": "System degraded. You MUST consult a healthcare provider before choosing a method.",
+            }
 
-    recommendations.append({"name": "Male Condoms", "effectiveness": 85, "explanation": "Protects against STIs"})
+    formatted_recommended = _format_recommended_for_api(result.get("recommended_methods"))
+    formatted_restricted = _format_restricted_for_api(result.get("restricted_methods"))
 
-    if intake_data.smoking and intake_data.age > 35:
-        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Age >35 + smoking increases cardiovascular risk", "who_category": 4})
-    if intake_data.migraine_type == "with_aura":
-        restrictions.append({"name": "Combined Oral Contraceptives", "reason": "WHO Category 4: Migraine with aura increases stroke risk", "who_category": 4})
-    if intake_data.breastfeeding:
-        recommendations.append({"name": "Progestin-only Pill (POP)", "effectiveness": 93, "explanation": "Safe during breastfeeding"})
-        recommendations.append({"name": "Lactational Amenorrhea Method (LAM)", "effectiveness": 98, "explanation": "For exclusively breastfeeding mothers <6 months"})
+    # Build a concise summary for the AI narrative field, falling back to the
+    # real ai_client if Gemini is configured (see ai_client.py for env checks).
+    base_summary_parts = []
+    for m in formatted_recommended[:3]:
+        if m.get("explanation"):
+            base_summary_parts.append(f"• {m['name']}: {m['explanation']}")
+    narrative_summary = "\n".join(base_summary_parts) if base_summary_parts else result.get("summary", "")
+    disclaimer = result.get("disclaimer", "Always consult a healthcare provider before starting any contraceptive method.")
 
-    # AI narrative (non-blocking)
     loop = asyncio.get_event_loop()
     with ThreadPoolExecutor() as pool:
-        ai_response, swahili_version = await asyncio.gather(
-            loop.run_in_executor(pool, get_ai_recommendation, intake_data.dict()),
-            loop.run_in_executor(pool, translate_to_swahili, recommendations[0]["explanation"] if recommendations else "")
+        swahili_version, full_ai = await asyncio.gather(
+            loop.run_in_executor(pool, translate_to_swahili, narrative_summary),
+            loop.run_in_executor(pool, get_ai_recommendation, intake_data.model_dump(), narrative_summary, disclaimer),
         )
 
     return {
-        "recommended_methods": recommendations,
-        "restricted_methods": restrictions,
-        "requires_provider_consultation": len(restrictions) > 0,
-        "general_advice": "Always consult a healthcare provider before starting any contraceptive method.",
-        "timestamp": datetime.now().isoformat(),
+        "recommended_methods": formatted_recommended,
+        "restricted_methods": formatted_restricted,
+        "requires_provider_consultation": bool(result.get("requires_provider", formatted_restricted)),
+        "general_advice": disclaimer,
+        "timestamp": result.get("timestamp", datetime.now().isoformat()),
         "swahili_version": swahili_version,
-        "full_ai_response": ai_response,
+        "full_ai_response": full_ai,
+        "engine_meta": {
+            "from_pipeline": True,
+            "allowed_count": result.get("allowed_count"),
+            "restricted_count": result.get("restricted_count"),
+            "summary": result.get("summary"),
+        },
     }
 
 

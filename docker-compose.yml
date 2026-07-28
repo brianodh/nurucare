@@ -30,12 +30,22 @@ services:
       db:
         condition: service_healthy
     environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
       STORAGE_BACKEND: local
       DATABASE_URL: postgresql://nurucare:nurucare@db:5432/nurucare
       SECRET_KEY: ${SECRET_KEY:-nurucare-dev-secret-change-in-production}
+      DEMO_MODE: ${DEMO_MODE:-}
+      # ACCESS_TOKEN_EXPIRE_MINUTES: 30
       SUPABASE_URL: ${SUPABASE_URL:-}
       SUPABASE_KEY: ${SUPABASE_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-}
+      REDIS_URL: ${REDIS_URL:-}
+      REDIS_HOST: ${REDIS_HOST:-}
+      REDIS_PORT: ${REDIS_PORT:-}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      SESSION_EXPIRY_HOURS: ${SESSION_EXPIRY_HOURS:-1}
     ports:
       - "8000:8000"
     volumes:
