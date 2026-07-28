@@ -347,7 +347,7 @@ export default function ContentManager() {
         <div>
           <h1 className="text-2xl font-bold">Content Manager</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Manage myths, WHO guidelines, and educational content.
+            Manage myths, WHO guidelines and educational content.
           </p>
         </div>
         <div className="flex gap-2">

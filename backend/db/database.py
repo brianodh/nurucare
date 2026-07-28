@@ -6,7 +6,7 @@ OPTIONAL — RAG-only SQLAlchemy/pgvector store.
 This module is NOT imported by the main FastAPI app. It is used exclusively by
 `backend/engine/rag_pipeline.py` when the optional RAG path of the
 `RecommendationPipeline` is enabled (i.e. when pgvector extension,
-`who_guidance_embeddings` table, and a valid `DATABASE_URL` are present).
+`who_guidance_embeddings` table and a valid `DATABASE_URL` are present).
 
 If any of those are missing, the recommendation engine degrades gracefully to
 the WHO MEC guardrail + adoption-statistics ranking only; nothing else in the

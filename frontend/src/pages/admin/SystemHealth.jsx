@@ -372,7 +372,7 @@ export default function SystemHealth() {
                         </div>
                         <div>
                           <p className="font-semibold text-emerald-700 dark:text-emerald-400">All systems operational</p>
-                          <p className="text-xs text-muted-foreground">Database, Gemini API, and WHO MEC engine are connected.</p>
+                          <p className="text-xs text-muted-foreground">Database, Gemini API and WHO MEC engine are connected.</p>
                         </div>
                       </>
                     ) : (
