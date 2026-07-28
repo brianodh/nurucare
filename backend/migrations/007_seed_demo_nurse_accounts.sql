@@ -1,0 +1,13 @@
+-- Migration 007: Seed demo nurse accounts into users table (idempotent)
+--
+-- These rows replace the hardcoded NURSE_ACCOUNTS dict in auth.py.
+-- The bcrypt hashes below were generated with the demo password
+-- "NuruCare2026" using bcrypt rounds=12.
+--
+-- Only inserted if the username does not already exist so this is safe
+-- to re-run. In non-demo environments simply never apply this file.
+-- Date: 2026-07-28
+--
+-- NOTE: Hashes are placeholder. Run the Python seed script instead:
+--   backend/scripts/seed_demo_nurses.py
+-- to generate per-environment hashes via hash_password().

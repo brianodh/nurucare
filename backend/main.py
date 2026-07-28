@@ -18,6 +18,7 @@ from database import (
     verify_session_key, verify_sync_token, get_profile_by_id,
     get_dashboard_data, create_user, get_user_by_username, get_user_by_email,
     update_profile_fields, compute_safety_score,
+    rate_limited_verify_session_key, rate_limited_verify_sync_token,
 )
 from ai_client import get_ai_recommendation, translate_to_swahili
 from auth import (
@@ -296,11 +297,12 @@ async def nurse_login(request: NurseLoginRequest):
 
 @app.post("/api/v1/auth/patient/session", response_model=PatientSessionResponse)
 async def create_patient_session():
-    """Create an anonymous patient session"""
+    """Create an anonymous patient session (user_id = None)."""
     result = save_intake_data(None, {
         "age": 0, "systolic_bp": 0, "diastolic_bp": 0,
         "smoking": False, "migraine_type": "none", "breastfeeding": False,
-    })
+        "intake_channel": "web",
+    }, user_id=None)
     if not result["success"]:
         raise HTTPException(status_code=500, detail="Failed to create session")
 
@@ -324,9 +326,14 @@ async def get_me(user: dict = Depends(get_current_user)):
 # ============================================
 @app.post("/api/v1/intake")
 async def submit_intake(intake_data: IntakeData, user: Optional[dict] = Depends(optional_auth)):
-    """Save full intake data"""
-    profile_id = user.get("sub") if user and user.get("role") == "patient" else None
-    result = save_intake_data(profile_id, intake_data.dict())
+    """Save full intake data. For authenticated patients the profile_id AND user_id
+    are both set so JOINs work correctly (p.user_id = u.user_id. For anonymous
+    patients user_id is NULL as expected.
+    """
+    is_authed_patient = user and user.get("role") == "patient"
+    profile_id = user.get("sub") if is_authed_patient else None
+    explicit_user_id = user.get("sub") if is_authed_patient else None
+    result = save_intake_data(profile_id, intake_data.dict(), user_id=explicit_user_id)
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to save intake"))
     return {"success": True, "message": "Intake data received", "profile_id": result["profile_id"]}
@@ -471,14 +478,16 @@ async def get_recommendations(intake_data: IntakeData):
 async def generate_session_key(request: SessionKeyRequest, user: Optional[dict] = Depends(optional_auth)):
     """Patient generates a 6-digit code to share with nurse"""
     profile_id = request.profile_id
-    if not profile_id and user and user.get("role") == "patient":
+    is_authed_patient = user and user.get("role") == "patient"
+    if not profile_id and is_authed_patient:
         profile_id = user.get("sub")
 
     if not profile_id:
         created = save_intake_data(None, {
             "age": 0, "systolic_bp": 0, "diastolic_bp": 0,
             "smoking": False, "migraine_type": "none", "breastfeeding": False,
-        })
+            "intake_channel": "web",
+        }, user_id=None)
         if not created["success"]:
             raise HTTPException(status_code=500, detail="Failed to create anonymous profile")
         profile_id = created["profile_id"]
@@ -495,10 +504,13 @@ async def nurse_verify_session(
     request: NurseVerifySessionRequest,
     nurse: dict = Depends(require_nurse),
 ):
-    """Nurse enters 6-digit code → gets patient profile. Nurse JWT required."""
-    result = verify_session_key(request.session_key)
+    """Nurse enters 6-digit code → gets patient profile. Nurse JWT required.
+    Rate-limited per access code (5 attempts / 60s) to block brute force.
+    """
+    result = rate_limited_verify_session_key(request.session_key)
     if not result["success"]:
-        raise HTTPException(status_code=400, detail=result.get("error", "Invalid or expired session key"))
+        status = 429 if "Too many attempts" in result.get("error", "") else 400
+        raise HTTPException(status_code=status, detail=result.get("error", "Invalid or expired session key"))
 
     profile = get_profile_by_id(result["patient_id"])
     if not profile["success"]:
@@ -514,14 +526,16 @@ async def nurse_verify_session(
 async def generate_sync_token(request: SyncGenerateRequest, user: Optional[dict] = Depends(optional_auth)):
     """Generate anonymous partner sync token"""
     profile_id = request.profile_id
-    if not profile_id and user and user.get("role") == "patient":
+    is_authed_patient = user and user.get("role") == "patient"
+    if not profile_id and is_authed_patient:
         profile_id = user.get("sub")
 
     if not profile_id:
         created = save_intake_data(None, {
             "age": 0, "systolic_bp": 0, "diastolic_bp": 0,
             "smoking": False, "migraine_type": "none", "breastfeeding": False,
-        })
+            "intake_channel": "web",
+        }, user_id=None)
         if not created["success"]:
             raise HTTPException(status_code=500, detail="Failed to create anonymous profile")
         profile_id = created["profile_id"]
@@ -535,10 +549,13 @@ async def generate_sync_token(request: SyncGenerateRequest, user: Optional[dict]
 
 @app.post("/api/v1/sync/verify")
 async def verify_sync_token_endpoint(request: SyncVerifyRequest):
-    """Partner enters the sync token → profiles are linked"""
-    result = verify_sync_token(request.token)
+    """Partner enters the sync token → profiles are linked.
+    Rate-limited per token (10 attempts / 60s) as anti-spray.
+    """
+    result = rate_limited_verify_sync_token(request.token)
     if not result["success"]:
-        raise HTTPException(status_code=400, detail=result.get("error", "Invalid or expired token"))
+        status = 429 if "Too many attempts" in result.get("error", "") else 400
+        raise HTTPException(status_code=status, detail=result.get("error", "Invalid or expired token"))
 
     linked_profile_id = result["from_user_id"]
     partner_profile = None

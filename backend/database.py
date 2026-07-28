@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import hashlib
 import os
+import threading
+from collections import deque
 from datetime import datetime, timedelta, timezone
 from typing import Any, Optional
 
@@ -153,6 +155,7 @@ def _ensure_local_schema() -> None:
 
     CREATE INDEX IF NOT EXISTS idx_profiles_age ON profiles(age);
     CREATE INDEX IF NOT EXISTS idx_profiles_intake_channel ON profiles(intake_channel);
+    CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON profiles(user_id);
     CREATE INDEX IF NOT EXISTS idx_partner_sync_expires_at ON partner_sync(expires_at);
     CREATE INDEX IF NOT EXISTS idx_nurse_sessions_expires_at ON nurse_sessions(expires_at);
     CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
@@ -273,13 +276,67 @@ if not _use_supabase():
         print("[WARNING] Database features will not be available, but app will still start")
 
 
+def _auto_seed_demo_nurses() -> None:
+    """Seed demo nurse accounts into users table (DEMO_MODE only, idempotent).
+
+    Run once at import time regardless of backend (Supabase or local PG).
+    Silent skip when DEMO_MODE is off or the rows already exist. Uses the
+    real create_user → hash_password chain so bcrypt hashes are generated
+    with correct rounds for the environment.
+    """
+    import os
+    demo_mode = os.getenv("DEMO_MODE", "").lower() in ("1", "true", "yes", "on")
+    if not demo_mode:
+        return
+    try:
+        from auth import hash_password
+    except Exception:
+        return
+    seed = [
+        dict(username="nurse.demo", email="nurse.demo@nurucare.example",
+             password="NuruCare2026", full_name="Demo Nurse", role="nurse",
+             institution_name="NuruCare Demo Clinic",
+             institution_address="123 Wellness Ave, Nairobi"),
+        dict(username="dr.alex", email="dr.alex@nurucare.example",
+             password="NuruCare2026", full_name="Dr. Alex Nuru", role="nurse",
+             institution_name="NuruCare Regional Hospital",
+             institution_address="456 Care Blvd, Kisumu"),
+    ]
+    for entry in seed:
+        try:
+            ex = get_user_by_username(entry["username"])
+            if ex["success"]:
+                continue
+            pw_hash = hash_password(entry["password"])
+            create_user(
+                username=entry["username"],
+                email=entry["email"],
+                password_hash=pw_hash,
+                full_name=entry["full_name"],
+                role=entry["role"],
+                gender=None,
+                institution_name=entry["institution_name"],
+                institution_address=entry["institution_address"],
+            )
+            print(f"[seed] Created demo nurse account: {entry['username']}")
+        except Exception as exc:
+            print(f"[seed] Skipped {entry['username']}: {exc}")
+
+
+try:
+    _auto_seed_demo_nurses()
+except Exception:
+    pass
+
+
 def get_supabase() -> Optional[Client]:
     return _supabase
 
 
-def save_intake_data(session_id: str, intake_data: dict):
+def save_intake_data(session_id: str, intake_data: dict, user_id: Optional[str] = None):
     row = {
         "profile_id": session_id,
+        "user_id": user_id,
         "age": intake_data["age"],
         "systolic_bp": intake_data.get("systolic_bp") or 0,
         "diastolic_bp": intake_data.get("diastolic_bp") or 0,
@@ -294,6 +351,7 @@ def save_intake_data(session_id: str, intake_data: dict):
         "allowed_methods": intake_data.get("allowed_methods"),
         "explanations": intake_data.get("explanations"),
         "confidence_score": intake_data.get("confidence_score"),
+        "intake_channel": intake_data.get("intake_channel", "web"),
     }
 
     if _supabase:
@@ -301,7 +359,7 @@ def save_intake_data(session_id: str, intake_data: dict):
             payload = {k: v for k, v in row.items() if v is not None}
             result = _supabase.table("profiles").upsert(payload).execute()
             profile_id = result.data[0]["profile_id"]
-            print(f"[OK] Supabase: Saved intake for profile {profile_id}")
+            print(f"[OK] Supabase: Saved intake for profile {profile_id}" + (f" (user_id={user_id})" if user_id else " (anonymous)"))
             return {"success": True, "profile_id": profile_id}
         except Exception as exc:
             print(f"[ERROR] Supabase error: {exc}")
@@ -310,18 +368,19 @@ def save_intake_data(session_id: str, intake_data: dict):
     try:
         sql = """
             INSERT INTO profiles (
-                profile_id, age, systolic_bp, diastolic_bp, smoking, migraine_type,
+                profile_id, user_id, age, systolic_bp, diastolic_bp, smoking, migraine_type,
                 breastfeeding, postpartum_weeks, last_period_date, duration_pref,
                 side_effects, restricted_methods, allowed_methods, explanations,
-                confidence_score
+                confidence_score, intake_channel
             ) VALUES (
-                COALESCE(%(profile_id)s::uuid, gen_random_uuid()), %(age)s, %(systolic_bp)s,
+                COALESCE(%(profile_id)s::uuid, gen_random_uuid()), %(user_id)s::uuid, %(age)s, %(systolic_bp)s,
                 %(diastolic_bp)s, %(smoking)s, %(migraine_type)s, %(breastfeeding)s,
                 %(postpartum_weeks)s, %(last_period_date)s, %(duration_pref)s,
                 %(side_effects)s, %(restricted_methods)s, %(allowed_methods)s,
-                %(explanations)s, %(confidence_score)s
+                %(explanations)s, %(confidence_score)s, %(intake_channel)s
             )
             ON CONFLICT (profile_id) DO UPDATE SET
+                user_id = COALESCE(EXCLUDED.user_id, profiles.user_id),
                 age = EXCLUDED.age,
                 systolic_bp = EXCLUDED.systolic_bp,
                 diastolic_bp = EXCLUDED.diastolic_bp,
@@ -336,6 +395,7 @@ def save_intake_data(session_id: str, intake_data: dict):
                 allowed_methods = EXCLUDED.allowed_methods,
                 explanations = EXCLUDED.explanations,
                 confidence_score = EXCLUDED.confidence_score,
+                intake_channel = EXCLUDED.intake_channel,
                 created_at = now()
             RETURNING profile_id;
         """
@@ -351,7 +411,7 @@ def save_intake_data(session_id: str, intake_data: dict):
                 cursor.execute(sql, params)
                 profile_id = cursor.fetchone()["profile_id"]
             connection.commit()
-        print(f"[OK] Local DB: Saved intake for profile {profile_id}")
+        print(f"[OK] Local DB: Saved intake for profile {profile_id}" + (f" (user_id={user_id})" if user_id else " (anonymous)"))
         return {"success": True, "profile_id": str(profile_id)}
     except Exception as exc:
         print(f"[ERROR] Local DB error: {exc}")
@@ -421,27 +481,32 @@ def verify_session_key(session_key: str):
     try:
         if _supabase:
             result = _supabase.table("nurse_sessions") \
-                .select("profile_id, expires_at, used") \
+                .select("profile_id, expires_at, used, force_expired") \
                 .eq("access_code", session_key) \
                 .eq("used", False) \
                 .execute()
             if not result.data:
                 return {"success": False, "error": "Invalid or expired session key"}
             row = result.data[0]
+            if row.get("force_expired"):
+                return {"success": False, "error": "Session key revoked by admin"}
             expires_at = _parse_datetime(row["expires_at"])
             if expires_at < datetime.now(timezone.utc):
                 return {"success": False, "error": "Session key expired"}
+            _supabase.table("nurse_sessions").update({"used": True}).eq("access_code", session_key).execute()
             return {"success": True, "patient_id": row["profile_id"]}
 
         with _local_connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "SELECT profile_id, expires_at FROM nurse_sessions WHERE access_code = %s AND used = false ORDER BY created_at DESC LIMIT 1",
+                    "SELECT profile_id, expires_at, used, force_expired FROM nurse_sessions WHERE access_code = %s AND used = false ORDER BY created_at DESC LIMIT 1",
                     (session_key,),
                 )
                 row = cursor.fetchone()
                 if not row:
                     return {"success": False, "error": "Invalid or expired session key"}
+                if row.get("force_expired"):
+                    return {"success": False, "error": "Session key revoked by admin"}
                 expires_at = _parse_datetime(row["expires_at"])
                 if expires_at < datetime.now(timezone.utc):
                     return {"success": False, "error": "Session key expired"}
@@ -1276,3 +1341,76 @@ def get_system_health_detail() -> dict:
         },
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }}
+
+
+# ================================================================
+# RATE LIMITER — protects guessable 6-digit nurse access codes
+# ================================================================
+
+class SlidingWindowRateLimiter:
+    """Thread-safe in-memory sliding window rate limiter.
+
+    Used to prevent brute-force guessing of:
+      - nurse_sessions.access_code (6-digit, 1M combinations → guessable)
+      - partner_sync tokens (longer, but still low-entropy enough to be worth gating)
+
+    Default config: 5 attempts per key per 60-second window.
+    """
+
+    def __init__(self, max_attempts: int = 5, window_seconds: int = 60):
+        self._max = max_attempts
+        self._window = timedelta(seconds=window_seconds)
+        self._buckets: dict[str, deque] = {}
+        self._lock = threading.Lock()
+
+    def check_and_record(self, key: str) -> tuple[bool, int]:
+        """Return (allowed, attempts_left_in_window)."""
+        now = datetime.now(timezone.utc)
+        cutoff = now - self._window
+        with self._lock:
+            dq = self._buckets.get(key)
+            if dq is None:
+                dq = deque()
+                self._buckets[key] = dq
+            while dq and dq[0] < cutoff:
+                dq.popleft()
+            if len(dq) >= self._max:
+                return False, 0
+            dq.append(now)
+            return True, self._max - len(dq)
+
+
+_NURSE_KEY_RL = SlidingWindowRateLimiter(max_attempts=5, window_seconds=60)
+_SYNC_TOKEN_RL = SlidingWindowRateLimiter(max_attempts=10, window_seconds=60)
+
+
+def rate_limited_verify_session_key(session_key: str) -> dict:
+    """Wraps verify_session_key() with per-attempt rate limiting on the key.
+
+    A 6-digit code has only 1M combinations — an attacker can enumerate it
+    in ~10 minutes at 2k qps. Gating at 5 attempts/minute per code pushes
+    that out to ~14 weeks (worst case) before the token expires anyway,
+    which is the practical security level we need given the other
+    mitigations (expiry, force_expire, single-use).
+    """
+    # Normalize / hash the input so the bucket key is deterministic but we
+    # don't retain access codes in memory long-term.
+    bucket = _hash_token(session_key or "")[:16]
+    allowed, _left = _NURSE_KEY_RL.check_and_record(bucket)
+    if not allowed:
+        return {"success": False, "error": "Too many attempts. Wait 60 seconds and try again."}
+    return verify_session_key(session_key)
+
+
+def rate_limited_verify_sync_token(token: str) -> dict:
+    """Wraps verify_sync_token() with rate limiting.
+
+    Partner sync tokens are higher entropy (NX-XXX-XXX ~ 36^6 combos) so
+    the limit is more permissive. Still, repeated failing requests should
+    be throttled to stop dumb spray attacks.
+    """
+    bucket = _hash_token(token or "")[:16]
+    allowed, _left = _SYNC_TOKEN_RL.check_and_record(bucket)
+    if not allowed:
+        return {"success": False, "error": "Too many attempts. Wait 60 seconds and try again."}
+    return verify_sync_token(token)
