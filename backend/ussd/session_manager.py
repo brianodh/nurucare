@@ -183,7 +183,7 @@ class USSDSessionManager:
         # Check if Redis is configured
         redis_url = os.getenv("REDIS_URL")
         redis_host = os.getenv("REDIS_HOST", "localhost")
-        redis_port = int(os.getenv("REDIS_PORT", "6379"))
+        redis_port = int(os.getenv("REDIS_PORT") or "6379")
         redis_password = os.getenv("REDIS_PASSWORD")
         
         # Try Redis first
@@ -204,7 +204,7 @@ class USSDSessionManager:
             print("✅ Using in-memory session storage")
             self._store = InMemorySessionStore()
         
-        self._expiry_hours = int(os.getenv("SESSION_EXPIRY_HOURS", "1"))
+        self._expiry_hours = int(os.getenv("SESSION_EXPIRY_HOURS") or "1")
     
     def get_session(self, session_id: str) -> Dict[str, Any]:
         """

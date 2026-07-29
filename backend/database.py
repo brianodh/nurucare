@@ -17,7 +17,8 @@ from typing import Any, Optional
 
 import psycopg
 from dotenv import load_dotenv
-from psycopg.extras import Json, RealDictCursor
+from psycopg.rows import dict_row
+from psycopg.types.json import Json
 from supabase import Client, create_client
 
 load_dotenv()
@@ -53,7 +54,7 @@ else:
 
 
 def _local_connection():
-    return psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
 
 
 def _ensure_local_schema() -> None:

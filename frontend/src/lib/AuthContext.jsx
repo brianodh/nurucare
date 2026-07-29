@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
     }
-    const res = await signup({
+    const res = await signupApi({
       username,
       email,
       password,

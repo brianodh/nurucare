@@ -3,6 +3,8 @@ NuruCare - Backend API (Full Version - Works without API keys)
 Updated to include USSD handler for offline accessibility
 """
 
+from __future__ import annotations
+
 import os
 import secrets
 import string
