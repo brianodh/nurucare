@@ -17,7 +17,8 @@ from typing import Any, Optional
 
 import psycopg
 from dotenv import load_dotenv
-from psycopg.extras import Json, RealDictCursor
+from psycopg.rows import dict_row
+from psycopg.types.json import Json
 from supabase import Client, create_client
 
 load_dotenv()
@@ -53,7 +54,14 @@ else:
 
 
 def _local_connection():
-    return psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    # psycopg3 (the "psycopg" package) has a different API from psycopg2:
+    # there is no psycopg.extras module, no RealDictCursor class, and
+    # connect() takes row_factory instead of cursor_factory. row_factory is
+    # set once here at the connection level, so every cursor opened from
+    # this connection (connection.cursor() / conn.cursor(), ~30 call sites
+    # throughout this file) automatically yields dict-like rows exactly as
+    # RealDictCursor used to — no per-call-site changes needed.
+    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
 
 
 def _ensure_local_schema() -> None:
