@@ -3,6 +3,15 @@ NuruCare - Backend API (Full Version - Works without API keys)
 Updated to include USSD handler for offline accessibility
 """
 
+# Must be the first statement: defers evaluation of type annotations (PEP 563)
+# instead of evaluating them eagerly at function-definition time. Needed
+# because _map_intake_to_pipeline() (below) annotates a parameter as
+# IntakeData, but that class isn't defined until further down this file —
+# without this import, that raises NameError: name 'IntakeData' is not
+# defined at module-import time, crashing the whole app before it can
+# start. database.py already uses this same import for the same reason.
+from __future__ import annotations
+
 import os
 import secrets
 import string
