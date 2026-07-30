@@ -108,6 +108,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ── Sign Up ────────────────────────────────────────────────────────────────
+  // Supports both patient and nurse self-registration. Patients get an
+  // access_token immediately and are logged in as part of signup. Nurse
+  // signups are created with is_active=False on the backend (pending admin
+  // approval) and the API deliberately returns NO access_token — there is
+  // nothing valid to authenticate with yet. In that case we must NOT persist
+  // a "logged in" user (there'd be no working token behind it, so every
+  // subsequent API call would 401) — instead we return a `pending: true`
+  // result so the caller (SignUp.jsx) can show a clear "awaiting admin
+  // approval" state rather than a broken silent "logged in" screen.
   const signUp = async ({ full_name, email, username, password, consentGiven, gender, role, institution_name, institution_address }) => {
     if (!consentGiven) {
       throw new Error('You must accept the data consent policy to create an account.');
@@ -122,6 +131,15 @@ export const AuthProvider = ({ children }) => {
       institution_name,
       institution_address
     });
+
+    if (res.pending_approval || !res.access_token) {
+      return {
+        pending: true,
+        role: res.role,
+        message: res.message || 'Account created and pending admin approval.',
+      };
+    }
+
     const jwt = decodeJwtPayload(res.access_token);
     const sub = jwt?.sub || res.user_id;
     const newUser = {
@@ -138,10 +156,14 @@ export const AuthProvider = ({ children }) => {
     persistUser(newUser);
     setUser(newUser);
     setIsAuthenticated(true);
-    return newUser;
+    return { pending: false, ...newUser };
   };
 
   // ── Login ──────────────────────────────────────────────────────────────────
+  // Single unified login for every role (patient, nurse, admin) — the backend's
+  // /api/v1/auth/login endpoint already looks the user up by username across
+  // all roles and returns the right role in the token, so there is exactly one
+  // login form/flow in the app; callers redirect by `role` afterward.
   const login = async ({ username, password }) => {
     const res = await loginApi(username, password);
     const jwt = decodeJwtPayload(res.access_token);

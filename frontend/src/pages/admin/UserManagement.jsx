@@ -59,7 +59,6 @@ import {
   RefreshCw,
   Plus,
   UserPlus,
-  Shield,
   ShieldAlert,
   UserCog,
   UserCheck,
@@ -567,13 +566,18 @@ export default function UserManagement() {
                                       <DropdownMenuContent align="end" className="w-48">
                                         <DropdownMenuLabel>Change role</DropdownMenuLabel>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem
-                                          disabled={rowRole === 'admin'}
-                                          onClick={() => handleRoleChange(rowId, 'admin')}
-                                        >
-                                          <Shield className="w-4 h-4 text-indigo-600" />
-                                          Promote to Admin
-                                        </DropdownMenuItem>
+                                        {/*
+                                          "Promote to Admin" intentionally removed.
+                                          Admin accounts are created exclusively via
+                                          the CLI bootstrap script
+                                          (backend/scripts/create_admin.py) -- the
+                                          API rejects role="admin" on this endpoint
+                                          (see api/endpoints/admin.py:
+                                          admin_update_role), so this action would
+                                          only ever fail with a 403. Existing admins
+                                          are still visible read-only via the Admin
+                                          tab/filter above.
+                                        */}
                                         <DropdownMenuItem
                                           disabled={rowRole === 'nurse'}
                                           onClick={() => handleRoleChange(rowId, 'nurse')}

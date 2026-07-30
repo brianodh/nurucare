@@ -17,8 +17,7 @@ from typing import Any, Optional
 
 import psycopg
 from dotenv import load_dotenv
-from psycopg.rows import dict_row
-from psycopg.types.json import Json
+from psycopg.extras import Json, RealDictCursor
 from supabase import Client, create_client
 
 load_dotenv()
@@ -54,7 +53,7 @@ else:
 
 
 def _local_connection():
-    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
+    return psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
 
 
 def _ensure_local_schema() -> None:
@@ -182,8 +181,14 @@ def create_user(
     role: str = "patient",
     gender: Optional[str] = None,
     institution_name: Optional[str] = None,
-    institution_address: Optional[str] = None
+    institution_address: Optional[str] = None,
+    is_active: bool = True
 ) -> dict:
+    """Create a user. `is_active` defaults to True (patients, admin-created nurses,
+    CLI-created admins are all usable immediately). Self-signup nurse accounts pass
+    is_active=False explicitly — the account exists but cannot log in
+    (login()/nurse_login() both reject inactive accounts) until an admin flips it
+    active via the admin panel's existing Activate/Deactivate control."""
     if _use_supabase():
         try:
             payload = {
@@ -194,7 +199,8 @@ def create_user(
                 "role": role,
                 "gender": gender,
                 "institution_name": institution_name,
-                "institution_address": institution_address
+                "institution_address": institution_address,
+                "is_active": is_active
             }
             result = _supabase.table("users").insert(payload).execute()
             print(f"[OK] Supabase: Created user {username}")
@@ -206,13 +212,13 @@ def create_user(
         sql = """
             INSERT INTO users (
                 username, email, password_hash, full_name, role, gender, 
-                institution_name, institution_address
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                institution_name, institution_address, is_active
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING user_id;
         """
         params = (
             username, email, password_hash, full_name, role, gender,
-            institution_name, institution_address
+            institution_name, institution_address, is_active
         )
         with _local_connection() as connection:
             with connection.cursor() as cursor:
@@ -224,6 +230,7 @@ def create_user(
     except Exception as exc:
         print(f"[ERROR] Local DB error: {exc}")
         return {"success": False, "error": str(exc)}
+
 
 def get_user_by_username(username: str) -> dict:
     if _use_supabase():
@@ -605,12 +612,30 @@ def get_dashboard_data():
 
         total = len(profiles)
         today = datetime.now(timezone.utc).date().isoformat()
+        now = datetime.now(timezone.utc)
         daily = sum(1 for profile in profiles if str(profile.get("created_at", ""))[:10] == today)
-        risk_flags = sum(
-            1
-            for profile in profiles
-            if compute_risk_flags(profile)["has_cat4_flag"]
-        )
+
+        weekly = 0
+        risk_flags = 0
+        risk_band_counts = {"low": 0, "medium": 0, "high": 0}
+        recommendation_counts = {}
+
+        for profile in profiles:
+            created_raw = str(profile.get("created_at", ""))
+            try:
+                created_dt = datetime.fromisoformat(created_raw.replace("Z", "+00:00"))
+                if (now - created_dt).days < 7:
+                    weekly += 1
+            except (ValueError, TypeError):
+                pass
+
+            risk = compute_risk_flags(profile)
+            if risk["has_cat4_flag"]:
+                risk_flags += 1
+            risk_band_counts[risk["risk_level"]] += 1
+
+            recommended_method = "Copper IUD" if not risk["_breastfeeding"] else "Progestin-only Pill"
+            recommendation_counts[recommended_method] = recommendation_counts.get(recommended_method, 0) + 1
 
         buckets = {"15-19": 0, "20-24": 0, "25-29": 0, "30-34": 0, "35-39": 0, "40+": 0}
         for profile in profiles:
@@ -644,12 +669,27 @@ def get_dashboard_data():
                 "lastVisit": str(profile.get("created_at", ""))[:10],
             })
 
+        risk_dist_fill = {"low": "hsl(174,52%,46%)", "medium": "hsl(43,74%,66%)", "high": "hsl(0,72%,60%)"}
+        risk_dist_label = {"low": "Low", "medium": "Medium", "high": "High"}
+        risk_distribution = []
+        for band in ("low", "medium", "high"):
+            count = risk_band_counts[band]
+            pct = round((count / total) * 100) if total else 0
+            risk_distribution.append({"name": risk_dist_label[band], "value": pct, "fill": risk_dist_fill[band]})
+
+        recommendation_distribution = [
+            {"name": name, "value": count} for name, count in sorted(recommendation_counts.items())
+        ]
+
         return {"success": True, "data": {
             "activeConsultations": total,
             "riskFlags": risk_flags,
             "dailySessions": daily,
+            "weeklySessions": weekly,
             "recentPatients": recent,
             "ageDemographics": [{"range": key, "count": value} for key, value in buckets.items()],
+            "riskDistribution": risk_distribution,
+            "recommendationDistribution": recommendation_distribution,
         }}
     except Exception as exc:
         return {"success": False, "error": str(exc)}
@@ -1130,9 +1170,17 @@ def get_user_by_id_admin(user_id: str) -> dict:
 
 
 def update_user_role(user_id: str, new_role: str, actor_user_id: str) -> dict:
-    """Promote/demote a user's role. Caller must already have verified actor is admin."""
-    if new_role not in ("patient", "nurse", "admin"):
-        return {"success": False, "error": "Invalid role"}
+    """Promote/demote a user's role. Caller must already have verified actor is admin.
+
+    "admin" is intentionally excluded from the allowed values: admin accounts are
+    created exclusively via the `backend/scripts/create_admin.py` CLI bootstrap,
+    never through this (or any other) HTTP-reachable endpoint. This is enforced at
+    both the API layer (api/endpoints/admin.py) and here at the DB layer as
+    defense in depth — a caller must not be able to reach admin promotion by any
+    request path, authenticated or not.
+    """
+    if new_role not in ("patient", "nurse"):
+        return {"success": False, "error": "Invalid role. Admin accounts can only be created via the CLI bootstrap script (backend/scripts/create_admin.py)."}
     try:
         if _supabase:
             r = _supabase.table("users").update({"role": new_role, "updated_at": datetime.now(timezone.utc).isoformat()}).eq("user_id", user_id).execute()

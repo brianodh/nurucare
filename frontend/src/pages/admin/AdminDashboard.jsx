@@ -47,6 +47,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchAllData = useCallback(async () => {
     try {
@@ -59,6 +60,7 @@ export default function AdminDashboard() {
       setOverview(ov);
       setSignupTrend(trend);
       setSystemHealth(health);
+      setLastUpdated(new Date());
     } catch (e) {
       setError(true);
     } finally {
@@ -69,6 +71,12 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchAllData();
+    // Live auto-refresh: platform overview numbers (signups, channel split,
+    // engine health) shouldn't require a manual click to stay current. Same
+    // 60s cadence as the nurse dashboard/analytics screens. The manual
+    // "Refresh" button (handleRefresh) still works for an immediate pull.
+    const interval = setInterval(() => fetchAllData(), 60_000);
+    return () => clearInterval(interval);
   }, [fetchAllData]);
 
   const handleRefresh = () => {
@@ -115,10 +123,17 @@ export default function AdminDashboard() {
           <h1 className="font-heading text-2xl font-bold">Admin Dashboard</h1>
           <p className="text-muted-foreground text-sm mt-1">System-wide overview and platform metrics.</p>
         </div>
-        <Button variant="outline" size="sm" onClick={handleRefresh} disabled={refreshing}>
-          <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-          Refresh
-        </Button>
+        <div className="flex items-center gap-3">
+          {lastUpdated && (
+            <p className="text-xs text-muted-foreground hidden sm:block">
+              Live · updated {lastUpdated.toLocaleTimeString()}
+            </p>
+          )}
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={refreshing}>
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+        </div>
       </motion.div>
 
       <motion.div

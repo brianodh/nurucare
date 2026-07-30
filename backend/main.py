@@ -3,8 +3,6 @@ NuruCare - Backend API (Full Version - Works without API keys)
 Updated to include USSD handler for offline accessibility
 """
 
-from __future__ import annotations
-
 import os
 import secrets
 import string
@@ -338,19 +336,34 @@ async def health_check():
 # ============================================
 @app.post("/api/v1/auth/signup")
 async def signup(request: SignupRequest):
-    """Public signup — creates patient accounts only.
+    """Public signup — creates patient OR nurse accounts. Patients are active
+    immediately. Nurse signups are created with is_active=False and cannot log in
+    until an existing admin activates them from the admin panel's user management
+    screen (existing Activate/Deactivate control) — a self-service nurse account is
+    still a privileged, patient-data-adjacent role, so it goes through a human
+    review gate rather than being usable the instant the form is submitted. No
+    access token is issued for a pending nurse signup, since the account cannot
+    authenticate yet.
 
-    Nurse and admin accounts are privileged roles that can only be created
-    by an existing admin via /api/v1/admin/users endpoints. The request may
-    send any role value; we override it to 'patient' here so there is no
-    privilege-escalation vector through the public signup API.
+    Admin accounts are more privileged still and cannot be created or granted
+    through any HTTP endpoint at all — the only path is the CLI bootstrap script
+    (backend/scripts/create_admin.py), run directly against the deployment
+    environment. Any role value other than 'patient'/'nurse' is rejected outright.
     """
-    forced_role = "patient"
+    role = (request.role or "patient").strip().lower()
+    if role not in ("patient", "nurse"):
+        raise HTTPException(
+            status_code=403,
+            detail="Only patient or nurse accounts can be created via signup. Admin accounts are created via backend/scripts/create_admin.py.",
+        )
 
     if len(request.password) < 8:
         raise HTTPException(status_code=400, detail="Password must be at least 8 characters")
     if not any(c.isdigit() for c in request.password):
         raise HTTPException(status_code=400, detail="Password must contain at least one number")
+
+    if role == "nurse" and not (request.institution_name or "").strip():
+        raise HTTPException(status_code=400, detail="Institution/facility name is required for healthcare provider accounts")
 
     existing_user = get_user_by_username(request.username)
     if existing_user["success"]:
@@ -361,32 +374,45 @@ async def signup(request: SignupRequest):
         raise HTTPException(status_code=400, detail="Email already exists")
 
     hashed_password = hash_password(request.password)
+    is_nurse_signup = role == "nurse"
 
     result = create_user(
         username=request.username,
         email=request.email,
         password_hash=hashed_password,
         full_name=request.full_name,
-        role=forced_role,
+        role=role,
         gender=request.gender,
-        institution_name=None,
-        institution_address=None,
+        institution_name=request.institution_name,
+        institution_address=request.institution_address,
+        is_active=not is_nurse_signup,
     )
 
     if not result["success"]:
         raise HTTPException(status_code=500, detail=result.get("error", "Failed to create user"))
 
+    if is_nurse_signup:
+        return {
+            "success": True,
+            "pending_approval": True,
+            "message": "Your healthcare provider account has been created and is pending review by a NuruCare administrator. You'll be able to sign in once it's activated.",
+            "user_id": result["user_id"],
+            "role": role,
+        }
+
     token = create_access_token(
-        {"sub": result["user_id"], "role": forced_role, "name": request.full_name, "gender": request.gender}
+        {"sub": result["user_id"], "role": role, "name": request.full_name, "gender": request.gender}
     )
 
     return {
         "success": True,
+        "pending_approval": False,
         "message": "Patient account created successfully",
         "user_id": result["user_id"],
         "access_token": token,
-        "role": forced_role,
+        "role": role,
     }
+
 
 @app.post("/api/v1/auth/login", response_model=TokenResponse)
 async def login(request: LoginRequest):
@@ -401,7 +427,7 @@ async def login(request: LoginRequest):
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
     if not user.get("is_active", True):
-        raise HTTPException(status_code=403, detail="Account deactivated. Contact an admin.")
+        raise HTTPException(status_code=403, detail="Account is not active. If you just signed up as a healthcare provider, an admin needs to approve your account first. Otherwise, contact an admin.")
 
     token = create_access_token({
         "sub": str(user["user_id"]),
@@ -429,7 +455,7 @@ async def nurse_login(request: NurseLoginRequest):
     if user_result["success"]:
         user = user_result["user"]
         if not user.get("is_active", True):
-            raise HTTPException(status_code=403, detail="Account deactivated. Contact an admin.")
+            raise HTTPException(status_code=403, detail="Account is not active. If you just signed up as a healthcare provider, an admin needs to approve your account first. Otherwise, contact an admin.")
         if verify_password(request.password, user["password_hash"]) and user["role"] == "nurse":
             token = create_access_token({
                 "sub": str(user["user_id"]),

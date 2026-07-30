@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { Heart, Eye, EyeOff, ArrowRight, Shield, X, CheckCircle, AlertCircle, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/lib/AuthContext';
 
 // ─── Consent Modal ────────────────────────────────────────────────────────────
@@ -132,23 +133,60 @@ function ConsentModal({ onAccept, onDecline }) {
   );
 }
 
+// ─── Pending Approval Screen (shown after a nurse self-signup) ────────────────
+function PendingApprovalScreen({ message }) {
+  return (
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md text-center"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center mx-auto mb-4">
+          <Clock className="w-7 h-7 text-amber-600" />
+        </div>
+        <h1 className="font-heading font-bold text-2xl">Account pending approval</h1>
+        <div className="bg-card rounded-2xl border shadow-sm p-6 sm:p-8 mt-6 text-left">
+          <p className="text-sm text-muted-foreground">
+            {message || "Your healthcare provider account has been created and is pending review by a NuruCare administrator. You'll be able to sign in once it's activated."}
+          </p>
+        </div>
+        <Link to="/login" className="inline-block mt-6">
+          <Button variant="outline" className="rounded-full gap-2">
+            Back to sign in <ArrowRight className="w-4 h-4" />
+          </Button>
+        </Link>
+      </motion.div>
+    </div>
+  );
+}
+
 // ─── Sign Up Page ─────────────────────────────────────────────────────────────
 export default function SignUp() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
 
-  const [form, setForm] = useState({ name: '', email: '', username: '', password: '', confirm: '', gender: '' });
+  const [form, setForm] = useState({
+    name: '', email: '', username: '', password: '', confirm: '', gender: '',
+    role: 'patient', institution_name: '', institution_address: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState('');
   const [generalError, setGeneralError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [pendingApproval, setPendingApproval] = useState(null); // { message } | null
+
+  const isNurse = form.role === 'nurse';
 
   const setField = (field) => (e) => {
     setForm((f) => ({ ...f, [field]: e.target.value }));
   };
   const setGender = (value) => {
     setForm((f) => ({ ...f, gender: value }));
+  };
+  const setRole = (value) => {
+    setForm((f) => ({ ...f, role: value }));
   };
 
   useEffect(() => {
@@ -165,7 +203,10 @@ export default function SignUp() {
     if (!form.username.trim() || !usernameRegex.test(form.username))
       return 'Please enter a valid username (at least 4 characters, alphanumeric/underscores only).';
     if (!form.email.includes('@')) return 'Please enter a valid email address.';
-    if (!form.gender) return 'Please select your gender.';
+    // Gender identifies which patient dashboard experience to show, so it's only
+    // required for patients — a healthcare provider account has no such use for it.
+    if (!isNurse && !form.gender) return 'Please select your gender.';
+    if (isNurse && !form.institution_name.trim()) return 'Please enter your facility/institution name.';
     if (form.password.length < 8) return 'Password must be at least 8 characters.';
     if (passwordMatchError) return passwordMatchError;
     return null;
@@ -183,15 +224,26 @@ export default function SignUp() {
     setShowConsent(false);
     setLoading(true);
     try {
-      await signUp({
+      const result = await signUp({
         full_name: form.name,
         email: form.email,
         username: form.username,
         password: form.password,
         consentGiven: true,
-        gender: form.gender,
-        role: 'patient',
+        gender: isNurse ? null : form.gender,
+        role: form.role,
+        institution_name: isNurse ? form.institution_name : undefined,
+        institution_address: isNurse ? form.institution_address : undefined,
       });
+
+      if (result.pending) {
+        // Nurse signup: no active session was created (backend issues no token
+        // until an admin activates the account) — show the pending screen
+        // instead of navigating into any authenticated area.
+        setPendingApproval({ message: result.message });
+        return;
+      }
+
       navigate(form.gender === 'female' ? '/female/intake' : '/male/intake');
     } catch (err) {
       setGeneralError(err.response?.data?.detail || err.message || 'Sign up failed. Please try again.');
@@ -199,6 +251,10 @@ export default function SignUp() {
       setLoading(false);
     }
   };
+
+  if (pendingApproval) {
+    return <PendingApprovalScreen message={pendingApproval.message} />;
+  }
 
   return (
     <>
@@ -229,6 +285,25 @@ export default function SignUp() {
           </div>
 
           <div className="bg-card rounded-2xl border shadow-sm p-6 sm:p-8">
+            {/* Role toggle: Patient vs Healthcare Provider (Nurse) */}
+            <Tabs value={form.role} onValueChange={setRole} className="mb-6">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="patient">Patient</TabsTrigger>
+                <TabsTrigger value="nurse">Healthcare provider</TabsTrigger>
+              </TabsList>
+            </Tabs>
+
+            {isNurse && (
+              <div className="flex items-start gap-2 text-xs text-muted-foreground bg-amber-500/10 border border-amber-500/20 rounded-xl px-3 py-2 mb-5">
+                <Clock className="w-4 h-4 flex-shrink-0 mt-0.5 text-amber-600" />
+                <span>
+                  Provider accounts are reviewed by a NuruCare administrator before
+                  activation. You'll create your credentials now, but won't be able
+                  to sign in until an admin approves the account.
+                </span>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-1.5">
                 <Label htmlFor="signup-name">Full name</Label>
@@ -266,18 +341,43 @@ export default function SignUp() {
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="signup-gender">Gender</Label>
-                <Select value={form.gender} onValueChange={setGender}>
-                  <SelectTrigger id="signup-gender">
-                    <SelectValue placeholder="Select gender" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="female">Female</SelectItem>
-                    <SelectItem value="male">Male</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              {isNurse ? (
+                <>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="signup-institution">Facility / institution name</Label>
+                    <Input
+                      id="signup-institution"
+                      placeholder="Kenyatta National Hospital"
+                      value={form.institution_name}
+                      onChange={setField('institution_name')}
+                      autoComplete="organization"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="signup-institution-address">Facility address (optional)</Label>
+                    <Input
+                      id="signup-institution-address"
+                      placeholder="Hospital Rd, Nairobi"
+                      value={form.institution_address}
+                      onChange={setField('institution_address')}
+                      autoComplete="street-address"
+                    />
+                  </div>
+                </>
+              ) : (
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-gender">Gender</Label>
+                  <Select value={form.gender} onValueChange={setGender}>
+                    <SelectTrigger id="signup-gender">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="male">Male</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
 
               <div className="space-y-1.5">
                 <Label htmlFor="signup-password">Password</Label>
@@ -331,14 +431,6 @@ export default function SignUp() {
                 {loading ? 'Creating account…' : <>Continue <ArrowRight className="w-4 h-4" /></>}
               </Button>
             </form>
-
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              Are you a healthcare provider?{' '}
-              <Link to="/login" className="text-primary font-medium hover:underline">
-                Sign in here
-              </Link>
-              {' '}— nurse accounts are created by NuruCare administrators.
-            </p>
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-4">

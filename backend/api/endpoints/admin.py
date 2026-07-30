@@ -272,9 +272,16 @@ def admin_update_role(
 ):
     """Promote/demote a user role. Protects against self-promotion:
     actor (admin token sub) cannot change their own role via this endpoint.
+
+    "admin" is not an accepted value here, even for an authenticated admin
+    caller. Admin accounts are created exclusively via the CLI bootstrap script
+    (backend/scripts/create_admin.py) -- there is no HTTP path to admin, by design.
     """
-    if payload.new_role not in ("patient", "nurse", "admin"):
-        raise HTTPException(status_code=400, detail="Invalid new_role")
+    if payload.new_role not in ("patient", "nurse"):
+        raise HTTPException(
+            status_code=403,
+            detail="Admin accounts cannot be created or promoted via the API. Use backend/scripts/create_admin.py.",
+        )
     actor_id = str(admin.get("sub", ""))
     if actor_id == str(payload.user_id):
         raise HTTPException(status_code=403, detail="Self-promotion/demotion is not allowed")
