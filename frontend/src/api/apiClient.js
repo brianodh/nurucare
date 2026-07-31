@@ -127,15 +127,15 @@ export const computeSafetyScore = (profile = {}) => {
 
   const flags = [];
   if (smoking && age > 35)
-    flags.push('Age >35 + smoking — WHO MEC Category 4 risk for combined methods');
+    flags.push('Age >35 + smoking WHO MEC Category 4 risk for combined methods');
   if (migraine === 'with_aura')
-    flags.push('Migraine with aura — WHO MEC Category 4 risk for combined methods');
+    flags.push('Migraine with aura WHO MEC Category 4 risk for combined methods');
   if (migraine === 'without_aura')
-    flags.push('Migraine without aura — monitor blood pressure closely with combined methods');
+    flags.push('Migraine without aura monitor blood pressure closely with combined methods');
   if (breastfeeding)
-    flags.push('Breastfeeding — only progestogen-only methods are recommended in the first 6 weeks');
+    flags.push('Breastfeeding only progestogen-only methods are recommended in the first 6 weeks');
   if (systolic >= 140 || diastolic >= 90)
-    flags.push('Elevated blood pressure — discuss options with a provider before starting combined methods');
+    flags.push('Elevated blood pressure discuss options with a provider before starting combined methods');
 
   let score = 100;
   if (smoking && age > 35) score -= 40;
@@ -213,7 +213,7 @@ export const translateText = (text, targetLanguage = 'swahili') =>
   apiClient.post('/api/v1/translate', { text, target_language: targetLanguage }).then((r) => r.data);
 
 // ─────────────────────────────────────────────
-// ADMIN — all require role === 'admin'
+// ADMIN all require role === 'admin'
 // ─────────────────────────────────────────────
 
 export const getAdminOverview = () =>

@@ -147,7 +147,7 @@ export default function AdminDashboard() {
             <div className="flex-1">
               <p className="text-sm font-medium">{bannerMessage}</p>
               {error && (
-                <p className="text-xs opacity-70 mt-0.5">Live data unavailable — showing last known or zero values.</p>
+                <p className="text-xs opacity-70 mt-0.5">Live data unavailable showing last known or zero values.</p>
               )}
             </div>
             {activePath && <Badge variant="outline" className="capitalize text-xs">{activePath.replace(/_/g, ' ')}</Badge>}
@@ -313,7 +313,7 @@ export default function AdminDashboard() {
               <BarChart3 className="w-4.5 h-4.5" />
             </div>
             <div>
-              <h3 className="font-heading font-semibold leading-tight">Signup Trend — Last 7 Days</h3>
+              <h3 className="font-heading font-semibold leading-tight">Signup Trend Last 7 Days</h3>
               <p className="text-xs text-muted-foreground">Daily new user registrations</p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 """
 NuruCare Admin Endpoints
 All endpoints require require_admin dependency.
-Every figure is a live DB query — no seed/demo numbers.
+Every figure is a live DB query no seed/demo numbers.
 """
 
 import json

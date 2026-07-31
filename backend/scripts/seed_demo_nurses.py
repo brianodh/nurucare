@@ -53,13 +53,13 @@ def seed_demo_nurses() -> list[dict]:
     demo_mode = os.getenv("DEMO_MODE", "").lower() in ("1", "true", "yes", "on")
     results = []
     if not demo_mode:
-        print("[seed_demo_nurses] DEMO_MODE is off — skipping seed.")
+        print("[seed_demo_nurses] DEMO_MODE is off skipping seed.")
         return results
 
     for entry in DEMO_NURSES:
         existing = get_user_by_username(entry["username"])
         if existing["success"]:
-            print(f"[seed_demo_nurses] user {entry['username']} already exists — skipped.")
+            print(f"[seed_demo_nurses] user {entry['username']} already exists skipped.")
             results.append({"username": entry["username"], "status": "existed"})
             continue
         pw_hash = hash_password(entry["password"])

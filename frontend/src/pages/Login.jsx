@@ -51,7 +51,7 @@ export default function Login() {
       } else if (loggedInUser.gender === 'female' || loggedInUser.gender === 'male') {
         navigate('/patient/dashboard', { replace: true });
       } else {
-        // Incomplete profile (e.g. legacy account with no gender) — continue through
+        // Incomplete profile (e.g. legacy account with no gender) continue through
         // the role/intake flow so the user can finish onboarding.
         navigate(location.state?.from || '/roles', { replace: true });
       }

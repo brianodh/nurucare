@@ -204,7 +204,7 @@ export default function SignUp() {
       return 'Please enter a valid username (at least 4 characters, alphanumeric/underscores only).';
     if (!form.email.includes('@')) return 'Please enter a valid email address.';
     // Gender identifies which patient dashboard experience to show, so it's only
-    // required for patients — a healthcare provider account has no such use for it.
+    // required for patients a healthcare provider account has no such use for it.
     if (!isNurse && !form.gender) return 'Please select your gender.';
     if (isNurse && !form.institution_name.trim()) return 'Please enter your facility/institution name.';
     if (form.password.length < 8) return 'Password must be at least 8 characters.';
@@ -238,7 +238,7 @@ export default function SignUp() {
 
       if (result.pending) {
         // Nurse signup: no active session was created (backend issues no token
-        // until an admin activates the account) — show the pending screen
+        // until an admin activates the account) show the pending screen
         // instead of navigating into any authenticated area.
         setPendingApproval({ message: result.message });
         return;

@@ -160,7 +160,7 @@ const AuthenticatedApp = () => {
         <Route path="/nurse/analytics" element={<NurseAnalytics />} />
       </Route>
 
-      {/* Admin routes (protected — fully separate from NurseLayout / patient layouts) */}
+      {/* Admin routes (protected fully separate from NurseLayout / patient layouts) */}
       <Route element={<RequireAdminAuth><AdminLayout /></RequireAdminAuth>}>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/content" element={<ContentManager />} />

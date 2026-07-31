@@ -104,7 +104,7 @@ export default function SystemHealth() {
         <div>
           <h1 className="font-heading text-2xl font-bold">System Health</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Live backend diagnostics — database, Gemini API, recommendation engine.
+            Live backend diagnostics database, Gemini API, recommendation engine.
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             Last refreshed: {lastRefreshed ? formatTimestamp(lastRefreshed) : 'Loading…'}
@@ -354,7 +354,7 @@ export default function SystemHealth() {
             </Card>
           </motion.div>
 
-          {/* 5) EXTRA CARD SLOT — timestamp / summary confirmation */}
+          {/* 5) EXTRA CARD SLOT timestamp / summary confirmation */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -381,11 +381,11 @@ export default function SystemHealth() {
                           <ShieldAlert className="w-5 h-5 text-amber-600" />
                         </div>
                         <div>
-                          <p className="font-semibold text-amber-800 dark:text-amber-400">Degraded — check red flags above</p>
+                          <p className="font-semibold text-amber-800 dark:text-amber-400">Degraded check red flags above</p>
                           <p className="text-xs text-muted-foreground">
                             {!db?.ok && 'Database unreachable. '}
-                            {geminiNotConfigured && 'Gemini API missing — AI in mock mode. '}
-                            {enginePath === 'hardcoded_fallback' && 'Engine fallback active — no WHO MEC checks. '}
+                            {geminiNotConfigured && 'Gemini API missing AI in mock mode. '}
+                            {enginePath === 'hardcoded_fallback' && 'Engine fallback active no WHO MEC checks. '}
                             {enginePath === 'engine_available_but_not_connected' && 'Engine loaded but not wired to /recommend. '}
                           </p>
                         </div>

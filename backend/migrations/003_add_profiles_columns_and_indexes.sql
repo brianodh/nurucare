@@ -1,7 +1,7 @@
 -- Migration 003: Add missing columns to profiles + FK index on user_id
 -- Date: 2026-07-28
 
--- intake_channel column (default 'web' — 'ussd' set by USSD flow)
+-- intake_channel column (default 'web' 'ussd' set by USSD flow)
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS intake_channel varchar(20) NOT NULL DEFAULT 'web';
 CREATE INDEX IF NOT EXISTS idx_profiles_intake_channel ON profiles(intake_channel);
 

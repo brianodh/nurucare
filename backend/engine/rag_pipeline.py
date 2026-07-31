@@ -13,7 +13,7 @@ Author: Brian Odhiambo Ouma
 Date: May 31, 2026
 Version: 2.1 - Fixed method parameter mismatches
  
-OPTIONAL — RAG augmentation sub-pipeline.
+OPTIONAL RAG augmentation sub-pipeline.
 
 This module is imported by `recommendation_pipeline.py` using a guarded
 try/except ImportError. If any optional dependency fails (pgvector, the

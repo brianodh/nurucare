@@ -1,5 +1,5 @@
 """
-Bootstrap an admin account (interactive CLI — the ONLY supported way to
+Bootstrap an admin account (interactive CLI the ONLY supported way to
 create an admin user in NuruCare).
 
 Usage (from backend/ directory):

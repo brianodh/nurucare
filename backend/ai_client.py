@@ -3,9 +3,18 @@ NuruCare - AI Client (Mock Mode - No API Keys Required)
 This version works without Gemini API. Add real keys later.
 """
 
-def get_ai_recommendation(user_data: dict) -> str:
+def get_ai_recommendation(user_data: dict, narrative_summary: str = "", disclaimer: str = "") -> str:
     """
-    Get personalized contraceptive recommendation - mock version
+    Build a personalized narrative around the REAL recommendation pipeline's
+    output. This does NOT independently decide which methods are safe — that
+    would risk contradicting the actual WHO MEC guardrail/pipeline result
+    (e.g. narrating a method as fine when the real engine restricted it for
+    this exact profile). `narrative_summary` and `disclaimer` are the real,
+    already-computed results from main.py's /api/v1/recommend endpoint
+    (engine.recommendation_pipeline / engine.guardrail) — this function only
+    formats them into a readable mock "AI" narrative. In MOCK MODE (no
+    Gemini key configured) this is template text; the shape/contract stays
+    identical so wiring in a real Gemini call later is a drop-in swap.
     """
     age = user_data.get('age', 25)
     parity = user_data.get('parity', 0)
@@ -13,8 +22,15 @@ def get_ai_recommendation(user_data: dict) -> str:
     smoking = user_data.get('smoking', False)
     breastfeeding = user_data.get('breastfeeding', False)
     migraine = user_data.get('migraine_type', 'none')
-    
-    # Build response based on user data
+
+    recommended_section = narrative_summary.strip() if narrative_summary and narrative_summary.strip() else (
+        "No specific methods could be ranked for this profile automatically — "
+        "please consult a healthcare provider for personalized guidance."
+    )
+    reminders = disclaimer.strip() if disclaimer and disclaimer.strip() else (
+        "Always consult a healthcare provider before starting any contraceptive method."
+    )
+
     response = f"""
 ╔══════════════════════════════════════════════════════════════╗
 ║                    NURUCARE - YOUR RESULTS                    ║
@@ -32,91 +48,12 @@ def get_ai_recommendation(user_data: dict) -> str:
 
 ✅ RECOMMENDED METHODS FOR YOU:
 
-"""
-    
-    # Age-based recommendations
-    if age < 20:
-        response += """
-1️⃣ MALE CONDOMS
-   • Effectiveness: 85% with typical use
-   • Why it's good for you: No hormones, protects against STIs
-   • Side effects: None
-   • Myth vs Fact: "Condoms reduce pleasure" → False, modern condoms are thin
+{recommended_section}
 
-2️⃣ PROGESTIN-ONLY PILL (POP)
-   • Effectiveness: 93% with perfect use
-   • Why it's good for you: Safe for young women
-   • Side effects: Irregular bleeding, headaches
-   • Myth vs Fact: "Pills cause infertility" → False, fertility returns immediately
-
-"""
-    elif age < 35:
-        response += """
-1️⃣ PROGESTIN-ONLY PILL (POP)
-   • Effectiveness: 93% with perfect use
-   • Why it's good for you: Highly effective, reversible
-   • Side effects: Irregular bleeding, breast tenderness
-   • Myth vs Fact: "Hormonal methods make you gain weight" → Limited evidence
-
-2️⃣ COPPER IUD
-   • Effectiveness: 99% - one of the most effective
-   • Why it's good for you: Long-acting (5-10 years), no hormones
-   • Side effects: Heavier periods, more cramping
-   • Myth vs Fact: "IUDs cause infertility" → False, fertility returns immediately
-
-"""
-    else:
-        response += """
-1️⃣ PROGESTIN-ONLY PILL (POP)
-   • Effectiveness: 93% with perfect use
-   • Why it's good for you: Safe for women over 35
-   • Side effects: Irregular bleeding, headaches
-   • Myth vs Fact: "Pills are dangerous after 35" → Only combined pills with smoking
-
-2️⃣ COPPER IUD
-   • Effectiveness: 99% - one of the most effective
-   • Why it's good for you: No hormones, works for years
-   • Side effects: Heavier periods, cramping
-   • Myth vs Fact: "IUDs are painful" → Mild discomfort at insertion only
-
-"""
-    
-    # Add condoms as third option for everyone
-    response += """
-3️⃣ MALE CONDOMS
-   • Effectiveness: 85% with typical use
-   • Why it's good for you: Protects against STIs, no side effects
-   • Side effects: None
-   • Myth vs Fact: "Condoms are not effective" → When used correctly, very effective
-
-"""
-    
-    # Add restrictions if needed
-    if smoking and age > 35:
-        response += """
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-❌ METHODS NOT RECOMMENDED FOR YOU:
-
-⚠️ COMBINED ORAL CONTRACEPTIVES
-   • Reason: Age > 35 + smoking increases cardiovascular risk
-   • WHO Category: 4 (Unacceptable health risk)
-
-"""
-    
-    if migraine == "with_aura":
-        response += """
-⚠️ COMBINED ORAL CONTRACEPTIVES
-   • Reason: Migraine with aura increases stroke risk
-   • WHO Category: 4 (Unacceptable health risk)
-
-"""
-    
-    response += """
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💡 IMPORTANT REMINDERS:
-• Always consult a healthcare provider before starting any method
+• {reminders}
 • Regular check-ups are recommended
 • No method is 100% effective except abstinence
 • You can change methods if you experience side effects
@@ -125,7 +62,6 @@ def get_ai_recommendation(user_data: dict) -> str:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """
-    
     return response
 
 def translate_to_swahili(text: str) -> str:

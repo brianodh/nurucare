@@ -55,12 +55,12 @@ else:
 
 def _local_connection():
     # psycopg3 (the "psycopg" package) has a different API from psycopg2:
-    # there is no psycopg.extras module, no RealDictCursor class, and
+    # there is no psycopg.extras module, no RealDictCursor class and
     # connect() takes row_factory instead of cursor_factory. row_factory is
     # set once here at the connection level, so every cursor opened from
     # this connection (connection.cursor() / conn.cursor(), ~30 call sites
     # throughout this file) automatically yields dict-like rows exactly as
-    # RealDictCursor used to — no per-call-site changes needed.
+    # RealDictCursor used to no per-call-site changes needed.
     return psycopg.connect(DATABASE_URL, row_factory=dict_row)
 
 
@@ -194,7 +194,7 @@ def create_user(
 ) -> dict:
     """Create a user. `is_active` defaults to True (patients, admin-created nurses,
     CLI-created admins are all usable immediately). Self-signup nurse accounts pass
-    is_active=False explicitly — the account exists but cannot log in
+    is_active=False explicitly the account exists but cannot log in
     (login()/nurse_login() both reject inactive accounts) until an admin flips it
     active via the admin panel's existing Activate/Deactivate control."""
     if _use_supabase():
@@ -534,7 +534,7 @@ def verify_session_key(session_key: str):
 
 
 # ═══════════════════════════════════════════════════════════════════
-# SINGLE SOURCE OF TRUTH — risk thresholds shared by both dashboards
+# SINGLE SOURCE OF TRUTH risk thresholds shared by both dashboards
 # ═══════════════════════════════════════════════════════════════════
 # These thresholds implement WHO MEC Category 3/4 rules and MUST be
 # the only place they are defined. Never re-derive these inline.
@@ -558,11 +558,11 @@ def compute_risk_flags(profile: dict) -> dict:
     systolic = int(profile.get("systolic_bp") or 0)
     diastolic = int(profile.get("diastolic_bp") or 0)
 
-    # WHO MEC Category 4 (unacceptable risk) — must be surfaced everywhere
+    # WHO MEC Category 4 (unacceptable risk) must be surfaced everywhere
     who_cat4_age_smoking = smoking and age > 35
     who_cat4_migraine_aura = migraine == "with_aura"
 
-    # WHO MEC Category 3 (advantages may not outweigh risks — clinical consult)
+    # WHO MEC Category 3 (advantages may not outweigh risks clinical consult)
     who_cat3_migraine_no_aura = migraine == "without_aura"
     who_cat3_hypertension = systolic >= 140 or diastolic >= 90
     who_cat3_breastfeeding_early = breastfeeding  # method-specific, flag as caution
@@ -575,7 +575,7 @@ def compute_risk_flags(profile: dict) -> dict:
         or (smoking and age <= 35)
     )
 
-    # For the nurse dashboard "risk flag" counter — only WHO MEC Cat 4 counts
+    # For the nurse dashboard "risk flag" counter only WHO MEC Cat 4 counts
     has_cat4_flag = who_cat4_age_smoking or who_cat4_migraine_aura
 
     # Risk band strings matching the patient dashboard compute_safety_score output
@@ -778,15 +778,15 @@ def compute_safety_score(profile: dict) -> dict:
 
     flags = []
     if risk["who_cat4_age_smoking"]:
-        flags.append("Age >35 + smoking — WHO MEC Category 4 risk for combined methods")
+        flags.append("Age >35 + smoking WHO MEC Category 4 risk for combined methods")
     if risk["who_cat4_migraine_aura"]:
-        flags.append("Migraine with aura — WHO MEC Category 4 risk for combined methods")
+        flags.append("Migraine with aura WHO MEC Category 4 risk for combined methods")
     if risk["who_cat3_migraine_no_aura"]:
-        flags.append("Migraine without aura — monitor blood pressure closely with combined methods")
+        flags.append("Migraine without aura monitor blood pressure closely with combined methods")
     if risk["who_cat3_breastfeeding_early"]:
-        flags.append("Breastfeeding — only progestogen-only methods are recommended in the first 6 weeks")
+        flags.append("Breastfeeding only progestogen-only methods are recommended in the first 6 weeks")
     if risk["who_cat3_hypertension"]:
-        flags.append("Elevated blood pressure — discuss options with a provider before starting combined methods")
+        flags.append("Elevated blood pressure discuss options with a provider before starting combined methods")
 
     deductions = {
         "age_35_smoking": 40,
@@ -868,7 +868,7 @@ def update_profile_fields(profile_id: str, fields: dict) -> dict:
 
 
 # ================================================================
-# ADMIN DASHBOARD — LIVE QUERIES
+# ADMIN DASHBOARD LIVE QUERIES
 # ================================================================
 
 def get_admin_overview_stats() -> dict:
@@ -986,7 +986,7 @@ def get_admin_signup_trend(days: int = 7) -> dict:
 
 
 # ================================================================
-# ADMIN — CONTENT MANAGER (content_items table + JSON file fallback)
+# ADMIN CONTENT MANAGER (content_items table + JSON file fallback)
 # ================================================================
 
 def list_content_items(content_type: Optional[str] = None) -> dict:
@@ -1113,7 +1113,7 @@ def delete_content_item(content_type: str, item_key: str) -> dict:
 
 
 # ================================================================
-# ADMIN — USER / ACCOUNT MANAGEMENT
+# ADMIN USER / ACCOUNT MANAGEMENT
 # ================================================================
 
 def list_all_users(role: Optional[str] = None, search: Optional[str] = None, limit: int = 200) -> dict:
@@ -1184,7 +1184,7 @@ def update_user_role(user_id: str, new_role: str, actor_user_id: str) -> dict:
     created exclusively via the `backend/scripts/create_admin.py` CLI bootstrap,
     never through this (or any other) HTTP-reachable endpoint. This is enforced at
     both the API layer (api/endpoints/admin.py) and here at the DB layer as
-    defense in depth — a caller must not be able to reach admin promotion by any
+    defense in depth a caller must not be able to reach admin promotion by any
     request path, authenticated or not.
     """
     if new_role not in ("patient", "nurse"):
@@ -1228,7 +1228,7 @@ def toggle_user_active(user_id: str, is_active: bool) -> dict:
 
 
 # ================================================================
-# ADMIN — SESSION & SYNC MONITORING
+# ADMIN SESSION & SYNC MONITORING
 # ================================================================
 
 def get_nurse_session_monitor() -> dict:
@@ -1347,7 +1347,7 @@ def get_partner_sync_monitor() -> dict:
 
 
 # ================================================================
-# ADMIN — SYSTEM HEALTH
+# ADMIN SYSTEM HEALTH
 # ================================================================
 
 def get_system_health_detail() -> dict:
@@ -1401,7 +1401,7 @@ def get_system_health_detail() -> dict:
 
 
 # ================================================================
-# RATE LIMITER — protects guessable 6-digit nurse access codes
+# RATE LIMITER protects guessable 6-digit nurse access codes
 # ================================================================
 
 class SlidingWindowRateLimiter:
@@ -1444,7 +1444,7 @@ _SYNC_TOKEN_RL = SlidingWindowRateLimiter(max_attempts=10, window_seconds=60)
 def rate_limited_verify_session_key(session_key: str) -> dict:
     """Wraps verify_session_key() with per-attempt rate limiting on the key.
 
-    A 6-digit code has only 1M combinations — an attacker can enumerate it
+    A 6-digit code has only 1M combinations an attacker can enumerate it
     in ~10 minutes at 2k qps. Gating at 5 attempts/minute per code pushes
     that out to ~14 weeks (worst case) before the token expires anyway,
     which is the practical security level we need given the other

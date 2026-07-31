@@ -110,7 +110,7 @@ const MALE_EDUCATION = [
   {
     title: 'Contraception Basics',
     description:
-      'Learn the contraceptive options that involve or affect you — condoms, vasectomy, partner methods and effectiveness.',
+      'Learn the contraceptive options that involve or affect you condoms, vasectomy, partner methods and effectiveness.',
     icon: BookOpen,
     color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300',
   },
@@ -393,7 +393,7 @@ export default function PatientDashboard() {
           setPartnerLoadError('Partner token accepted, but partner profile is empty.');
           toast({
             title: 'Token used',
-            description: 'Partner profile has no intake data yet — please ask them to complete intake.',
+            description: 'Partner profile has no intake data yet please ask them to complete intake.',
           });
         } else {
           setPartnerProfile(realPartner);
@@ -547,7 +547,7 @@ export default function PatientDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* ── Left column (shell — 2/3) ─────────────────────────────── */}
+          {/* ── Left column (shell 2/3) ─────────────────────────────── */}
           <div className="space-y-6 lg:col-span-2">
             {/* Score + Quick actions row ────────────────────────────── */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -616,7 +616,7 @@ export default function PatientDashboard() {
                           </ul>
                         ) : (
                           <p className="text-sm text-muted-foreground">
-                            No active risk flags — keep it up.
+                            No active risk flags keep it up.
                           </p>
                         )}
                         <Progress
@@ -696,13 +696,13 @@ export default function PatientDashboard() {
                           >
                             {typeof m === 'string'
                               ? m.replace(/_/g, ' ')
-                              : `${m.name}${typeof m.effectiveness === 'number' ? ` — ${m.effectiveness}%` : ''}`}
+                              : `${m.name}${typeof m.effectiveness === 'number' ? ` ${m.effectiveness}%` : ''}`}
                           </Badge>
                         ))}
                       </div>
                     ) : (
                       <p className="text-sm text-muted-foreground">
-                        No recommendations yet — complete your intake to see personalised options.
+                        No recommendations yet complete your intake to see personalised options.
                       </p>
                     )}
                   </div>
@@ -823,7 +823,7 @@ export default function PatientDashboard() {
             </motion.div>
           </div>
 
-          {/* ── Right column (shell — 1/3) ───────────────────────────── */}
+          {/* ── Right column (shell 1/3) ───────────────────────────── */}
           <div className="space-y-6">
             {/* Partner sync ──────────────────────────────────────────── */}
             <motion.div
@@ -898,7 +898,7 @@ export default function PatientDashboard() {
                     Side Effects Log
                   </CardTitle>
                   <CardDescription>
-                    Track any symptoms you notice — they'll be shared with your nurse when you
+                    Track any symptoms you notice they'll be shared with your nurse when you
                     use a session key.
                   </CardDescription>
                 </CardHeader>
@@ -1014,7 +1014,7 @@ export default function PatientDashboard() {
 
                   {computed.sideEffects.length === 0 ? (
                     <div className="text-sm text-center text-muted-foreground py-6 rounded-lg bg-muted/40">
-                      No entries yet — log something above if you notice any symptoms.
+                      No entries yet log something above if you notice any symptoms.
                     </div>
                   ) : (
                     <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
@@ -1222,11 +1222,11 @@ function PartnerAwarenessPanel({ profile, partnerProfile, onNavigateToSync }) {
   const diastolic = profile?.diastolic_bp || 0;
 
   const keyMessages = [];
-  if (age > 35 && smoking) keyMessages.push('Quit smoking support — reduces combined-method risks for your partner.');
+  if (age > 35 && smoking) keyMessages.push('Quit smoking support reduces combined-method risks for your partner.');
   if (migraine === 'with_aura' || migraine === 'without_aura')
     keyMessages.push('Discuss migraine history with a provider before choosing a combined method.');
   if (systolic >= 140 || diastolic >= 90)
-    keyMessages.push('Elevated BP detected — encourage partner to have it checked.');
+    keyMessages.push('Elevated BP detected encourage partner to have it checked.');
   if (keyMessages.length === 0)
     keyMessages.push('Your cardiovascular profile supports low-risk decisions.');
 

@@ -697,11 +697,22 @@ async def get_recommendations(intake_data: IntakeData):
     disclaimer = result.get("disclaimer", "Always consult a healthcare provider before starting any contraceptive method.")
 
     loop = asyncio.get_event_loop()
-    with ThreadPoolExecutor() as pool:
-        swahili_version, full_ai = await asyncio.gather(
-            loop.run_in_executor(pool, translate_to_swahili, narrative_summary),
-            loop.run_in_executor(pool, get_ai_recommendation, intake_data.model_dump(), narrative_summary, disclaimer),
-        )
+    try:
+        with ThreadPoolExecutor() as pool:
+            swahili_version, full_ai = await asyncio.gather(
+                loop.run_in_executor(pool, translate_to_swahili, narrative_summary),
+                loop.run_in_executor(pool, get_ai_recommendation, intake_data.model_dump(), narrative_summary, disclaimer),
+            )
+    except Exception as exc:
+        # The clinically important part (formatted_recommended/formatted_restricted,
+        # computed above via the real WHO MEC pipeline) is already safe at this
+        # point. Narrative/translation text is a presentation nicety on top of
+        # that — a bug here should degrade to plain English text, never crash
+        # the whole /recommend response and block the patient from seeing their
+        # actual (already-correct) recommendations.
+        print(f"[ERROR] AI narrative/translation step failed ({exc}). Falling back to plain summary text.")
+        swahili_version = narrative_summary
+        full_ai = narrative_summary or disclaimer
 
     return {
         "recommended_methods": formatted_recommended,

@@ -1,7 +1,7 @@
 """
 Database Connection Module for NuruCare
 Handles connection to PostgreSQL with pgvector
-OPTIONAL — RAG-only SQLAlchemy/pgvector store.
+OPTIONAL RAG-only SQLAlchemy/pgvector store.
 
 This module is NOT imported by the main FastAPI app. It is used exclusively by
 `backend/engine/rag_pipeline.py` when the optional RAG path of the

@@ -38,10 +38,10 @@ const categoryStyles = {
 };
 
 const categoryLabels = {
-  1: 'Category 1 — No restrictions',
-  2: 'Category 2 — Advantages outweigh risks',
-  3: 'Category 3 — Risks may outweigh advantages',
-  4: 'Category 4 — Unacceptable risk',
+  1: 'Category 1 No restrictions',
+  2: 'Category 2 Advantages outweigh risks',
+  3: 'Category 3 Risks may outweigh advantages',
+  4: 'Category 4 Unacceptable risk',
 };
 
 export default function WHORulesConsole() {
@@ -82,7 +82,7 @@ export default function WHORulesConsole() {
           <div className="flex items-center gap-2">
             <BookOpen className="w-6 h-6 text-primary" />
             <h1 className="font-heading text-2xl font-bold">
-              WHO MEC Rules Engine — Read-Only View
+              WHO MEC Rules Engine Read-Only View
             </h1>
           </div>
           <p className="text-muted-foreground text-sm mt-1 max-w-2xl">

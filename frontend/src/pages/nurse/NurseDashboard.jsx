@@ -12,7 +12,7 @@ const riskColors = { Low: 'bg-secondary/10 text-secondary', Medium: 'bg-accent/1
 const statusColors = { Active: 'bg-secondary/10 text-secondary', Pending: 'bg-muted text-muted-foreground', Flagged: 'bg-destructive/10 text-destructive' };
 
 // Auto-refresh interval for live dashboard numbers. This is a real clinical
-// triage screen — a nurse should never be looking at data more than a couple
+// triage screen a nurse should never be looking at data more than a couple
 // of minutes stale without knowing it. Polling (not a mock timer) re-fetches
 // the same real GET /api/v1/nurse/dashboard endpoint used on mount.
 const REFRESH_INTERVAL_MS = 60_000;
@@ -33,7 +33,7 @@ export default function NurseDashboard() {
         setFetchError(false);
       })
       .catch(() => {
-        // Do NOT fall back to mock/fabricated numbers on error — that would
+        // Do NOT fall back to mock/fabricated numbers on error that would
         // show a nurse fake clinical data with no indication it's fake. Show
         // an honest error state instead and keep the last known-real values
         // (if any) rather than replacing them with placeholders.
