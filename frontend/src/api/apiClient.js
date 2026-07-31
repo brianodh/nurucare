@@ -88,6 +88,68 @@ export const getRecommendations = (intakeData) =>
   apiClient.post('/api/v1/recommend', intakeData).then((r) => r.data);
 
 // ─────────────────────────────────────────────
+// PATIENT PROFILE (dashboard + intake persisted data)
+// ─────────────────────────────────────────────
+
+/** Fetch the currently authenticated patient's full profile + safety score.
+ *  Response: { success, profile, safety_score: { score, risk_level, flags } }
+ */
+export const getPatientProfile = () =>
+  apiClient.get('/api/v1/patient/profile').then((r) => r.data);
+
+/** Partial update of the patient's profile (e.g. side_effects, BP, etc.)
+ *  @param {Partial<{side_effects, duration_pref, age, smoking, migraine_type,
+ *    systolic_bp, diastolic_bp, breastfeeding, postpartum_weeks, last_period_date}>} patch
+ */
+export const updatePatientProfile = (patch) =>
+  apiClient.put('/api/v1/patient/profile', patch).then((r) => r.data);
+
+/** Append one side-effect entry to the profile's side_effects jsonb array.
+ *  @param {{symptom, severity, started_on, notes?, method?}} entry
+ */
+export const appendSideEffect = (entry) =>
+  apiClient.post('/api/v1/patient/profile/side-effects', entry).then((r) => r.data);
+
+/** Client-side helper for computing a 0-100 safety score from profile flags.
+ *  Mirrors database.compute_safety_score so offline dashboards still render real
+ *  numbers without a backend fetch.  Never hardcodes a static score.
+ */
+export const computeSafetyScore = (profile = {}) => {
+  if (!profile || typeof profile !== 'object') {
+    return { score: 0, risk_level: 'high', flags: ['No profile data yet'] };
+  }
+  const age = Number(profile.age) || 0;
+  const smoking = Boolean(profile.smoking);
+  const migraine = profile.migraine_type || 'none';
+  const breastfeeding = Boolean(profile.breastfeeding);
+  const systolic = Number(profile.systolic_bp) || 0;
+  const diastolic = Number(profile.diastolic_bp) || 0;
+
+  const flags = [];
+  if (smoking && age > 35)
+    flags.push('Age >35 + smoking WHO MEC Category 4 risk for combined methods');
+  if (migraine === 'with_aura')
+    flags.push('Migraine with aura WHO MEC Category 4 risk for combined methods');
+  if (migraine === 'without_aura')
+    flags.push('Migraine without aura monitor blood pressure closely with combined methods');
+  if (breastfeeding)
+    flags.push('Breastfeeding only progestogen-only methods are recommended in the first 6 weeks');
+  if (systolic >= 140 || diastolic >= 90)
+    flags.push('Elevated blood pressure discuss options with a provider before starting combined methods');
+
+  let score = 100;
+  if (smoking && age > 35) score -= 40;
+  if (migraine === 'with_aura') score -= 30;
+  if (migraine === 'without_aura') score -= 8;
+  if (breastfeeding) score -= 5;
+  if (systolic >= 140 || diastolic >= 90) score -= 12;
+  score = Math.max(0, Math.min(100, Math.round(score)));
+
+  const risk_level = score < 60 ? 'high' : score < 85 ? 'medium' : 'low';
+  return { score, risk_level, flags };
+};
+
+// ─────────────────────────────────────────────
 // SESSION KEY  (patient → nurse handoff)
 // ─────────────────────────────────────────────
 
@@ -149,6 +211,62 @@ export const verifySyncToken = (token, profileId) =>
  */
 export const translateText = (text, targetLanguage = 'swahili') =>
   apiClient.post('/api/v1/translate', { text, target_language: targetLanguage }).then((r) => r.data);
+
+// ─────────────────────────────────────────────
+// ADMIN all require role === 'admin'
+// ─────────────────────────────────────────────
+
+export const getAdminOverview = () =>
+  apiClient.get('/api/v1/admin/overview').then((r) => r.data);
+
+export const getAdminSignupTrend = (days = 7) =>
+  apiClient.get(`/api/v1/admin/signup-trend?days=${days}`).then((r) => r.data);
+
+export const listContentItems = (contentType = null) =>
+  apiClient.get(contentType ? `/api/v1/admin/content?content_type=${encodeURIComponent(contentType)}` : '/api/v1/admin/content').then((r) => r.data);
+
+export const getContentItem = (contentType, itemKey) =>
+  apiClient.get(`/api/v1/admin/content/${encodeURIComponent(contentType)}/${encodeURIComponent(itemKey)}`).then((r) => r.data);
+
+export const upsertContentItem = (content_type, item_key, content_data) =>
+  apiClient.post('/api/v1/admin/content', { content_type, item_key, content_data }).then((r) => r.data);
+
+export const deleteContentItem = (content_type, item_key) =>
+  apiClient.delete('/api/v1/admin/content', { data: { content_type, item_key } }).then((r) => r.data);
+
+export const getWHOMECRules = () =>
+  apiClient.get('/api/v1/admin/who-mec-rules').then((r) => r.data);
+
+export const listAdminUsers = (role = null, search = null) => {
+  const params = new URLSearchParams();
+  if (role) params.set('role', role);
+  if (search) params.set('search', search);
+  return apiClient.get(`/api/v1/admin/users?${params.toString()}`).then((r) => r.data);
+};
+
+export const getAdminUser = (userId) =>
+  apiClient.get(`/api/v1/admin/users/${userId}`).then((r) => r.data);
+
+export const adminCreateNurse = (payload) =>
+  apiClient.post('/api/v1/admin/users/create-nurse', payload).then((r) => r.data);
+
+export const adminUpdateUserRole = (user_id, new_role) =>
+  apiClient.post('/api/v1/admin/users/update-role', { user_id, new_role }).then((r) => r.data);
+
+export const adminToggleUserActive = (user_id, is_active) =>
+  apiClient.post('/api/v1/admin/users/toggle-active', { user_id, is_active }).then((r) => r.data);
+
+export const getNurseSessionMonitor = () =>
+  apiClient.get('/api/v1/admin/monitor/nurse-sessions').then((r) => r.data);
+
+export const forceExpireNurseSession = (session_id) =>
+  apiClient.post('/api/v1/admin/monitor/nurse-sessions/force-expire', { session_id }).then((r) => r.data);
+
+export const getPartnerSyncMonitor = () =>
+  apiClient.get('/api/v1/admin/monitor/partner-sync').then((r) => r.data);
+
+export const getAdminSystemHealth = () =>
+  apiClient.get('/api/v1/admin/health').then((r) => r.data);
 
 // ─────────────────────────────────────────────
 // LEGACY MOCK kept so nothing crashes

@@ -39,7 +39,7 @@ export default function RoleSelection() {
       icon: User,
       titleKey: 'role_male_title',
       descKey: 'role_male_desc',
-      path: '/male/dashboard',
+      path: '/male/intake',
       color: 'from-primary/10 to-primary/5 border-primary/20',
       iconColor: 'text-primary bg-primary/10',
     },

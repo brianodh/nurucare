@@ -12,6 +12,18 @@ This module handles:
 Author: Brian Odhiambo Ouma
 Date: May 31, 2026
 Version: 2.1 - Fixed method parameter mismatches
+ 
+OPTIONAL RAG augmentation sub-pipeline.
+
+This module is imported by `recommendation_pipeline.py` using a guarded
+try/except ImportError. If any optional dependency fails (pgvector, the
+`db.database` SQLAlchemy module, the WHO guideline embeddings table, or
+a valid Gemini API key), `RAG_AVAILABLE` is set to False and the
+`RecommendationPipeline` falls back to a non-RAG ranking path (WHO MEC
+guardrail + adoption-stats + fertility-intent weighting).
+
+Nothing else imports this module directly. The service boots and serves
+recommendations perfectly well without this file being loadable.
 """
 
 import os

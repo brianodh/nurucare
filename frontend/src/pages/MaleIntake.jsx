@@ -36,7 +36,7 @@ function GenerateKeyButton({ profileId, data, onSaved }) {
       }
 
       const keyResult = await generateSessionKey(pid);
-      navigate('/male/dashboard', { state: { sessionKey: keyResult.session_key, patientId: pid } });
+      navigate('/patient/dashboard', { state: { sessionKey: keyResult.session_key, patientId: pid } });
     } catch (err) {
       toast({ title: 'Error', description: 'Could not generate session key. Please try again.', variant: 'destructive' });
     } finally {
@@ -157,7 +157,7 @@ export default function MaleIntake() {
               <Link to="/education">
                 <Button variant="outline" className="rounded-full">Learn More</Button>
               </Link>
-              <Link to="/male/dashboard">
+              <Link to="/patient/dashboard">
                 <Button variant="secondary" className="rounded-full">Go to Dashboard</Button>
               </Link>
               <GenerateKeyButton
